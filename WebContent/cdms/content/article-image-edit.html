@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章图片-编辑</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+	<style type="text/css">
+    .input-file{
+    	padding-right: 17px
+    }
+	</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+    	<form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">图片标题</label>
+                <input type="text" id="title" name="title" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+                <label class="col-sm-2 control-label edit-layer-title">排序</label>
+                <input type="text" id="dispOrder" name="dispOrder" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+                <label class="col-sm-2 control-label edit-layer-title">图片url</label>
+                <div style="width:645px"><input type="file" accept="image/*" id="images" name="photo"></div>
+            </div>
+            <div class="form-group edit-group-style">
+                <label class="col-sm-2 control-label edit-layer-title">图片备注</label>
+                <input type="text" id="memo" name="memo" class="form-control m-b edit-layer-input" style="width:542px;">
+         	</div>
+            <div style="float:right;margin-right: 32px;clear:both;">
+		        <button type="submit" class="btn btn-primary edit-layer-button" id="layerOk">保 存</button>
+		        <button type="reset" class="btn btn-white edit-layer-button" id="layerCancel">取 消</button>
+	        </div>
+        </form>
+    </div>
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/prettyfile/bootstrap-prettyfile.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="js/article-image-edit.js" type="text/javascript"></script>
+</body>
+</html>

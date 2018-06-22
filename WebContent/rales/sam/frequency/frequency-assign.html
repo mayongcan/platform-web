@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-模拟设台</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <style type="text/css">
+		a:hover, a:focus{
+		    outline: none;
+		    text-decoration: none;
+		}
+		#accordion .panel{
+		    box-shadow: none;
+		    border: none;
+		    border-radius:0;
+		    margin-bottom: 6px;
+		    border-left:5px solid #65a9e8;
+		}
+		#accordion .panel-heading{
+		    padding:0;
+		    background-color:#fff;
+		}
+		#accordion .panel-title a{
+		    display: block;
+		    color: #333;
+		    font-size: 15px;
+		    font-weight: bold;
+		    padding: 14px 40px;
+		    background: #f5f5f5;
+		    text-transform: uppercase;
+		    border-bottom: 1px solid #d3d3d3;
+		    position: relative;
+		}
+		#accordion .panel-title a.collapsed{
+		    border-top: 0;
+		    color: #333;
+		    background: #eee;
+		    border-bottom:1px solid transparent;
+		}
+		#accordion .panel-title a:before,
+		#accordion .panel-title a.collapsed:before{
+		    content: "\f068";
+		    font-family: FontAwesome;
+		    position: absolute;
+		    top: 10px;
+		    left: 15px;
+		    font-size: 14px;
+		    line-height: 24px;
+		    color: #65a9e8;
+		}
+		#accordion .panel-title a.collapsed:before{
+		    content: "\f067";
+		}
+		#accordion .panel-body{
+		    color: #666464;
+		    font-size: 14px;
+		    line-height: 20px;
+		    border-top: 0 none;
+		    background: #f5f5f5;
+		    /* padding: 15px 27px; */
+		}
+		.edit-layer-title{
+			width:135px;
+		}
+		.edit-group-style {
+		    margin-right: 0px;
+		    height: 30px;
+		}
+		.edit-layer-input {
+		    width: 220px;
+		}
+	</style>
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeIn">
+		<div class="ibox-content" style="display:flex;">
+			<div class="container" style="width: 400px">
+			    <div class="row">
+			    <form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
+			        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		                <div class="panel panel-default">
+		                    <div class="panel-heading" role="tab" id="headingOne">
+		                        <h4 class="panel-title">
+		                            <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+		                                基本分析条件
+		                            </a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+		                        <div class="panel-body">
+		                            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">台站类型</label>
+						                <select class="m-b selectpicker edit-layer-input" id="statType"></select>
+						            </div>
+		                            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">覆盖区域</label>
+						                <select class="m-b selectpicker edit-layer-input" id="areaType"></select>
+						            </div>
+		                            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">组网形式</label>
+						                <select class="m-b selectpicker edit-layer-input" id="network"></select>
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">频点</label>
+						                <input type="text" id="frequency" name="frequency" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">MHz</label>
+						            </div>
+						            <div id="divFrequencyList"></div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title"></label>
+						                <button type="button" class="btn btn-outline btn-default" id="btnAddFrequency" style="width: 220px;padding: 0px 20px;height:30px;">
+						                		<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加频点
+						                	</button>
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">地址</label>
+						                <input type="text" id="address" name="address" class="form-control m-b edit-layer-input">
+						                <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title"></label>
+						                <button type="button" class="btn btn-primary" id="btnMapSelect" style="width: 220px;padding: 0px 20px;height:30px;">启动地图选点</button>
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">经度</label>
+						                <input type="text" id="longitude" name="longitude" class="form-control m-b edit-layer-input" readonly>
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">纬度</label>
+						                <input type="text" id="latitude" name="latitude" class="form-control m-b edit-layer-input" readonly>
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">服务半径</label>
+						                <input type="text" id="serviceRadius" name="serviceRadius" class="form-control m-b edit-layer-input" style="width:175px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">KM</label>
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">推荐频点数量</label>
+						                <input type="text" id="recommendNumber" name="recommendNumber" class="form-control m-b edit-layer-input">
+						            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading" role="tab" id="headingTwo">
+		                        <h4 class="panel-title">
+		                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+		                                监测站点数
+		                            </a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+		                        <div class="panel-body">
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">监测站点数据</label>
+						                <textarea id="monitoringStation" name="monitoringStation" class="form-control m-b edit-layer-input" style="height:150px;"></textarea>
+						            </div>
+						            <div style="clear:both;margin-top:165px;"></div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title"></label>
+						                <button type="button" class="btn btn-primary" id="btnStationSelect" style="width: 220px;padding: 0px 20px;height:30px;">选择</button>
+						            </div>
+		                        		<div class="form-group edit-group-style">
+		                            		<label class="col-sm-2 control-label edit-layer-title">监测开始时间</label>
+					                   	<div class="input-group date" id="divBeginDate" style="width: 220px;float: left;">
+					                   		<input type="text" class="form-control" id="beginDate" name="beginDate"/>
+					                   		<span class="input-group-addon">
+					                       		<span class="glyphicon glyphicon-calendar"></span>
+					                   		</span>
+					               		</div>
+					               	</div>
+		                        		<div class="form-group edit-group-style">
+		                            		<label class="col-sm-2 control-label edit-layer-title">检测结束时间</label>
+					                   	<div class="input-group date" id="divEndDate" style="width: 220px;float: left;">
+					                   		<input type="text" class="form-control" id="endDate" name="endDate"/>
+					                   		<span class="input-group-addon">
+					                       		<span class="glyphicon glyphicon-calendar"></span>
+					                   		</span>
+					               		</div>
+					               	</div>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading" role="tab" id="headingThree">
+		                        <h4 class="panel-title">
+		                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+		                                详细分析条件（EMC)
+		                            </a>
+		                        </h4>
+		                    </div>
+		                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+		                        <div class="panel-body">
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">接收门限</label>
+						                <input type="text" id="receivingThreshold" name="receivingThreshold" class="form-control m-b edit-layer-input">
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">C/I门限</label>
+						                <input type="text" id="ciThreshold" name="ciThreshold" class="form-control m-b edit-layer-input">
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">接收高度</label>
+						                <input type="text" id="receivingHeight" name="receivingHeight" class="form-control m-b edit-layer-input">
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">功率</label>
+						                <input type="text" id="pow" name="pow" class="form-control m-b edit-layer-input">
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">增益</label>
+						                <input type="text" id="gain" name="gain" class="form-control m-b edit-layer-input">
+						            </div>
+						            <div class="form-group edit-group-style">
+						            		<label class="col-sm-2 control-label edit-layer-title">馈损</label>
+						                <input type="text" id="feedLoss" name="feedLoss" class="form-control m-b edit-layer-input">
+						            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                <button type="button" class="btn btn-primary" id="btnHandle" style="width: 100%;margin-top:20px;padding: 0px 20px;height:35px;">分 析</button>
+		            </div>
+		       	</form>
+			    </div>
+			</div>
+			<div id="map-container" style="margin-top: 5px; flex:1; margin-left:10px;"></div>
+			<div style="clear: both"></div>
+
+		</div>
+	</div>
+
+	<script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/api?v=3.0&ak=rOh5lOLnNiiVBGdcB3QVg1YvojYavPfe" type="text/javascript" ></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/frequency-assign.js" type="text/javascript"></script>
+</body>
+</html>

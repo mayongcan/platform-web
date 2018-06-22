@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-人员信息-编辑</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../css/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+    	<form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
+	    
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">姓名</label>
+                <input type="text" id="name" name="name" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">性别</label>
+                <input type="text" id="sex" name="sex" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">年龄</label>
+                <input type="text" id="age" name="age" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">手机号码</label>
+                <input type="text" id="mobile" name="mobile" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">实名制卡</label>
+                <input type="text" id="realNameCard" name="realNameCard" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">所属项目</label>
+                <input type="text" id="belongProject" name="belongProject" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">所属班组长</label>
+                <input type="text" id="belongMan" name="belongMan" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">工种</label>
+                <input type="text" id="workType" name="workType" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">是否有效</label>
+                <input type="text" id="isValid" name="isValid" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">出勤天数</label>
+                <input type="text" id="days" name="days" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">出勤小时</label>
+                <input type="text" id="hours" name="hours" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">地域</label>
+                <input type="text" id="area" name="area" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">教育水平</label>
+                <input type="text" id="teachLevel" name="teachLevel" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">是否项目人员</label>
+                <input type="text" id="isProjectMan" name="isProjectMan" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">出生日期</label>
+                <input type="text" id="birthday" name="birthday" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">籍贯</label>
+                <input type="text" id="origin" name="origin" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">有效日期</label>
+                <input type="text" id="validDate" name="validDate" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">家庭住址</label>
+                <input type="text" id="homeAddress" name="homeAddress" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">是否为班组长</label>
+                <input type="text" id="isTeamLeader" name="isTeamLeader" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">劳务分包商</label>
+                <input type="text" id="laborSubcontractors" name="laborSubcontractors" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">紧急联系人</label>
+                <input type="text" id="emergencyContact" name="emergencyContact" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">紧急联系电话</label>
+                <input type="text" id="emergencyPhone" name="emergencyPhone" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">宿舍号</label>
+                <input type="text" id="dormitoryNumber" name="dormitoryNumber" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">床位号</label>
+                <input type="text" id="bedNumber" name="bedNumber" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">卡号绑定</label>
+                <input type="text" id="cardNumber" name="cardNumber" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">配置安全状态</label>
+                <input type="text" id="securityStatus" name="securityStatus" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">配置类型</label>
+                <input type="text" id="configureType" name="configureType" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">操作类型</label>
+                <input type="text" id="operateType" name="operateType" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">角色</label>
+                <input type="text" id="role" name="role" class="form-control m-b edit-layer-input">
+            </div>
+		
+		
+		
+            <div class="edit-box-button">
+		        <button type="submit" class="btn btn-primary edit-layer-button" id="layerOk">保 存</button>
+		        <button type="reset" class="btn btn-white edit-layer-button" id="layerCancel">取 消</button>
+	        </div>
+        </form>
+    </div>
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+	<script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/prettyfile/bootstrap-prettyfile.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../js/platform/combobox-tree.js" type="text/javascript"></script>
+    <script src="js/sssp-per-information-edit.js" type="text/javascript"></script>
+</body>
+</html>

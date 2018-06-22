@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-基础模块-编辑</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <style type="text/css">
+    .edit-layer-title{
+    	width:110px;
+    }
+    .edit-layer-input{
+    	width: 530px;
+    }
+    </style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+    	<form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
+	    
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">厂家名称</label>
+                <input type="text" id="venderName" name="venderName" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">联系电话</label>
+                <input type="text" id="contactPhone" name="contactPhone" class="form-control m-b edit-layer-input" style="width:202px">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">联系人姓名</label>
+                <input type="text" id="contactName" name="contactName" class="form-control m-b edit-layer-input" style="width:203px">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">厂家地址</label>
+                <input type="text" id="venderAddr" name="venderAddr" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">厂家图片</label>
+            	<div style="width:640px">
+            		<input type="file" accept="image/*" id="venderPhoto" name="venderPhoto" multiple="multiple">
+				</div>
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">厂家简介</label>
+            	<textarea id="venderDesc" name="venderDesc" class="form-control m-b edit-layer-input" style="height:120px;"></textarea>
+            </div>
+            <div class="edit-box-button">
+		        <button type="submit" class="btn btn-primary edit-layer-button" id="layerOk">保 存</button>
+		        <button type="reset" class="btn btn-white edit-layer-button" id="layerCancel">取 消</button>
+	        </div>
+        </form>
+    </div>
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+	<script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/prettyfile/bootstrap-prettyfile.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../js/platform/combobox-tree.js" type="text/javascript"></script>
+    <script src="../js/scms-utils.js" type="text/javascript"></script>
+    <script src="js/scms-vender-info-edit.js" type="text/javascript"></script>
+</body>
+</html>

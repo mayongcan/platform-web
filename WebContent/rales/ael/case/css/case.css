@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.table-title{
+   	display: block;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.table-title-mark{
+    font-size: 15px;
+}
+table.reference1, table.tecspec {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+.reference-th {
+    color: #fff;
+    background-color: #555;
+    border: 1px solid #555;
+    font-size: 13px;
+    padding: 3px;
+    vertical-align: top;
+    text-align: left;
+}
+.reference-td {
+    line-height: 34px;
+    min-width: 95px;
+    border: 1px solid #d4d4d4;
+    padding: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    vertical-align: top;
+    font-size: 13px;
+    padding-left:10px;
+    padding-right:10px;
+    vertical-align: middle;
+}
+.reference-td1 {
+    line-height: 28px;
+    min-width: 95px;
+    border: 1px solid #d4d4d4;
+    padding: 5px;
+    vertical-align: top;
+    font-size: 13px;
+    padding-left:10px;
+    padding-right:10px;
+}
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+   		width: 100%;
+}
+.float-e-margins .btn {
+    margin-bottom: 0px;
+}
+.input-file{
+	width:100%;
+}
+.edit-layer-input{
+	width:100%;
+}
+
+/*********** case-detail.html ****************/
+.nav-detail {
+  	margin-top:10px;
+  	overflow: hidden;
+}
+.nav-detail ul li {
+  	/* height: 40px; */
+  	line-height: 40px;
+  	float: left;
+  	padding: 10px;
+  	position: relative;
+  	width:33.3%;
+  	text-align: center;
+}
+.nav-detail ul li a {
+  	color: #666;
+  	font-size: 23px;
+  	text-decoration: none;
+  	font-weight: bold;
+}
+.nav-detail ul li a:hover {
+  	color: #000;
+  	text-decoration: none;
+}
+.nav-detail ul li span {
+  /* display: block;
+  	position: absolute;
+  	height: 0px;
+  	width: 0px; 
+  	background: #1FAEFF;
+  	top: 58px;
+  	left: 50%; 
+  */
+  	display: block;
+  	position: absolute;
+  	width: 95%; 
+  	background: #d4d4d4;
+  	height: 3px;
+}
+
+.box-title{
+	text-align: center;
+	padding-top:15px;
+	margin-bottom:20px;
+}

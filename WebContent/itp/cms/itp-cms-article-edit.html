@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-文章-编辑</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../fonts/iconfont/iconfont.css" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <link href="../css/itp.css" rel="stylesheet">
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+		<form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
+	    	<div class="ibox-title">
+	            <h5>文章信息</h5>
+				<div class="ibox-tools" style="margin-right: 10px;">
+					<a class="collapse-link" data-toggle="collapse" href="#baseInfo"> 
+						<i id="baseInfoIcon" class="glyphicon glyphicon-chevron-up"></i>
+					</a> 
+				</div>
+			</div>
+			<div class="ibox-content collapse in collapse-content" id="baseInfo" style="border-top-width: 1px">
+				<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:120px;">标题<span class="input-request">＊</span></td>
+							<td class="reference-td"><input type="text" id="title" name="title" class="form-control"></td>
+						</tr>
+						<tr>
+							<td class="reference-td">短标题</td>
+							<td class="reference-td"><input type="text" id="shortTitle" name="shortTitle" class="form-control"></td>
+						</tr>
+						<tr>
+							<td class="reference-td">所属分类</td>
+							<td class="reference-td"><div id="categoryId" style="float: left; width: 100%"></div></td>
+						</tr>
+						<tr>
+							<td class="reference-td">关键字</td>
+							<td class="reference-td"><input type="text" id="keywords" name="keywords" class="form-control"></td>
+						</tr>
+						<tr>
+							<td class="reference-td">作者</td>
+							<td class="reference-td"><input type="text" id="author" name="author" class="form-control"></td>
+						</tr>
+						<tr>
+							<td class="reference-td">来源</td>
+							<td class="reference-td"><input type="text" id="source" name="source" class="form-control"></td>
+						</tr>
+						<tr>
+							<td class="reference-td">首页图片url<span class="input-request">＊</span></td>
+							<td class="reference-td"><input type="file" accept="image/*" id="image" name="image"></td>
+						</tr>
+						<tr>
+							<td class="reference-td">描述</td>
+							<td class="reference-td"><input type="text" id="articleDesc" name="articleDesc" class="form-control"></td>
+						</tr>
+						<!-- <tr>
+							<td class="reference-td">权重</td>
+							<td class="reference-td"><input type="text" id="weight" name="weight" class="form-control"></td>
+							<td class="reference-td">权重期限</td>
+							<td class="reference-td">
+								<div class='input-group date' id='divWeightDate'>
+									<input type='text' class="form-control" id='weightDate' />
+									<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">外连接</td>
+							<td class="reference-td"><input type="text" id="link" name="link" class="form-control"></td>
+							<td class="reference-td">是否外链接</td>
+							<td class="reference-td">
+								<select class="selectpicker" id="isOutLink">
+									<option value="1">是</option>
+									<option value="0">否</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">发布时间</td>
+							<td class="reference-td">
+								<div class='input-group date' id='divPublishDate'>
+									<input type='text' class="form-control" id='publishDate' />
+									<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </span>
+								</div>
+							</td>
+							<td class="reference-td">发布状态</td>
+							<td class="reference-td"><select class="selectpicker" id="status"></select></td>
+						</tr>
+						<tr>
+							<td class="reference-td">多图缩略图</td>
+							<td class="reference-td"><input type="file" accept="image/*" id="multiImages" name="multiImages" multiple="multiple"></td>
+							<td class="reference-td">积分兑换有效期</td>
+							<td class="reference-td">
+								<div class='input-group date' id='divPeriodDate'>
+									<input type='text' class="form-control" id='periodDate' />
+									<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </span>
+								</div>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+	        </div>
+	    	<div class="ibox-title m-t">
+	            <h5>文章内容<span class="input-request">＊</span></h5>
+				<div class="ibox-tools" style="margin-right: 10px;">
+					<a class="collapse-link" data-toggle="collapse" href="#baseContent"> 
+						<i id="baseContentIcon" class="glyphicon glyphicon-chevron-up"></i>
+					</a> 
+				</div>
+	        </div>
+			<div class="ibox-content collapse in collapse-content" id="baseContent" style="border-top-width: 1px;padding-top:15px;">
+				<textarea id="editorContent"></textarea>
+	        </div>
+            <div style="text-align: center;margin-top:30px">
+		        <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">保 存</button>
+		        <button type="button" class="btn btn-white" id="btnCancel" style="width: 100px;">返 回</button>
+	        </div>
+		</form>
+    </div>
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+	<script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/prettyfile/bootstrap-prettyfile.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../js/platform/combobox-tree.js" type="text/javascript"></script>
+    <script src="js/itp-cms-article-edit.js" type="text/javascript"></script>
+</body>
+</html>

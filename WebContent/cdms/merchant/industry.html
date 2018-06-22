@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行业信息管理</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <style type="text/css">
+    .jstree-open>.jstree-anchor>.fa-folder:before{content:"\f07c"}.jstree-default .jstree-icon.none{width:0}
+    </style>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+		<div class="btn-group hidden-xs div-tool-bar" id="treeToolbar" role="group"></div>
+		<div class="div-box-tree" style="border-width: 5px 0px;margin-right:510px">
+			<div id="treeView" style="overflow: auto;padding-bottom: 25px;"></div>
+		</div>
+		<div id="divInfo" class="div-box-tree" style="border-width: 5px 0px;width:500px;position:absolute;top:0;right:0;margin: 85px 15px 0px 20px;">
+			<table class="reference">
+				<tbody><tr><th style="width:85px;">名称</th><th>内容</th></tr>
+				<tr><td>行业名称</td><td id="tdIndustryName"></td></tr>
+				<tr><td>行业信息父节点</td><td id="tdParentId"></td></tr>
+				<tr><td>备注</td><td id="tdMemo"></td></tr>
+				<tr><td>显示次序</td><td id="tdDispOrder"></td></tr>
+				<tr><td>创建时间</td><td id="tbCreateDate"></td></tr>
+				</tbody>
+			</table>
+		</div>
+    </div>
+    
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../js/cdms-conf.js" type="text/javascript"></script>
+    <script src="js/industry.js" type="text/javascript"></script>
+</body>
+</html>

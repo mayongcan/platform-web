@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-订单（零售单、批发单、预售单、退货单）-编辑</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+    <link href="../../../css/plugins/typeahead/jquery.typeahead.min.css" rel="stylesheet">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-fileinput/fileinput.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <link href="../css/scms.css" rel="stylesheet">
+    <style type="text/css">
+	.checkbox-inline {
+		width: 100px;
+	}
+	.btn-table-opreate {
+		padding: 5px 15px !important;
+	}
+	/* 去掉按钮点击后的篮框 */
+	.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+		outline: none;
+	}
+	.btn-table-opreate{
+		min-width:85px;
+	}
+	.m-t{
+		margin-top: 10px;
+	}
+	.ibox-tools a i{
+		color:#555555 !important;
+	}
+	</style>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+    	<div class="ibox-title">
+            <h5>正在创建的订单类型：</h5>
+			<span style="color:#4397e6" id="orderTypeName"></span>
+		</div>
+		<div class="ibox-title m-t">
+            <h5>选择客户与店铺</h5>
+			<div class="ibox-tools" style="margin-right: 10px;">
+				<a class="collapse-link" data-toggle="collapse" href="#goodsOrderType"> 
+					<i id="goodsOrderTypeIcon" class="glyphicon glyphicon-chevron-up"></i>
+				</a> 
+			</div>
+        </div>
+		<div class="ibox-content collapse in collapse-content" id="goodsOrderType" style="border-top-width: 1px">
+			<table class="reference1">
+				<tbody>
+					<tr id="trCustomerKnow">
+						<td class="reference-td" style="width:120px;">
+						   	是否已知客户
+						</td>
+						<td class="reference-td">
+							<div id="divCustomerKnow">
+								<label class="checkbox-inline">
+							      	<input type="radio" name="radioCustomerKnow" value="0"  checked="checked"> 未知客户
+							    </label>
+								<label class="checkbox-inline">
+							      	<input type="radio" name="radioCustomerKnow" value="1"> 已知客户
+							    </label>
+						    </div>  
+						</td>
+					</tr>
+					<tr id="divOrderCustomerId" style="display: none">
+						<td class="reference-td" style="width:120px;">
+						   	选择客户
+						</td>
+						<td class="reference-td" id="tdOrderCustomerId">
+							<div class="input-group">
+						   		<input type="text" id="orderCustomerId" name="orderCustomerId" class="form-control" readonly>
+								<span id="btnSelectOrderCustomerId" class="input-group-addon" style="cursor: pointer;">选择客户</span>
+					        </div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	所属店铺
+						</td>
+						<td class="reference-td" id="tdShopId">
+							<select class="selectpicker edit-layer-input" id="shopId"></select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+		<div class="ibox-title m-t">
+            <h5>选择商品</h5>
+			<div class="ibox-tools" style="margin-right: 10px;">
+				<a href="#" id="selectGoodsInfo"> 
+					<i class="glyphicon glyphicon-plus"></i>
+				</a> 
+			</div>
+        </div>
+       	<div id="divGoodsList" class="ibox-content" style="border-top-width: 1px;padding-left:20px;padding-right:20px"></div>
+    	<div class="ibox-title m-t">
+            <h5>选择支付与支付方式</h5>
+			<div class="ibox-tools" style="margin-right: 10px;">
+				<a class="collapse-link" data-toggle="collapse" href="#goodsPayInfo"> 
+					<i id="goodsPayInfoIcon" class="glyphicon glyphicon-chevron-up"></i>
+				</a> 
+			</div>
+        </div>
+		<div class="ibox-content collapse in collapse-content" id="goodsPayInfo" style="border-top-width: 1px">
+			<table class="reference1">
+				<tbody>
+					<tr id="divCustomerBalance" style="display: none">
+						<td class="reference-td" style="width:120px;">
+						   	客户余额
+						</td>
+						<td class="reference-td">
+							客户余额：<span id="customerBalance" style="color:red;margin-right:50px;">¥0.00</span>
+							<label style="line-height: 3px;">
+                                <input type="checkbox" id="checkIsCombinePay" value="" > 是否合并付款
+                            </label>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	订单概况
+						</td>
+						<td class="reference-td">
+							订单总额：<span id="orderTotalPay" style="margin-right:50px;"></span>
+							未付金额：<span id="orderUnPay" style="color:red;margin-right:50px;"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	抹零金额
+						</td>
+						<td class="reference-td" id="orderPayType">
+							<div class="input-group"> 
+								<span class="input-group-addon">¥</span>
+								<input type="text" id="smallChange" name="smallChange" class="form-control" placeholder="0.00" oninput="payInputEvent()" onporpertychange="payInputEvent()">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	支付方式
+						</td>
+						<td class="reference-td" id="orderPayType">
+							<div>
+					        	<table class="reference1">
+					        		<tbody id="tbodyOrderPayType"></tbody>
+					        	</table>
+				        	</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+		<div class="ibox-title m-t">
+            <h5>填写其他信息</h5>
+			<div class="ibox-tools" style="margin-right: 10px;">
+				<a class="collapse-link" data-toggle="collapse" href="#goodsOtherInfo"> 
+					<i id="goodsOtherInfoIcon" class="glyphicon glyphicon-chevron-up"></i>
+				</a> 
+			</div>
+        </div>
+		<div class="ibox-content collapse in collapse-content" id="goodsOtherInfo" style="border-top-width: 1px">
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	运输方式
+						</td>
+						<td class="reference-td">
+							<select class="selectpicker edit-layer-input" id="transportId"></select>
+						</td>
+					</tr>
+					<tr id="trSellerBy">
+						<td class="reference-td" style="width:120px;">
+						   	订单销售人
+						</td>
+						<td class="reference-td">
+							<div class="input-group">
+						   		<input type="text" id="sellerBy" name="sellerBy" class="form-control" readonly>
+								<span id="btnSelectSellerBy" class="input-group-addon" style="cursor: pointer;">选择用户</span>
+					        </div>
+						</td>
+					</tr>
+					<tr id="trPerformanceBy">
+						<td class="reference-td" style="width:120px;">
+						   	业绩归属人
+						</td>
+						<td class="reference-td">
+							<div class="input-group">
+						   		<input type="text" id="performanceBy" name="performanceBy" class="form-control" readonly>
+								<span id="btnSelectPerformanceBy" class="input-group-addon" style="cursor: pointer;">选择用户</span>
+					        </div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	订单备注
+						</td>
+						<td class="reference-td">
+							<textarea id="orderMemo" name="orderMemo" class="form-control" style="height:120px"></textarea>
+						</td>
+					</tr>
+					<tr id="trModifyMemo" style="display: none">
+						<td class="reference-td" style="width:120px;">
+						   	订单修改备注
+						</td>
+						<td class="reference-td">
+							<textarea id=modifyMemo name="modifyMemo" class="form-control" style="height:120px"></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+	    	
+        <div style="text-align: center;margin-top:30px">
+	        <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">下 单</button>
+	        <button type="button" class="btn btn-white" id="btnCancel" style="width: 100px;">返 回</button>
+        </div>
+    </div>
+    
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/accounting.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/cleave/cleave.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/plugins/piexif.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/plugins/sortable.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/plugins/purify.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/fileinput.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/locales/zh.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/typeahead/jquery.typeahead.min.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/platform/combobox-tree.js" type="text/javascript"></script>
+    <script src="../js/scms-utils.js" type="text/javascript"></script>
+    <script src="../js/inventory-utils.js" type="text/javascript"></script>
+    <script src="js/order-lsd-edit.js" type="text/javascript"></script>
+</body>
+</html>

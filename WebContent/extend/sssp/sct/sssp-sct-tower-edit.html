@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-塔吊信息表-编辑</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../css/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+    	<form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
+	    
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">设备名称</label>
+                <input type="text" id="name" name="name" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">备案编号</label>
+                <input type="text" id="recordNumber" name="recordNumber" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">备案状态</label>
+                <input type="text" id="recordStatus" name="recordStatus" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">安装日期</label>
+                <input type="text" id="installDate" name="installDate" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">生产厂商</label>
+                <input type="text" id="manufacturer" name="manufacturer" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">租赁公司</label>
+                <input type="text" id="leasingCompany" name="leasingCompany" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">经度</label>
+                <input type="text" id="longitude" name="longitude" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">纬度</label>
+                <input type="text" id="latitude" name="latitude" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">前臂长</label>
+                <input type="text" id="forearmLength" name="forearmLength" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">后臂长</label>
+                <input type="text" id="longarmLength" name="longarmLength" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">塔机高</label>
+                <input type="text" id="towerCrane" name="towerCrane" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">塔帽高</label>
+                <input type="text" id="towerCapHigh" name="towerCapHigh" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">配置高度</label>
+                <input type="text" id="height" name="height" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">额定起重重量</label>
+                <input type="text" id="ratedLiftingWeight" name="ratedLiftingWeight" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">黑匣子编号</label>
+                <input type="text" id="blackBoxNumber" name="blackBoxNumber" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">司机id</label>
+                <input type="text" id="driverId" name="driverId" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">是否有效</label>
+                <input type="text" id="isValid" name="isValid" class="form-control m-b edit-layer-input">
+            </div>
+		
+		
+		
+            <div class="edit-box-button">
+		        <button type="submit" class="btn btn-primary edit-layer-button" id="layerOk">保 存</button>
+		        <button type="reset" class="btn btn-white edit-layer-button" id="layerCancel">取 消</button>
+	        </div>
+        </form>
+    </div>
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+	<script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/prettyfile/bootstrap-prettyfile.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../js/platform/combobox-tree.js" type="text/javascript"></script>
+    <script src="js/sssp-sct-tower-edit.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-设备型号查询</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+		<div class="ibox-content">
+			<div class="panel panel-default search-panel" id="searchPannel">
+       			<div class="panel-body form-horizontal">
+               		<label class="control-label page-search-label">核准证号</label>
+                   	<input type="text" class="form-control page-search-input" id="searchDeviceId">
+               		<label class="control-label page-search-label">核准代码</label>
+                   	<input type="text" class="form-control page-search-input" id="searchCode">
+               		<label class="control-label page-search-label">设备型号</label>
+                   	<input type="text" class="form-control page-search-input" id="searchModel">
+               		<label class="control-label page-search-label" style="margin-right: 25px;">设备名称</label>
+                   	<input type="text" class="form-control page-search-input" id="searchName">
+                  </div>
+                  <div class="panel-body form-horizontal" style="padding-top: 0px;">
+               		<label class="control-label page-search-label">频率范围</label>
+               		<div style="float:left; margin-right:15px;">
+	                   	<input type="text" class="form-control page-search-input" id="searchFrequencyRange" style="width: 111px;margin-right: 0px;">
+	                   	<label class="control-label page-search-label" style="border: 1px solid #E5E6E7;border-left-width: 0px;padding: 5px 5px;">MHz</label>
+                   	</div>
+               		<label class="control-label page-search-label">发射功率</label>
+               		<div style="float:left; margin-right:15px;">
+	                   	<input type="text" class="form-control page-search-input" id="searchTransmissionPower" style="width: 111px;margin-right: 0px;">
+	                   	<label class="control-label page-search-label" style="border: 1px solid #E5E6E7;border-left-width: 0px;padding: 5px 5px;">MHz</label>
+                   	</div>
+               		<label class="control-label page-search-label">占用带宽</label>
+               		<div style="float:left; margin-right:15px;">
+	                   	<input type="text" class="form-control page-search-input" id="searchBandwidth" style="width: 111px;margin-right: 0px;">
+	                   	<label class="control-label page-search-label" style="border: 1px solid #E5E6E7;border-left-width: 0px;padding: 5px 5px;">MHz</label>
+                   	</div>
+               		<label class="control-label page-search-label">杂散发射限值</label>
+               		<div style="float:left; margin-right:15px;">
+	                   	<input type="text" class="form-control page-search-input" id="searchEmissionLimits" style="width: 111px;margin-right: 0px;">
+	                   	<label class="control-label page-search-label" style="border: 1px solid #E5E6E7;border-left-width: 0px;padding: 5px 5px;">dbm</label>
+                   	</div>
+                  </div>
+                  <div class="panel-body form-horizontal" style="padding-top: 0px;">
+               		<label class="control-label page-search-label">生产厂商</label>
+                   	<input type="text" class="form-control page-search-input" id="searchVendor">
+					<label class="control-label page-search-label">核准日期</label>
+               		<div class='input-group date' id='divApprovedDateBegin' style="width: 150px;float: left;margin: 0px 15px;">
+                   		<input type='text' class="form-control" id='approvedDateBegin'/>
+                   		<span class="input-group-addon">
+                       		<span class="glyphicon glyphicon-calendar"></span>
+                   		</span>
+               		</div>
+               		<label class="control-label page-search-label" style="margin-right: 14px;">有效期</label>
+                   	<input type="text" class="form-control page-search-input" id="searchPeriodDate">
+               		<button type="button" style="margin-right:10px" id="btnSearch" class="btn btn-primary">查 询</button>                  		
+               		<button type="button" class="btn btn-white" id="btnReset">重 置</button>
+       			</div>
+   			</div>  
+       
+    		<div class="btn-group hidden-xs" id="tableToolbar" role="group"></div>
+            <table id="tableList" class="table text-nowrap"
+				data-toolbar="#tableToolbar"
+				data-show-toggle="false"
+				data-show-columns="true"
+				data-striped="true"
+				data-cache="false"
+				data-sortable="false"
+				data-sort-order="asc"
+				data-page-number="1"
+				data-page-size="15"
+				data-click-to-select="true"
+				data-icon-size="outline"
+				data-pagination="true"
+				data-side-pagination="server"	
+				data-page-list="[15, 30, 50, 100, ALL]"
+				data-mobile-responsive="true">
+                <thead>
+                    <tr>
+                        <th data-field="tableMulti" data-formatter="appTable.tableFormatCheckbox" data-checkbox="true" data-visible="false"></th>
+                        <th data-field="deviceId">核准证号</th>
+                        <th data-field="code">核准代码</th>
+                        <th data-field="model">设备型号</th>
+                        <th data-field="name">设备名称</th>
+                        <th data-field="frequencyRange">频率范围</th>
+                        <th data-field="transmissionPower">发射功率</th>
+                        <th data-field="bandwidth">占用带宽</th>
+                        <th data-field="emissionLimits">杂散发射限值</th>
+                        <th data-field="vendor">生产厂商</th>
+                        <th data-field="approvedDate" data-formatter="appTable.tableFormatDate">核准日期</th>
+                        <th data-field="periodDate">有效期</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-table/tableExport.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="js/device-type.js" type="text/javascript"></script>
+</body>
+</html>

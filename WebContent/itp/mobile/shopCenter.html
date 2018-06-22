@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <title>个人中心</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+    <!-- head 中 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+
+</head>
+<body>
+<div class="weui-cells">
+    <!--<div class="weui-cell">-->
+        <!--<div class="weui-cell__bd">-->
+            <!--<p>标题文字</p>-->
+        <!--</div>-->
+        <!--<div class="weui-cell__ft">说明文字</div>-->
+    <!--</div>-->
+    <!--<div class="weui-cell">-->
+        <!--<div class="weui-cell__bd">-->
+            <!--<p>标题文字</p>-->
+        <!--</div>-->
+        <!--<div class="weui-cell__ft">说明文字</div>-->
+    <!--</div>-->
+</div>
+<div style="width:80%;bottom:2%;margin-top: 10px;background-color:#777373;border-radius:3px;margin-left:8%;height:35px;line-height:35px;"
+     align="center">
+    <button type="submit" id="bindopenid" class="weui-btn weui-btn_primary" onclick="bindopenid()">绑定微信
+    </button>
+</div>
+<div style="width:80%;bottom:2%;margin-top: 30px;border-radius:3px;margin-left:8%;height:35px;line-height:35px;"
+     align="center">
+    <button type="submit" id="trade" class="weui-btn weui-btn_plain-default" onclick="loginOut()">退出
+    </button>
+</div>
+
+<div class="weui-tabbar">
+    <a href="javascript:;" class="weui-tabbar__item" onclick="tradeAction()">
+        <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+        <div class="weui-tabbar__icon">
+            <img src="http://jqweui.com/dist/demos/images/icon_nav_button.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">收款记录</p>
+    </a>
+    <a href="javascript:;" class="weui-tabbar__item  weui-bar__item--on">
+        <div class="weui-tabbar__icon">
+            <img src="http://jqweui.com/dist/demos/images/icon_nav_cell.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">我</p>
+    </a>
+</div>
+
+<script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+<script src="../../../js/plugins/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/bootstrap-table/tableExport.js" type="text/javascript"></script>
+<script src="../../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/loadingoverlay/loadingoverlay.js" type="text/javascript"></script>
+<script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+<script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
+<script src="../../../js/platform/appconfig.js" type="text/javascript"></script>
+
+
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+
+<!-- 如果使用了某些拓展插件还需要额外的JS -->
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>
+
+
+<script>
+    //绑定微信openid
+    function tradeAction() {
+        window.location.href = encodeURI("trade.html");
+    }
+
+    function loginOut() {
+        app.cookies.delCookiesToken();
+        app.cookies.delCookiesRefreshToken();
+        window.location.href = encodeURI("login.html");
+    }
+
+
+    //绑定微信openid
+    function bindopenid() {
+        var redirect_uri = "";
+        if (window.location.port == 80) {
+            redirect_uri = "http://" + document.domain + "/itp/mobile/bindwx-success.html";
+        } else {
+            redirect_uri = "http://" + document.domain + ":" + location.port + "/itp/mobile/bindwx-success.html";
+        }
+        redirect_uri = "http://" + document.domain + "/itp/mobile/bindwx-success.html";
+        var url = "https://open.weixin.qq.com/connect/oauth2/authorize?redirect_uri=" + redirect_uri
+            + "&appid=wx721f5ed390bbeafe&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
+        window.location.href = encodeURI(url);
+    }
+
+
+    $(document).ready(function () {
+        //搜索参数
+        var searchParams = function (params) {
+            var param = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                access_token: top.app.cookies.getCookiesToken(),
+                size: params.limit,   						//页面大小
+                page: params.offset / params.limit,  		//当前页
+                confName: $("#searchConfName").val(),
+            };
+            return param;
+        };
+
+        $.ajax({
+            url: top.app.conf.url.apigateway + "/api/itp/merchants/getMerchantsInfoList?access_token=" + top.app.cookies.getCookiesToken(),
+            method: "GET",
+            data: JSON.stringify(searchParams),
+            contentType: "application/json",
+            success: function (data) {
+                console.log(data);
+                if ("51006" == data.RetCode) {
+                    // $("form").hide();
+                    // $("#detailsDiv").append("<lable>" + data.RetMsg + "</label>");
+                } else if (top.app.message.code.success == data.RetCode) {
+                    $(".weui-cells").html("");
+                    var tagList = data.rows;
+                    var str = "";
+                    tagLength = tagList.length;
+                    for (var i = 0; i < 1; i++) {
+                        var url = "conf-img-upload.html?confId=" + tagList[i].id + "&confName=" + tagList[i].merchantsName + "&signId=";
+
+                        str += '  <div class="weui-cell" onclick="confUpload(\'' + tagList[i].id + '\',\'' + tagList[i].merchantsName + '\')"> '
+                            + ' <div class="weui-cell__bd"> '
+                            + ' <p>商户名称</p> '
+                            + ' </div> '
+                            + ' <div class="weui-cell__ft">' + tagList[i].merchantsName + '</div> '
+                            + '  </div> ';
+
+                        str += '  <div class="weui-cell" onclick="confUpload(\'' + tagList[i].id + '\',\'' + tagList[i].merchantsName + '\')"> '
+                            + ' <div class="weui-cell__bd"> '
+                            + ' <p>联系电话</p> '
+                            + ' </div> '
+                            + ' <div class="weui-cell__ft">' + tagList[i].corpmanPhone + '</div> '
+                            + '  </div> ';
+
+                        str += '  <div class="weui-cell" onclick="confUpload(\'' + tagList[i].id + '\',\'' + tagList[i].merchantsName + '\')"> '
+                            + ' <div class="weui-cell__bd"> '
+                            + ' <p>商户地址</p> '
+                            + ' </div> '
+                            + ' <div class="weui-cell__ft">' + tagList[i].addr + '</div> '
+                            + '  </div> ';
+
+                        str += '  <div class="weui-cell" onclick="confUpload(\'' + tagList[i].id + '\',\'' + tagList[i].merchantsName + '\')"> '
+                            + ' <div class="weui-cell__bd"> '
+                            + ' <p></p> '
+                            + ' </div> '
+                            + ' <div class="weui-cell__ft">' + tagList[i].categoryName + '</div> '
+                            + '  </div> ';
+
+                    }
+                    if ("" != str) {
+                        $(".weui-cells").html(str);
+                    }
+                }
+            }
+        });
+    });
+
+    //验证输入的验证码
+    function confUpload(id, shopName, payAmount, customerTypeName, createDate) {
+        var url = "tradeDetail.html?id=" + id + "&shopName=" + shopName + "&payAmount=" + payAmount + "&customerTypeName=" + customerTypeName + "&createDate=" + createDate;
+       // window.location.href = encodeURI(url);
+    }
+
+</script>
+</body>
+</html>

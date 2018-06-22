@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-订单（零售单、批发单、预售单）-详情</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+    <link href="../../../css/plugins/typeahead/jquery.typeahead.min.css" rel="stylesheet">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-fileinput/fileinput.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <link href="../css/itp.css" rel="stylesheet">
+    <style type="text/css">
+	.checkbox-inline {
+		width: 100px;
+	}
+	.btn-table-opreate {
+		padding: 5px 15px !important;
+	}
+	/* 去掉按钮点击后的篮框 */
+	.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+		outline: none;
+	}
+	.btn-table-opreate{
+		min-width:85px;
+	}
+	.typeahead__cancel-button {
+	    line-height: 22px;
+	    font-size: 22px;
+	}
+	.searchResult strong{
+		color: red;
+	}
+	.m-t{
+		margin-top: 10px;
+	}
+	.ibox-tools a i{
+		color:#555555 !important;
+	}
+	</style>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+		<div class="ibox-title">
+            <h5>
+            	订单概况
+            	<span id="orderNum" style="color: #555555;font-weight: normal;font-size: 12px;"></span>
+            	<span id="orderType" style="color: #555555;font-weight: normal;font-size: 12px;"></span>
+            	<span id="orderStatus" style="color: #555555;font-weight: normal;font-size: 12px;"></span>
+            	<span id="orderPayStatus" style="color: #555555;font-weight: normal;font-size: 12px;border-bottom: 1px solid #333;cursor: pointer;"></span>
+            	<span id="orderSendStatus" style="color: #555555;font-weight: normal;font-size: 12px;border-bottom: 1px solid #333;cursor: pointer;display: none"></span>
+            	<span id="orderReceiveStatus" style="color: #555555;font-weight: normal;font-size: 12px;border-bottom: 1px solid #333;cursor: pointer;display: none"></span>
+            </h5>
+			<div class="ibox-tools" style="margin-right: 10px;">
+				<a class="collapse-link" data-toggle="collapse" href="#goodsOrderType"> 
+					<i id="goodsOrderTypeIcon" class="glyphicon glyphicon-chevron-up"></i>
+				</a> 
+			</div>
+        </div>
+		<div class="ibox-content collapse in collapse-content" id="goodsOrderType" style="border-top-width: 1px">
+			<div style="padding-right:30px;padding-top:8px;float:left;min-width: 200px">
+       			<div style="font-size:12px">订单总金额</div>
+       			<div id="totalAmount" style="color:#81c41f;font-size:25px;"></div>
+       		</div>
+			<div style="padding-right:30px;padding-top:8px;float:left;min-width: 200px">
+       			<div style="font-size:12px">订单未支付金额</div>
+       			<div id="totalUnPay" style="color:#e36be7;font-size:25px;"></div>
+       		</div>
+			<div style="padding-right:30px;padding-top:8px;float:left;min-width: 200px">
+       			<div style="font-size:12px">商品项数</div>
+       			<div id="totalGoodsRows" style="color:#d6ac34;font-size:25px;"></div>
+       		</div>	
+			<div style="padding-right:30px;padding-top:8px;float:left;min-width: 200px">
+       			<div style="font-size:12px">商品总数量</div>
+       			<div id="totalNum" style="color:#d6ac34;font-size:25px;"></div>
+       		</div>
+        	<div style="clear:both"></div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="ibox-title m-t">
+            <h5>客户信息与支付记录</h5>
+			<div class="ibox-tools" style="margin-right: 10px;">
+				<a class="collapse-link" data-toggle="collapse" href="#goodsPayInfo"> 
+					<i id="goodsPayInfoIcon" class="glyphicon glyphicon-chevron-up"></i>
+				</a> 
+			</div>
+        </div>
+		<div class="ibox-content collapse in collapse-content" id="goodsPayInfo" style="border-top-width: 1px">
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	客户信息
+						</td>
+						<td class="reference-td" id="customerInfo">
+							订单总额：<span id="orderTotalPay" style="margin-right:50px;"></span>
+							未付金额：<span id="orderUnPay" style="color:red;margin-right:50px;"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	抹零金额
+						</td>
+						<td class="reference-td" id="smallChange" style="color: #e95879"></td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	支付记录
+						</td>
+						<td class="reference-td">
+							<table class="reference"><tbody id="orderPayList"></tbody></table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+		<div class="ibox-title m-t">
+            <h5>商品列表</h5>
+			<div class="ibox-tools" style="margin-right: 10px;">
+				<a class="collapse-link" data-toggle="collapse" href="#divGoodsList"> 
+					<i id="divGoodsListIcon" class="glyphicon glyphicon-chevron-up"></i>
+				</a> 
+			</div>
+        </div>
+       	<div id="divGoodsList" class="ibox-content collapse in collapse-content" style="border-top-width: 1px;padding-left:20px;padding-right:20px"></div>
+		<div class="ibox-title m-t">
+            <h5>其他信息</h5>
+			<div class="ibox-tools" style="margin-right: 10px;">
+				<a class="collapse-link" data-toggle="collapse" href="#goodsOtherInfo"> 
+					<i id="goodsOtherInfoIcon" class="glyphicon glyphicon-chevron-up"></i>
+				</a> 
+			</div>
+        </div>
+		<div class="ibox-content collapse in collapse-content" id="goodsOtherInfo" style="border-top-width: 1px">
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	订单创建时间
+						</td>
+						<td class="reference-td" id="createDate" style="width: 38%;"></td>
+						<td class="reference-td" style="width:120px;">
+						   	订单创建人
+						</td>
+						<td class="reference-td" id="createBy"></td>
+					</tr>
+					<tr id="trSellerBy">
+						<td class="reference-td" style="width:120px;">
+						   	订单销售人
+						</td>
+						<td class="reference-td" id="sellerBy"></td>
+						<td class="reference-td" style="width:120px;">
+						   	业绩归属人
+						</td>
+						<td class="reference-td" id="performanceBy"></td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	运输方式
+						</td>
+						<td class="reference-td" id="transportId" colspan="3"></td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:120px;">
+						   	订单备注
+						</td>
+						<td class="reference-td" id="orderMemo" colspan="3"></td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+    </div>
+    
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/accounting.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/cleave/cleave.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/plugins/piexif.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/plugins/sortable.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/plugins/purify.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/fileinput.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-fileinput/locales/zh.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/typeahead/jquery.typeahead.min.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/platform/combobox-tree.js" type="text/javascript"></script>
+    <script src="../js/itp-utils.js" type="text/javascript"></script>
+    <script src="../js/inventory-utils.js" type="text/javascript"></script>
+    <script src="js/order-lsd-detail.js" type="text/javascript"></script>
+</body>
+</html>

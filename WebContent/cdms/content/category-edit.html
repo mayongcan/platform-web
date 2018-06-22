@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章分类-编辑</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/jsTree/default/style.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+	<style type="text/css">
+	.edit-layer-title{
+	    width:130px;
+    }
+	.edit-layer-input{
+		float: left;
+		width: 200px;
+    }
+    .input-file{
+    	padding-right: 14px
+    }
+	</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+    	<form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">栏目名称</label>
+                <input type="text" id="name" name="name" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+                <label class="col-sm-2 control-label edit-layer-title">栏目父节点</label>
+		   		<div id="parentCatId" style="float:left"></div>                
+            </div>
+            <div class="form-group edit-group-style">
+                <label class="col-sm-2 control-label edit-layer-title">归属机构</label>
+		   		<div id="organizerBox" style="float:left"></div>                
+            </div>
+            <div class="form-group edit-group-style">
+                <label class="col-sm-2 control-label edit-layer-title">站点编号</label>
+                <input type="text" id="siteId" name="siteId" class="form-control m-b edit-layer-input">
+         	</div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">栏目模块</label>
+                <input type="text" id="module" name="module" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">栏目英文名称</label>
+                <input type="text" id="nameEn" name="nameEn" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">栏目图片</label>
+                <div style="width:690px"><input type="file" accept="image/*" id="image" name="image"></div>
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">链接</label>
+                <input type="text" id="href" name="href" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">目标</label>
+                <input type="text" id="target" name="target" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">描述</label>
+                <input type="text" id="categoryDesc" name="categoryDesc" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">关键字</label>
+                <input type="text" id="keywords" name="keywords" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">排序</label>
+                <input type="text" id="dispOrder" name="dispOrder" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">在导航中显示</label>
+                <select class="selectpicker" id="inMenu">
+        			<option value="1">是</option>  
+					<option value="0">否</option>  
+        		</select>
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">分类页显示列表</label>
+                <select class="selectpicker" id="inList">
+        			<option value="1">是</option>  
+					<option value="0">否</option>  
+        		</select>
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">展现方式</label>
+                <input type="text" id="showMode" name="showMode" class="form-control m-b edit-layer-input">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">允许评论</label>
+                <select class="selectpicker" id="allowComment">
+        			<option value="1">是</option>  
+					<option value="0">否</option>  
+        		</select>
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">需要审核</label>
+                <select class="selectpicker" id="isAudit">
+        			<option value="1">是</option>  
+					<option value="0">否</option>  
+        		</select>
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">自定义列表视图</label>
+                <input type="text" id="customListView" name="customListView" class="form-control m-b edit-layer-input" style="width:545px;">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">自定义内容视图</label>
+                <input type="text" id="customContentView" name="customContentView" class="form-control m-b edit-layer-input" style="width:545px;">
+            </div>
+            <div class="form-group edit-group-style">
+            	<label class="col-sm-2 control-label edit-layer-title">视图配置</label>
+                <input type="text" id="viewConfig" name="viewConfig" class="form-control m-b edit-layer-input" style="width:545px;">
+            </div>
+            <div style="float:right;margin-right: 29px;margin-bottom:20px">
+		        <button type="submit" class="btn btn-primary edit-layer-button" id="layerOk">保 存</button>
+		        <button type="reset" class="btn btn-white edit-layer-button" id="layerCancel">取 消</button>
+	        </div>
+        </form>
+    </div>
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+	<script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/prettyfile/bootstrap-prettyfile.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/combobox-tree.js" type="text/javascript"></script>
+    <script src="js/category-edit.js" type="text/javascript"></script>
+</body>
+</html>

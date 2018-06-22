@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-智慧工地监控</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+    <link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <style type="text/css">
+    .nav-detail ul li {
+        width:auto;
+    }
+    .nav-detail ul li a {
+        font-size: 18px;
+        padding-left: 15px;
+        padding-right: 5px;
+    }
+    .btn-style{
+        width:120px;
+        margin-right:15px;
+    }
+    </style>
+</head>
+<body style="background-color: #404a58;">
+		
+    <div class="wrapper wrapper-content animated fadeIn" style="padding: 10px;">
+        <div style="background-color: #404a58;font-size:30px;color:#569ed6;padding-left: 50px;font-weight: bold;">
+            住建一张网，监管一块屏，网络化实时监控管辖区内统计数据
+        </div>
+        <div class="ibox-content" style="background-color: #404a58;border-width: 0px;padding-left: 0px;">
+            <div style="margin-right:520px;">
+                <div style="border: 1px solid #28639a;">
+                    <div id="mapCharts" style="height:698px;"></div>
+                </div>
+                <div style="margin-top:15px;">
+                    <div style="width:30%;height:200px;float: left;border: 1px solid #28639a;margin-right:10px;">
+                        <div style="color:#ddd;font-weight:bold;text-align: center;font-size: 16px">视频监控</div>
+                        <div style="padding:10px">
+                            <img src="construction-1.jpg" style="width:48%;height:70px;margin-right:3px;margin-bottom:10px"/>
+                            <img src="construction-2.jpg" style="width:48%;height:70px;;margin-bottom:10px"/>
+                            <img src="construction-3.jpg" style="width:48%;height:70px;margin-right:3px"/>
+                            <img src="construction-4.jpg" style="width:48%;height:70px;"/>
+                        </div>
+                    </div>
+                    <div style="width:37%;height:200px;float: left;border: 1px solid #28639a;margin-right:10px;">
+                        <div style="color:#ddd;font-weight:bold;text-align: center;font-size: 16px">预警信息</div>
+                        <div style="padding:10px">
+                            <div style="color:#ddd;font-size:11px;">[超载报警]   升降机6t,超过额定值5t，请检查！</div>
+                            <div style="color:#ddd;font-size:11px;">[超载报警]   升降机5.5t,超过额定值5t，请检查！</div>
+                            <div style="color:#ddd;font-size:11px;">[塔吊预警]   风速10级，超过预警值6t，请注意防范！</div>
+                            <div style="color:#ddd;font-size:11px;">[塔吊预警]   风速9级，超过预警值6t，请注意防范！</div>
+                            <div style="color:#ddd;font-size:11px;">[塔吊预警]   风速9级，超过预警值6t，请注意防范！</div>
+                            <div style="color:#ddd;font-size:11px;">[塔吊预警]   风速9级，超过预警值6t，请注意防范！</div>
+                            <div style="color:#ddd;font-size:11px;">[塔吊预警]   风速8级，超过预警值6t，请注意防范！</div>
+                            <div style="color:#ddd;font-size:11px;">[塔吊预警]   风速8级，超过预警值6t，请注意防范！</div>
+                            <div style="color:#ddd;font-size:11px;">[塔吊预警]   风速8级，超过预警值6t，请注意防范！</div>
+                        </div>
+                    </div>
+                    <div style="width:30%;height:200px;float: left;border: 1px solid #28639a;">
+                        <div style="color:#ddd;font-weight:bold;text-align: center;font-size: 16px">视频会议</div>
+                        <div style="padding:10px">
+                            <img src="meeting-1.jpg" style="width:65%;height:100px;margin-right:3px;margin-bottom:10px"/>
+                            <img src="meeting-5.jpg" style="width:30%;height:100px;;margin-bottom:10px"/>
+                            <img src="meeting-2.jpg" style="width:31%;height:40px;margin-right:3px"/>
+                            <img src="meeting-3.jpg" style="width:31%;height:40px;margin-right:3px"/>
+                            <img src="meeting-4.jpg" style="width:31%;;height:40px;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="width:520px;position: absolute;right: 10px;top: 58px;">
+                <div style="border:1px solid #28639a;height:220px">
+                  	<div style="color:#ddd;font-weight:bold;font-size: 16px;padding-top:5px;padding-left:5px;">2007-2016年建筑业企业数量及增速</div>
+                    <div style="float:left">
+                  		<div style="padding-left:5px;width:60px;float:left">
+                  			<div style="color:#ddd;font-size:25px">2016</div>
+                  			<div style="color:#ddd;font-size:12px;text-align: right;">年底</div>
+                  		</div>
+                  		<div style="padding-left:5px;border-left:1px solid #28639a;float:left;height: 170px;margin-left: 10px;margin-top: 10px;"></div>
+                  		<div style="padding-left:5px;padding-top:8px;width:90px;float:left">
+                  			<div style="color:#ddd;font-size:12px">全国总数</div>
+                  			<div style="color:#d6ac34;font-size:25px;">83017<span style="font-size:12px;">个</span></div>
+                  			<div style="color:#ddd;font-size:12px">同比上年增加</div>
+                  			<div style="color:#81c41f;font-size:25px;">2016<span style="font-size:12px;">个</span></div>
+                  			<div style="color:#ddd;font-size:12px">增速</div>
+                  			<div style="color:#e36be7;font-size:25px;">2.06<span style="font-size:12px;">%</span></div>
+                  		</div>
+                  	</div>
+                  	<div id="barCharts1" style="height:210px;float:right;width:320px"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div style="border:1px solid #28639a;height:220px;">
+                  	<div style="color:#ddd;font-weight:bold;font-size: 16px;padding-top:5px;padding-left:5px;">2016年各地区建筑业从业人数及增长情况</div>
+                    <div style="float:left">
+                  		<div style="padding-left:5px;width:60px;float:left">
+                  			<div style="color:#ddd;font-size:25px">2016</div>
+                  			<div style="color:#ddd;font-size:12px;text-align: right;">年</div>
+                  		</div>
+                  		<div style="padding-left:5px;border-left:1px solid #28639a;float:left;height: 170px;margin-left: 10px;margin-top: 10px;"></div>
+                  		<div style="padding-left:5px;padding-top:8px;width:125px;float:left">
+                  			<div style="color:#ddd;font-size:12px">从业人数超过百万地区</div>
+                  			<div style="color:#d6ac34;font-size:25px;">18<span style="font-size:12px;">个</span></div>
+                  			<div style="color:#ddd;font-size:12px">同比上年增加</div>
+                  			<div style="color:#81c41f;font-size:25px;">19<span style="font-size:12px;">个</span></div>
+                  			<div style="color:#ddd;font-size:12px">同比上年减少</div>
+                  			<div style="color:#e95879;font-size:25px;">12<span style="font-size:12px;">%</span></div>
+                  		</div>
+                  	</div>
+                  	<div id="barCharts2" style="height:210px;float:right;width:310px"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div style="border:1px solid #28639a;height:220px;">
+                  	<div style="color:#ddd;font-weight:bold;font-size: 16px;padding-top:5px;padding-left:5px;">2007-2016年建筑业企业房屋施工面积，竣工面积及增速</div>
+                    <div style="float:left">
+                  		<div style="padding-left:5px;width:60px;float:left">
+                  			<div style="color:#ddd;font-size:25px">2016</div>
+                  			<div style="color:#ddd;font-size:12px;text-align: right;">年</div>
+                  		</div>
+                  		<div style="padding-left:5px;border-left:1px solid #28639a;float:left;height: 170px;margin-left: 10px;margin-top: 10px;"></div>
+                  		<div style="padding-left:5px;padding-top:8px;width:200px;float:left">
+                  			<div style="float:left">
+	                  			<div style="color:#ddd;font-size:12px">全国建筑业施工面积</div>
+	                  			<div style="color:#7abd49;font-size:25px;">126<span style="font-size:12px;">亿平方米</span></div>
+                  			</div>
+                  			<div style="float:left;margin-left:10px">
+	                  			<div style="color:#ddd;font-size:12px">同比上年增长</div>
+	                  			<div style="color:#e36be7;font-size:25px;">1.98<span style="font-size:12px;">%</span></div>
+                  			</div>
+                			<div style="clear:both"></div>
+                  			<div style="float:left;">
+	                  			<div style="color:#ddd;font-size:12px">全国建筑业竣工面积</div>
+	                  			<div style="color:#47e0c2;font-size:25px;">42<span style="font-size:12px;">亿平方米</span></div>
+                  			</div>
+                  			<div style="float:left;margin-left:10px">
+	                  			<div style="color:#ddd;font-size:12px">同比上年增长</div>
+	                  			<div style="color:#e36be7;font-size:25px;">0.38<span style="font-size:12px;">%</span></div>
+                  			</div>
+                  		</div>
+                  	</div>
+                  	<div id="barCharts3" style="height:210px;float:right;width:240px"></div>
+                </div>
+                
+                <div style="clear:both"></div>
+                <div style="height:220px;">
+                    <div style="float: left;width: 25%;border: 1px solid #28639a;text-align: center;padding: 10px;margin-right:5px;height:200px;">
+                  		<div style="color:#ddd;font-size:13px;height:54px">
+                  			2016年全国建筑业企业完成建筑业总产值
+                  		</div>
+                  		<div style="color:#eaa621;font-size:25px;">
+                  			193566
+                  		</div>
+                  		<div style="color:#eaa621;font-size:13px;">
+                  			亿元
+                  		</div>
+                  		<div style="color:#ddd;font-size:13px">
+                  			同比增长
+                  		</div>
+                  		<div style="color:#e36be7;font-size:25px;">
+                  			7.09<span style="font-size:12px;">%</span>
+                  		</div>
+                  	</div>
+                  	<div style="float: left;width: 24%;border: 1px solid #28639a;text-align: center;padding: 10px;margin-right:5px;height:200px;">
+                  		<div style="color:#ddd;font-size:13px;height:54px">
+                  			2016年全国建筑业企业完成竣工产值
+                  		</div>
+                  		<div style="color:#f6e72a;font-size:25px;">
+                  			112892
+                  		</div>
+                  		<div style="color:#f6e72a;font-size:13px;">
+                  			亿元
+                  		</div>
+                  		<div style="color:#ddd;font-size:13px">
+                  			同比增长
+                  		</div>
+                  		<div style="color:#e36be7;font-size:25px;">
+                  			7.09<span style="font-size:12px;">%</span>
+                  		</div>
+                  	</div>
+                  	<div style="float: left;width: 24%;border: 1px solid #28639a;text-align: center;padding: 10px;margin-right:5px;height:200px;">
+                  		<div style="color:#ddd;font-size:13px;height:54px">
+                  			2016年全国完成房屋施工面积
+                  		</div>
+                  		<div style="color:#7edb1b;font-size:25px;">
+                  			126
+                  		</div>
+                  		<div style="color:#7edb1b;font-size:13px;">
+                  			亿元
+                  		</div>
+                  		<div style="color:#ddd;font-size:13px">
+                  			同比增长
+                  		</div>
+                  		<div style="color:#e36be7;font-size:25px;">
+                  			7.09<span style="font-size:12px;">%</span>
+                  		</div>
+                  	</div>
+                  	<div style="float: left;width: 24%;border: 1px solid #28639a;text-align: center;padding: 10px;height:200px;">
+                  		<div style="color:#ddd;font-size:13px;height:54px">
+                  			2016年全国完成房屋竣工面积
+                  		</div>
+                  		<div style="color:#50dec8;font-size:25px;">
+                  			42
+                  		</div>
+                  		<div style="color:#50dec8;font-size:13px;">
+                  			亿元
+                  		</div>
+                  		<div style="color:#ddd;font-size:13px">
+                  			同比增长
+                  		</div>
+                  		<div style="color:#e36be7;font-size:25px;">
+                  			0.38<span style="font-size:12px;">%</span>
+                  		</div>
+                  	</div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+    
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/echarts/echarts.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/echarts/map/js/china.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/echarts/map/js/province/guangdong.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/echarts/extension/bmap.min.js"></script>
+    <script src="http://api.map.baidu.com/api?v=3.0&ak=rOh5lOLnNiiVBGdcB3QVg1YvojYavPfe" type="text/javascript" ></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="js/monitor.js" type="text/javascript"></script>
+</body>
+</html>

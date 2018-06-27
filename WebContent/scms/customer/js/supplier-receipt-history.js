@@ -120,7 +120,7 @@ function getReceiptHistoryStatistics(){
 	   	data:{
 	    	access_token: top.app.cookies.getCookiesToken(),
 			merchantsId: scms.getUserMerchantsId(),
-			orderType: g_orderType,
+			orderTypeList: g_orderType,
 			orderCustomerType: '2',
 			customerId: g_params.rows.id,
 	   	},

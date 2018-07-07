@@ -1,4 +1,5 @@
 var g_params = {}, g_iframeIndex = null;
+
 $(function () {
 	g_iframeIndex = parent.layer.getFrameIndex(window.name);
 	formValidate();
@@ -8,7 +9,7 @@ $(function () {
     });
 	//设置select的宽度
 	$('.selectpicker').selectpicker({
-		width: '225px'
+		width: '555px'
 	});
 });
 
@@ -26,19 +27,15 @@ function receiveParams(value){
  * 初始化界面
  */
 function initView(){
-	top.app.addComboBoxOption($("#tenantsStatus"), g_params.tenantsStatusDict);
-	$('#beginDate').datepicker({language: 'zh-CN',todayBtn:"linked",keyboardNavigation:false,forceParse:false,autoclose:true});
-	$('#endDate').datepicker({language: 'zh-CN',todayBtn:"linked",keyboardNavigation:false,forceParse:false,autoclose:true});
+    //var loginUrlDict = top.app.getDictDataByDictTypeValue('RALES_BING_USER');
+	top.app.addComboBoxOption($("#loginUrl"), g_params.loginUrlDict);
 	//判断是新增还是修改
 	if(g_params.type == "edit"){
-		$('#tenantsName').val(g_params.rows.tenantsName);
-		$('#tenantsStatus').val(g_params.rows.status);
-		$('#maxUsers').val(g_params.rows.maxUsers);
-		$('#tenantsDesc').val(g_params.rows.tenantsDesc);
-		$('#beginDate').val($.date.dateFormat(g_params.rows.beginDate, "yyyy-MM-dd"));
-		$('#endDate').val($.date.dateFormat(g_params.rows.endDate, "yyyy-MM-dd"));
+		$('#loginUser').val(g_params.rows.loginUser);
+		$('#loginPassword').val(g_params.rows.loginPassword);
+		$('#loginUrl').val(g_params.rows.loginUrl);
+	}else{
 	}
-	
 	//刷新数据，否则下拉框显示不出内容
 	$('.selectpicker').selectpicker('refresh');
 }
@@ -49,16 +46,11 @@ function initView(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	tenantsName: {required: true},
-        	maxUsers:  {required: true, digits:true},
-        	beginDate: {required: true, dateISO:true},
-            endDate: {required: true, dateISO:true}
+        	loginUser: {required: true},
+        	loginPassword: {required: true},
         },
         messages: {
-            tenantsName: {required: "请输入租户名称"},
-            maxUsers: {required: "请输入用户数量", digits: "用户数量必须为0－999999之间的数字"},
-			beginDate: {required: "请输入开始日期", dateISO: "请输入不带时间的正确日期格式,如：2017-01-01"},
-            endDate: {required: "请输入开始日期", dateISO: "请输入不带时间的正确日期格式,如：2017-01-01" }
+        	
         },
         //重写showErrors
         showErrors: function (errorMap, errorList) {
@@ -71,8 +63,7 @@ function formValidate(){
         //失去焦点时不验证
         onfocusout: false,
         submitHandler: function () {
-            //提交内容
-        		submitAction();
+        	submitAction();
         }
     });
 }
@@ -81,17 +72,15 @@ function formValidate(){
  * 提交数据
  */
 function submitAction(){
-	top.app.message.loading();
 	//定义提交数据
 	var submitData = {};
-	if(g_params.rows != null && g_params.rows != undefined)
-		submitData['tenantsId'] = g_params.rows.tenantsId;
-	submitData["tenantsName"] = $.trim($("#tenantsName").val());
-	submitData["status"] = $("#tenantsStatus").val();
-	submitData["maxUsers"] = $.trim($("#maxUsers").val());
-	submitData["tenantsDesc"] = $("#tenantsDesc").val();
-	submitData["beginDate"] = $("#beginDate").val();
-	submitData["endDate"] = $("#endDate").val();
+	if(g_params.type == "edit")
+		submitData["id"] = g_params.rows.id;
+		
+	submitData["userId"] = top.app.info.userInfo.userId;
+	submitData["loginUser"] = $("#loginUser").val();
+	submitData["loginPassword"] = $("#loginPassword").val();
+	submitData["loginUrl"] = $("#loginUrl").val();
 	//异步处理
 	$.ajax({
 		url: g_params.operUrl + "?access_token=" + top.app.cookies.getCookiesToken(),
@@ -111,3 +100,5 @@ function submitAction(){
         }
 	});
 }
+
+

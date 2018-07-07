@@ -839,6 +839,8 @@ var index = index || {};
 		    			//加载子菜单数据
 		    			index.getUserFuncByFd(func.funcId, "folder_" + func.funcId, true);
 		    		});
+		    		//获取绑定用户(用于无线电执法融合系统)
+		    		index.getBindUserList();		
 		    		//加载顶部菜单界面
 		    		index.loadTopMenu(true);
 		    	}else{
@@ -955,7 +957,8 @@ var index = index || {};
 			var active = "";
 			if(idx == 0) active = "active";
 			var topMenu = "<li class='" + active + "'>" + 
-	                            "<a data-toggle='tab' id='folder_" + func.funcId + "' name='folder_" + func.funcId + "' data-id='" + func.funcId + "' data-name='" + func.funcName + "' class='index-top-item'>" + 
+	                            "<a data-toggle='tab' id='folder_" + func.funcId + "' name='folder_" + func.funcId + "' data-id='" + func.funcId + "' data-name='" + func.funcName + "' ' data-funcflag='" + func.funcFlag + "' ' data-funclink='" + func.funcLink + "' " +
+	                            		"class='index-top-item'>" + 
 	                            	"<i class='" + icon + "'></i> " +
 	                            	"<span>" + func.funcName + "</span>" + 
 	                            "</a>" +
@@ -1183,13 +1186,21 @@ var index = index || {};
 	//| 顶部菜单栏点击事件
 	//+--------------------------------------------------- 
 	index.topMenuItemOnClick = function(obj){
-		var funcIc = $(this).data('id');
+		var funcId = $(this).data('id');
 		var funcName = $(this).data('name');
-		index.loadLeftMenu(funcIc, funcName);
-		//跳转到当前已激活的tab上
-		var clickType = 1; 		//1手动，2自动
-		if($.utils.isNull(obj.which)) clickType = 2;
-		index.changeToActiveTab(clickType);
+		var funcFlag = $(this).data('funcflag');
+		//判断是否为特殊菜单
+		if(!$.utils.isEmpty(funcFlag) && funcFlag.indexOf("ThirdPlatform") != -1){
+			var funcLink = $(this).data('funclink');
+			var operUrl = funcLink + "?access_token=" + top.app.cookies.getCookiesToken() + "&loginUrl=" + funcLink;
+			window.open(operUrl);
+		}else{
+			index.loadLeftMenu(funcId, funcName);
+			//跳转到当前已激活的tab上
+			var clickType = 1; 		//1手动，2自动
+			if($.utils.isNull(obj.which)) clickType = 2;
+			index.changeToActiveTab(clickType);
+		}
 	}
 
 	//+---------------------------------------------------   
@@ -1293,6 +1304,38 @@ var index = index || {};
 	    		app.cookies.setCookiesTokenExpires(expires + "", 846000);
 		    },
 		    repeat: true //重复调用
+		});
+	}
+	
+	index.getBindUserList = function(){
+		$.ajax({
+		    url: app.conf.url.apigateway + "/api/rales/user/getList",
+		    method: 'GET',
+		    async: false,
+		   	timeout:5000,
+		    data: {
+	    		access_token: app.cookies.getCookiesToken(),
+	    		userId: top.app.info.userInfo.userId,
+		    },success: function(data){
+		    	if(app.message.code.success == data.RetCode){
+		    		var dict = top.app.getDictDataByDictTypeValue('RALES_BING_USER');
+		    		//添加菜单
+		    		for(var i = 0; i < data.rows.length; i++){
+		    			var obj = {};
+		    			obj.funcLink = data.rows[i].loginUrl;
+		    			obj.funcName = top.app.getDictName(data.rows[i].loginUrl, dict);
+		    			obj.funcId = "99999" + i;
+		    			obj.funcFlag = 'ThirdPlatform' + i;
+//		    			obj.funcLevel = 1;
+//		    			obj.funcType = 100200;
+//		    			obj.isBase = 'Y';
+//		    			obj.isBlank = 'Y';
+//		    			obj.isShow = 'Y';
+//		    			obj.isBase = 'Y';
+		    			index.topMenuList.push(obj);
+		    		}
+		    	}
+			}
 		});
 	}
 })();

@@ -120,7 +120,7 @@ function initButton(){
 	$("#btnNewDoc1-5").click(function () {
 		btnEventNew(1, 5);
     });
-	//责令（限期）改正通知书
+	//责令（限期）整改通知书
 	$("#btnNewDoc1-6").click(function () {
 		btnEventNew(1, 6);
     });

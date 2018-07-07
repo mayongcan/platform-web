@@ -363,7 +363,7 @@ rales.getDelegationStorage = function(registerId){
 	return rales.getTableDataInfo(registerId, "DelegationStorage");
 }
 
-//责令（限期）改正通知书
+//责令（限期）整改通知书
 rales.getOrderCorrect = function(registerId){
 	return rales.getTableDataInfo(registerId, "OrderCorrect");
 }

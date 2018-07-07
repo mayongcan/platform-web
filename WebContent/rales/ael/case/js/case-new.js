@@ -111,17 +111,29 @@ function initView(){
 	$("#btnCancel").click(function () {
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		if($.utils.isEmpty(g_oldRegisterId)) {
-			window.location.href = "case-new.html?_pid=" + pid;
+			if(!$.utils.isNull(g_params) && !$.utils.isNull(g_params.reportRow)){
+				window.location.href = g_backUrl + "?_pid=" + pid;
+			}else
+				window.location.href = "case-new.html?_pid=" + pid;
 		}else{
-			window.location.href = g_backUrl + "?_pid=" + pid;
+   			window.location.href = g_backUrl + "?_pid=" + pid;
 		}
     });
 	
+	//填写日常巡查的快捷登记
 	if(!$.utils.isNull(g_params) && !$.utils.isNull(g_params.routineRow)){
 		$("#defendantName").val(g_params.routineRow.defendantName);
 		$("#defendantAddress").val(g_params.routineRow.address);
 		$("#defendantDate").val($.date.dateFormat(g_params.routineRow.checkDate, "yyyy-MM-dd"));
 		$("#clueSummary").val(g_params.routineRow.clueSummary);
+	}
+	
+	//填写微信案件登记的快捷登记
+	if(!$.utils.isNull(g_params) && !$.utils.isNull(g_params.reportRow)){
+		$("#defendantName").val(g_params.reportRow.name);
+		$("#defendantAddress").val(g_params.reportRow.address);
+		$("#defendantDate").val($.date.dateFormat(g_params.reportRow.reportDate, "yyyy-MM-dd"));
+		$("#clueSummary").val(g_params.reportRow.content);
 	}
 }
 
@@ -224,6 +236,11 @@ function submitAction(){
 		submitData["oldRegisterId"] = g_oldRegisterId;
 		submitData["registerType"] = g_registerType;
 	}
+
+	//微信案件登记标识
+	if(!$.utils.isNull(g_params) && !$.utils.isNull(g_params.reportRow)){
+		submitData["webReportId"] = g_params.reportRow.id;
+	}
 	
 	//设置区域内容
 	if($("#areaDistrict").val() != null && $("#areaDistrict").val() != undefined && $("#areaDistrict").val() != '')
@@ -249,7 +266,10 @@ function submitAction(){
 	   			top.app.message.notice("数据保存成功！");
 	   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	   			if($.utils.isEmpty(g_oldRegisterId)) {
-		   			window.location.href = "case-new.html?_pid=" + pid;
+	   				if(!$.utils.isNull(g_params) && !$.utils.isNull(g_params.reportRow)){
+	   					window.location.href = g_backUrl + "?_pid=" + pid;
+	   				}else
+	   					window.location.href = "case-new.html?_pid=" + pid;
 	   			}else{
 		   			window.location.href = g_backUrl + "?_pid=" + pid;
 	   			}

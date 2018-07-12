@@ -177,7 +177,7 @@ scms.getColorPullDown = function(divObj, merchantsId, isAll, defVal){
 	});
 }
 
-//颜色下拉
+//材质下拉
 scms.getTexturePullDown = function(divObj, merchantsId, isAll, defVal){
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/scms/base/getTextureInfoList",

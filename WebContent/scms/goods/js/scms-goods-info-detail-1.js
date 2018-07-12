@@ -103,6 +103,7 @@ function initData(){
 	$("#purchasePrice").text(accounting.formatMoney(g_params.row.purchasePrice, "¥"));
 	$("#defDiscount").text(g_params.row.defDiscount);
 	$("#packingNum").text(g_params.row.packingNum);
+	$("#goodsTexture").text(g_params.row.goodsTexture);
 	$("#goodsYear").text(top.app.getDictName(g_params.row.goodsYear, g_params.goodsYearDict));
 	$("#goodsSeason").text(top.app.getDictName(g_params.row.goodsSeason, g_params.goodsSeasonDict));
 	$("#buyStatus").text(top.app.getDictName(g_params.row.buyStatus, g_params.buyStatusDict));
@@ -129,15 +130,6 @@ function initData(){
 		$('#tdGoodsColor').empty();
 		for(var i = 0; i < arrayName.length; i++){
 			$('#tdGoodsColor').append('<button type="button" class="btn btn-info btn-table-opreate" >' + 
-											arrayName[i] + 
-										'</button>');
-		}
-	}
-	if(!$.utils.isEmpty(g_params.row.textureNameList)){
-		var arrayName = g_params.row.textureNameList.split(",");
-		$('#tdGoodsTexture').empty();
-		for(var i = 0; i < arrayName.length; i++){
-			$('#tdGoodsTexture').append('<button type="button" class="btn btn-info btn-table-opreate" >' + 
 											arrayName[i] + 
 										'</button>');
 		}

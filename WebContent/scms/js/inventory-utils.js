@@ -1,6 +1,6 @@
 //库存工具信息
 var g_shopList = [];
-var g_selectColor = [], g_selectSize = [], g_selectTexture = [];
+var g_selectColor = [], g_selectSize = [];
 var g_goodsInventoryDataList = [];
 
 //获取店铺列表
@@ -134,63 +134,6 @@ function selectSize(id, name){
 	}
 	//进行排序
 	g_selectSize = g_selectSize.sort($.utils.objArrayCompare("id"));
-	//加载初始化库存输入内容
-	loadGenInventoryInfo();
-}
-
-//初始化材质选择列表
-function initGoodsTexture(){
-	$.ajax({
-		url: top.app.conf.url.apigateway + "/api/scms/base/getTextureInfoList",
-		method: 'GET',
-	    async: false,
-	   	timeout:5000,
-		data: {
-			access_token: top.app.cookies.getCookiesToken(),
-            page: 0,
-            size: 1000,
-			merchantsId: scms.getUserMerchantsId(),
-		},
-		success: function(data) {
-			if(top.app.message.code.success == data.RetCode) {
-				if(data.rows != null && data.rows != undefined && data.rows.length > 0) {
-					$('#tdGoodsTexture').empty();
-					var html = "";
-					for(var i = 0; i < data.rows.length; i++){
-						html += '<button id="btnTexture' + data.rows[i].id + '" type="button" class="btn btn-white btn-table-opreate" onclick="selectTexture(\'' + data.rows[i].id + '\', \'' + data.rows[i].textureName + '\')">' + 
-									data.rows[i].textureName + 
-								'</button>';
-					}
-					$('#tdGoodsTexture').append(html);
-				}
-			} else {
-				top.app.message.error(data.RetMsg);
-			}
-		}
-	});
-}
-
-//材质选择事件
-function selectTexture(id, name){
-	if($('#btnTexture' + id).hasClass('btn-info')){
-		$('#btnTexture' + id).removeClass('btn-info');
-		$('#btnTexture' + id).addClass('btn-white');
-		for(var i = 0; i < g_selectTexture.length; i++){
-			if(g_selectTexture[i].id == id){
-				g_selectTexture.splice(i, 1);
-				break;
-			}
-		}
-	}else{
-		$('#btnTexture' + id).addClass('btn-info');
-		$('#btnTexture' + id).removeClass('btn-white');
-		var obj = new Object();
-		obj.id = id;
-		obj.name = name;
-		g_selectTexture.push(obj);
-	}
-	//进行排序
-	g_selectTexture = g_selectTexture.sort($.utils.objArrayCompare("id"));
 	//加载初始化库存输入内容
 	loadGenInventoryInfo();
 }

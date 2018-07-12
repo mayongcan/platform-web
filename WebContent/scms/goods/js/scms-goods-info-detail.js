@@ -3,6 +3,7 @@ $(function () {
 	g_params = top.app.info.iframe.params;
 	initView();
 	initNavButton();
+	$('#navDetail1').trigger("click");
 });
 
 function initView(){

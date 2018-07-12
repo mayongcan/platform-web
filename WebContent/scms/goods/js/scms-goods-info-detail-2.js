@@ -4,7 +4,7 @@ $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search, "backUrl");
 	g_params = parent.g_params;
 	parent.document.getElementById('sub-iframe').style.height = '0px';
-	g_tableHeight = $.utils.calcPageHeight(parent.document) - 120;
+	g_tableHeight = $.utils.calcPageHeight(parent.document);
 	getStatisticsGoodsInventory();
 	//初始化列表信息
 	initTable();
@@ -12,7 +12,7 @@ $(function () {
 	setTimeout(function () {
 		//重新计算当前页面的高度，用于iframe
         parent.document.getElementById('sub-iframe').style.height = g_tableHeight + 'px';
-    }, 500);
+    }, 300);
 });
 
 function getStatisticsGoodsInventory(){
@@ -74,6 +74,7 @@ function initTable(){
         	appTable.setRowClickStatus($table, row, $el);
         }
     });
+	appTable.searchPannelHeight = 80;
 	//初始化Table相关信息
 	appTable.initTable($table);
 }

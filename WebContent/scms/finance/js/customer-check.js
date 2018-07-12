@@ -302,7 +302,6 @@ function setList(data, listObj, totalObj, unPayObj, smallChangeObj){
 						for(var k = 0; k < goodsDetailList.length; k++){
 							if(k == 0){
 								html += '<td class="reference-td">' + goodsDetailList[k].goodsColorName + '</td>' +
-									'<td class="reference-td">' + goodsDetailList[k].goodsTextureName + '</td>' +
 									'<td class="reference-td">' + goodsDetailList[k].goodsSizeName + '</td>' +
 									'<td class="reference-td">' + goodsDetailList[k].goodsOrderNum + '</td>' +
 									'<td class="reference-td">' + accounting.formatMoney(goodsDetailList[k].goodsOrderPrice, "¥") + '</td>' +
@@ -313,7 +312,6 @@ function setList(data, listObj, totalObj, unPayObj, smallChangeObj){
 							}else{
 								html += '<tr>' + 
 											'<td class="reference-td">' + goodsDetailList[k].goodsColorName + '</td>' +
-										'<td class="reference-td">' + goodsDetailList[k].goodsTextureName + '</td>' +
 										'<td class="reference-td">' + goodsDetailList[k].goodsSizeName + '</td>' +
 										'<td class="reference-td">' + goodsDetailList[k].goodsOrderNum + '</td>' +
 										'<td class="reference-td">' + accounting.formatMoney(goodsDetailList[k].goodsOrderPrice, "¥") + '</td>' +
@@ -327,7 +325,6 @@ function setList(data, listObj, totalObj, unPayObj, smallChangeObj){
 						for(var k = 0; k < goodsDetailList.length; k++){
 							if(k != 0) html += '<tr>';
 							html += '<td class="reference-td">' + goodsDetailList[k].goodsColorName + '</td>' +
-								'<td class="reference-td">' + goodsDetailList[k].goodsTextureName + '</td>' +
 								'<td class="reference-td">' + goodsDetailList[k].goodsSizeName + '</td>' +
 								'<td class="reference-td">' + goodsDetailList[k].goodsOrderNum + '</td>' +
 								'<td class="reference-td">' + accounting.formatMoney(goodsDetailList[k].goodsOrderPrice, "¥") + '</td>' +
@@ -354,7 +351,6 @@ function setList(data, listObj, totalObj, unPayObj, smallChangeObj){
 	}else{
 		listObj.append('<tr>' + 
 									'<td class="reference-td">合计</td>' + 
-									'<td class="reference-td"></td>' +
 									'<td class="reference-td"></td>' +
 									'<td class="reference-td"></td>' +
 									'<td class="reference-td"></td>' +

@@ -51,7 +51,6 @@ function loadGoodsDataList(){
 							'<tbody>' +
 								'<tr>' +
 									'<td class="reference-td">颜色</td>' +
-									'<td class="reference-td">材质</td>' +
 									'<td class="reference-td">尺寸</td>' +
 									'<td class="reference-td">盘点前数量</td>' +
 									'<td class="reference-td">盘点后数量</td>' +
@@ -59,7 +58,6 @@ function loadGoodsDataList(){
 		for(var j = 0; j < g_goodsOrderList[i].goodsDataList.length; j++){
 			html += '<tr>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsColorName + '</td>' +
-						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsTextureName + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsSizeName + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsBeforeNum + '</td>' +	
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsAfterNum + '</td>' +					

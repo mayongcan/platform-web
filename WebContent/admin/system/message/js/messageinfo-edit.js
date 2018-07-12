@@ -86,11 +86,11 @@ function initView(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-	        	msgTitle: {required: true},
-	        	weight: {required: true, digits:true}
+        	msgTitle: {required: true},
+        	weight: {required: true, digits:true}
         },
         messages: {
-        		msgTitle: {required: "请输入消息标题"}
+    		msgTitle: {required: "请输入消息标题"}
         },
         //重写showErrors
         showErrors: function (errorMap, errorList) {

@@ -95,7 +95,6 @@ function loadGoodsDataList(){
 								'<tr>' +
 									'<td class="reference-td">店铺</td>' +
 									'<td class="reference-td">颜色</td>' +
-									'<td class="reference-td">材质</td>' +
 									'<td class="reference-td">尺寸</td>' +
 									'<td class="reference-td">盘点前数量</td>' +
 									'<td class="reference-td">调盘后数量</td>' +
@@ -107,7 +106,6 @@ function loadGoodsDataList(){
 			for(var inventoryIndex = 0;inventoryIndex < g_goodsOrderList[i].goodsInventoryDataList.length; inventoryIndex++){
 				if($("#shopId").val() == g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].shopId && 
 						g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].colorId == g_goodsOrderList[i].goodsDataList[j].goodsColorId && 
-						g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].textureId == g_goodsOrderList[i].goodsDataList[j].goodsTextureId && 
 						g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].inventorySizeId == g_goodsOrderList[i].goodsDataList[j].goodsSizeId) {
 					goodsInventoryNum = g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].inventoryNum;
 					break;
@@ -116,12 +114,11 @@ function loadGoodsDataList(){
 			html += '<tr>' +
 						'<td class="reference-td">' + $("#shopId").find("option:selected").text() + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsColorName + '</td>' +
-						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsTextureName + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsSizeName + '</td>' +
 						'<td class="reference-td">' + goodsInventoryNum + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsOrderNum + '</td>' +
 						'<td class="reference-td">' +
-							'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="removeOrderGoods(\'' + g_goodsOrderList[i].goodsId + '\', \'' + g_goodsOrderList[i].goodsDataList[j].goodsColorId + '\', \'' + g_goodsOrderList[i].goodsDataList[j].goodsTextureId + '\', \'' + g_goodsOrderList[i].goodsDataList[j].goodsSizeId + '\')">' + 
+							'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="removeOrderGoods(\'' + g_goodsOrderList[i].goodsId + '\', \'' + g_goodsOrderList[i].goodsDataList[j].goodsColorId + '\', \'' + g_goodsOrderList[i].goodsDataList[j].goodsSizeId + '\')">' + 
 								'<i class="glyphicon glyphicon-trash" aria-hidden="true"></i> 移除' + 
 						  '</button>'
 						'</td>' +
@@ -151,11 +148,11 @@ function delSelectGoodsInfo(goodsId){
 }
 
 //移除商品条目
-function removeOrderGoods(goodsId, colorId, textureId, sizeId){
+function removeOrderGoods(goodsId, colorId, sizeId){
 	for(var i = 0;i < g_goodsOrderList.length; i++){
 		if(g_goodsOrderList[i].goodsId != goodsId) continue;
 		for(var j = 0; j < g_goodsOrderList[i].goodsDataList.length; j++){
-			if(g_goodsOrderList[i].goodsDataList[j].goodsColorId == colorId && g_goodsOrderList[i].goodsDataList[j].goodsTextureId == textureId && g_goodsOrderList[i].goodsDataList[j].goodsSizeId == sizeId){
+			if(g_goodsOrderList[i].goodsDataList[j].goodsColorId == colorId && g_goodsOrderList[i].goodsDataList[j].goodsSizeId == sizeId){
 				g_goodsOrderList[i].goodsDataList.splice(j, 1);
 				break;
 			}
@@ -191,7 +188,6 @@ function getOrderGoodsList(){
 			for(var inventoryIndex = 0;inventoryIndex < g_goodsOrderList[i].goodsInventoryDataList.length; inventoryIndex++){
 				if($("#shopId").val() == g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].shopId && 
 						g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].colorId == g_goodsOrderList[i].goodsDataList[j].goodsColorId && 
-						g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].textureId == g_goodsOrderList[i].goodsDataList[j].goodsTextureId && 
 						g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].inventorySizeId == g_goodsOrderList[i].goodsDataList[j].goodsSizeId) {
 					goodsInventoryNum = g_goodsOrderList[i].goodsInventoryDataList[inventoryIndex].inventoryNum;
 					break;

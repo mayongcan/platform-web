@@ -96,7 +96,6 @@ function loadGoodsDataList(){
 									'</td>' +
 									'<td class="reference-td">店铺</td>' +
 									'<td class="reference-td">颜色</td>' +
-									'<td class="reference-td">材质</td>' +
 									'<td class="reference-td">尺寸</td>' +
 									'<td class="reference-td">数量</td>' +
 									'<td class="reference-td">单价</td>' +
@@ -112,7 +111,6 @@ function loadGoodsDataList(){
 						'</td>' +
 						'<td class="reference-td">' + g_params.orderInfo.row.shopName + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsColorName + '</td>' +
-						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsTextureName + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsSizeName + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsOrderNum + '</td>' +
 						'<td class="reference-td">' + accounting.formatMoney(g_goodsOrderList[i].goodsDataList[j].goodsOrderPrice, "¥") + '</td>' +

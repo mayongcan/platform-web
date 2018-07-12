@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>通用信息管理平台-微信报案</title>
-    <meta name="keywords" content="通用信息管理平台">
-    <meta name="description" content="通用信息管理平台">
+    <title>无线电行政执法系统-微信报案</title>
+    <meta name="keywords" content="无线电行政执法系统">
+    <meta name="description" content="无线电行政执法系统">
 	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
     <link href="../../../fonts/iconfont/iconfont.css" rel="stylesheet">
@@ -15,13 +15,25 @@
     <link href="../../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="../../../css/platform.css" rel="stylesheet">
     <link href="../ael/case/css/case.css" rel="stylesheet">
+    <style type="text/css">
+    body{
+    	color: #232323;
+    }
+    input[type="text"] {
+	  -webkit-appearance: none;
+	}
+	textarea{
+	  -webkit-appearance: none;
+	}
+    </style>
 <body>
-    <div class="wrapper wrapper-content animated fadeIn">
-   	 	<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
+    <div class="wrapper wrapper-content animated fadeIn" style="padding:0px;">
+    	<div style="height:45px;background-color: #3963af; color: #fff;text-align: center; line-height: 45px;font-size: 17px;font-weight: bold;">微信报案</div>
+   	 	<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off style="padding-left:10px;padding-right:10px">
 			<table class="reference1">
 				<tbody>
 					<tr>
-						<td class="reference-td" width="150px">
+						<td class="reference-td" width="115px">
 						   	报案姓名
 						</td>
 						<td class="reference-td">
@@ -68,7 +80,7 @@
 				</tbody>
 			</table>
             <div style="text-align: center;margin-top:30px">
-		        <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">提 交</button>
+		        <button type="button" class="btn btn-primary" id="btnOK" style="width: 90%;background-color: #3963af;border-color: #3963af;">提 交</button>
 	        </div>
 		</form>
     </div>

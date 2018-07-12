@@ -12,7 +12,6 @@ $(function () {
 	getShopList();
 	initGoodsColor();
 	initGoodsSize();
-	initGoodsTexture();
 	initView();
 	formValidate();
 	top.app.message.loadingClose();
@@ -25,6 +24,7 @@ function initView(){
 	g_comboBoxTree.isOpenFirst = false;
 	g_comboBoxTree.init($('#categoryId'), g_params.allTreeData, '100%');
 	scms.getVenderPullDown($("#venderId"), scms.getUserMerchantsId(), true, " ");
+	scms.getTexturePullDown($("#goodsTexture"), scms.getUserMerchantsId(), false);
 	g_salePrice = new Cleave('#salePrice', {
 	    numeral: true,
 	    numeralThousandsGroupStyle: 'thousand'
@@ -139,31 +139,27 @@ function judgeDisplayDiscount(){
 function loadGenInventoryInfo(){
 	//动态生成table内容
 	$('#tbodyGenInventory').empty();
-	if(g_selectColor.length == 0 && g_selectTexture.length == 0 && g_selectSize.length == 0) {
+	if(g_selectColor.length == 0 && g_selectSize.length == 0) {
 		$('#divTotalStat').css('display', 'none');
 		return; 
 	}
 	$('#divTotalStat').css('display', '');
 	$('#divTotalStatNotice').text('');
 	if(g_selectColor.length == 0) $('#divTotalStatNotice').text('(请选择商品颜色)');
-	else if(g_selectTexture.length == 0) $('#divTotalStatNotice').text('(请选择商品材质)');
 	else if(g_selectSize.length == 0) $('#divTotalStatNotice').text('(请选择商品尺寸)');
 	//首先生成表格头
 	var tableHeader = '<tr>' + 
 							'<td class="reference-td" style="font-weight:bold;line-height:20px;">店铺</td>' + 
 							'<td class="reference-td" style="font-weight:bold;line-height:20px;">商品颜色</td>' + 
-							'<td class="reference-td" style="font-weight:bold;line-height:20px;">商品材质</td>' + 
 							'<td class="reference-td" style="font-weight:bold;line-height:20px;">商品尺寸</td>' + 
 							'<td class="reference-td" style="font-weight:bold;line-height:20px;">商品库存</td>' + 
 						'</tr>';
 	$('#tbodyGenInventory').append(tableHeader);
 	var tableContent = ""; 
 	var colorLength = g_selectColor.length == 0 ? 1 : g_selectColor.length, 
-		textureLength = g_selectTexture.length == 0 ? 1 : g_selectTexture.length,
 		sizeLength = g_selectSize.length == 0 ? 1 : g_selectSize.length;
-	var shopRowSpan = 1, colorRowSpan = 1, textureRowSpan = 1, sizeRowSpan = 1;
-	textureRowSpan = sizeRowSpan * sizeLength;
-	colorRowSpan = textureRowSpan * textureLength;
+	var shopRowSpan = 1, colorRowSpan = 1, sizeRowSpan = 1;
+	colorRowSpan = sizeRowSpan * sizeLength;
 	shopRowSpan = colorRowSpan * colorLength;
 	//生成内容
 	for(var shopIndex = 0; shopIndex < g_shopList.length; shopIndex++){
@@ -175,31 +171,25 @@ function loadGenInventoryInfo(){
 			tableContent += '<td class="reference-td" rowspan="' + colorRowSpan + '" style="line-height:20px;">' + 
 								getDataListValue(g_selectColor, colorIndex) + 
 							'</td>'; 
-			//获取材质层
-			for(var textureIndex = 0; textureIndex < textureLength; textureIndex++){
-				tableContent += '<td class="reference-td" rowspan="' + textureRowSpan + '" style="line-height:20px;">' + 
-									getDataListValue(g_selectTexture, textureIndex) + 
-								'</td>'; 
-				//获取尺寸层
-				for(var sizeIndex = 0; sizeIndex < sizeLength; sizeIndex++){
-					var selColorId = getDataListId(g_selectColor, colorIndex), selTextureId = getDataListId(g_selectTexture, textureIndex), selSizeId = getDataListId(g_selectSize, sizeIndex);
-					var tmpId = "_" + g_shopList[shopIndex].ID + "_" + selColorId + "_" + selTextureId + "_" + selSizeId;
-					tableContent += '<td class="reference-td" style="line-height:20px;">' + 
-										getDataListValue(g_selectSize, sizeIndex) + 
-									'</td>' + 
-									'<td class="reference-td" style="line-height:20px;">' + 
-										'<div class="input-group" style="width:150px;float:left;margin-right:10px">' + 
-											'<span class="input-group-addon" style="font-size:12px;">数量</span>' + 
-										   	'<input id="num' + tmpId + '" type="text" class="form-control" value="0" style="font-size:12px;">' + 
-								        '</div>' + 
-								        '<div class="input-group" style="min-width:120px;">' + 
-											'<span class="input-group-addon" style="font-size:12px;">条码</span>' + 
-										   	'<input id="barcode' + tmpId + '" type="text" class="form-control" style="font-size:12px;">' + 
-								        '</div>' + 
-									'</td>' + 
-									'<script>new Cleave("#num' + tmpId + '", {numeral: true,numeralThousandsGroupStyle: "none",numeralIntegerScale: 5,numeralDecimalScale: 0});</script> ' +
-								'</tr>'; 
-				}
+			//获取尺寸层
+			for(var sizeIndex = 0; sizeIndex < sizeLength; sizeIndex++){
+				var selColorId = getDataListId(g_selectColor, colorIndex), selSizeId = getDataListId(g_selectSize, sizeIndex);
+				var tmpId = "_" + g_shopList[shopIndex].ID + "_" + selColorId + "_" + selSizeId;
+				tableContent += '<td class="reference-td" style="line-height:20px;">' + 
+									getDataListValue(g_selectSize, sizeIndex) + 
+								'</td>' + 
+								'<td class="reference-td" style="line-height:20px;">' + 
+									'<div class="input-group" style="width:150px;float:left;margin-right:10px">' + 
+										'<span class="input-group-addon" style="font-size:12px;">数量</span>' + 
+									   	'<input id="num' + tmpId + '" type="text" class="form-control" value="0" style="font-size:12px;">' + 
+							        '</div>' + 
+							        '<div class="input-group" style="min-width:120px;">' + 
+										'<span class="input-group-addon" style="font-size:12px;">条码</span>' + 
+									   	'<input id="barcode' + tmpId + '" type="text" class="form-control" style="font-size:12px;">' + 
+							        '</div>' + 
+								'</td>' + 
+								'<script>new Cleave("#num' + tmpId + '", {numeral: true,numeralThousandsGroupStyle: "none",numeralIntegerScale: 5,numeralDecimalScale: 0});</script> ' +
+							'</tr>'; 
 			}
 		}
 	}
@@ -251,22 +241,18 @@ function getGoodsInventoryResult(){
 	//获取数量等内容
 	for(var shopIndex = 0; shopIndex < g_shopList.length; shopIndex++){
 		for(var colorIndex = 0; colorIndex < g_selectColor.length; colorIndex++){
-			for(var textureIndex = 0; textureIndex < g_selectTexture.length; textureIndex++){
-				for(var sizeIndex = 0; sizeIndex< g_selectSize.length; sizeIndex++){
-					var tmpId = "_" + g_shopList[shopIndex].ID + "_" + g_selectColor[colorIndex].id + "_" + g_selectTexture[textureIndex].id + "_" + g_selectSize[sizeIndex].id;
-					if(document.getElementById("num" + tmpId)){
-						var obj = new Object();
-						obj.shopId = g_shopList[shopIndex].ID;
-						obj.colorId = g_selectColor[colorIndex].id;
-						obj.colorName = g_selectColor[colorIndex].name;
-						obj.textureId = g_selectTexture[textureIndex].id;
-						obj.textureName = g_selectTexture[textureIndex].name;
-						obj.inventorySizeId = g_selectSize[sizeIndex].id;
-						obj.inventorySize = g_selectSize[sizeIndex].name;
-						obj.inventoryNum = $('#num' + tmpId).val();
-						obj.goodsBarcode = $('#barcode' + tmpId).val();
-						dataList.push(obj);
-					}
+			for(var sizeIndex = 0; sizeIndex< g_selectSize.length; sizeIndex++){
+				var tmpId = "_" + g_shopList[shopIndex].ID + "_" + g_selectColor[colorIndex].id + "_" + g_selectSize[sizeIndex].id;
+				if(document.getElementById("num" + tmpId)){
+					var obj = new Object();
+					obj.shopId = g_shopList[shopIndex].ID;
+					obj.colorId = g_selectColor[colorIndex].id;
+					obj.colorName = g_selectColor[colorIndex].name;
+					obj.inventorySizeId = g_selectSize[sizeIndex].id;
+					obj.inventorySize = g_selectSize[sizeIndex].name;
+					obj.inventoryNum = $('#num' + tmpId).val();
+					obj.goodsBarcode = $('#barcode' + tmpId).val();
+					dataList.push(obj);
 				}
 			}
 		}
@@ -301,8 +287,8 @@ function formValidate(){
         	//上传图片
         	fileupload.uploadAction(function(){
         		var inventoryPass = false;
-        		if(g_selectColor.length == 0 && g_selectTexture.length == 0 && g_selectSize.length == 0) inventoryPass = true;
-        		if(g_selectColor.length > 0 && g_selectTexture.length > 0 && g_selectSize.length > 0) inventoryPass = true;
+        		if(g_selectColor.length == 0 && g_selectSize.length == 0) inventoryPass = true;
+        		if(g_selectColor.length > 0 && g_selectSize.length > 0) inventoryPass = true;
         		if(!inventoryPass){
         			top.app.message.notice("商品库存中的规格不能留空！");
         			return false;
@@ -334,9 +320,10 @@ function submitAction(){
 	submitData["buyStatus"] = $('#buyStatus').prop('checked') ? '1' : '2';
 	submitData["shelfStatus"] = $('#shelfStatus').prop('checked') ? '1' : '2';
 	submitData["goodsDesc"] = $("#goodsDesc").val();
+	submitData["goodsTexture"] = $("#goodsTexture").val();
 
 	//获取选择的规格列表
-	var colorIdList = "", colorNameList = "", sizeIdList = "", sizeNameList = "", textureIdList = "", textureNameList = "";
+	var colorIdList = "", colorNameList = "", sizeIdList = "", sizeNameList = "";
 	for(var i = 0;i < g_selectColor.length; i++){
 		colorIdList += g_selectColor[i].id + ",";
 		colorNameList += g_selectColor[i].name + ",";
@@ -353,14 +340,6 @@ function submitAction(){
 	if(sizeNameList != '') sizeNameList = sizeNameList.substring(0, sizeNameList.length - 1);
 	submitData["sizeIdList"] = sizeIdList;
 	submitData["sizeNameList"] = sizeNameList;
-	for(var i = 0;i < g_selectTexture.length; i++){
-		textureIdList += g_selectTexture[i].id + ",";
-		textureNameList += g_selectTexture[i].name + ",";
-	}	
-	if(textureIdList != '') textureIdList = textureIdList.substring(0, textureIdList.length - 1);
-	if(textureNameList != '') textureNameList = textureNameList.substring(0, textureNameList.length - 1);
-	submitData["textureIdList"] = textureIdList;
-	submitData["textureNameList"] = textureNameList;
 	
 	//额外价格表json列表
 	submitData["extraPriceList"] = JSON.stringify(getMorePriceDataList());

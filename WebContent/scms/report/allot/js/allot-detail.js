@@ -59,7 +59,6 @@ function initSearchPanel(){
 		$("#searchDestShopId").val("");
 		$("#searchOrderNum").val("");
 		$("#searchColor").val("");
-		$("#searchTexture").val("");
 		$("#searchSize").val("");
 		$("#searchOrderStatus").val("1");
 		$('.selectpicker').selectpicker('refresh');
@@ -108,7 +107,6 @@ function initSearchPanel(){
 	//获取厂家下拉列表
 	scms.getVenderPullDown($("#searchVender"), scms.getUserMerchantsId(), true);
 	scms.getColorPullDown($("#searchColor"), scms.getUserMerchantsId(), true);
-	scms.getTexturePullDown($("#searchTexture"), scms.getUserMerchantsId(), true);
 	scms.getSizePullDown($("#searchSize"), scms.getUserMerchantsId(), true);
 }
 
@@ -165,7 +163,6 @@ function initTable(){
             destShopId: $("#searchDestShopId").val(),
             orderNum: $("#searchOrderNum").val(),
             goodsColor: $('#searchColor').val(),
-            goodsTexture: $("#searchTexture").val(),
             goodsSize: $("#searchSize").val(),
             orderStatus: $("#searchOrderStatus").val(),
         };
@@ -216,7 +213,6 @@ function getStatistics(){
             destShopId: $("#searchDestShopId").val(),
             orderNum: $("#searchOrderNum").val(),
             goodsColor: $('#searchColor').val(),
-            goodsTexture: $("#searchTexture").val(),
             goodsSize: $("#searchSize").val(),
             orderStatus: $("#searchOrderStatus").val(),
 	   	},

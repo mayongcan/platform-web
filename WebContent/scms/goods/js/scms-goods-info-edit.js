@@ -1,6 +1,6 @@
 var g_params = null, g_backUrl = "";
 var g_comboBoxTree = null;
-var g_selectColor = [], g_selectSize = [], g_selectTexture = [];
+var g_selectColor = [], g_selectSize = [];
 var g_morePriceIndex = 0, g_morePrice = [], g_morePriceTotal = 0;
 var g_moreDiscountIndex = 0, g_moreDiscount = [], g_moreDiscountTotal = 0;
 
@@ -12,7 +12,6 @@ $(function () {
 	top.app.message.loading();
 	initGoodsColor();
 	initGoodsSize();
-	initGoodsTexture();
 	loadExtraPrice();
 	loadExtraDiscount();
 	initView();
@@ -80,6 +79,7 @@ function initView(){
 	g_comboBoxTree.isOpenFirst = false;
 	g_comboBoxTree.init($('#categoryId'), g_params.allTreeData, '100%');
 	scms.getVenderPullDown($("#venderId"), scms.getUserMerchantsId(), true, " ");
+	scms.getTexturePullDown($("#goodsTexture"), scms.getUserMerchantsId(), false);
 	g_salePrice = new Cleave('#salePrice', {
 	    numeral: true,
 	    numeralThousandsGroupStyle: 'thousand'
@@ -205,6 +205,7 @@ function initData(){
 	$("#purchasePrice").val(g_params.row.purchasePrice);
 	$("#defDiscount").val(g_params.row.defDiscount);
 	$("#packingNum").val(g_params.row.packingNum);
+	$("#goodsTexture").val(g_params.row.goodsTexture);
 	top.app.addRadioButton($("#divGoodsYear"), g_params.goodsYearDict, 'radioGoodsYear', g_params.row.goodsYear);
 	top.app.addRadioButton($("#divGoodsSeason"), g_params.goodsSeasonDict, 'radioGoodsSeason', g_params.row.goodsSeason);
 	var stat = false;
@@ -224,13 +225,6 @@ function initData(){
 		var arrayName = g_params.row.colorNameList.split(",");
 		for(var i = 0; i < arrayId.length; i++){
 			selectColor(arrayId[i], arrayName[i]);
-		}
-	}
-	if(!$.utils.isEmpty(g_params.row.textureIdList)){
-		var arrayId = g_params.row.textureIdList.split(",");
-		var arrayName = g_params.row.textureNameList.split(",");
-		for(var i = 0; i < arrayId.length; i++){
-			selectTexture(arrayId[i], arrayName[i]);
 		}
 	}
 	if(!$.utils.isEmpty(g_params.row.sizeIdList)){
@@ -297,8 +291,8 @@ function formValidate(){
         	//上传图片
         	fileupload.uploadAction(function(){
         		var inventoryPass = false;
-        		if(g_selectColor.length == 0 && g_selectTexture.length == 0 && g_selectSize.length == 0) inventoryPass = true;
-        		if(g_selectColor.length > 0 && g_selectTexture.length > 0 && g_selectSize.length > 0) inventoryPass = true;
+        		if(g_selectColor.length == 0 && g_selectSize.length == 0) inventoryPass = true;
+        		if(g_selectColor.length > 0 && g_selectSize.length > 0) inventoryPass = true;
         		if(!inventoryPass){
         			top.app.message.notice("商品库存中的规格不能留空！");
         			return false;
@@ -334,13 +328,13 @@ function submitAction(){
 	submitData["shelfStatus"] = $('#shelfStatus').prop('checked') ? '1' : '2';
 	submitData["goodsDesc"] = $("#goodsDesc").val();
 	submitData["modifyMemo"] = $("#modifyMemo").val();
+	submitData["goodsTexture"] = $("#goodsTexture").val();
 	//进行排序
 	g_selectColor = g_selectColor.sort($.utils.objArrayCompare("id"));
-	g_selectTexture = g_selectTexture.sort($.utils.objArrayCompare("id"));
 	g_selectSize = g_selectSize.sort($.utils.objArrayCompare("id"));
 
 	//获取选择的规格列表
-	var colorIdList = "", colorNameList = "", sizeIdList = "", sizeNameList = "", textureIdList = "", textureNameList = "";
+	var colorIdList = "", colorNameList = "", sizeIdList = "", sizeNameList = "";
 	for(var i = 0;i < g_selectColor.length; i++){
 		colorIdList += g_selectColor[i].id + ",";
 		colorNameList += g_selectColor[i].name + ",";
@@ -357,15 +351,7 @@ function submitAction(){
 	if(sizeNameList != '') sizeNameList = sizeNameList.substring(0, sizeNameList.length - 1);
 	submitData["sizeIdList"] = sizeIdList;
 	submitData["sizeNameList"] = sizeNameList;
-	for(var i = 0;i < g_selectTexture.length; i++){
-		textureIdList += g_selectTexture[i].id + ",";
-		textureNameList += g_selectTexture[i].name + ",";
-	}	
-	if(textureIdList != '') textureIdList = textureIdList.substring(0, textureIdList.length - 1);
-	if(textureNameList != '') textureNameList = textureNameList.substring(0, textureNameList.length - 1);
-	submitData["textureIdList"] = textureIdList;
-	submitData["textureNameList"] = textureNameList;
-	if(colorIdList != g_params.row.colorIdList || sizeIdList != g_params.row.sizeIdList || textureIdList != g_params.row.textureIdList){
+	if(colorIdList != g_params.row.colorIdList || sizeIdList != g_params.row.sizeIdList){
 		submitData["inventoryIsChange"] = "change";
 	}
 

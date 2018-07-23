@@ -39,7 +39,7 @@
    			</div>  
        
     		<div class="btn-group hidden-xs" id="tableToolbar" role="group"></div>
-            <table id="tableList" 
+            <table id="tableList" class="table text-nowrap"
 				data-toolbar="#tableToolbar"
 				data-show-toggle="false"
 				data-show-columns="true"
@@ -58,6 +58,7 @@
                 <thead>
                     <tr>
               			<th data-field="tableMulti" data-formatter="appTable.tableFormatCheckbox" data-checkbox="true" data-visible="false"></th>
+						<th data-field="operate" data-formatter="formatOperate" data-width="230px">操作</th>
                        	<th data-field="userCode">登录账号</th>
                         <th data-field="userName">用户名</th>
                         <th data-field="mobile">手机号码</th>

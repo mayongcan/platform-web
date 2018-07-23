@@ -151,3 +151,38 @@ function showLocation(longitude, latitude){
 	params.latitude = latitude;
 	top.app.layer.editLayer('显示用户定位', ['900px', '550px'], '/itp/user/user-location.html', params, function(retParams){});
 }
+
+//格式化列表右侧的操作按钮
+function formatOperate(value, row, index){
+	//根据权限是否显示操作菜单
+	var length = g_operRights.length;
+	var operateBtn = "";
+	for (var i = 0; i < length; i++) {
+		if(g_operRights[i].dispPosition == '2'){
+			operateBtn += '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="' + g_operRights[i].funcFlag  + '(' + row.userId + ', \'' + g_operRights[i].funcLink + '\')">' + 
+								'<i class="' + g_operRights[i].funcIcon + '" aria-hidden="true"></i> ' + g_operRights[i].funcName + 
+						  '</button>';
+		}
+	}
+	return operateBtn;
+}
+
+function itpUserChangePwd(id, url){
+	var row = $table.bootstrapTable("getRowByUniqueId", id);
+	//设置参数
+	var params = {};
+	params.row = row;
+	params.operUrl = top.app.conf.url.apigateway + url;
+	top.app.layer.editLayer('修改用户密码', ['710px', '400px'], '/itp/user/user-list-change-pwd.html', params, function(){
+			//重新加载列表
+		$table.bootstrapTable('refresh');
+	});
+}
+
+function itpDisableUser(id, url){
+	appTable.postData($table, url, id + "", "确定要禁用当前用户？", "用户禁用成功！");
+}
+
+function itpEnableUser(id, url){
+	appTable.postData($table, url, id + "", "确定要解禁当前用户？", "用户解禁成功！");
+}

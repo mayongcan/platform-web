@@ -22,7 +22,7 @@ function initSearchPanel(){
 	$('#searchBeginTime').val(g_dateFormatBegin);
 	$('#searchEndTime').val(g_dateFormatEnd);
 	
-	//获取用户列表
+	//获取积分源列表
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/itp/point/getPointKeyVal",
 		method: 'GET',

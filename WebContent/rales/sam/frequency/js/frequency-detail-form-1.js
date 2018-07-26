@@ -10,7 +10,10 @@ function initView(){
 	$('#type').text(top.app.getDictName(g_params.row.type, g_params.typeDict));
 	$('#coverageArea').text(top.app.getDictName(g_params.row.coverageArea, g_params.coverageAreaDict));
 	$('#network').text(top.app.getDictName(g_params.row.network, g_params.networkDict));
-	$('#frequencyScope').text("");
+	if($.utils.isEmpty(g_params.row.centerFrequency))
+		$('#frequencyScope').text(g_params.row.mobileStation + "MHz");
+	else
+		$('#frequencyScope').text(g_params.row.centerFrequency);
 	$('#lgla').text("东经" + g_params.row.longitude + ",　北纬" + g_params.row.latitude);
 	$('#serviceRadius').text(g_params.row.serviceRadius + "km");
 	$('#address').text(g_params.row.address);
@@ -26,16 +29,33 @@ function initView(){
 	$('#feedLoss').text(g_params.row.feedLoss);
 }
 
+function exportWord(){
+	var rules = "", ss = document.styleSheets;
+	for (var i = 0; i < ss.length; ++i) {
+	    for (var x = 0; x < ss[i].cssRules.length; ++x) {
+	        rules += ss[i].cssRules[x].cssText;
+	    }
+	}
+	$("#content-left").wordExport("综合报告", rules);
+}
+
 function getResultList(){
 	if(!$.utils.isNull(g_params.row) && !$.utils.isNull(g_params.row.id)){
 		$.ajax({
-	        url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getMonitoringdetailList",   		//请求后台的URL（*）
+	        url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getSumList",   		//请求后台的URL（*）
 		    method: 'GET',
 		    data: {
-		    		access_token: top.app.cookies.getCookiesToken(),
-		    		spectralanalysisId: g_params.row.id,
-				page: 0,
-				size:50
+	    		access_token: top.app.cookies.getCookiesToken(),
+	    		spectralanalysisId: g_params.row.id,
+		    	analysisType: g_params.row.analysisType,
+		    	network: g_params.row.network,
+		    	coverageArea: g_params.row.coverageArea,
+		    	centerFrequency: g_params.row.centerFrequency,
+		    	mobileStation: g_params.row.mobileStation,
+		    	baseStation: g_params.row.baseStation,
+		    	statLg: g_params.row.longitude,
+		    	statLa: g_params.row.latitude,
+		    	serviceRadius: g_params.row.serviceRadius,
 		    },success: function(data){
 			    	if(top.app.message.code.success == data.RetCode){
 			    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){

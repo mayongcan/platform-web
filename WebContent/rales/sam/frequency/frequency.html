@@ -106,16 +106,22 @@
 						                <select class="m-b selectpicker edit-layer-input" id="areaType"></select>
 						            </div>
 		                            <div class="form-group edit-group-style">
-						            		<label class="col-sm-2 control-label edit-layer-title">组网形式</label>
+						            	<label class="col-sm-2 control-label edit-layer-title">组网形式</label>
 						                <select class="m-b selectpicker edit-layer-input" id="network"></select>
 						            </div>
-						            <div class="form-group edit-group-style">
+						            <div class="form-group edit-group-style" id="divCenterFrequency">
+						            		<label class="col-sm-2 control-label edit-layer-title">中心频率</label>
+						                <input type="text" id="mobileStation1" name="centerFrequency1" class="form-control m-b edit-layer-input" style="width:75px;">
+						                <input type="text" id="mobileStation2" name="centerFrequency2" class="form-control m-b edit-layer-input" style="width:75px;margin-left:16px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">MHz</label>
+						            </div>
+						            <div class="form-group edit-group-style" id="divMobileFrequency" style="display: none">
 						            		<label class="col-sm-2 control-label edit-layer-title">移动台发射频率</label>
 						                <input type="text" id="mobileStation1" name="mobileStation1" class="form-control m-b edit-layer-input" style="width:75px;">
 						                <input type="text" id="mobileStation2" name="mobileStation2" class="form-control m-b edit-layer-input" style="width:75px;margin-left:16px;">
 						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">MHz</label>
 						            </div>
-						            <div class="form-group edit-group-style">
+						            <div class="form-group edit-group-style" id="divBaseFrequency" style="display: none">
 						            		<label class="col-sm-2 control-label edit-layer-title">基地台发射频率</label>
 						                <input type="text" id="baseStation1" name="baseStation1" class="form-control m-b edit-layer-input" style="width:75px;">
 						                <input type="text" id="baseStation2" name="baseStation2" class="form-control m-b edit-layer-input" style="width:75px;margin-left:16px;">

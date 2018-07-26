@@ -61,6 +61,9 @@ function initView(){
 		$('#tdSendByName').text(g_params.row.sendByName);
 		$('#tdCompletedDate').text($.date.dateFormat(g_params.row.completedDate, "yyyy-MM-dd"));
 		$('#tdCreateDate').text($.date.dateFormat(g_params.row.createDate, "yyyy-MM-dd"));
+		$('#tdSendOrg').text(g_params.row.sendOrg);
+		$('#tdHandleOrg').text(g_params.row.handleOrg);
+		$('#tdHandleUserName').text(g_params.row.handleUserName);
 
 		//显示文件列表
 		var arrayFileUrl = [], arrayFileName = [];

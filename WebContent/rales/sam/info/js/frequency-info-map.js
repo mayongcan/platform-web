@@ -31,6 +31,11 @@ function initData(){
             freqEfe: parent.$('#searchFreqEfe').val(),
             freqRfb: parent.$('#searchFreqRfb').val(),
             freqRfe: parent.$('#searchFreqRfe').val(),
+            statName: parent.$('#searchStatName').val(),
+            statWork: parent.$('#searchStatWork').val(),
+            radius: parent.$('#searchRadius').val(),
+            statLg: parent.$('#searchStatLg').val(),
+            statLa: parent.$('#searchStatLa').val(),
 	    },
 	    success: function(data){
 			top.app.message.loadingClose();
@@ -82,17 +87,27 @@ function initData(){
 
 function getInfo(index){  
 	//清空
+	$('#orgName').text("");
+	$('#statName').text("");
 	$('#freqNum').text("");
 	$('#freqMod').text("");
 	$('#freqSend').text("");
 	$('#freqReceive').text("");
-	$('#statName').text("");
 	$('#statType').text("");
+	$('#statWork').text("");
+	$('#statLg').text("");
+	$('#statLa').text("");
+	$('#radius').text("");
 	//赋值
+	$('#orgName').text($.utils.getNotNullVal(g_rows[index].orgName));
+	$('#statName').text($.utils.getNotNullVal(g_rows[index].statName));
 	$('#freqNum').text($.utils.getNotNullVal(g_rows[index].ftFreqNo));
 	$('#freqMod').text(top.app.getDictName(g_rows[index].freqMod, parent.g_scopeDict));
 	$('#freqSend').text($.utils.getNotNullVal(g_rows[index].freqEfb) + "-" + $.utils.getNotNullVal(g_rows[index].freqEfe) + "MHz");
 	$('#freqReceive').text($.utils.getNotNullVal(g_rows[index].freqRfb) + "-" + $.utils.getNotNullVal(g_rows[index].freqRfe) + "MHz");
-	$('#statName').text($.utils.getNotNullVal(g_rows[index].statName));
 	$('#statType').text(top.app.getDictName(g_rows[index].statType, parent.g_statTypeDict));
+	$('#statWork').text(top.app.getDictName(g_rows[index].statType, parent.g_statWorkDict));
+	$('#statLg').text($.utils.getNotNullVal(g_rows[index].statLg));
+	$('#statLa').text($.utils.getNotNullVal(g_rows[index].statLa));
+	$('#radius').text($.utils.getNotNullVal(g_rows[index].stServR));
 }  

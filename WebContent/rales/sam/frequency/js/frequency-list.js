@@ -22,7 +22,7 @@ $(function () {
  */
 function initDict(){
 	g_typeDict = top.app.getDictDataByDictTypeValue('RALES_SAM_SPECTRALANALYSIS_TYPE');
-	g_coverageAreaDict = top.app.getDictDataByDictTypeValue('RALES_SAM_FREQUENCYCONF_AREATYPE');
+	g_coverageAreaDict = top.app.getDictDataByDictTypeValue('SAM_FREQUENCYCONF_REGION');
 	g_networkDict = top.app.getDictDataByDictTypeValue('RALES_SAM_FREQUENCYCONF_FREQUENCYTYPE');
 }
 
@@ -101,6 +101,21 @@ function initTable(){
  * 初始化权限功能点击事件
  */
 function initFuncBtnEvent(){
+	$("#RalesFrequencyUploadMonitorData").click(function () {
+		var rows = appTable.getSelectionRows($table);
+		if(rows.length == 0 || rows.length > 1){
+			top.app.message.alert("请选择一条数据进行操作！");
+			return;
+		}
+		//设置参数
+		var params = {};
+		params.operUrl = top.app.conf.url.apigateway + $("#RalesFrequencyUploadMonitorData").data('action-url');
+		params.row = rows[0];
+		top.app.layer.editLayer('上传监测站数据', ['710px', '400px'], '/rales/sam/frequency/frequency-upload.html', params, function(){
+   			//重新加载列表
+			$table.bootstrapTable('refresh');
+		});
+    });
 }
 function formatOperate(value, row, index){
 	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonEdit(' + row.id + ')">' + 

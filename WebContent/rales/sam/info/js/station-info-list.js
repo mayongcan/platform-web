@@ -22,6 +22,7 @@ function initTable(){
             radius: parent.$('#searchRadius').val(),
             begin: parent.$('#searchBegin').val(),
             end: parent.$('#searchEnd').val(),
+            statOrg: parent.$('#searchStatOrg').val(),
         };
         return param;
     };

@@ -33,6 +33,7 @@ function initData(){
             radius: parent.$('#searchRadius').val(),
             begin: parent.$('#searchBegin').val(),
             end: parent.$('#searchEnd').val(),
+            statOrg: parent.$('#searchStatOrg').val(),
 	    },
 	    success: function(data){
 			top.app.message.loadingClose();
@@ -84,6 +85,7 @@ function initData(){
 
 function getInfo(index){  
 	//清空
+	$('#orgName').text("");
 	$('#statName').text("");
 	$('#licenseCode').text("");
 	$('#statWork').text("");
@@ -93,9 +95,10 @@ function getInfo(index){
 	$('#sysType').text("");
 	$('#technology').text("");
 	//赋值
+	$('#orgName').text($.utils.getNotNullVal(g_rows[index].orgName));
 	$('#statName').text($.utils.getNotNullVal(g_rows[index].statName));
 	$('#licenseCode').text($.utils.getNotNullVal(g_rows[index].licenseCode));
-	$('#statWork').text(top.app.getDictName(g_rows[index].statType, statWork.g_statWorkDict));
+	$('#statWork').text(top.app.getDictName(g_rows[index].statType, parent.g_statWorkDict));
 	$('#statLg').text($.utils.getNotNullVal(g_rows[index].statLg));
 	$('#statLa').text($.utils.getNotNullVal(g_rows[index].statLa));
 	$('#radius').text($.utils.getNotNullVal(g_rows[index].stServR));

@@ -58,6 +58,7 @@ function initView(){
 		$('#tdSendByName').text(g_params.row.sendByName);
 		$('#tdCompletedDate').text($.date.dateFormat(g_params.row.completedDate, "yyyy-MM-dd"));
 		$('#tdCreateDate').text($.date.dateFormat(g_params.row.createDate, "yyyy-MM-dd"));
+		$('#handleOrg').val(g_params.row.handleOrg);
 
 		//显示文件列表
 		var arrayFileUrl = [], arrayFileName = [];
@@ -90,7 +91,7 @@ function initView(){
 	
 	$("#btnHandle").click(function () {
 		if($('#suggest').val() == ''){
-			top.app.message.notice("审批意见不能为空!");
+			top.app.message.notice("汇报内容不能为空!");
 			return;
 		}
     	fileupload.uploadAction(null, false, true, "-1", function(){submitAction();});
@@ -102,11 +103,21 @@ function initView(){
     });
 
 	//判断当前任务节点名称
-	if(g_params.row.activityId == 'auditTask'){
+	if(g_params.row.activityId == 'handleTask'){
+		top.app.addComboBoxOption($("#isImportant"), [{ID:'1', NAME:'是'}, {ID:'0', NAME:'否'}]);
+		$('#trIsHandle').css('display', '');
+		$('#trIsImportant').css('display', '');
+		$('#trAuditStatus').css('display', 'none');
+	}else if(g_params.row.activityId == 'auditTask'){
 		top.app.addComboBoxOption($("#auditStatus"), [{ID:'1', NAME:'通过'}, {ID:'0', NAME:'回退'}]);
 		$('#trAuditStatus').css('display', '');
-	}else{
-		$('#trAuditStatus').css('display', 'none');
+		$('#trIsHandle').css('display', 'none');
+		$('#trIsImportant').css('display', 'none');
+	}else if(g_params.row.activityId == 'isFinish'){
+		top.app.addComboBoxOption($("#auditStatus"), [{ID:'1', NAME:'通过'}, {ID:'0', NAME:'回退'}]);
+		$('#trAuditStatus').css('display', '');
+		$('#trIsHandle').css('display', 'none');
+		$('#trIsImportant').css('display', 'none');
 	}
 }
 
@@ -122,7 +133,18 @@ function submitAction(){
 	submitData["files"] = fileupload.getUploadFilePath();
 
 	//判断当前任务节点名称
-	if(g_params.row.activityId == 'auditTask'){
+	if(g_params.row.activityId == 'handleTask'){
+		submitData["isImportant"] = $("#isImportant").val();
+		submitData["handleOrg"] = $('#handleOrg').val();
+		submitData["handleUserId"] = top.app.info.userInfo.userId;
+		submitData["handleUserName"] = top.app.info.userInfo.userName;
+		if($.utils.isEmpty($('#handleOrg').val())){
+			top.app.message.notice("请填写经办部门！");
+			return;
+		}
+	}else if(g_params.row.activityId == 'auditTask'){
+		submitData["auditStatus"] = $("#auditStatus").val();
+	}else if(g_params.row.activityId == 'isFinish'){
 		submitData["auditStatus"] = $("#auditStatus").val();
 	}
 

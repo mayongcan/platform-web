@@ -79,6 +79,8 @@ function submitAction(){
 	var submitData = {};
 	submitData["unitId"] = g_params.data.orgGuid;
 	submitData["name"] = g_params.data.orgName;
+	submitData["statId"] = g_params.data.guid;
+	submitData["statName"] = g_params.data.statName;
 	submitData["auditYear"] = $("#auditYear").val();
 	submitData["pay"] = $("#pay").val();
 	submitData["memo"] = $("#memo").val();

@@ -30,39 +30,26 @@
 </head>
 <body>
     <div class="wrapper wrapper-content animated fadeIn" style="padding: 15px;">
-		<div class="ibox-content" style="border: 1px solid #d4d4d4;padding:20px">
-			<div class="nav-search" style="border: 1px solid #d4d4d4;height:140px;padding:20px">
-				<div>
-					<div style="font-weight: bold;float:left;margin-right:23px;">市辖区：</div>
-				    <div style="float:left">
-		                <label style="margin-right:20px;margin-bottom:0px;font-weight: normal;">
-		                    <input type="checkbox" id="areaCheckAll" value=""> 全选
-		                </label>
-		            </div> 
-		            <div id="divCheckboxArea" style="float:left;"></div>
-			   	</div>
-		  		<div style="clear:both"></div>
-			   	<div style="margin-top:20px;">
-			   		<div style="font-weight: bold;float:left;margin-right:10px;">台站类别：</div>
-				    <div style="float:left">
-		                <label style="margin-right:20px;margin-bottom:0px;font-weight: normal;">
-		                    <input type="checkbox" id="stationTypeCheckAll" value=""> 全选
-		                </label>
-		            </div> 
-		            <div id="divCheckboxStationType" style="float:left;"></div>
-			   	</div>
-		  		<div style="clear:both"></div>
-			   	<div style="margin-top:15px;float:right;">
-					<button type="button" style="margin-right: 10px;width: 80px;height: 30px;font-size: 13px;" id="btnSearch" class="btn btn-primary">查 询</button>                  		
-              		<button type="button" style="width: 80px;height: 30px;font-size: 13px;" class="btn btn-white" id="btnReset">重 置</button>
-			   	</div>
-		  	</div>
-		  	<div style="clear:both"></div>
-		  	<div class="btn-group hidden-xs" id="tableToolbar" role="group"></div>
-            <table id="tableList" 
+		<div class="ibox-content" style="border: 1px solid #d4d4d4;padding:20px;padding-top: 0px;">
+		  	<div class="panel panel-default search-panel" id="searchPannel">
+       			<div class="panel-body form-horizontal">
+               		<label class="control-label page-search-label">所在地</label>
+               		<div id="divSearchStatus" class="page-search-input" style="width: 300px">
+              			<select class="form-control m-b selectpicker" multiple data-selected-text-format="count > 4" id="searchStatAreaCode"></select>
+              		</div>
+               		<label class="control-label page-search-label">台站类型</label>
+               		<div id="divSearchStatus" class="page-search-input" style="width: 300px">
+              			<select class="form-control m-b selectpicker" multiple data-selected-text-format="count > 4" id="searchStatType"></select>
+              		</div>
+               		<button type="button" style="margin-right:10px" id="btnSearch" class="btn btn-primary">查 询</button>                  		
+               		<button type="button" class="btn btn-white" id="btnReset">重 置</button>
+                  </div>
+       		</div>
+		  	<!-- <div class="btn-group hidden-xs" id="tableToolbar" role="group"></div> -->
+            <table id="tableList" class="table text-nowrap"
 				data-toolbar="#tableToolbar"
 				data-show-toggle="false"
-				data-show-columns="true"
+				data-show-columns="false"
 				data-striped="true"
 				data-cache="false"
 				data-sortable="false"
@@ -75,21 +62,10 @@
 				data-side-pagination="server"	
 				data-page-list="[15, 30, 50, 100, ALL]"
 				data-mobile-responsive="true"
-				data-show-footer="true">
-                <thead>
-                    <tr>
-                			<th data-field="tableMulti" data-formatter="appTable.tableFormatCheckbox" data-checkbox="true" data-visible="false"></th>                        
-					   	<th data-field="serialNumber" data-align="center" data-formatter="serialNumberTable" data-width="100px" data-footer-formatter="tableFormatTotalText">序号</th>          
-                        	<th data-field="name" data-align="center">行政区</th>
-                        	<th data-field="timeScope" data-align="center" data-footer-formatter="tableFormatTotalValue" data-width="150px">广播电台</th>
-                        	<th data-field="value" data-align="center" data-footer-formatter="tableFormatTotalValue" data-width="150px">高频电台</th>
-                        	<th data-field="value" data-align="center" data-footer-formatter="tableFormatTotalValue" data-width="150px">蜂窝移动通信系统</th>
-                        	<th data-field="value" data-align="center" data-footer-formatter="tableFormatTotalValue" data-width="150px">台站总数</th>
-                    </tr>
-                </thead>
+				data-show-footer="false">
             </table>
 		  	<div style="clear:both"></div>
-			<div style="margin-top:30px;">
+			<div style="margin-top:30px;display: none" id="chats">
 				<div style="background-color: white;float:left;width:40%">
 					<div id="pieCharts" style="min-height:350px;"></div>
 				</div>

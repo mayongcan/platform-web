@@ -30,6 +30,7 @@ function initFuncBtnEvent(){
 		$("#searchStatWork").val("");
 		$("#searchBegin").val("");
 		$("#searchEnd").val("");
+		$("#searchStatOrg").val("");
 		$('.selectpicker').selectpicker('refresh');
 		loadData();
     });

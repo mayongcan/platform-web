@@ -1,4 +1,4 @@
-
+var $table = $('#tableList');
 $(function () {
 	g_params = parent.g_params;
 	initView();
@@ -32,26 +32,26 @@ function getResultList(){
 	        url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getMonitoringdetailList",   		//请求后台的URL（*）
 		    method: 'GET',
 		    data: {
-		    		access_token: top.app.cookies.getCookiesToken(),
-		    		spectralanalysisId: g_params.row.id,
+	    		access_token: top.app.cookies.getCookiesToken(),
+	    		spectralanalysisId: g_params.row.id,
 				page: 0,
-				size:50
+				size:5000
 		    },success: function(data){
 			    	if(top.app.message.code.success == data.RetCode){
-			    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
-			    			$('#resultList').empty();
-			    			for(var i = 0; i < data.rows.length; i++){
-			    				var img = '<img src="/rales/img/icon-no.png" style="width:20px;height:20px;">';
-				    			if(data.rows[i].isUse == '1') img = '<img src="/rales/img/icon-yes.png" style="width:20px;height:20px;">';
-			    				var html = '<tr>' + 
-		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].frequency) + '</td>' + 
-		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].occupy) + '</td>' + 
-		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].demageLevel) + '</td>' + 
-		    									'<td class="reference-td">' + img + '</td>' + 
-		    								'</tr>';
-			    				$('#resultList').append(html);
-			    			}
-			    		}
+//			    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
+//			    			$('#resultList').empty();
+//			    			for(var i = 0; i < data.rows.length; i++){
+//			    				var img = '<img src="/rales/img/icon-no.png" style="width:20px;height:20px;">';
+//				    			if(data.rows[i].isUse == '1') img = '<img src="/rales/img/icon-yes.png" style="width:20px;height:20px;">';
+//			    				var html = '<tr>' + 
+//		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].frequency) + '</td>' + 
+//		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].occupy) + '</td>' + 
+//		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].demageLevel) + '</td>' + 
+//		    									'<td class="reference-td">' + img + '</td>' + 
+//		    								'</tr>';
+//			    				$('#resultList').append(html);
+//			    			}
+//			    		}
 			    		initCharts(data.rows);
 			    	    parent.document.getElementById('case-iframe').style.height = '0px';
 			    		//重新计算当前页面的高度，用于iframe
@@ -60,6 +60,33 @@ function getResultList(){
 			}
 		});
 	}
+	//搜索参数
+	var searchParams = function (params) {
+        var param = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+		    access_token: top.app.cookies.getCookiesToken(),
+            size: params.limit,   						//页面大小
+            page: params.offset / params.limit,  		//当前页
+            spectralanalysisId: g_params.row.id,
+        };
+        return param;
+    };
+    //初始化列表
+	$table.bootstrapTable({
+        url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getMonitoringdetailList",   		//请求后台的URL（*）
+        queryParams: searchParams,											//传递参数（*）
+        uniqueId: 'id',
+        height:400,
+        onClickRow: function(row, $el){
+        	appTable.setRowClickStatus($table, row, $el);
+        }
+    });
+	//初始化Table相关信息
+//	appTable.initTable($table);
+}
+
+function formatIsUse(value,row,index){
+	if(value == '1') return '<img src="/rales/img/icon-yes.png" style="width:20px;height:20px;">';
+	else return '<img src="/rales/img/icon-no.png" style="width:20px;height:20px;">';
 }
 
 
@@ -160,4 +187,50 @@ function initCharts(data){
 	};
 	// 使用刚指定的配置项和数据显示图表。
 	charts.setOption(option);
+}
+
+function exportWord(){
+	var rules = 'table{border-collapse:collapse;margin:0 auto;text-align:center;width: 100%;}table td,table th{border:1px solid #cad9ea;color:#666;height:30px}table thead th{background-color:#F1F1F1;min-width:400px}table tr{background:#fff}';
+	var ss = document.styleSheets;
+	for (var i = 0; i < ss.length; ++i) {
+	    for (var x = 0; x < ss[i].cssRules.length; ++x) {
+	        rules += ss[i].cssRules[x].cssText;
+	    }
+	}
+	
+	//先clone来避免影响页面显示
+	var clone = $("#content-left").clone();
+	
+	//隐藏
+	clone.find(".fixed-table-pagination").remove();
+	clone.find(".fixed-table-toolbar").remove();
+	clone.find(".fixed-table-footer").remove();
+	clone.find(".fixed-table-header").remove();
+	
+	//找到所有echarts图表容器
+	var charts = clone.find(".chart");
+	//隐藏无需导出的dom
+	clone.find(".input_div").hide();
+	//简单控制流程
+	var flag = charts.length;
+	for(var i = 0; i < charts.length; i++) {
+	    //获取echarts对象
+	    var curEchart = echarts.getInstanceByDom(charts[i]);
+	    if(curEchart) {
+	        //将图表替换为图片
+	        var base = curEchart.getConnectedDataURL();
+	        var img = $('<img style="" src="' + base + '"/>');
+	        $(charts[i]).html(img);
+	        flag--;
+	    } else {
+	        flag--;
+	    }
+	}
+	var interval = setInterval(function() {
+	    if(!flag) {
+	        clearInterval(interval);
+	        //导出word
+	        clone.wordExport("监测系统分析报告", rules, 20);
+	    }
+	}, 200);
 }

@@ -14,11 +14,12 @@ $(function () {
 
 function initView(){
     g_statTypeDict = top.app.getDictDataByDictTypeValue('RALES_SAM_SPECTRALANALYSIS_TYPE');
-    g_areaTypeDict = top.app.getDictDataByDictTypeValue('RALES_SAM_FREQUENCYCONF_AREATYPE');
+    g_areaTypeDict = top.app.getDictDataByDictTypeValue('SAM_FREQUENCYCONF_REGION');
     g_networkDict = top.app.getDictDataByDictTypeValue('RALES_SAM_FREQUENCYCONF_FREQUENCYTYPE');
 	top.app.addComboBoxOption($("#statType"), g_statTypeDict);
 	top.app.addComboBoxOption($("#areaType"), g_areaTypeDict);
 	top.app.addComboBoxOption($("#network"), g_networkDict);
+	$('.selectpicker').selectpicker('refresh');
 
 	//实现日期联动
 	$.date.initSearchDate('divBeginDate', 'divEndDate');
@@ -43,6 +44,21 @@ function initView(){
 	$("#btnStationSelect").click(function () {
 		
     });
+
+	// 下拉框变更事件
+	$('#network').on('changed.bs.select',
+		function(e) {
+			if ($('#network').val() == '1' || $('#network').val() == '2') {
+				$('#divCenterFrequency').css("display", "");
+				$('#divMobileFrequency').css("display", "none");
+				$('#divBaseFrequency').css("display", "none");
+			} else {
+				$('#divCenterFrequency').css("display", "none");
+				$('#divMobileFrequency').css("display", "");
+				$('#divBaseFrequency').css("display", "");
+			}
+		}
+	);
 }
 
 //地图点击事件
@@ -182,11 +198,16 @@ function submitAction(){
 	}
 	//提交数据
 	var submitData = {};
+	submitData["analysisType"] = "1";
 	submitData["type"] = $('#statType').val();
 	submitData["coverageArea"] = $('#areaType').val();
 	submitData["network"] = $("#network").val();
-	submitData["mobileStation"] = $("#mobileStation1").val() + "-" + $("#mobileStation2").val();
-	submitData["baseStation"] = $("#baseStation1").val() + "-" + $("#baseStation2").val();
+	if($("#network").val() == '1' || $("#network").val() == '2')
+		submitData["centerFrequency"] = $("#centerFrequency1").val() + "-" + $("#centerFrequency2").val();
+	else{
+		submitData["mobileStation"] = $("#mobileStation1").val() + "-" + $("#mobileStation2").val();
+		submitData["baseStation"] = $("#baseStation1").val() + "-" + $("#baseStation2").val();
+	}
 	submitData["address"] = $("#address").val();
 	submitData["longitude"] = $("#longitude").val();
 	submitData["latitude"] = $("#latitude").val();

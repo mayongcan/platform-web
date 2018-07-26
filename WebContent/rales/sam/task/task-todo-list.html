@@ -21,7 +21,9 @@
        			<div class="panel-body form-horizontal">
                		<label class="control-label page-search-label" style="width:50px">标题</label>
                    	<input type="text" class="form-control page-search-input" id="searchTitle">
-               		<label class="control-label page-search-label" style="width:100px">发起时间</label>
+               		<label class="control-label page-search-label" style="width:100px">发起部门</label>
+                   	<input type="text" class="form-control page-search-input" id="searchSendOrg" style="width: 200px;">
+               		<label class="control-label page-search-label">发起时间</label>
                    	<div class="input-group date" id="divCreateDate" style="width: 200px;float: left;margin: 0px 15px;">
                    		<input type="text" class="form-control" id="searchCreateDate"/>
                    		<span class="input-group-addon">
@@ -67,6 +69,9 @@
                         	<th data-field="title">标题</th>
                         	<th data-field="sendByName">发起人</th>
                         	<th data-field="receiveByName">接收人</th>
+                        	<th data-field="sendOrg">发起部门</th>
+                        	<th data-field="handleOrg">经办部门</th>
+                        	<th data-field="handleUserName">经办人</th>
                         	<th data-field="createDate" data-formatter="appTable.tableFormatDate">发起时间</th>
                         	<th data-field="completedDate" data-formatter="appTable.tableFormatDate">要求办结时间</th>
                         	<th data-field="activityName">进度</th>

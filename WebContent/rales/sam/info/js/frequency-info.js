@@ -1,16 +1,14 @@
-var g_optionalFlowIndex = 1, g_freqModDict = [], g_statTypeDict = [];
+var g_optionalFlowIndex = 1, g_freqModDict = [], g_statTypeDict = [], g_statWorkDict = [];
 
 $(function () {
 	//实现日期联动
 	$.date.initSearchDate('divHandleBegin', 'divHandleEnd');
 	g_freqModDict = rales.getDictByCode("00272006");
 	g_statTypeDict = rales.getDictByCode("00052006");
+	g_statWorkDict = rales.getDictByCode("00062006");
 	top.app.addComboBoxOption($("#searchFreqMod"), g_freqModDict, true);
+	top.app.addComboBoxOption($("#searchStatWork"), g_statWorkDict, true);
 	initFuncBtnEvent();
-	//设置select的宽度
-	$('.selectpicker').selectpicker({
-		width: '192px'
-	});
 });
 function initFuncBtnEvent(){
 	$("#optionalFlow1").click(function () {
@@ -30,6 +28,12 @@ function initFuncBtnEvent(){
 		$("#searchFreqEfe").val("");
 		$("#searchFreqRfb").val("");
 		$("#searchFreqRfe").val("");
+		$("#searchStatOrg").val("");
+		$("#searchStatName").val("");
+		$("#searchStatLg").val("");
+		$("#searchStatLa").val("");
+		$("#searchRadius").val("");
+		$("#searchStatWork").val("");
 		$('.selectpicker').selectpicker('refresh');
 		loadData();
     });

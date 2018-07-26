@@ -1,6 +1,6 @@
 var g_map = null, g_rows = null, g_statTypeDict = [], g_areaTypeDict = [], g_networkDict = [];
 var g_searchVal = "", g_isMapClick = false, g_mapGeoc = null;
-var g_frequencyIndex = 1;
+var g_frequencyIndex = 1, g_mobileFrequencyIndex = 1, g_baseFrequencyIndex = 1;
 $(function () {
 	top.app.message.loading();
     initView();
@@ -15,11 +15,12 @@ $(function () {
 
 function initView(){
     g_statTypeDict = top.app.getDictDataByDictTypeValue('RALES_SAM_SPECTRALANALYSIS_TYPE');
-    g_areaTypeDict = top.app.getDictDataByDictTypeValue('RALES_SAM_FREQUENCYCONF_AREATYPE');
+    g_areaTypeDict = top.app.getDictDataByDictTypeValue('SAM_FREQUENCYCONF_REGION');
     g_networkDict = top.app.getDictDataByDictTypeValue('RALES_SAM_FREQUENCYCONF_FREQUENCYTYPE');
 	top.app.addComboBoxOption($("#statType"), g_statTypeDict);
 	top.app.addComboBoxOption($("#areaType"), g_areaTypeDict);
 	top.app.addComboBoxOption($("#network"), g_networkDict);
+	$('.selectpicker').selectpicker('refresh');
 
 	//实现日期联动
 	$.date.initSearchDate('divBeginDate', 'divEndDate');
@@ -44,6 +45,34 @@ function initView(){
 	$("#btnStationSelect").click(function () {
 		
     });
+
+	// 下拉框变更事件
+	$('#network').on('changed.bs.select',
+		function(e) {
+			if ($('#network').val() == '1' || $('#network').val() == '2') {
+				$('#divFrequency').css("display", "");
+				$('#divFrequencyList').css("display", "");
+				$('#divFrequencyAdd').css("display", "");
+				$('#divMobileFrequency').css("display", "none");
+				$('#divMobileFrequencyList').css("display", "none");
+				$('#divMobileFrequencyAdd').css("display", "none");
+				$('#divBaseFrequency').css("display", "none");
+				$('#divBaseFrequencyList').css("display", "none");
+				$('#divBaseFrequencyAdd').css("display", "none");
+			} else {
+				$('#divFrequency').css("display", "none");
+				$('#divFrequencyList').css("display", "none");
+				$('#divFrequencyAdd').css("display", "none");
+				$('#divMobileFrequency').css("display", "");
+				$('#divMobileFrequencyList').css("display", "");
+				$('#divMobileFrequencyAdd').css("display", "");
+				$('#divBaseFrequency').css("display", "");
+				$('#divBaseFrequencyList').css("display", "");
+				$('#divBaseFrequencyAdd').css("display", "");
+			}
+		}
+	);
+	
 	$("#btnAddFrequency").click(function () {
 		var html = '<div class="form-group edit-group-style" id="divEachFrequency' + g_frequencyIndex + '">' + 
 				    		'<label class="col-sm-2 control-label edit-layer-title"></label>' + 
@@ -56,12 +85,52 @@ function initView(){
 		$('#divFrequencyList').append(html);
 		g_frequencyIndex++;
     });
+	
+	$("#btnAddMobileFrequency").click(function () {
+		var html = '<div class="form-group edit-group-style" id="divEachMobileFrequency' + g_mobileFrequencyIndex + '">' + 
+				    		'<label class="col-sm-2 control-label edit-layer-title"></label>' + 
+			            '<input type="text" id="mobileFrequency' + g_mobileFrequencyIndex + '" name="mobileFrequency' + g_mobileFrequencyIndex + '" class="form-control m-b edit-layer-input" style="width:115px;">' + 
+			            '<label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">MHz</label>' + 
+			            '<button type="button" class="btn btn-outline btn-default" style="margin-left:10px" onclick=removeMobileFrequency(' + g_mobileFrequencyIndex + ')>' + 
+			            		'<i class="glyphicon glyphicon-minus" aria-hidden="true"></i>' + 
+			            	'</button>' + 
+			        '</div>';
+		$('#divMobileFrequencyList').append(html);
+		g_mobileFrequencyIndex++;
+    });
+	
+	$("#btnAddBaseFrequency").click(function () {
+		var html = '<div class="form-group edit-group-style" id="divEachBaseFrequency' + g_baseFrequencyIndex + '">' + 
+				    		'<label class="col-sm-2 control-label edit-layer-title"></label>' + 
+			            '<input type="text" id="baseFrequency' + g_baseFrequencyIndex + '" name="baseFrequency' + g_baseFrequencyIndex + '" class="form-control m-b edit-layer-input" style="width:115px;">' + 
+			            '<label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">MHz</label>' + 
+			            '<button type="button" class="btn btn-outline btn-default" style="margin-left:10px" onclick=removeBaseFrequency(' + g_baseFrequencyIndex + ')>' + 
+			            		'<i class="glyphicon glyphicon-minus" aria-hidden="true"></i>' + 
+			            	'</button>' + 
+			        '</div>';
+		$('#divBaseFrequencyList').append(html);
+		g_baseFrequencyIndex++;
+    });
 }
 
 //移除
 function removeFrequency(index){
 	if(document.getElementById("divEachFrequency" + index)){
 		$('#divEachFrequency' + index).remove();
+	}
+}
+
+//移除
+function removeMobileFrequency(index){
+	if(document.getElementById("divEachMobileFrequency" + index)){
+		$('#divEachMobileFrequency' + index).remove();
+	}
+}
+
+//移除
+function removeBaseFrequency(index){
+	if(document.getElementById("divEachBaseFrequency" + index)){
+		$('#divEachBaseFrequency' + index).remove();
 	}
 }
 
@@ -165,9 +234,20 @@ function formValidate(){
 }
 
 function submitAction(){
-	if($('#frequency').val() == ''){
-		top.app.message.notice("请输入频点！");
-		return;
+	if($("#network").val() == '1' || $("#network").val() == '2'){
+		if($('#frequency').val() == ''){
+			top.app.message.notice("请输入中心频率！");
+			return;
+		}	
+	}else{
+		if($('#mobileFrequency').val() == ''){
+			top.app.message.notice("请输入移动台发射频率！");
+			return;
+		}
+		if($('#baseFrequency').val() == ''){
+			top.app.message.notice("请输入基地台发射频率！");
+			return;
+		}
 	}
 	if($('#address').val() == ''){
 		top.app.message.notice("请输入地址！");
@@ -201,12 +281,36 @@ function submitAction(){
 		}
 	}
 	frequencyList = frequencyList.substring(0, frequencyList.length - 1);
+
+	//获取所有频点列表
+	var mobileFrequencyList = $('#mobileFrequency').val() + ",";
+	for(var i = 0; i < g_mobileFrequencyIndex; i++){
+		if(document.getElementById("divEachMobileFrequency" + i) && document.getElementById("mobileFrequency" + i)){
+			mobileFrequencyList += $('#mobileFrequency' + i).val() + ",";
+		}
+	}
+	mobileFrequencyList = mobileFrequencyList.substring(0, mobileFrequencyList.length - 1);
+
+	//获取所有频点列表
+	var baseFrequencyList = $('#baseFrequency').val() + ",";
+	for(var i = 0; i < g_baseFrequencyIndex; i++){
+		if(document.getElementById("divEachBaseFrequency" + i) && document.getElementById("baseFrequency" + i)){
+			baseFrequencyList += $('#baseFrequency' + i).val() + ",";
+		}
+	}
+	baseFrequencyList = baseFrequencyList.substring(0, baseFrequencyList.length - 1);
 	//提交数据
 	var submitData = {};
+	submitData["analysisType"] = "2";
 	submitData["type"] = $('#statType').val();
 	submitData["coverageArea"] = $('#areaType').val();
 	submitData["network"] = $("#network").val();
-	submitData["frequency"] = frequencyList;
+	if($("#network").val() == '1' || $("#network").val() == '2')
+		submitData["centerFrequency"] = frequencyList;
+	else{
+		submitData["mobileStation"] = mobileFrequencyList;
+		submitData["baseStation"] = baseFrequencyList;
+	}
 	submitData["address"] = $("#address").val();
 	submitData["longitude"] = $("#longitude").val();
 	submitData["latitude"] = $("#latitude").val();

@@ -10,7 +10,10 @@ function initView(){
 	$('#type').text(top.app.getDictName(g_params.row.type, g_params.typeDict));
 	$('#coverageArea').text(top.app.getDictName(g_params.row.coverageArea, g_params.coverageAreaDict));
 	$('#network').text(top.app.getDictName(g_params.row.network, g_params.networkDict));
-	$('#frequencyScope').text("");
+	if($.utils.isEmpty(g_params.row.centerFrequency))
+		$('#frequencyScope').text(g_params.row.mobileStation + "MHz");
+	else
+		$('#frequencyScope').text(g_params.row.centerFrequency);
 	$('#lgla').text("东经" + g_params.row.longitude + ",　北纬" + g_params.row.latitude);
 	$('#serviceRadius').text(g_params.row.serviceRadius + "km");
 	$('#address').text(g_params.row.address);
@@ -58,4 +61,14 @@ function getResultList(){
 			}
 		});
 	}
+}
+
+function exportWord(){
+	var rules = "", ss = document.styleSheets;
+	for (var i = 0; i < ss.length; ++i) {
+	    for (var x = 0; x < ss[i].cssRules.length; ++x) {
+	        rules += ss[i].cssRules[x].cssText;
+	    }
+	}
+	$("#content-left").wordExport("EMC分析报告", rules, 20);
 }

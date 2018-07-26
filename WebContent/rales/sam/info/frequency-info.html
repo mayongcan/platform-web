@@ -23,9 +23,13 @@
                		<label class="control-label page-search-label">频率序号</label>
                    	<input type="text" class="form-control page-search-input" id="searchFreqNum" style="width: 192px;">
                		<label class="control-label page-search-label">调制方式</label>
-               		<div id="divSearchStatus" class="page-search-input">
+               		<div id="divSearchStatus" class="page-search-input" style="width: 192px;">
               			<select class="form-control m-b selectpicker" id="searchFreqMod"></select>
               		</div>
+               		<label class="control-label page-search-label">设台单位</label>
+               		<input type="text" class="form-control page-search-input" id="searchStatOrg">
+               		<label class="control-label page-search-label">台站名称</label>
+                   	<input type="text" class="form-control page-search-input" id="searchStatName">
                   </div>
                   <div class="panel-body form-horizontal" style="padding-top: 0px;">
                		<label class="control-label page-search-label">发射频率</label>
@@ -40,6 +44,18 @@
 	                   	<input type="text" class="form-control page-search-input" id="searchFreqRfe" style="width: 70px;margin-right: 0px;;margin-left:6px">
 	                   	<label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left:6px;padding: 5px 5px;">MHz</label>
                    	</div>
+               		<label class="control-label page-search-label">服务半径</label>
+               		<input type="text" class="form-control page-search-input" id="searchRadius">
+               		<label class="control-label page-search-label">工作方式</label>
+               		<div id="divSearchStatus" class="page-search-input">
+              			<select class="form-control m-b selectpicker" id="searchStatWork"></select>
+              		</div>
+                  </div>
+                  <div class="panel-body form-horizontal" style="padding-top: 0px;">
+               		<label class="control-label page-search-label" style="margin-right: 25px;">经度</label>
+                   	<input type="text" class="form-control page-search-input" id="searchStatLg">
+               		<label class="control-label page-search-label">纬度</label>
+                   	<input type="text" class="form-control page-search-input" id="searchStatLa">
                		<button type="button" style="margin-right:10px" id="btnSearch" class="btn btn-primary">查 询</button>                  		
                		<button type="button" class="btn btn-white" id="btnReset">重 置</button>
                   </div>

@@ -71,22 +71,20 @@ function initView(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-	        	userCode: {required:true},
-	        	userName: {required:true},
-	        	password: {rangelength:[6,20]},
-	        	passwordConfirm: {rangelength:[6,20], equalTo:"#password"},
-	        	email: {email:true},
-	        	mobile: {minlength: 11, isMobile:true},
-	        	birthday: { dateISO:true},
-	        	//beginDate: {required: true, dateISO:true},
-            //endDate: {required: true, dateISO:true}
+        	userCode: {required:true},
+        	userName: {required:true},
+        	password: {rangelength:[6,20]},
+        	passwordConfirm: {rangelength:[6,20], equalTo:"#password"},
+        	email: {email:true},
+        	mobile: {minlength: 11, isMobile:true},
+        	birthday: { dateISO:true},
         },
         messages: {
 			userCode:{required:"登录账号不能为空"},
 			userName:{required:"用户名称不能为空"},
-			password2:{equalTo: "两次输入的密码不一致" },
-	        	mobile: {minlength: "确认手机不能小于11个字符", isMobile: "请正确填写您的手机号码" },
-	        	birthday: {dateISO: "请输入不带时间的正确日期格式,如：2017-01-01"},
+			passwordConfirm:{equalTo: "两次输入的密码不一致" },
+        	mobile: {minlength: "确认手机不能小于11个字符", isMobile: "请正确填写您的手机号码" },
+        	birthday: {dateISO: "请输入不带时间的正确日期格式,如：2017-01-01"},
 			//beginDate: {required: "请输入开始日期", dateISO: "请输入不带时间的正确日期格式,如：2017-01-01"},
             //endDate: {required: "请输入开始日期", dateISO: "请输入不带时间的正确日期格式,如：2017-01-01" }
         },

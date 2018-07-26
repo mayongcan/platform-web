@@ -47,6 +47,7 @@ function initTable(){
             createDate: $("#searchCreateDate").val(),
             createUser: $("#searchSendBy").val(),
             completedDate: $("#searchCompletedDate").val(),
+            sendOrg: $("#searchSendOrg").val(),
         };
         return param;
     };
@@ -71,6 +72,7 @@ function initTable(){
 		$("#searchCreateDate").val("");
 		$("#searchSendBy").val("");
 		$("#searchCompletedDate").val("");
+		$("#searchSendOrg").val("");
 		//刷新数据，否则下拉框显示不出内容
 		$('.selectpicker').selectpicker('refresh');
 		$table.bootstrapTable('refresh');

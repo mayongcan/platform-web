@@ -46,6 +46,7 @@ function formValidate(){
 	$("#divEditForm").validate({
         rules: {
         	title: {required: true},
+        	handleOrg: {required: true},
         	completedDate: {required: true},
         	content: {required: true},
         },
@@ -83,8 +84,10 @@ function submitAction(){
 	var submitData = {};
 	submitData["title"] = $('#title').val();
 	submitData["receiveBy"] = g_userIdList;
+	submitData["receiveByName"] = g_userNameList;
 	submitData["completedDate"] = $('#completedDate').val();
 	submitData["content"] = $("#content").val();
+	submitData["sendOrg"] = $("#sendOrg").val();
 	//已上传的附件路径
 	submitData["files"] = fileupload.getUploadFilePath();
 

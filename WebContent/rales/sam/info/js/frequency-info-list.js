@@ -20,6 +20,12 @@ function initTable(){
             freqEfe: parent.$('#searchFreqEfe').val(),
             freqRfb: parent.$('#searchFreqRfb').val(),
             freqRfe: parent.$('#searchFreqRfe').val(),
+            statOrg: parent.$('#searchStatOrg').val(),
+            statName: parent.$('#searchStatName').val(),
+            statWork: parent.$('#searchStatWork').val(),
+            radius: parent.$('#searchRadius').val(),
+            statLg: parent.$('#searchStatLg').val(),
+            statLa: parent.$('#searchStatLa').val(),
         };
         return param;
     };
@@ -59,4 +65,7 @@ function tableFormatFreqMod(value, row) {
 }
 function tableFormatStatType(value, row) {
 	return appTable.tableFormatDictValue(parent.g_statTypeDict, value);
+}
+function tableFormatStatWork(value, row) {
+	return appTable.tableFormatDictValue(parent.g_statWorkDict, value);
 }

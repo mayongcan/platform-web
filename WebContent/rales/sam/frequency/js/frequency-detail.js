@@ -15,6 +15,7 @@ function initNavButton(){
 		if(this.id == 'navDetail1' && g_navIndex == 1){
 		}else if(this.id == 'navDetail2' && g_navIndex == 2){
 		}else if(this.id == 'navDetail3' && g_navIndex == 3){
+		}else if(this.id == 'navDetail4' && g_navIndex == 4){
 		}else {
 			$('span', this).css('background', '#d4d4d4');
 			$('a', this).css('color', '#666');
@@ -72,6 +73,10 @@ function initNavButton(){
 		$('#navDetail4 a').css('color', '#000');
 
 		document.getElementById("case-iframe").src="/rales/sam/frequency/frequency-detail-form-4.html";
+    });
+
+	$('#btnExportReport').click(function () {
+		$("#case-iframe")[0].contentWindow.exportWord();
     });
 }
 

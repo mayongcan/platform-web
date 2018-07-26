@@ -135,7 +135,7 @@ function initView(){
  */
 function submitAction(){
 	var rows = g_selectRowsId;
-	if(rows.length != 1){
+	if(rows.length == 0){
 		top.app.message.notice("请选择一个任务接收人!");
 		return;
 	}

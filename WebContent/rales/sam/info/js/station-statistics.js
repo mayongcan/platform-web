@@ -1,47 +1,36 @@
 var $table = $('#tableList'), g_loadDataRow = null;
-var g_areaDict = [{ID:'1', NAME: '越秀区'}, {ID:'2', NAME: '海珠区'}, {ID:'3', NAME: '荔湾区'}, {ID:'4', NAME: '天河区'},
-	{ID:'5', NAME: '白云区'}, {ID:'6', NAME: '花都区'}, {ID:'7', NAME: '番禺区'}, {ID:'8', NAME: '南沙区'}, {ID:'9', NAME: '从化区'},
-	{ID:'10', NAME: '增城区'}, {ID:'11', NAME: '黄埔区'}];
-var g_stationTypeDict = [{ID:'1', NAME: '广播电台'}, {ID:'2', NAME: '高频电台'}, {ID:'3', NAME: '微波接力站'}, {ID:'4', NAME: '蜂窝移动通信系统'},
-	{ID:'5', NAME: '卫星地球站'}, {ID:'6', NAME: '业余电台'}, {ID:'7', NAME: '甚高频、特高频站台'}, {ID:'8', NAME: '集群'}, {ID:'9', NAME: '其他电台'}];
+var g_statTypeDict = [], g_statAreaCodeDict = [];
 $(function () {
 	initView();
 	//获取权限菜单
 	initFunc();
 	//初始化列表信息
-	initTable();
-	
-	initPieCharts();
-	initBarCharts();
-	initLineCharts();
+//	initTable();
 });
 
 function initView(){
-	top.app.addCheckBoxButton($('#divCheckboxArea'), g_areaDict, 'checkboxArea');
-	top.app.addCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType');
-	$('#areaCheckAll').change(function(){
-	   if($(this).prop('checked')){
-		   top.app.setCheckBoxButton($('#divCheckboxArea'), g_areaDict, 'checkboxArea', true);
-	   }else{
-		   top.app.setCheckBoxButton($('#divCheckboxArea'), g_areaDict, 'checkboxArea', false);
-	   }
-	});
-	$('#stationTypeCheckAll').change(function(){
-		if($(this).prop('checked')){
-			top.app.setCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType', true);
-		}else{
-			top.app.setCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType', false);
-		}
-	});
+	g_statAreaCodeDict = rales.getDictByCode("00032006");
+	top.app.addComboBoxOption($("#searchStatAreaCode"), g_statAreaCodeDict, false);
+	g_statTypeDict = rales.getDictByCode("00052006");
+	top.app.addComboBoxOption($("#searchStatType"), g_statTypeDict, false);
+	
 	//搜索点击事件
 	$("#btnSearch").click(function () {
-		
+		if($.utils.isEmpty($.trim($("#searchStatAreaCode").val()))){
+   			top.app.message.notice("请选择需要统计的所在地！");
+   			return;
+		}
+		$table.bootstrapTable('destroy');
+		loadTable();
+//		$table.bootstrapTable('refresh');
     });
 	$("#btnReset").click(function () {
-		$('#areaCheckAll').prop('checked', false);
-		top.app.setCheckBoxButton($('#divCheckboxArea'), g_areaDict, 'checkboxArea', false);
-		$('#stationTypeCheckAll').prop('checked', false);
-		top.app.setCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType', false);
+		$('#searchStatType').val("");
+		$('#searchStatAreaCode').val("");
+		//刷新数据，否则下拉框显示不出内容
+		$('.selectpicker').selectpicker('refresh');
+		$table.bootstrapTable('destroy');
+//		$table.bootstrapTable('refresh');
     });
 }
 
@@ -62,65 +51,92 @@ function initFunc(){
 	$("#tableToolbar").append(htmlTable);
 }
 
-function initTable(){
+function loadTable(){
 	//搜索参数
 	var searchParams = function (params) {
         var param = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 		    access_token: top.app.cookies.getCookiesToken(),
             size: params.limit,   						//页面大小
             page: params.offset / params.limit,  		//当前页
-            areaType: top.app.getCheckBoxButton($('#divCheckboxArea'), g_areaDict, 'checkboxArea'),
-            stationType: top.app.getCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType'),
+            areaCode: $.trim($("#searchStatAreaCode").val()),
+            stationType: $.trim($("#searchStatType").val()),
         };
         return param;
     };
+    var columnsArray = [];
+    columnsArray.push({
+		field:"tableMulti",
+		formatter:"appTable.tableFormatCheckbox",
+		checkbox: true,
+		visible: false,
+    });
+    columnsArray.push({
+		title: '序号',
+		field:"serialNumber",
+		align: 'center',
+		formatter:"serialNumberTable",
+		width: '100px',
+    });
+    columnsArray.push({
+		title: '所在地',
+		field:"areaCode",
+		formatter:"tableFormatAreaCode",
+    });
+    var type = $.trim($("#searchStatType").val()).split(',');
+    for(var i = 0; i < type.length; i++){
+        columnsArray.push({
+    		title: top.app.getDictName(type[i], g_statTypeDict),
+    		field: type[i],
+        });
+    }
+    columnsArray.push({
+		title: '台站总数',
+		field:"totalCnt",
+    });
+    
     //初始化列表
 	$table.bootstrapTable({
-//        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticAreaList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/sam/info/getStationStatisticList",   		//请求后台的URL（*）
         queryParams: searchParams,										//传递参数（*）
         height: 400,
         onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+	        appTable.setRowClickStatus($table, row, $el);
         },
-        onPostBody:function () {
-	    		setTimeout(function () {
-	    	    	    if($.utils.isNull(g_loadDataRow) || g_loadDataRow.length == 0){
-	    	    	    		$('.fixed-table-footer').remove();
-	    	    	    }else{
-	    	    	    		//合并页脚
-	    	        		var footerTbody = $('.fixed-table-footer table tbody');
-	    	            var footerTr = footerTbody.find('>tr');
-	    	            var footerTd = footerTr.find('>td');
-	    	            var footerTd0 = footerTd.eq(0);
-	    	            //隐藏其他列
-	    	            for(var i = 0; i < 2; i++) {
-	    	                footerTd.eq(i).hide();
-	    	            }
-	    	            footerTd0.attr('colspan', 2).show();
-	    	            footerTd.eq(2).attr('width', "150px").show();
-	    	            footerTd.eq(3).attr('width', "150px").show();
-	    	            footerTd.eq(4).attr('width', "150px").show();
-	    	            footerTd.eq(5).attr('width', "150px").show();
-	    	    	    }
-		    }, 300);
-	    }
+        columns: columnsArray,
     });
 	//初始化Table相关信息
 	appTable.initTable($table, false);
 	$table.on('load-success.bs.table', function (data) {
 	    g_loadDataRow = $table.bootstrapTable('getData');
 	    if($.utils.isNull(g_loadDataRow) || g_loadDataRow.length == 0){
-	    		//移除图表
-	    		$('#charts').remove();
+	    	//移除图表
+	    	$('#chats').css('display', 'none');
 	    }else{
-//		    initCharts(g_loadDataRow);
+	    	$('#chats').css('display', '');
+		    initCharts(g_loadDataRow);
 	    }
     });
+}
+
+function initCharts(loadData){
+	initPieCharts(loadData);
+	initBarCharts(loadData);
+	initLineCharts(loadData);
 }
 
 //初始化饼图
 function initPieCharts(data){
 	var pieCharts = echarts.init(document.getElementById('pieCharts'));
+	//初始化数据
+	var tmpData = $.trim($("#searchStatAreaCode").val()).split(',');
+	var dataName = [];
+	for(var i = 0; i < tmpData.length; i++){
+		dataName.push(top.app.getDictName(tmpData[i], g_statAreaCodeDict));
+	}
+	var dataValue = [];
+	for(var i = 0; i < data.length; i++){
+		dataValue.push({value:data[i].totalCnt, name: top.app.getDictName(data[i].areaCode, g_statAreaCodeDict)});
+	}
 	option = {
 	    title: {
 	        text: '各行政区台站统计图',
@@ -133,8 +149,8 @@ function initPieCharts(data){
 	    legend: {
 	        bottom: 10,
 	        left: 'center',
-	        data: ['天河', '花都','海珠','番禺','荔湾']
-//	        data: dataName
+//	        data: ['天河', '花都','海珠','番禺','荔湾']
+	        data: dataName
 	    },
 	    series : [
 	        {
@@ -148,14 +164,14 @@ function initPieCharts(data){
 	                    color: '#000'
 	                }
 	            },
-	            data:[
-	                {value:12,name: '天河'},
-	                {value:19, name: '花都'},
-	                {value:24, name: '海珠'},
-	                {value:25, name: '番禺'},
-	                {value:15, name: '荔湾'}
-	            ],
-//	            data: dataValue,
+//	            data:[
+//	                {value:12,name: '天河'},
+//	                {value:19, name: '花都'},
+//	                {value:24, name: '海珠'},
+//	                {value:25, name: '番禺'},
+//	                {value:15, name: '荔湾'}
+//	            ],
+	            data: dataValue,
 	            itemStyle: {
 	                emphasis: {
 	                    shadowBlur: 10,
@@ -180,6 +196,30 @@ function initBarCharts(data){
 	        textBorderWidth: 2
 	    }
 	}
+	//初始化数据
+	var tmpData = $.trim($("#searchStatAreaCode").val()).split(',');
+	var dataXName = [];
+	for(var i = 0; i < tmpData.length; i++){
+		dataXName.push(top.app.getDictName(tmpData[i], g_statAreaCodeDict));
+	}
+	tmpData = $.trim($("#searchStatType").val()).split(',');
+	var dataYName = [];
+	for(var i = 0; i < tmpData.length; i++){
+		dataYName.push(top.app.getDictName(tmpData[i], g_statTypeDict));
+	}
+	var dataValue = [];
+	for(var i = 0; i < data.length; i++){
+		var seriesData = [];
+		for(var j = 0; j < tmpData.length; j++){
+			seriesData.push(data[i][tmpData[j]]);
+		}
+		dataValue.push({
+            name: top.app.getDictName(data[i].areaCode, g_statAreaCodeDict),
+            type: 'bar',
+            label: seriesLabel,
+            data: seriesData,
+        });
+	}
 	option = {
 	    title: {
 	        text: '各行政区不同类别台站数量统计图',
@@ -192,14 +232,12 @@ function initBarCharts(data){
 	        }
 	    },
 	    legend: {
-	        data: ['海珠', '越秀', '天河'],
+//	        data: ['海珠', '越秀', '天河'],
+	    	data: dataXName,
 	        bottom: 0,
 	    },
-	    toolbox: {
-	        show: true,
-	        feature: {
-	            saveAsImage: {}
-	        }
+	    grid: {
+	        left: 150
 	    },
 	    xAxis: {
 	        type: 'value',
@@ -210,28 +248,30 @@ function initBarCharts(data){
 	    yAxis: {
 	        type: 'category',
 	        inverse: true,
-	        data: ['广播电台', '高频电台', '微波接力站'],
+//	        data: ['广播电台', '高频电台', '微波接力站'],
+	        data: dataYName,
 	    },
-	    series: [
-	        {
-	            name: '海珠',
-	            type: 'bar',
-	            label: seriesLabel,
-	            data: [165, 170, 30],
-	        },
-	        {
-	            name: '越秀',
-	            type: 'bar',
-	            label: seriesLabel,
-	            data: [150, 105, 110]
-	        },
-	        {
-	            name: '天河',
-	            type: 'bar',
-	            label: seriesLabel,
-	            data: [220, 82, 63]
-	        }
-	    ]
+//	    series: [
+//	        {
+//	            name: '海珠',
+//	            type: 'bar',
+//	            label: seriesLabel,
+//	            data: [165, 170, 30],
+//	        },
+//	        {
+//	            name: '越秀',
+//	            type: 'bar',
+//	            label: seriesLabel,
+//	            data: [150, 105, 110]
+//	        },
+//	        {
+//	            name: '天河',
+//	            type: 'bar',
+//	            label: seriesLabel,
+//	            data: [220, 82, 63]
+//	        }
+//	    ]
+	    series: dataValue,
 	};
 	// 使用刚指定的配置项和数据显示图表。
 	barCharts.setOption(option);
@@ -240,22 +280,59 @@ function initBarCharts(data){
 //初始化线图
 function initLineCharts(data){
 	var lineCharts = echarts.init(document.getElementById('lineCharts'));
+
+	//初始化数据
+	var tmpData = $.trim($("#searchStatAreaCode").val()).split(',');
+	var dataXName = [];
+	for(var i = 0; i < tmpData.length; i++){
+		dataXName.push(top.app.getDictName(tmpData[i], g_statAreaCodeDict));
+	}
+	tmpData = $.trim($("#searchStatType").val()).split(',');
+	var dataYName = [];
+	for(var i = 0; i < tmpData.length; i++){
+		dataYName.push(top.app.getDictName(tmpData[i], g_statTypeDict));
+	}
+	var dataValue = [];
+	for(var i = 0; i < data.length; i++){
+		var seriesData = [];
+		for(var j = 0; j < tmpData.length; j++){
+			seriesData.push(data[i][tmpData[j]]);
+		}
+		dataValue.push({
+            name: top.app.getDictName(data[i].areaCode, g_statAreaCodeDict),
+            type:'line',
+            stack: '总量',
+            data: seriesData,
+        });
+	}
+	
 	option = {
 	    title: {
 	        text: '市内不同类别台站数量统计图',
-	        left: 'center'
+		    left: 'center',
+	    },
+	    tooltip: {
+	        trigger: 'axis'
+	    },
+	    legend: {
+	        data: dataXName,
+	        top: 30
+	    },
+	    grid: {
+	        left: '3%',
+	        right: '4%',
+	        bottom: '3%',
+	        containLabel: true
 	    },
 	    xAxis: {
 	        type: 'category',
-	        data: ['广播电台', '高频电台', '微波接力站']
+	        boundaryGap: false,
+	        data: dataYName
 	    },
 	    yAxis: {
 	        type: 'value'
 	    },
-	    series: [{
-	        data: [60, 40, 80],
-	        type: 'line'
-	    }]
+	    series: dataValue
 	};
 	// 使用刚指定的配置项和数据显示图表。
 	lineCharts.setOption(option);
@@ -263,6 +340,10 @@ function initLineCharts(data){
 
 function serialNumberTable(value,row,index){
 	return appTable.tableFormatSerialNumber($table, index);
+}
+
+function tableFormatAreaCode(value,row,index){
+	return appTable.tableFormatDictValue(g_statAreaCodeDict, value);
 }
 //格式化统计-文字
 function tableFormatTotalText(data){

@@ -47,6 +47,7 @@ function initTable(){
             createDate: $("#searchCreateDate").val(),
             createUser: $("#searchSendBy").val(),
             completedDate: $("#searchCompletedDate").val(),
+            sendOrg: $("#searchSendOrg").val(),
         };
         return param;
     };
@@ -71,6 +72,7 @@ function initTable(){
 		$("#searchCreateDate").val("");
 		$("#searchSendBy").val("");
 		$("#searchCompletedDate").val("");
+		$("#searchSendOrg").val("");
 		//刷新数据，否则下拉框显示不出内容
 		$('.selectpicker').selectpicker('refresh');
 		$table.bootstrapTable('refresh');
@@ -84,10 +86,10 @@ function initFuncBtnEvent(){
 }
 
 function tableFormatTimelineStatus(value, row) {
-	if($.date.dateDiff('d', row.completedDate, new Date()) >= 1)
-		return '<img src="/rales/img/icon_dot_red.png" style="width:18px;height:18px"/>';
-	else
+	if($.date.dateDiff('d',new Date(), row.completedDate) >= 2)
 		return '<img src="/rales/img/icon_dot_blue.png" style="width:18px;height:18px"/>';
+	else
+		return '<img src="/rales/img/icon_dot_red.png" style="width:18px;height:18px"/>';
 }
 
 function formatOperate(value, row, index){

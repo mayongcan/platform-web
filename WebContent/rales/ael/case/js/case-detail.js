@@ -169,9 +169,24 @@ function initNavButton(){
 
 //提交审批
 function submitAudit(){
-	if(g_btnType == 2 && $("#case-iframe")[0].contentWindow.getTableCnt() == 0){
-		top.app.message.notice("请先创建审批文书再提交！");
-		return;
+	if(g_btnType == 2){
+		var hasFile = true;
+		if(g_params.row.activityName == '立案审批' && $("#case-iframe")[0].contentWindow.getTableCnt(2,1) == 0){
+			hasFile = false;
+		}
+		if(g_params.row.activityName == '调查报告' && $("#case-iframe")[0].contentWindow.getTableCnt(3,1) == 0){
+			hasFile = false;
+		}
+		if(g_params.row.activityName == '行政处罚' && $("#case-iframe")[0].contentWindow.getTableCnt(4,1) == 0){
+			hasFile = false;
+		}
+		if(g_params.row.activityName == '结案报告' && $("#case-iframe")[0].contentWindow.getTableCnt(5,1) == 0){
+			hasFile = false;
+		}
+		if(!hasFile){
+			top.app.message.notice("请先创建审批文书再提交！");
+			return;
+		}
 	}
 	var notice = "确定要提交审批？";
 	if(g_btnType == 4) notice = "确定要重新提交审批？";

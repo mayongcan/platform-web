@@ -1264,7 +1264,7 @@ var app = app || {};
 	//+---------------------------------------------------   
 	//| 打开加载层
 	//+--------------------------------------------------- 
-	app.message.loading = function(){
+	app.message.loading = function(closeTime){
 		if (!!window.ActiveXObject || "ActiveXObject" in window) { 
 			$.LoadingOverlay("show",{
 			    image       : "",
@@ -1277,7 +1277,8 @@ var app = app || {};
 			});
 		}  
 		//防止没关闭，10秒后默认关闭
-		setTimeout("$.LoadingOverlay('hide')", 12000);
+		if($.utils.isNull(closeTime)) closeTime = 12000;
+		setTimeout("$.LoadingOverlay('hide')", closeTime);
 	}
 	
 	//+---------------------------------------------------   

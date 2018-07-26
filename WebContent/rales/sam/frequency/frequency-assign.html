@@ -109,15 +109,39 @@
 						            		<label class="col-sm-2 control-label edit-layer-title">组网形式</label>
 						                <select class="m-b selectpicker edit-layer-input" id="network"></select>
 						            </div>
-						            <div class="form-group edit-group-style">
-						            		<label class="col-sm-2 control-label edit-layer-title">频点</label>
+						            <div class="form-group edit-group-style" id="divFrequency">
+						            	<label class="col-sm-2 control-label edit-layer-title">中心频率</label>
 						                <input type="text" id="frequency" name="frequency" class="form-control m-b edit-layer-input" style="width:165px;">
 						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">MHz</label>
 						            </div>
 						            <div id="divFrequencyList"></div>
-						            <div class="form-group edit-group-style">
+						            <div class="form-group edit-group-style" id="divFrequencyAdd">
 						            		<label class="col-sm-2 control-label edit-layer-title"></label>
 						                <button type="button" class="btn btn-outline btn-default" id="btnAddFrequency" style="width: 220px;padding: 0px 20px;height:30px;">
+						                		<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加频点
+						                	</button>
+						            </div>
+						            <div class="form-group edit-group-style" style="display: none" id="divMobileFrequency">
+						            	<label class="col-sm-2 control-label edit-layer-title">移动台发射频率</label>
+						                <input type="text" id="mobileFrequency" name="mobileFrequency" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">MHz</label>
+						            </div>
+						            <div id="divMobileFrequencyList" style="display: none" ></div>
+						            <div class="form-group edit-group-style" style="display: none" id="divMobileFrequencyAdd">
+						            	<label class="col-sm-2 control-label edit-layer-title"></label>
+						                <button type="button" class="btn btn-outline btn-default" id="btnAddMobileFrequency" style="width: 220px;padding: 0px 20px;height:30px;">
+					                		<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加频点
+					                	</button>
+						            </div>
+						            <div class="form-group edit-group-style" style="display: none" id="divBaseFrequency">
+						            		<label class="col-sm-2 control-label edit-layer-title">基地台发射频率</label>
+						                <input type="text" id="baseFrequency" name="baseFrequency" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;">MHz</label>
+						            </div>
+						            <div id="divBaseFrequencyList" style="display: none" ></div>
+						            <div class="form-group edit-group-style" style="display: none"  id="divBaseFrequencyAdd">
+						            		<label class="col-sm-2 control-label edit-layer-title"></label>
+						                <button type="button" class="btn btn-outline btn-default" id="btnAddBaseFrequency" style="width: 220px;padding: 0px 20px;height:30px;">
 						                		<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加频点
 						                	</button>
 						            </div>

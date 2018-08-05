@@ -23,11 +23,11 @@
                    	<input type="text" class="form-control page-search-input" id="searchCode">
                		<label class="control-label page-search-label" style="width:100px">案件编号</label>
                    	<input type="text" class="form-control page-search-input" id="searchCaseCode" >
-               		<label class="control-label page-search-label" style="width:52px">进度</label>
+               		<!-- <label class="control-label page-search-label" style="width:52px">进度</label>
                    	<div id="divSearchProgress" class="page-search-input">
               			<select class="form-control m-b selectpicker" id="searchFlowProgress"></select>
-              		</div>
-               		<label class="control-label page-search-label">当事人</label>
+              		</div> -->
+               		<label class="control-label page-search-label" style="width: 52px;">当事人</label>
                    	<input type="text" class="form-control page-search-input" id="searchParties">
        			</div>
        			<div class="panel-body form-horizontal" style="padding-top:0px">
@@ -76,7 +76,13 @@
                		<button type="button" class="btn btn-white" id="btnReset">重 置</button>
        			</div>
    			</div>  
-    			<div class="btn-group hidden-xs" id="tableToolbar" role="group"></div>
+    			
+    		<div class="btn-group hidden-xs" id="tableToolbar" role="group">
+    			<label class="control-label" style="float: left;">进度</label>
+               	<div id="divSearchProgress" class="page-search-input" style="width: 200px;">
+          			<select class="form-control m-b selectpicker" id="searchFlowProgress"></select>
+          		</div>
+    		</div>
             <table id="tableList" 
 				data-toolbar="#tableToolbar"
 				data-show-toggle="false"
@@ -99,7 +105,7 @@
 					   	<th data-field="serialNumber" data-formatter="serialNumberTable" data-width="60px">序号</th>
                        	<th data-field="code">案件登记表编号</th>
                        	<th data-field="caseCode">案件编号</th>
-                       	<th data-field="parties">当事人</th>
+                       	<th data-field="partiesName">当事人</th>
                        	<th data-field="lastHandleUserName">最后处理人</th>
                        	<th data-field="lastHandleTime" data-formatter="appTable.tableFormatDate">最后处理时间</th>
                        	<th data-field="associate" data-formatter="tableFormatAssociate">承办人</th>

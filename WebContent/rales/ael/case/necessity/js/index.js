@@ -71,58 +71,22 @@ function reloadData(stepNumber){
 }
 
 function initButton(){
-	//立案审批表
-	$("#btnNewDoc2-1").click(function () {
-		btnEventNew(2, 1);
-    });
-	//立案通知书
-	$("#btnNewDoc2-2").click(function () {
-		btnEventNew(2, 2);
-    });
-	//立案移送通知书
-	$("#btnNewDoc2-3").click(function () {
-		btnEventNew(2, 3);
-    });
-	//案件调查报告
-	$("#btnNewDoc3-1").click(function () {
-		btnEventNew(3, 1);
-    });
-	//行政处罚告知书
-	$("#btnNewDoc3-2").click(function () {
-		btnEventNew(3, 2);
-    });
-	//行政处罚听证告知书
-	$("#btnNewDoc3-3").click(function () {
-		btnEventNew(3, 3);
-    });
-	//行政处罚审批表
-	$("#btnNewDoc4-1").click(function () {
-		btnEventNew(4, 1);
-    });
-	//当场行政处罚决定书
-	$("#btnNewDoc4-2").click(function () {
-		btnEventNew(4, 2);
-    });
-	//行政处罚决定书
-	$("#btnNewDoc4-3").click(function () {
-		btnEventNew(4, 3);
-    });
-	//结案报告
-	$("#btnNewDoc5-1").click(function () {
-		btnEventNew(5, 1);
-    });
-	//行政执法案卷
-	$("#btnNewDoc6-1").click(function () {
-		btnEventNew(6, 1);
-    });
-	// 案卷目录
-	$("#btnNewDoc6-2").click(function () {
-		if(parseInt($('#tableCnt6-2').text()) == 1){
-   			top.app.message.notice("案卷目录只能创建一份！");
-   			return;
+	for(var i = 0; i < 100; i++){
+		for(var j = 0; j < 100; j++){
+			//初始化点击事件
+			$("#btnNewDoc" + i + "-" + j).attr("index", i);
+			$("#btnNewDoc" + i + "-" + j).attr("subIndex", j);
+			$("#btnNewDoc" + i + "-" + j).on('click', function () {
+				btnEventNew($(this).attr('index'), $(this).attr('subIndex'));
+		    });
+			//初始化启动流程或者提交流程
+			$("#btnSubmitAudit" + i + "-" + j).attr("index", i);
+			$("#btnSubmitAudit" + i + "-" + j).attr("subIndex", j);
+			$("#btnSubmitAudit" + i + "-" + j).on('click', function () {
+				btnSubmitAudit($(this).attr('index'), $(this).attr('subIndex'));
+		    });
 		}
-		btnEventNew(6, 2);
-    });
+	}
 }
 
 function initData(){
@@ -149,51 +113,50 @@ function initData(){
 					'</tr>';
 		$('#tableList1-1').append(html);
 	}else if(g_wizardIndex == 1){
-		//立案审批表列表
-		addList('tableList2-1', 'tableCnt2-1', '/api/rales/ael/case/getCaseFilingList', 2, 1, true);
-		//立案通知书列表
-		addList('tableList2-2', 'tableCnt2-2','/api/rales/ael/case/getCaseFilingNoticeList', 2, 2, true);
-		//案件移送通知书列表
-		addList('tableList2-3', 'tableCnt2-3','/api/rales/ael/case/getCaseTranserNoticeList', 2, 3, true);
+		addList('tableList2-1', 'tableCnt2-1', '/api/rales/ael/writ/getWritList', 2, 1, rales.writNecessity2_1, '', true);
+		addList('tableList2-2', 'tableCnt2-2', '/api/rales/ael/writ/getWritList', 2, 2, rales.writNecessity2_2, '', true);
+		addFlowList('tableList2-3', 'tableCnt2-3', '/api/rales/ael/writ/getWritList', 2, 3, rales.writNecessity2_3, '', true);
+		addList('tableList2-4', 'tableCnt2-4', '/api/rales/ael/writ/getWritList', 2, 4, rales.writNecessity2_4, '', true);
+		addList('tableList2-5', 'tableCnt2-5', '/api/rales/ael/writ/getWritList', 2, 5, rales.writNecessity2_5, '', true);
+		addList('tableList2-6', 'tableCnt2-6', '/api/rales/ael/writ/getWritList', 2, 6, rales.writNecessity2_6, '', true);
+		addList('tableList2-7', 'tableCnt2-7', '/api/rales/ael/writ/getWritList', 2, 7, rales.writNecessity2_7, '', true);
+		addList('tableList2-8', 'tableCnt2-8', '/api/rales/ael/writ/getWritList', 2, 8, rales.writNecessity2_8, '', true);
 	}else if(g_wizardIndex == 2){
-		//案件调查报告
-		addList('tableList3-1', 'tableCnt3-1', '/api/rales/ael/case/getCaseReportList', 3, 1, true);
-		//行政处罚告知书
-		addList('tableList3-2', 'tableCnt3-2','/api/rales/ael/case/getPunishNoticeList', 3, 2, true);
-		//行政处罚听证告知书
-		addList('tableList3-3', 'tableCnt3-3','/api/rales/ael/case/getPunishNoticeList', 3, 3, true);
+		addList('tableList3-1', 'tableCnt3-1', '/api/rales/ael/writ/getWritList', 3, 1, rales.writNecessity3_1, '', true);
+		addList('tableList3-2', 'tableCnt3-2', '/api/rales/ael/writ/getWritList', 3, 2, rales.writNecessity3_2, '', true);
+		addList('tableList3-3', 'tableCnt3-3', '/api/rales/ael/writ/getWritList', 3, 3, rales.writNecessity3_3, '', true);
+		addFlowList('tableList3-4', 'tableCnt3-4', '/api/rales/ael/writ/getWritList', 3, 4, rales.writNecessity3_4, '', true);
+		addList('tableList3-5', 'tableCnt3-5', '/api/rales/ael/writ/getWritList', 3, 5, rales.writNecessity3_5, '', true);
+		addList('tableList3-6', 'tableCnt3-6', '/api/rales/ael/writ/getWritList', 3, 6, rales.writNecessity3_6, '', true);
+		addList('tableList3-7', 'tableCnt3-7', '/api/rales/ael/writ/getWritList', 3, 7, rales.writNecessity3_7, '', true);
+		addList('tableList3-8', 'tableCnt3-8', '/api/rales/ael/writ/getWritList', 3, 8, rales.writNecessity3_8, '', true);
+		addList('tableList3-9', 'tableCnt3-9', '/api/rales/ael/writ/getWritList', 3, 9, rales.writNecessity3_9, '', true);
 	}else if(g_wizardIndex == 3){
-		//行政处罚审批表
-		addList('tableList4-1', 'tableCnt4-1', '/api/rales/ael/case/getPunishAuditList', 4, 1, true);
-		//当场行政处罚决定书
-		addList('tableList4-2', 'tableCnt4-2','/api/rales/ael/case/getCurPunishDecisionList', 4, 2, true);
-		//行政处罚决定书
-		addList('tableList4-3', 'tableCnt4-3','/api/rales/ael/case/getPunishDecisionList', 4, 3, true);
+		addList('tableList4-1', 'tableCnt4-1', '/api/rales/ael/writ/getWritList', 4, 1, rales.writNecessity4_1, '', true);
+		addList('tableList4-2', 'tableCnt4-2', '/api/rales/ael/writ/getWritList', 4, 2, rales.writNecessity4_2, '', true);
+		addFlowList('tableList4-3', 'tableCnt4-3', '/api/rales/ael/writ/getWritList', 4, 3, rales.writNecessity4_3, '', true);
+		addList('tableList4-4', 'tableCnt4-4', '/api/rales/ael/writ/getWritList', 4, 4, rales.writNecessity4_4, '', true);
 	}else if(g_wizardIndex == 4){
 		//结案报告
-		addList('tableList5-1', 'tableCnt5-1', '/api/rales/ael/case/getCaseClosedList', 5, 1, true);
+		addList('tableList5-1', 'tableCnt5-1', '/api/rales/ael/writ/getWritList', 5, 1, rales.writNecessity5_1, '', true);
 	}else if(g_wizardIndex == 5){
-		//行政执法案卷
-		addList('tableList6-1', 'tableCnt6-1', '/api/rales/ael/case/getCaseVolumeList', 6, 1, true);
-		//案卷目录
-		addList('tableList6-2', 'tableCnt6-2', '/api/rales/ael/case/getCaseCatalogList', 6, 2, true, "案卷目录");
+		addList('tableList6-1', 'tableCnt6-1', '/api/rales/ael/writ/getWritList', 6, 1, rales.writNecessity6_1, '', true, "案卷封面");
+		addList('tableList6-2', 'tableCnt6-2', '/api/rales/ael/writ/getWritList', 6, 2, rales.writNecessity6_2, '', true, "案卷目录");
 	}
 }
 
 //添加列表内容
-function addList(tableListId, tableCntId, url, index, subIndex, addEditBtn, codeDefault){
+function addList(tableListId, tableCntId, url, index, subIndex, writType, subType, addEditBtn, codeDefault){
 	$('#' + tableListId).empty();
 	var html = "";
-	var tableType = "";
-	if(index == 3 && subIndex == 2) tableType = "1";
-	if(index == 3 && subIndex == 3) tableType = "2";
 	$.ajax({
 		url: top.app.conf.url.apigateway + url,
 	    method: 'GET',
 	   	data:{
 	   		access_token: top.app.cookies.getCookiesToken(),
 	   		registerId: parent.g_params.row.id,
-	   		tableType: tableType
+	   		writType: writType,
+	   		subType: subType,
 	   	},
 		success: function(data){
 			if(top.app.message.code.success == data.RetCode){
@@ -229,20 +192,8 @@ function addList(tableListId, tableCntId, url, index, subIndex, addEditBtn, code
 						$('#btnNewDoc' + index + '-' + subIndex).remove();
 					}
 				}
-				//只能新建一份立案通知书
-				if(index == 2 && subIndex == 2){
-					if(getTableCnt(index, subIndex) == 1){
-						$('#btnNewDoc' + index + '-' + subIndex).remove();
-					}
-				}
-				//只能新建一份行政处罚告知书
-				if(index == 3 && subIndex == 2){
-					if(getTableCnt(index, subIndex) == 1){
-						$('#btnNewDoc' + index + '-' + subIndex).remove();
-					}
-				}
-				//只能新建一份行政处罚听证告知书
-				if(index == 3 && subIndex == 3){
+				//只能新建一份行政处罚案卷目录
+				if(index == 6 && subIndex == 2){
 					if(getTableCnt(index, subIndex) == 1){
 						$('#btnNewDoc' + index + '-' + subIndex).remove();
 					}
@@ -252,12 +203,81 @@ function addList(tableListId, tableCntId, url, index, subIndex, addEditBtn, code
 	});
 } 
 
+//添加列表内容
+function addFlowList(tableListId, tableCntId, url, index, subIndex, writType, subType, addEditBtn, codeDefault){
+	$('#' + tableListId).empty();
+	var html = "";
+	$.ajax({
+		url: top.app.conf.url.apigateway + url,
+	    method: 'GET',
+	   	data:{
+	   		access_token: top.app.cookies.getCookiesToken(),
+	   		registerId: parent.g_params.row.id,
+	   		writType: writType,
+	   		subType: subType,
+	   	},
+		success: function(data){
+			if(top.app.message.code.success == data.RetCode){
+				var flowProgress = "";
+				if(index == 2 && subIndex == 3) flowProgress = "案件移送审批流程(立案)";
+				if(index == 3 && subIndex == 4) flowProgress = "案件移送审批流程(调查报告)";
+				if(index == 4 && subIndex == 3) flowProgress = "不予行政处罚决定审批流程";
+				g_dataListArray[subIndex] = data.rows;
+				var length = data.rows.length;
+				$('#' + tableCntId).text(length);
+				var removeAuditButton = true;
+				for(var i = 0; i < length; i++){
+					//流程未启动或退回重新编辑的时候，可以显示编辑按钮
+					if($.utils.isEmpty(data.rows[i].lastHandleTime)) {
+						addEditBtn = true;
+						removeAuditButton = false;
+						flowProgress = "";
+					}
+					//判断是否启动编辑
+					if(parent.g_params.row.activityName == '案件移送(立案)编辑' && index == 2 && subIndex == 3)  addEditBtn = true;
+					if(parent.g_params.row.activityName == '案件移送(调查报告)编辑' && index == 3 && subIndex == 4)  addEditBtn = true;
+					if(parent.g_params.row.activityName == '不予行政处罚决定审批编辑' && index == 4 && subIndex == 3)  addEditBtn = true;
+					var editButton = "";
+					if(addEditBtn && !parent.g_params.isFinish){
+						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'编 辑' + 
+									 '</button>'; 
+					}
+					html += '<tr>' + 
+								'<td class="reference-td">' + (i+1) + '</td>' + 
+								'<td class="reference-td">' + ($.utils.isEmpty(data.rows[i].code) ? codeDefault : data.rows[i].code) + '</td>' + 
+								'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].lastHandleUserName) + '</td>' + 
+								'<td class="reference-td">' + $.date.dateFormat(data.rows[i].lastHandleTime, "yyyy-MM-dd") + '</td>' + 
+								'<td class="reference-td">' + flowProgress + '</td>' + 
+								'<td class="reference-td">' + 
+									'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'查 看' + 
+									'</button>' + 
+									editButton + 
+								'</td>' + 
+							'</tr>';
+				}
+				$('#' + tableListId).append(html);
+		        if(length == 1) {
+	        		$('#btnNewDoc' + index + '-' + subIndex).remove();
+	        		if(removeAuditButton) $('#btnSubmitAudit' + index + '-' + subIndex).remove();
+		        }
+				else {
+					$('#btnSubmitAudit' + index + '-' + subIndex).remove();
+				}
+	   		}
+    }
+	});
+} 
+
 //新增
 function btnEventNew(index, subIndex){
 	top.app.info.iframe.params = parent.g_params;
 	top.app.info.iframe.params.navIndex = 2;
 	top.app.info.iframe.params.type = 1;	//1新增 2编辑 3查看
-	parent.location.href = encodeURI(getShowOrEditUrl(index, subIndex));
+	var pid = $.utils.getUrlParam(window.location.search,"_pid");
+	var url = "/rales/ael/case/necessity/writ" + index + "_" + subIndex + ".html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+	parent.location.href = encodeURI(url);
 }
 
 //查询
@@ -269,7 +289,9 @@ function btnEventDetail(index, subIndex, id){
 	top.app.info.iframe.params.id = id;
 	top.app.info.iframe.params.subRow = getSubRow(subIndex, id);
 	//iframe上层跳转
-	parent.location.href = encodeURI(getShowOrEditUrl(index, subIndex));
+	var pid = $.utils.getUrlParam(window.location.search,"_pid");
+	var url = "/rales/ael/case/necessity/writ" + index + "_" + subIndex + ".html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+	parent.location.href = encodeURI(url);
 }
 
 //编辑
@@ -281,40 +303,9 @@ function btnEventEdit(index, subIndex, id){
 	top.app.info.iframe.params.id = id;
 	top.app.info.iframe.params.subRow = getSubRow(subIndex, id);
 	//iframe上层跳转
-	parent.location.href = encodeURI(getShowOrEditUrl(index, subIndex));
-}
-
-function getShowOrEditUrl(index, subIndex){
-	var url = "";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
-	if(index == 1 && subIndex == 1){
-		url = "/rales/ael/case/necessity/case-register.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 2 && subIndex == 1){
-		url = "/rales/ael/case/necessity/put-on-record-audit.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 2 && subIndex == 2){
-		url = "/rales/ael/case/necessity/put-on-record-notice.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 2 && subIndex == 3){
-		url = "/rales/ael/case/necessity/case-tran-notice.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 3 && subIndex == 1){
-		url = "/rales/ael/case/necessity/case-survey-report.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 3 && subIndex == 2){
-		url = "/rales/ael/case/necessity/punish-notice.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 3 && subIndex == 3){
-		url = "/rales/ael/case/necessity/punish-hearing-notice.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 4 && subIndex == 1){
-		url = "/rales/ael/case/necessity/punish-audit.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 4 && subIndex == 2){
-		url = "/rales/ael/case/necessity/cur-punish-decision.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 4 && subIndex == 3){
-		url = "/rales/ael/case/necessity/punish-decision.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 5 && subIndex == 1){
-		url = "/rales/ael/case/necessity/case-end-report.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 6 && subIndex == 1){
-		url = "/rales/ael/case/necessity/case-volume.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}else if(index == 6 && subIndex == 2){
-		url = "/rales/ael/case/necessity/case-catalog.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-	}
-	return url;
+	var url = "/rales/ael/case/necessity/writ" + index + "_" + subIndex + ".html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+	parent.location.href = encodeURI(url);
 }
 
 function getSubRow(subIndex, id){
@@ -335,4 +326,63 @@ function getTableCnt(index, subIndex){
 	if($.utils.isEmpty(retVal)) return 0;
 	if(isNaN(retVal)) return 0;
 	else return retVal;
+}
+
+
+//启动流程或提交审核
+function btnSubmitAudit(index, subIndex){
+	top.app.message.confirm("确定要提交审批？", function(){
+		var submitData = {}, url = "";
+		if(index == 2 && subIndex == 3) {
+			url = "/api/rales/ael/case/startCaseTransferFlow1";
+			submitData["subFlowProgress"] = "6";
+		}
+		if(index == 3 && subIndex == 4) {
+			url = "/api/rales/ael/case/startCaseTransferFlow2";
+			submitData["subFlowProgress"] = "7";
+		}
+		if(index == 4 && subIndex == 3) {
+			url = "/api/rales/ael/case/startNotPunishFlow";
+			submitData["subFlowProgress"] = "8";
+		}
+		if($.utils.isEmpty(parent.g_params.row.associateExecutor)){
+			top.app.message.notice("请填写案件第二承办人！");
+			return;
+		}
+		
+		//传送案件的流程实例ID
+		submitData["caseProcessInstanceId"] = parent.g_params.row.processInstanceId;
+		
+		submitData["registerId"] = parent.g_params.row.id;
+		if(top.app.info.userInfo.userId == parent.g_params.row.associateExecutor)
+			submitData["associateExecutor"] = parent.g_params.row.createBy;
+		else
+			submitData["associateExecutor"] = parent.g_params.row.associateExecutor;
+
+		//填入当前行的ID和文书
+		if(g_dataListArray[subIndex].length > 0){
+			submitData["id"] = g_dataListArray[subIndex][0].id;
+			submitData["otherFlowCode"] = g_dataListArray[subIndex][0].code;
+		}
+		
+		top.app.message.loading();
+		//异步处理
+		$.ajax({
+			url: top.app.conf.url.apigateway + url + "?access_token=" + top.app.cookies.getCookiesToken(),
+		    method: 'POST',
+			data:JSON.stringify(submitData),
+			contentType: "application/json",
+		    dataType: "json",
+			success: function(data){
+				top.app.message.loadingClose();
+				if(top.app.message.code.success == data.RetCode){
+		   			top.app.message.notice("数据提交成功！");
+		   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
+		   			parent.location.href = "/rales/ael/case/case-todo.html?_pid=" + pid;
+		   		}else{
+		   			top.app.message.error(data.RetMsg);
+		   		}
+	        }
+		});
+	});
 }

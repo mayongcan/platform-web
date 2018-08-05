@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/preview.css" rel="stylesheet">
+    <style type="text/css">
+    .reference-td{
+    	text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <div class="animated fadeIn" id="printBody">
+		<div class="ibox-content box-info">
+			<div class="box-title">
+				<span class="table-title">送达回证</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01送回〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td"  style="width:160px;">
+						   	送达文书名称、文号
+						</td>
+						<td class="reference-td" id="tdWritCode">
+						   	<input type="text" class="form-control" id="writCode" name="WritCode"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	受送达人
+						</td>
+						<td class="reference-td" id="tdArriveUser" >
+						   	<input type="text" id="arriveUser" name="arriveUser" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	受送达人
+						</td>
+						<td class="reference-td"></td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	代收人
+						</td>
+						<td class="reference-td"></td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+							送达地点
+						</td>
+						<td class="reference-td" id="tdArriveAddr" >
+						   	<input type="text" id="arriveAddr" name="arriveAddr" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+							代收人与受送达人关系
+						</td>
+						<td class="reference-td" id="tdArriveRelation" >
+						   	<input type="text" id="arriveRelation" name="arriveRelation" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+							送达日期
+						</td>
+						<td class="reference-td" id="tdArriveDate" >
+							<div class="input-group date edit-layer-input" id="divArriveDate">
+			            		<input type="text" class="form-control" id="arriveDate" name="arriveDate"/>
+			            		<span class="input-group-addon">
+			                		<span class="glyphicon glyphicon-calendar"></span>
+			            		</span>
+			            	</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+							送达方式
+						</td>
+						<td class="reference-td" id="tdArriveType" >
+						   	<input type="text" id="arriveType" name="arriveType" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+							拒收原因
+						</td>
+						<td class="reference-td" id="tdRejectReason" >
+						   	<input type="text" id="rejectReason" name="rejectReason" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	见证人
+						</td>
+						<td class="reference-td" style="text-align: center;">
+							年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	送达人
+						</td>
+						<td class="reference-td" style="text-align: center;">
+							年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	送达人
+						</td>
+						<td class="reference-td" style="text-align: center;">
+							年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+							备注
+						</td>
+						<td class="reference-td" id="tdArriveMemo" >
+						   	<input type="text" id="arriveMemo" name="arriveMemo" class="form-control">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/jquery.print.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/writ-pre8_1.js" type="text/javascript"></script>
+</body>
+</html>

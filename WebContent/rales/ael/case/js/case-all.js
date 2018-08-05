@@ -21,17 +21,22 @@ $(function () {
  * 初始化权限
  */
 function initFunc(){
-	var operRights = top.app.getUserRights($.utils.getUrlParam(window.location.search,"_pid"));
-	$("#tableToolbar").empty();
+//	var operRights = top.app.getUserRights($.utils.getUrlParam(window.location.search,"_pid"));
+//	$("#tableToolbar").empty();
 	var htmlTable = "";
-	var length = operRights.length;
-	for (var i = 0; i < length; i++) {
-		htmlTable += "<button type='button' class='btn btn-outline btn-default' id='" + operRights[i].funcFlag  + "' data-action-url='" + operRights[i].funcLink + "'>" + 
-						"<i class=\""+ operRights[i].funcIcon + "\" aria-hidden=\"true\"></i> " + operRights[i].funcName + 
-					 "</button>";
-	}
+//	var length = operRights.length;
+//	for (var i = 0; i < length; i++) {
+//		htmlTable += "<button type='button' class='btn btn-outline btn-default' id='" + operRights[i].funcFlag  + "' data-action-url='" + operRights[i].funcLink + "'>" + 
+//						"<i class=\""+ operRights[i].funcIcon + "\" aria-hidden=\"true\"></i> " + operRights[i].funcName + 
+//					 "</button>";
+//	}
 	htmlTable += appTable.addDefaultFuncButton();
 	$("#tableToolbar").append(htmlTable);
+
+	// 权限类型下拉框变更事件
+	$('#searchFlowProgress').on('changed.bs.select',
+		function(e) { $table.bootstrapTable('refresh'); }
+	);
 }
 
 /**
@@ -108,7 +113,8 @@ function tableFormatFlowProgress(value, row) {
 }
 
 function tableFormatAssociate(value, row) {
-	return row.createUserName + "、" + row.associateUserName;
+	if($.utils.isNull(row.associateUserName)) return row.createUserName;
+	else return row.createUserName + "、" + row.associateUserName;
 }
 
 function formatOperate(value, row, index){

@@ -24,9 +24,6 @@ function initFunc(){
 						"<i class=\""+ operRights[i].funcIcon + "\" aria-hidden=\"true\"></i> " + operRights[i].funcName + 
 					 "</button>";
 	}
-	htmlTable += "<button type='button' class='btn btn-outline btn-default' id='btnNew' data-action-url=''>" + 
-					"<i class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></i> 新建现场检查记录表" + 
-				 "</button>";
 	htmlTable += appTable.addDefaultFuncButton();
 	$("#tableToolbar").append(htmlTable);
 }
@@ -42,19 +39,19 @@ function initTable(){
             size: params.limit,   						//页面大小
             page: params.offset / params.limit,  		//当前页
             code: $('#searchCode').val(),
-            parties: $('#searchParties').val(),
-            begin: $('#searchBegin').val(),
-            end: $('#searchEnd').val(),
+            lastHandlerUserName: $('#searchLastHandlerUserName').val(),
+            lastHandleTimeBegin: $('#searchLastHandleTimeBegin').val(),
+            lastHandleTimeEnd: $('#searchLastHandleTimeEnd').val(),
         };
         return param;
     };
     //初始化列表
 	$table.bootstrapTable({
-	        url: top.app.conf.url.apigateway + "/api/rales/ael/routine/getAllList",   		//请求后台的URL（*）
-	        queryParams: searchParams,										//传递参数（*）
-	        uniqueId: 'id',
-	        onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+        url: top.app.conf.url.apigateway + "/api/rales/ael/routine/getAllList",   		//请求后台的URL（*）
+        queryParams: searchParams,										//传递参数（*）
+        uniqueId: 'id',
+        onClickRow: function(row, $el){
+	        appTable.setRowClickStatus($table, row, $el);
         }
     });
 	//初始化Table相关信息
@@ -66,9 +63,9 @@ function initTable(){
     });
 	$("#btnReset").click(function () {
 		$("#searchCode").val("");
-		$("#searchParties").val("");
-		$("#searchBegin").val("");
-		$("#searchEnd").val("");
+		$("#searchLastHandlerUserName").val("");
+		$("#searchLastHandleTimeBegin").val("");
+		$("#searchLastHandleTimeEnd").val("");
 		//刷新数据，否则下拉框显示不出内容
 		$('.selectpicker').selectpicker('refresh');
 		$table.bootstrapTable('refresh');
@@ -79,79 +76,51 @@ function initTable(){
  * 初始化权限功能点击事件
  */
 function initFuncBtnEvent(){
-	$("#btnNew").click(function () {
-		top.app.info.iframe.params = {};
-		top.app.info.iframe.params.type = 1;	//1新增 2编辑 3查看
-		var pid = $.utils.getUrlParam(window.location.search,"_pid");
-		var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=/rales/ael/routine/routine.html";
-		window.location.href = encodeURI(url);
-    });
+	
 }
 
 function serialNumberTable(value,row,index){
     return appTable.tableFormatSerialNumber($table, index);
 }
 
-function formatOperate(value, row, index){
-	if(row.rapIsLegal == '0'){
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail(' + row.id + ')">' + 
-					'查看' + 
-				'</button>' +
-				'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + row.id + ')">' + 
-					'编辑' + 
-				'</button>' + 
-				'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + row.id + ')">' + 
-					'删除' + 
-				'</button>' + 
-				'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventRegister(' + row.id + ')">' + 
-					'案件快捷登记' + 
-				'</button>';
-	}else{
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail(' + row.id + ')">' + 
-					'查看' + 
-				'</button>' +
-				'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + row.id + ')">' + 
-					'编辑' + 
-				'</button>' +
-				'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + row.id + ')">' + 
-					'删除' + 
-				'</button>';
-	}
+function formatProgress(value,row,index){
+	if($.utils.isEmpty(value)) return "待提交";
+	else return value;
 }
 
-function btnEventDetail(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	//设置传送对象
-	top.app.info.iframe.params = {};
-	top.app.info.iframe.params.type = 3;	//1新增 2编辑 3查看
-	top.app.info.iframe.params.row = row;
-	var pid = $.utils.getUrlParam(window.location.search,"_pid");
-	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=/rales/ael/routine/routine.html";
-	window.location.href = encodeURI(url);
+function formatCaseCode(value,row,index){
+	if($.utils.isNull(row.otherFlowParams)) return ""
+	else return row.otherFlowParams.code;
+}
+
+function formatOperate(value, row, index){
+	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit(' + row.id + ')">' + 
+				'查看' + 
+			'</button>';
 }
 
 function btnEventEdit(id){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
 	//设置传送对象
 	top.app.info.iframe.params = {};
-	top.app.info.iframe.params.type = 2;	//1新增 2编辑 3查看
+	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.backUrl = "/rales/ael/routine/routine.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
-	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=/rales/ael/routine/routine.html";
+	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
 	window.location.href = encodeURI(url);
 }
 
-function btnEventDel(id){
+function btnEventAudit(id){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	appTable.delData($table, "/api/rales/ael/routine/delRoutineInfo", id + "");
-}
-
-function btnEventRegister(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	//设置传送对象
 	top.app.info.iframe.params = {};
-	top.app.info.iframe.params.routineRow = row;
-	var url = "/rales/ael/case/case-new.html?_pid=" + pid + "&backUrl=/rales/ael/routine/routine.html&oldRegisterId=" + row.id + "&registerType=2";
+	if(row.activityName == '行政检查编辑' || row.activityName == '行政检查草稿' ||  row.activityName == '第二承办人审批'){
+		top.app.info.iframe.params.isEdit = true;
+	}
+	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.backUrl = "/rales/ael/routine/routine.html";
+	var pid = $.utils.getUrlParam(window.location.search,"_pid");
+	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
 	window.location.href = encodeURI(url);
 }

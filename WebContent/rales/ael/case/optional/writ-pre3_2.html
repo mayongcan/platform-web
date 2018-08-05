@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/preview.css" rel="stylesheet">
+    <style type="text/css">
+    .reference-td{
+    	text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <div class="animated fadeIn" id="printBody">
+		<div class="ibox-content box-info">
+			<div class="box-title">
+				<span class="table-title">行政强制措施现场笔录</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01强制笔录〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<div class="box-content-noindent">
+				行政强制措施种类：<span id="tdType"></span>
+			</div>
+			<div class="box-content-noindent">
+				时间：<a class="content-fill-in" id="dataYear">　</a>
+					年
+					<a class="content-fill-in" id="dataMonth">　</a>
+					月
+					<a class="content-fill-in" id="dataDay">　</a>
+					日
+					<a class="content-fill-in" id="dataHour">　</a>
+					时
+					<a class="content-fill-in" id="dataMinute">　</a>
+					分至
+					<a class="content-fill-in" id="dataDay1">　</a>
+					日
+					<a class="content-fill-in" id="dataHour1">　</a>
+					时
+					<a class="content-fill-in" id="dataMinute1">　</a>
+					分
+			</div>
+			<div class="box-content-noindent">
+				地点：<span id="tdCheckAddr"></span>
+			</div>
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				一、被检查对象基本情况
+			</div>
+			<div class="box-content-noindent">
+				<input type="checkbox" id="personType2" value="" style="margin-right: 10px">被检查单位名称：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyName>　</a>
+				法定代表人（负责人）：<a class="content-fill-in" style="min-width:80px;" id=tdLegalRepresentative>　</a>         　
+				住所：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyAddr>　</a>
+				统一社会信用代码：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyCreditCode>　</a>
+				联系电话：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyPhone>　</a>
+			</div>
+			<div class="box-content-noindent">
+				<input type="checkbox" id="personType1" value="" style="margin-right: 10px">被检查人姓名：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesName>　</a>
+				性别：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesSex>　</a>         　
+				职业：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesJob>　</a>
+				身份证号码：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesIdCard>　</a>
+				工作单位：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesUnit>　</a>
+				联系电话：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesPhone>　</a>
+				住址：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesAddr>　</a>
+				邮编：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesZip>　</a>				
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				二、见证人基本情况（可选）
+			</div>
+			<div class="box-content-noindent">
+				见证人姓名：<a class="content-fill-in" style="min-width:80px;" id=tdWitnessName>　</a>
+				性别：<a class="content-fill-in" style="min-width:80px;" id=tdWitnessSex>　</a>         　
+				职业：<a class="content-fill-in" style="min-width:80px;" id=tdWitnessJob>　</a>
+				身份证号码：<a class="content-fill-in" style="min-width:80px;" id=tdWitnessIdCard>　</a>
+				工作单位：<a class="content-fill-in" style="min-width:80px;" id=tdWitnessUnit>　</a>
+				联系电话：<a class="content-fill-in" style="min-width:80px;" id=tdWitnessPhone>　</a>
+				住址：<a class="content-fill-in" style="min-width:80px;" id=tdWitnessAddr>　</a>
+				邮编：<a class="content-fill-in" style="min-width:80px;" id=tdWitnessZip>　</a>				
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				三、告知事项
+			</div>
+			<div class="box-content">
+				问：你好！我们是<a class="content-fill-in" style="min-width:80px;" id=tdLawOffice>　</a>
+				的执法人员<a class="content-fill-in" style="min-width:80px;" id=tdLawUser>　</a>
+				，执法证号分别是<a class="content-fill-in" style="min-width:80px;" id=tdLawUserCardNo>　</a>，这是我们的执法证件（出示执法证件），请你确认。
+				<a class="content-fill-in" style="min-width:80px;" id=tdNoticeUser>　</a>
+				请配合我单位开展检查（勘验），并如实回答有关问题。如果你认为我们与本案有利害关系从而影响到本案的公正办理，可以申请我们回避，你是否申请回避？
+			</div>
+			<div class="box-content">
+				答：<span id="tdNoticeAnswer">　</span>
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				四、采取行政强制措施理由、依据、当事人权利及救济途径告知：
+			</div>
+			<div class="box-content">
+				<span id="tdCheckDetail">　</span>
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				五、陈述（申辩）情况：
+			</div>
+			<div class="box-content">
+				<span id="tdAskInfo">　</span>
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				六、现场处理情况：
+			</div>
+			<div class="box-content">
+				<span id="tdHandleInfo">　</span>
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top:20px;">
+				<a class="content-fill-in">当事人应当逐页签字确认</a>
+			</div>
+			<div class="box-content-noindent">
+				<a class="content-fill-in" style="padding-left: 50px">（以下是笔录尾页）</a>
+			</div>
+			<div class="box-content-noindent">
+				<a class="content-fill-in">当事人阅核后签注“笔录上述内容，记录属实。”</a>
+			</div>
+			
+			<div class="box-content-noindent">
+				当事人：<a class="content-fill-in" style="min-width:200px;">　</a>
+			</div>
+			<div class="box-content-noindent" id="selectUser1" style="display: none">
+				在场人（可选）：<a class="content-fill-in" style="min-width:200px;">　</a>
+			</div>
+			<div class="box-content-noindent" id="selectUser2" style="display: none">
+				见证人（可选）：<a class="content-fill-in" style="min-width:200px;">　</a>
+			</div>
+			<div class="box-content-noindent">
+				行政执法人员：<a class="content-fill-in" style="min-width:200px;">　</a>
+			</div>
+			<div class="box-content-noindent">
+				记录人：<a class="content-fill-in" style="min-width:200px;">　</a>
+			</div>
+			<div class="box-content" style="float: right;">
+				第<span>　　</span>页（共<span>　　</span>页）
+			</div>
+			
+			<div style="clear:both;"></div>
+			<div class="box-content-noindent">
+				附件(可选)：1.涉案物品清单
+			</div>
+			<div class="box-content-noindent" style="padding-left: 72px">
+				2.视听资料/电子数据
+			</div>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/jquery.print.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/writ-pre3_2.js" type="text/javascript"></script>
+</body>
+</html>

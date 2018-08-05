@@ -150,7 +150,7 @@ var fileupload = fileupload || {};
 			//判断是否需要校验,如果校验函数结果不通过，则返回
 			if(!checkFunc()) return;
 		}
-		if($("#" + fileupload.inputFileName)[0].files[0] == null || $("#" + fileupload.inputFileName)[0].files[0] == undefined){
+		if($.utils.isNull($("#" + fileupload.inputFileName)[0]) || $.utils.isNull($("#" + fileupload.inputFileName)[0].files[0])){
 			if(callbackFunc) callbackFunc();
 			return;
 		}

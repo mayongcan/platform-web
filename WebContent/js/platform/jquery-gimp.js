@@ -21,13 +21,15 @@ jQuery.support.cors = true;
 		    if (typeof dtStart == 'string' ){    
 		    	dtStart = StringToDate(dtStart);   
 		    } 
-			return dtStart.DateDiff(strInterval,dtEnd);
+		    if($.utils.isNull(dtStart)) return "";
+		    else return dtStart.DateDiff(strInterval,dtEnd);
 		},
 		dateAdd:function(strInterval,Number,dt){
 			if (typeof dt == 'string' ){    
 				dt = StringToDate(dt);   
 		    }
-			return dt.DateAdd(strInterval, Number);
+			if($.utils.isNull(dt)) return "";
+		    else return dt.DateAdd(strInterval, Number);
 		},
 		//日期格式化 
 		dateFormat:function(dt,formatStr){

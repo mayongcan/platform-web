@@ -39,7 +39,8 @@ var appTable = appTable || {};
 	appTable.tableFormatSerialNumber = function(table, index){
 		var pageNumber = table.bootstrapTable('getOptions').pageNumber;
 	    var pageSize = table.bootstrapTable('getOptions').pageSize;
-	    return (pageNumber-1) * pageSize + index + 1;
+	    if(isNaN(pageSize) || isNaN(pageNumber)) return index + 1;
+	    else return (pageNumber-1) * pageSize + index + 1;
 	}
 	
 	/**

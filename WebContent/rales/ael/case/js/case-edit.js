@@ -185,14 +185,14 @@ function submitAction(){
 		top.app.message.notice("请选择案发市辖区！");
 		return;
 	}
-	if($.utils.isEmpty(g_userIdList)){
-		top.app.message.notice("请选择第二承办人！");
-		return;
-	}
-	if(g_userIdList == top.app.info.userInfo.userId){
-		top.app.message.notice("不能选择自己作为第二承办人！");
-		return;
-	}
+//	if($.utils.isEmpty(g_userIdList)){
+//		top.app.message.notice("请选择第二承办人！");
+//		return;
+//	}
+//	if(g_userIdList == top.app.info.userInfo.userId){
+//		top.app.message.notice("不能选择自己作为第二承办人！");
+//		return;
+//	}
 	//定义提交数据
 	var submitData = {};
 	submitData["id"] = g_params.row.id;

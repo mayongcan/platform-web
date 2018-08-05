@@ -903,6 +903,33 @@ var app = app || {};
 	}
 
 	//+---------------------------------------------------   
+	//| 将字典值写入多选框(每个选项换行)
+	//+---------------------------------------------------
+	app.addCheckBoxButtonLine = function(htmlObj, dict, name, checkList){
+		if(htmlObj == null || htmlObj == undefined || dict == null || dict == undefined || dict.length == 0) return;
+		htmlObj.empty();
+		var html = "";
+		var length = dict.length;
+		var arrayCheck = [];
+		if(checkList == null || checkList == undefined){
+			for (var i = 0; i < length; i++) {
+				arrayCheck[i] = '0';
+			}
+		}else{
+			arrayCheck = checkList.split(',');
+		}
+		for (var i = 0; i < length; i++) {
+			var check = "";
+			if(arrayCheck[i] == '1') check = 'checked';
+			html += '<label style="margin-right:20px;margin-bottom:0px;font-weight: normal;">' +
+				      	'<input type="checkbox" id="' + name + dict[i].ID + '" value="" ' + check + '> ' + dict[i].NAME +
+				    '</label>' + 
+				    '<br/>';
+		}
+		htmlObj.append(html);
+	}
+
+	//+---------------------------------------------------   
 	//| 获取多选框字典值
 	//+---------------------------------------------------
 	app.getCheckBoxButton = function(htmlObj, dict, name){
@@ -930,10 +957,10 @@ var app = app || {};
 	//+--------------------------------------------------- 
 	app.uploadFile = function(fileObj, callback, modifyName){
 		if(fileObj == null || fileObj == undefined) return;
-		if(fileObj.size / 1024 / 1024 > 50){
-			top.app.message.alert("请选择50MB以下的文件进行上传！");
-			return;
-		}
+//		if(fileObj.size / 1024 / 1024 > 50){
+//			top.app.message.alert("请选择50MB以下的文件进行上传！");
+//			return;
+//		}
 		top.app.message.loading();
 		var formData = new FormData();
 		formData.append("file",	fileObj);
@@ -970,10 +997,10 @@ var app = app || {};
 		for(var i = 0; i < fileObj.length; i++){
 			size += fileObj[i].size;
 		}
-		if(size / 1024 / 1024 > 50){
-			top.app.message.alert("总文件数不能大于50M！");
-			return;
-		}
+//		if(size / 1024 / 1024 > 50){
+//			top.app.message.alert("总文件数不能大于50M！");
+//			return;
+//		}
 		top.app.message.loading();
 		var formData = new FormData();
 		for(var i = 0; i < fileObj.length; i++){
@@ -1008,10 +1035,10 @@ var app = app || {};
 	//+--------------------------------------------------- 
 	app.uploadImage = function(imageObj, callback){
 		if(imageObj == null || imageObj == undefined) return;
-		if(imageObj.size / 1024 / 1024 > 2){
-			top.app.message.alert("请选择2MB以下的文件进行上传！");
-			return;
-		}
+//		if(imageObj.size / 1024 / 1024 > 2){
+//			top.app.message.alert("请选择2MB以下的文件进行上传！");
+//			return;
+//		}
 		top.app.message.loading();
 		var formData = new FormData();
 		formData.append("file",	imageObj);
@@ -1046,10 +1073,10 @@ var app = app || {};
 		for(var i = 0; i < imageObj.length; i++){
 			size += imageObj[i].size;
 		}
-		if(size / 1024 / 1024 > 10){
-			top.app.message.alert("总文件数不能大于10M！");
-			return;
-		}
+//		if(size / 1024 / 1024 > 10){
+//			top.app.message.alert("总文件数不能大于10M！");
+//			return;
+//		}
 		top.app.message.loading();
 		var formData = new FormData();
 		for(var i = 0; i < imageObj.length; i++){

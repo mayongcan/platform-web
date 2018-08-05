@@ -1,5 +1,4 @@
-var g_params = {}, g_backUrl = null, g_counterpartType = "5";
-var g_auditStatusDict1 = [], g_auditStatusDict2 = [], g_auditStatusDict3 = [], g_auditStatusDict4 = [];
+var g_params = {}, g_backUrl = null, g_counterpartType = "11";
 
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
@@ -8,43 +7,8 @@ $(function () {
 	getResultList();
 	initView();
 	initData();
-	
-	//设置右侧的高度和左侧一致
-	$("#content-right").height($("#content-left").height());
+	initOtherInfo();
 });
-
-function getResultList(){
-	if(!$.utils.isNull(g_params.row) && !$.utils.isNull(g_params.row.id)){
-		$.ajax({
-	        url: top.app.conf.url.apigateway + "/api/rales/ael/case/getCaseSuggestList",   		//请求后台的URL（*）
-		    method: 'GET',
-		    data: {
-		    		access_token: top.app.cookies.getCookiesToken(),
-		    		registerId: g_params.row.id,
-		    		counterpartType: g_counterpartType,
-				page: 0,
-				size:50
-		    },success: function(data){
-			    	if(top.app.message.code.success == data.RetCode){
-			    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
-			    			g_dataList = data.rows;
-			    			$('#resultList').empty();
-			    			for(var i = 0; i < data.rows.length; i++){
-			    				var html = '<tr>' + 
-											'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createUserName) + '</td>' + 
-											'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].result) + '</td>' + 
-											'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createDate) + '</td>' + 
-										'</tr>';
-			    				$('#resultList').append(html);
-			    			}
-			    		}
-			    		//设置右侧的高度和左侧一致
-			    		$("#content-right").height($("#content-left").height());
-		   		}
-			}
-		});
-	}
-}
 
 function initView(){
 	//提交
@@ -70,13 +34,26 @@ function initView(){
 		}else if(g_params.row.activityName == '单位领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
 			submitData["needLawOfficeAudit"] = $('#divNeedLawOfficeAudit input:radio:checked').val();
-		}else if(g_params.row.activityName == '法规处审批'){
+			submitData["isRegister"] = '0';
+		}else if(g_params.row.activityName == '法规处领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
 		}else if(g_params.row.activityName == '委领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
+		}else if(g_params.row.activityName == '法规处指派'){
+			if(g_userIdList == ''){
+				top.app.message.notice("请选择指派人员！");
+				return;
+			}
+			submitData["auditStatus"] = $("#auditStatus").val();
+			submitData["assignHandleUser"] = g_userIdList;
 		}else{
 			//设置进入子流程的时候，设置流程启动人
 			submitData["setApplyUser"] = "1";
+		}
+		//用于处理非必要流程
+		if(!$.utils.isEmpty(g_params.row.subFlowProgress)){
+			submitData["subFlowProgress"] = g_params.row.subFlowProgress;
+			submitData["otherFlowId"] = g_params.row.otherFlowId;
 		}
 
 		top.app.message.loading();
@@ -94,56 +71,51 @@ function initView(){
 					parent.app.layer.editLayerRet = true;
 		   			top.app.message.notice("数据提交成功！");
 		   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
-		   			window.location.href = "/rales/ael/case/case-todo.html?_pid=" + pid;
+		   			window.location.href = g_backUrl + "?_pid=" + pid;
 		   		}else{
 		   			top.app.message.error(data.RetMsg);
 		   		}
 	        }
 		});
     });
-	//返回
-	$("#btnCancel").click(function () {
-		top.app.info.iframe.params = g_params;
-		var pid = $.utils.getUrlParam(window.location.search,"_pid");
-		window.location.href = g_backUrl + "?_pid=" + pid + "&navIndex=" + g_params.navIndex;
-    });
 }
 
 function initData(){
-	$('#tdCaseNo').text(g_params.row.caseCode);
-	$('#tdSuggest').text(g_params.row.advice);
-	//获取立案审批表相关信息
-//	var dataInfo = rales.getHearingAuditInfo(g_params.row.id);
 	var dataInfo = g_params.row.otherFlowParams;
 	$('#tableTitleMark').text(dataInfo.code);
-	$('#tdIllegalContent').text(dataInfo.illegalContent);
-	$('#tdCaseParties').text(dataInfo.parties);
-	$('#tdPartiesCertificateNo').text(dataInfo.certificateNo);
-	$('#tdPartiesCompany').text(dataInfo.company);
-	$('#tdPartiesContacts').text(dataInfo.legalRepresentative);
-	$('#tdPartiesAddress').text(dataInfo.address);
-	$('#tdPartiesZip').text(dataInfo.zip);
-	$('#tdPartiesPhone').text(dataInfo.phone);
-	$('#tdHearingDetail').text(dataInfo.hearingCondition);
-	$('#tdMemo').text(dataInfo.memo);
+	
+	if(!$.utils.isNull(dataInfo.content)){
+		var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
+		var g_taskSourceDict = top.app.getDictDataByDictTypeValue('AEL_TASK_SOURCE');
+		var g_checkRegisterAdviceDict = top.app.getDictDataByDictTypeValue('AEL_CHECK_REGISTER_ADVICE');
+		//转换json
+		if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
+		if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
+		else $("#personType2").attr("checked",true);
+
+		top.app.addRadioButton($("#divTaskSource"), g_taskSourceDict, 'radioTaskSource', dataInfo.content.taskSource);
+		top.app.addCheckBoxButtonLine($("#divCheckUserAdvice"), g_checkRegisterAdviceDict, 'checkUserAdvice', dataInfo.content.checkUserAdvice);
+
+		$('#tdPartiesName').text($.utils.getNotNullVal(dataInfo.content.partiesName));
+		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
+		$('#tdPartiesAge').text($.utils.getNotNullVal(dataInfo.content.partiesAge));
+		$('#tdPartiesAddr').text($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+		$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
+		$('#tdPartiesPhone').text($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+		$('#tdCompanyName').text($.utils.getNotNullVal(dataInfo.content.companyName));
+		$('#tdLegalRepresentative').text($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
+		$('#tdCompanyAddr').text($.utils.getNotNullVal(dataInfo.content.companyAddr));
+		$('#tdCompanyPhone').text($.utils.getNotNullVal(dataInfo.content.companyPhone));
+		$('#tdLawUser1').text($.utils.getNotNullVal(dataInfo.content.lawUser1));
+		$('#tdLawUser2').text($.utils.getNotNullVal(dataInfo.content.lawUser2));
+		$('#tdLawUserCardNo1').text($.utils.getNotNullVal(dataInfo.content.lawUserCardNo1));
+		$('#tdLawUserCardNo2').text($.utils.getNotNullVal(dataInfo.content.lawUserCardNo2));
+		$('#tdCheckContent').text($.utils.getNotNullVal(dataInfo.content.checkContent));
+		$('#tdCheckDate').text($.utils.getNotNullVal(dataInfo.content.checkDate));
+		$('#tdMainCheckDetail').text($.utils.getNotNullVal(dataInfo.content.mainCheckDetail));
+	}
+	
+	//初始化文件列表和文书列表
 	rales.initFilesList(dataInfo.files);
 	rales.initCodeRelevance(dataInfo.relevanceId);
-	
-	//判断当前任务节点名称
-	if(g_params.row.activityName == '部门领导审批'){
-		g_auditStatusDict1 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_1');
-		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict1);
-	}else if(g_params.row.activityName == '单位领导审批'){
-		g_auditStatusDict2 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_2');
-		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict2);
-		$('#trNeedLawOfficeAudit').css('display', '');
-	}else if(g_params.row.activityName == '法规处审批'){
-		g_auditStatusDict3 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_3');
-		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict3);
-	}else if(g_params.row.activityName == '委领导审批'){
-		g_auditStatusDict4 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_4');
-		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict4);
-	}else{
-		$('#trAuditStatus').css('display', 'none');
-	}
 }

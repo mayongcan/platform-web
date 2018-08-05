@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/preview.css" rel="stylesheet">
+    <style type="text/css">
+    .reference-td {
+	    min-width: 15px;
+	}
+    </style>
+</head>
+<body>
+    <div class="animated fadeIn" id="printBody">
+		<div class="ibox-content box-info">
+			<div class="box-title">
+				<span class="table-title">行政处罚案件结案审批表</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01结案〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td" colspan="1" rowspan="4" style="text-align: center;width:90px;">
+						   	当 事 人<br/>基本情况
+						</td>
+						<td class="reference-td" colspan="1" rowspan="2" style="width:80px;">
+							<label style="margin-bottom:0px;font-weight: normal;">
+								<input type="checkbox" id="personType1" value=""> 公民
+							</label>
+						</td>
+						<td class="reference-td" style="width:60px;">
+						   	姓名
+						</td>
+						<td class="reference-td" id="tdPartiesName" style="width: 80px">
+						   	<input type="text" id="partiesName" name="partiesName" class="form-control">
+						</td>
+						<td class="reference-td" style="width:80px;">
+						   	性别
+						</td>
+						<td class="reference-td" id="tdPartiesSex" style="width: 80px">
+						   	<select class="selectpicker" id="partiesSex"></select>
+						</td>
+						<td class="reference-td" style="width:90px;">
+						   	年龄
+						</td>
+						<td class="reference-td" id="tdPartiesAge">
+						   	<input type="text" id="partiesAge" name="partiesAge" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:60px;">
+						   	住址
+						</td>
+						<td class="reference-td" id="tdPartiesAddr">
+						   	<input type="text" id="partiesAddr" name="partiesAddr" class="form-control">
+						</td>
+						<td class="reference-td" style="width:60px;">
+						   	身份证号
+						</td>
+						<td class="reference-td" id="tdPartiesCertificateNo">
+						   	<input type="text" id="partiesCertificateNo" name="partiesCertificateNo" class="form-control">
+						</td>
+						<td class="reference-td" style="width:60px;">
+						   	联系电话
+						</td>
+						<td class="reference-td" id="tdPartiesPhone">
+						   	<input type="text" id="partiesPhone" name="partiesPhone" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" colspan="1" rowspan="2" style="width:60px;">
+							<label style="margin-bottom:0px;font-weight: normal;">
+								<input type="checkbox" id="personType2" value=""> 法人或其他组织
+							</label>
+						</td>
+						<td class="reference-td" style="width:60px;">
+						   	名称
+						</td>
+						<td class="reference-td" id="tdCompanyName" colspan="3">
+						   	<input type="text" id="companyName" name="companyName" class="form-control">
+						</td>
+						<td class="reference-td" style="width:60px;">
+						   	法定代表人
+						</td>
+						<td class="reference-td" id="tdLegalRepresentative">
+						   	<input type="text" id="legalRepresentative" name="legalRepresentative" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:60px;">
+						   	住址
+						</td>
+						<td class="reference-td" id="tdCompanyAddr" colspan="3">
+						   	<input type="text" id="companyAddr" name="companyAddr" class="form-control">
+						</td>
+						<td class="reference-td" style="width:60px;">
+						   	联系电话
+						</td>
+						<td class="reference-td" id="tdCompanyPhone">
+						   	<input type="text" id="companyPhone" name="companyPhone" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	案由
+						</td>
+						<td class="reference-td" id="tdIllegalContent" colspan="4">
+						   	<input type="text" id="illegalContent" name="illegalContent" class="form-control">
+						</td>
+						<td class="reference-td" style="text-align: center;">
+						   	立案日期
+						</td>
+						<td class="reference-td" colspan="3" id="tdCaseBeginDate">
+						   	<div class="input-group date edit-layer-input" id="divCaseBeginDate">
+			            		<input type="text" class="form-control" id="caseBeginDate" name="caseBeginDate"/>
+			            		<span class="input-group-addon">
+			                		<span class="glyphicon glyphicon-calendar"></span>
+			            		</span>
+			            	</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	行政处罚决定书文号
+						</td>
+						<td class="reference-td" id="tdPunishWritCode" colspan="4">
+						   	<input type="text" id="punishWritCode" name="punishWritCode" class="form-control">
+						</td>
+						<td class="reference-td" style="text-align: center;">
+						   	处罚日期
+						</td>
+						<td class="reference-td" colspan="3" id="tdPunishDate">
+						   	<div class="input-group date edit-layer-input" id="divPunishDate">
+			            		<input type="text" class="form-control" id="punishDate" name="punishDate"/>
+			            		<span class="input-group-addon">
+			                		<span class="glyphicon glyphicon-calendar"></span>
+			            		</span>
+			            	</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:60px;text-align: center;">
+						   	案件简要<br/>情况
+						</td>
+						<td class="reference-td" id="tdCaseDesc" colspan="7">
+							<textarea id="caseDesc" name="caseDesc" class="form-control" style="height:120px"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	行政处罚<br/>内容
+						</td>
+						<td class="reference-td" id="tdPunishContent"  colspan="7">
+							<textarea id="punishContent" name="punishContent" class="form-control" style="height:120px"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	行政处罚<br/>执行情况
+						</td>
+						<td class="reference-td" colspan="7">
+							<div id="divPunishDetailCheck1" style="display: none">
+								<label style="margin-bottom:0px;font-weight: normal;">
+									<input type="checkbox" id="punishDetailCheck1" value=""> 责令改正违法行为的执行情况：
+								</label>
+								<div id="tdPunishDetailContent1">
+									<textarea id="punishDetailContent1" name="punishDetailContent1" class="form-control" style="height:60px"></textarea>
+								</div>
+							</div>
+							<div id="divPunishDetailCheck2" style="display: none">
+								<label style="margin-bottom:0px;font-weight: normal;">
+									<input type="checkbox" id="punishDetailCheck2" value=""> 罚款缴纳情况、违法所得、非法财物的处理情况：
+								</label>
+								<div id="tdPunishDetailContent2">
+									<textarea id="punishDetailContent2" name="punishDetailContent2" class="form-control" style="height:60px"></textarea>
+								</div>
+							</div>
+							<div id="divPunishDetailCheck3" style="display: none">
+								<label style="margin-bottom:0px;font-weight: normal;">
+									<input type="checkbox" id="punishDetailCheck3" value=""> 行政执法主体强制执行或者申请人民法院强制执行的情况：
+								</label>
+								<div id="tdPunishDetailContent3">
+									<textarea id="punishDetailContent3" name="punishDetailContent3" class="form-control" style="height:60px"></textarea>
+								</div>
+							</div>
+							<div id="divPunishDetailCheck4" style="display: none">
+								<label style="margin-bottom:0px;font-weight: normal;">
+									<input type="checkbox" id="punishDetailCheck4" value=""> 其他：
+								</label>
+								<div id="tdPunishDetailContent4">
+									<textarea id="punishDetailContent4" name="punishDetailContent4" class="form-control" style="height:60px"></textarea>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	附有关行政<br/>处罚文书
+						</td>
+						<td class="reference-td" colspan="7">
+							<div id="divPunishCodeCheck1" style="display: none">
+								<label style="margin-bottom:0px;font-weight: normal;">
+									<input type="checkbox" id="punishCodeCheck1" value=""> 省财政厅统一印制或者监制的罚没票据、罚没收据：
+								</label>
+								<div id="tdPunishCodeContent1">
+									<textarea id="punishCodeContent1" name="punishCodeContent1" class="form-control" style="height:60px"></textarea>
+								</div>
+							</div>
+							<div id="divPunishCodeCheck2" style="display: none">
+								<label style="margin-bottom:0px;font-weight: normal;">
+									<input type="checkbox" id="punishCodeCheck2" value=""> 关于先行登记保存、查封、扣押、没收的涉案财物，后续处置凭证：
+								</label>
+								<div id="tdPunishCodeContent2">
+									<textarea id="punishCodeContent2" name="punishCodeContent2" class="form-control" style="height:60px"></textarea>
+								</div>
+							</div>
+							<div id="divPunishCodeCheck3" style="display: none">
+								<label style="margin-bottom:0px;font-weight: normal;">
+									<input type="checkbox" id="punishCodeCheck3" value=""> 申请人民法院强制执行的相关文书等：
+								</label>
+								<div id="tdPunishCodeContent3">
+									<textarea id="punishCodeContent3" name="punishCodeContent3" class="form-control" style="height:60px"></textarea>
+								</div>
+							</div>
+							<div id="divPunishCodeCheck4" style="display: none">
+								<label style="margin-bottom:0px;font-weight: normal;">
+									<input type="checkbox" id="punishCodeCheck4" value=""> 其他：
+								</label>
+								<div id="tdPunishCodeContent4">
+									<textarea id="punishCodeContent4" name="punishCodeContent4" class="form-control" style="height:60px"></textarea>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	行政复议、行政诉讼情况（可选）
+						</td>
+						<td class="reference-td" id="tdReviewContent"  colspan="7">
+							<textarea id="reviewContent" name="reviewContent" class="form-control" style="height:120px"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;" colspan="1">
+						   	承办人<br/>意见
+						</td>
+						<td class="reference-td" colspan="7" id="tdSuggest" style="height:150px;vertical-align: top;position: relative;">
+							<div id="tdSuggestContent" style="float:left;"></div>
+							<div style="position: absolute;right: 10px;bottom: 0;">
+								<span style="margin-right:100px;">承办人：</span>
+								<span>年　　　月　　　日</span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	承办机构<br/>意见
+						</td>
+						<td class="reference-td" colspan="7" id="tdDeptSuggest" style="height:150px;vertical-align: top;position: relative;">
+							<div style="line-height: 20px;" id="tdDeptSuggestContent"></div>
+							<div style="position: absolute;right: 10px;bottom: 0;">
+								<span style="margin-right:100px;">负责人：</span>
+								<span>年　　　月　　　日</span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	单位负责人<br/>审批意见
+						</td>
+						<td class="reference-td" colspan="7" id="tdUnitSuggest" style="height:150px;vertical-align: top;position: relative;">
+							<div style="line-height: 20px;" id="tdUnitSuggestContent"></div>
+							<div style="position: absolute;right: 10px;bottom: 0;">
+								<span style="margin-right:100px;">负责人：</span>
+								<span>年　　　月　　　日</span>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/jquery.print.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/writ-pre5_1.js" type="text/javascript"></script>
+</body>
+</html>

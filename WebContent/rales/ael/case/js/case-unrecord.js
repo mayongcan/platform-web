@@ -93,9 +93,20 @@ function tableFormatFlowProgress(value, row) {
 	if($.utils.isEmpty(row.subFlowProgress))
 		return appTable.tableFormatDictValue(g_flowProgressDict, value);
 	else{
-		if(row.subFlowProgress == '10') return "证据保全措施审批流程";
-		else if(row.subFlowProgress == '11') return "听证审批流程";
-		else if(row.subFlowProgress == '12') return "听证报告书审批流程";
+		if(row.subFlowProgress == '6') return "案件移送审批流程(立案)";
+		else if(row.subFlowProgress == '7') return "案件移送审批流程(调查报告)";
+		else if(row.subFlowProgress == '8') return "不予行政处罚决定审批流程";
+		else if(row.subFlowProgress == '10') return "行政检查登记流程";
+		else if(row.subFlowProgress == '11') return "行政检查登记流程";
+		else if(row.subFlowProgress == '12') return "先行登记保存证据审批流程";
+		else if(row.subFlowProgress == '13') return "先行登记保存证据审批流程";
+		else if(row.subFlowProgress == '14') return "行政强制措施及相关事项内部审批";
+		else if(row.subFlowProgress == '15') return "行政强制措施及相关事项内部审批";
+		else if(row.subFlowProgress == '16') return "行政处罚决定法制审核流程";
+		else if(row.subFlowProgress == '17') return "听证审批流程";
+		else if(row.subFlowProgress == '18') return "行政处罚没收财物处理审批";
+		else if(row.subFlowProgress == '19') return "行政处罚延期（分期）缴纳罚款审批";
+		else if(row.subFlowProgress == '20') return "行政强制执行及相关事项内部审批";		
 	}
 }
 

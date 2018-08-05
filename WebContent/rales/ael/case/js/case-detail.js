@@ -44,20 +44,48 @@ function initView(){
 			g_isEdit = 1;
 			g_addInquiryReportProcedure = true;
 		}else{
+			if(g_params.row.activityName == '初步审批' || g_params.row.activityName == '调查报告审批' 
+				|| g_params.row.activityName == '行政处罚审批' || g_params.row.activityName == '结案报告审批'){
+				g_isEdit = 1;
+			}
 			g_btnType = 1;
 		}
 	}//非必要流程
 	else{
 		//设置顶部显示
 		$('#caseRegisterCode').text(g_params.row.otherFlowCode);
-		if(g_params.row.subFlowProgress == '10')
-			$('#flowProgressName').text("证据保全措施审批报告");
+		if(g_params.row.subFlowProgress == '6')
+			$('#flowProgressName').text("案件移送审批流程(立案)");
+		else if(g_params.row.subFlowProgress == '7')
+			$('#flowProgressName').text("案件移送审批流程(调查报告)");
+		else if(g_params.row.subFlowProgress == '8')
+			$('#flowProgressName').text("不予行政处罚决定审批流程");
+		else if(g_params.row.subFlowProgress == '10')
+			$('#flowProgressName').text("行政检查登记流程");
 		else if(g_params.row.subFlowProgress == '11')
-			$('#flowProgressName').text("听证审批报告");
+			$('#flowProgressName').text("行政检查登记流程");
 		else if(g_params.row.subFlowProgress == '12')
-			$('#flowProgressName').text("听证报告书");
+			$('#flowProgressName').text("先行登记保存证据审批流程");
+		else if(g_params.row.subFlowProgress == '13')
+			$('#flowProgressName').text("先行登记保存证据审批流程");
+		else if(g_params.row.subFlowProgress == '14')
+			$('#flowProgressName').text("行政强制措施及相关事项内部审批");
+		else if(g_params.row.subFlowProgress == '15')
+			$('#flowProgressName').text("行政强制措施及相关事项内部审批");
+		else if(g_params.row.subFlowProgress == '16')
+			$('#flowProgressName').text("行政处罚决定法制审核流程");
+		else if(g_params.row.subFlowProgress == '17')
+			$('#flowProgressName').text("听证审批流程");
+		else if(g_params.row.subFlowProgress == '18')
+			$('#flowProgressName').text("行政处罚没收财物处理审批");
+		else if(g_params.row.subFlowProgress == '19')
+			$('#flowProgressName').text("行政处罚延期（分期）缴纳罚款审批");
+		else if(g_params.row.subFlowProgress == '20')
+			$('#flowProgressName').text("行政强制执行及相关事项内部审批");
 		
-		if(g_params.row.activityName == '决议书编辑' || g_params.row.activityName == '听证审批表编辑' || g_params.row.activityName == '听证报告书编辑'){
+		if(g_params.row.activityName == '行政检查编辑' || g_params.row.activityName == '先行登记保存证据审批编辑' || g_params.row.activityName == '行政强制措施及相关事项内部审批编辑' || 
+				g_params.row.activityName == '行政处罚决定法制审核编辑' || g_params.row.activityName == '听证审批表编辑' || g_params.row.activityName == '行政处罚没收财物处理审批编辑' || 
+				g_params.row.activityName == '行政处罚延期（分期）缴纳罚款审批编辑' || g_params.row.activityName == '行政强制执行及相关事项内部审批编辑'){
 			$('#btnAudit').text("重新提交");
 			$('#flowProgressNotice').text("待编辑，请重新编辑后提交审批！");
 			g_btnType = 4;
@@ -71,32 +99,7 @@ function initNavButton(){
 	//审批按钮点击
 	$('#btnAudit').click(function () {
 		if(g_btnType == 1){
-			//根据必要流程的状态，进入不同的审批页面
-			top.app.info.iframe.params = g_params;
-			top.app.info.iframe.params.navIndex = g_navIndex;
-			var pid = $.utils.getUrlParam(window.location.search,"_pid");
-			var url = "";
-			if($.utils.isEmpty(g_params.row.subFlowProgress)){
-				if(g_params.row.flowProgress == '1')
-					url = "/rales/ael/case/audit/audit-1.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-				else if(g_params.row.flowProgress == '2')
-					url = "/rales/ael/case/audit/audit-2.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-				else if(g_params.row.flowProgress == '3')
-					url = "/rales/ael/case/audit/audit-3.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-				else if(g_params.row.flowProgress == '4')
-					url = "/rales/ael/case/audit/audit-4.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-				else if(g_params.row.flowProgress == '5')
-					url = "/rales/ael/case/audit/audit-5.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-			}else{
-				if(g_params.row.subFlowProgress == '10'){			//证据保全措施审批
-					url = "/rales/ael/case/audit/audit-10.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-				}else if(g_params.row.subFlowProgress == '11'){		//听证审批
-					url = "/rales/ael/case/audit/audit-11.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-				}else if(g_params.row.subFlowProgress == '12'){		//听证报告书
-					url = "/rales/ael/case/audit/audit-12.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
-				}
-			}
-			window.location.href = encodeURI(url);
+			jumpToAuditPage();
 		}else if(g_btnType == 2 || g_btnType == 4){
 			//先判断是否有创建文书
 			if(g_btnType == 2 && g_navIndex != 2) {
@@ -169,7 +172,8 @@ function initNavButton(){
 
 //提交审批
 function submitAudit(){
-	if(g_btnType == 2){
+	//必要流程的审批才需要创建审批文书
+	if($.utils.isEmpty(g_params.row.subFlowProgress) && g_btnType == 2){
 		var hasFile = true;
 		if(g_params.row.activityName == '立案审批' && $("#case-iframe")[0].contentWindow.getTableCnt(2,1) == 0){
 			hasFile = false;
@@ -188,57 +192,98 @@ function submitAudit(){
 			return;
 		}
 	}
-	var notice = "确定要提交审批？";
-	if(g_btnType == 4) notice = "确定要重新提交审批？";
-	if(g_btnType == 3) notice = "确定要结束流程？";
-	top.app.message.confirm(notice, function(){
-		top.app.message.loading();
-		var submitData = {};
-		submitData["taskId"] = g_params.row.taskId;
-		submitData["processInstanceId"] = g_params.row.processInstanceId;
-		submitData["processDefinitionId"] = g_params.row.processDefinitionId;
-		submitData["registerId"] = g_params.row.id;
-		//用于处理非必要流程外的三个流程
-		if(!$.utils.isEmpty(g_params.row.subFlowProgress)){
-			submitData["subFlowProgress"] = g_params.row.subFlowProgress;
-			submitData["otherFlowId"] = g_params.row.otherFlowId;
+	//跳转页面进行提交
+	jumpToAuditPage();
+	
+//	var notice = "确定要提交审批？";
+//	if(g_btnType == 4) notice = "确定要重新提交审批？";
+//	if(g_btnType == 3) notice = "确定要结束流程？";
+//	top.app.message.confirm(notice, function(){
+//		top.app.message.loading();
+//		var submitData = {};
+//		submitData["taskId"] = g_params.row.taskId;
+//		submitData["processInstanceId"] = g_params.row.processInstanceId;
+//		submitData["processDefinitionId"] = g_params.row.processDefinitionId;
+//		submitData["registerId"] = g_params.row.id;
+//		//用于处理非必要流程
+//		if(!$.utils.isEmpty(g_params.row.subFlowProgress)){
+//			submitData["subFlowProgress"] = g_params.row.subFlowProgress;
+//			submitData["otherFlowId"] = g_params.row.otherFlowId;
+//		}
+//		//判断是否需要写入调查报告的程序处理类型
+//		if(g_addInquiryReportProcedure){
+//			//设置案件处理程序默认为1
+//			submitData["inquiryReportProcedure"] = "1";
+//		}
+//		//提交审批
+//		$.ajax({
+//			url: top.app.conf.url.apigateway + "/api/rales/ael/case/caseFlowNext?access_token=" + top.app.cookies.getCookiesToken(),
+//		    method: 'POST',
+//			data:JSON.stringify(submitData),
+//			contentType: "application/json",
+//			success: function(data){
+//				top.app.message.loadingClose();
+//				if(top.app.message.code.success == data.RetCode){
+//		   			top.app.message.notice("数据提交成功！");
+//		   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
+//		   			window.location.href = "/rales/ael/case/case-todo.html?_pid=" + pid;
+//		   		}else{
+//		   			top.app.message.error(data.RetMsg);
+//		   		}
+//	        }
+//		});
+//	});
+}
+
+function jumpToAuditPage(){
+	//根据必要流程的状态，进入不同的审批页面
+	top.app.info.iframe.params = g_params;
+	top.app.info.iframe.params.navIndex = g_navIndex;
+	var pid = $.utils.getUrlParam(window.location.search,"_pid");
+	var url = "";
+	if($.utils.isEmpty(g_params.row.subFlowProgress)){
+		if(g_params.row.flowProgress == '1')
+			url = "/rales/ael/case/audit/audit-1.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		else if(g_params.row.flowProgress == '2')
+			url = "/rales/ael/case/audit/audit-2.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		else if(g_params.row.flowProgress == '3')
+			url = "/rales/ael/case/audit/audit-3.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		else if(g_params.row.flowProgress == '4')
+			url = "/rales/ael/case/audit/audit-4.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		else if(g_params.row.flowProgress == '5')
+			url = "/rales/ael/case/audit/audit-5.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+	}else{
+		if(g_params.row.subFlowProgress == '6')
+			url = "/rales/ael/case/audit/audit-6.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		else if(g_params.row.subFlowProgress == '7')
+			url = "/rales/ael/case/audit/audit-7.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		else if(g_params.row.subFlowProgress == '8')
+			url = "/rales/ael/case/audit/audit-8.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		else if(g_params.row.subFlowProgress == '10'){
+			url = "/rales/ael/case/audit/audit-10.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '11'){	
+			url = "/rales/ael/case/audit/audit-11.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '12'){
+			url = "/rales/ael/case/audit/audit-12.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '13'){
+			url = "/rales/ael/case/audit/audit-13.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '14'){
+			url = "/rales/ael/case/audit/audit-14.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '15'){
+			url = "/rales/ael/case/audit/audit-15.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '16'){
+			url = "/rales/ael/case/audit/audit-16.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '17'){
+			url = "/rales/ael/case/audit/audit-17.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '18'){
+			url = "/rales/ael/case/audit/audit-18.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '19'){
+			url = "/rales/ael/case/audit/audit-19.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '20'){
+			url = "/rales/ael/case/audit/audit-20.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
 		}
-		//判断是否需要写入调查报告的程序处理类型
-		if(g_addInquiryReportProcedure){
-			$.ajax({
-				url: top.app.conf.url.apigateway + '/api/rales/ael/case/getCaseReportList',
-			    method: 'GET',
-			    async: false,
-			   	timeout:5000,
-			   	data:{
-			   		access_token: top.app.cookies.getCookiesToken(),
-			   		registerId: g_params.row.id
-			   	},
-				success: function(data){
-					if(top.app.message.code.success == data.RetCode && data.rows != null && data.rows != undefined && data.rows.length > 0){
-						submitData["inquiryReportProcedure"] = data.rows[0].inquiryReportProcedure;
-			   		}
-		        }
-			});
-		}
-		//提交审批
-		$.ajax({
-			url: top.app.conf.url.apigateway + "/api/rales/ael/case/caseFlowNext?access_token=" + top.app.cookies.getCookiesToken(),
-		    method: 'POST',
-			data:JSON.stringify(submitData),
-			contentType: "application/json",
-			success: function(data){
-				top.app.message.loadingClose();
-				if(top.app.message.code.success == data.RetCode){
-		   			top.app.message.notice("数据提交成功！");
-		   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
-		   			window.location.href = "/rales/ael/case/case-todo.html?_pid=" + pid;
-		   		}else{
-		   			top.app.message.error(data.RetMsg);
-		   		}
-	        }
-		});
-	});
+	}
+	window.location.href = encodeURI(url);
 }
 
 var ifr = document.getElementById('case-iframe');

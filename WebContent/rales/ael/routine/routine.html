@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>通用信息管理平台-日常巡查</title>
+    <title>通用信息管理平台-综合查询</title>
     <meta name="keywords" content="通用信息管理平台">
     <meta name="description" content="通用信息管理平台">
 	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
@@ -21,20 +21,20 @@
        			<div class="panel-body form-horizontal">
                		<label class="control-label page-search-label" style="width:100px">文书编号</label>
                    	<input type="text" class="form-control page-search-input" id="searchCode" style="width: 180px;">
-               		<label class="control-label page-search-label" style="width:100px">当事人</label>
-                   	<input type="text" class="form-control page-search-input" id="searchParties" style="width: 180px;">
+               		<label class="control-label page-search-label" style="width:100px">最后处理人</label>
+                   	<input type="text" class="form-control page-search-input" id="searchLastHandlerUserName" style="width: 180px;">
        			</div>
        			<div class="panel-body form-horizontal" style="padding-top:0px">
-               		<label class="control-label page-search-label" style="width:100px">检查开始时间</label>
+               		<label class="control-label page-search-label" style="width:100px">最后处理时间从</label>
                    	<div class="input-group date" id="divHandleBegin" style="width: 180px;float: left;margin: 0px 15px;">
-                   		<input type="text" class="form-control" id='searchBegin'/>
+                   		<input type="text" class="form-control" id='searchLastHandleTimeBegin'/>
                    		<span class="input-group-addon">
                        		<span class="glyphicon glyphicon-calendar"></span>
                    		</span>
                		</div>
                		<label class="control-label page-search-label" style="width:100px">至</label>
                    	<div class="input-group date" id="divHandleEnd" style="width: 180px;float: left;margin: 0px 15px;">
-                   		<input type="text" class="form-control" id="searchEnd"/>
+                   		<input type="text" class="form-control" id="searchLastHandleTimeEnd"/>
                    		<span class="input-group-addon">
                        		<span class="glyphicon glyphicon-calendar"></span>
                    		</span>
@@ -43,7 +43,7 @@
                		<button type="button" class="btn btn-white" id="btnReset">重 置</button>
        			</div>
    			</div>  
-    		<div class="btn-group hidden-xs" id="tableToolbar" role="group"></div>
+    			<div class="btn-group hidden-xs" id="tableToolbar" role="group"></div>
             <table id="tableList" 
 				data-toolbar="#tableToolbar"
 				data-show-toggle="false"
@@ -64,11 +64,11 @@
                     <tr>
                 		<th data-field="tableMulti" data-formatter="appTable.tableFormatCheckbox" data-checkbox="true" data-visible="false"></th>                        
 					   	<th data-field="serialNumber" data-formatter="serialNumberTable" data-width="60px">序号</th>
-                       	<th data-field="rapCode">文书编号</th>
-                       	<th data-field="rapCheckDate" data-formatter="appTable.tableFormatDate">检查时间</th>
-                       	<th data-field="rapParties">当事人</th>
-                       	<!-- <th data-field="lastHandle" data-formatter="appTable.tableFormatDate" >最后处理时间</th> -->
-                       	<th data-field="operate" data-formatter="formatOperate" data-width="320px">操作</th>
+                       	<th data-field="rawCode" data-formatter="formatCaseCode">文书编号</th>
+                       	<th data-field="lastHandleUserName">最后处理人</th>
+                       	<th data-field="lastHandleTime" data-formatter="appTable.tableFormatDate">最后处理时间</th>
+                       	<th data-field="activityName" data-formatter="formatProgress">进度</th>
+                       	<th data-field="operate" data-formatter="formatOperate" data-width="150px">操作</th>
                     </tr>
                 </thead>
             </table>

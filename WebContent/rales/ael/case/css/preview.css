@@ -41,6 +41,13 @@ a:hover { color: #676a6c; }
 	padding: 0px 5px;
 	text-indent: 0em;
 }
+.content-fill-in-not{
+	text-decoration: none;
+	border-bottom: 0px solid #000;
+	color: #676a6c;
+	padding: 0px 5px;
+	text-indent: 0em;
+}
 .imaginary-line{
 	/* width:100%; */
 	width: calc(100% - 60px);

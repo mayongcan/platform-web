@@ -15,26 +15,26 @@ function getResultList(){
 	        url: top.app.conf.url.apigateway + "/api/rales/clr/complaint/getComplaintSuggestList",   		//请求后台的URL（*）
 		    method: 'GET',
 		    data: {
-		    		access_token: top.app.cookies.getCookiesToken(),
-		    		registerId: g_params.row.id,
+	    		access_token: top.app.cookies.getCookiesToken(),
+	    		complaintId: g_params.row.id,
 				page: 0,
 				size:50
 		    },success: function(data){
-			    	if(top.app.message.code.success == data.RetCode){
-			    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
-			    			g_dataList = data.rows;
-			    			$('#resultList').empty();
-			    			for(var i = 0; i < data.rows.length; i++){
-			    				var html = '<tr>' + 
-		    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createUserName) + '</td>' + 
-		    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].content) + '</td>' + 
-		    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createDate) + '</td>' + 
-		    								'</tr>';
-			    				$('#resultList').append(html);
-			    			}
-			    		}
-			    		//设置右侧的高度和左侧一致
-			    		$("#content-right").height($("#content-left").height());
+		    	if(top.app.message.code.success == data.RetCode){
+		    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
+		    			g_dataList = data.rows;
+		    			$('#resultList').empty();
+		    			for(var i = 0; i < data.rows.length; i++){
+		    				var html = '<tr>' + 
+	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createUserName) + '</td>' + 
+	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].content) + '</td>' + 
+	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createDate) + '</td>' + 
+	    								'</tr>';
+		    				$('#resultList').append(html);
+		    			}
+		    		}
+		    		//设置右侧的高度和左侧一致
+		    		$("#content-right").height($("#content-left").height());
 		   		}
 			}
 		});
@@ -178,6 +178,7 @@ function initData(){
 	}else{
 		if(g_params.row.activityId == 'feedbackTask'){
 			$('#trFeedback').css('display', '');
+			$('#trAuditContent').remove();		//移除审核意见
 		}else if(g_params.row.activityId == 'finalOpinionTask'){
 			$('#trFeedback').css('display', '');
 			$('#tdFeedback').text(g_params.row.feedback);

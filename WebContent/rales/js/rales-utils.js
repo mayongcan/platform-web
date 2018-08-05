@@ -1,6 +1,84 @@
 //业务模块全局配置
 var rales = {};
 
+//文书对应值(必要文书)
+rales.writNecessity2_1 = "2";
+rales.writNecessity2_2 = "3";
+rales.writNecessity2_3 = "4";
+rales.writNecessity2_4 = "5";
+rales.writNecessity2_5 = "6";
+rales.writNecessity2_6 = "7";
+rales.writNecessity2_7 = "8";
+rales.writNecessity2_8 = "9";
+rales.writNecessity3_1 = "10";
+rales.writNecessity3_2 = "11";
+rales.writNecessity3_3 = "12";
+rales.writNecessity3_4 = "13";
+rales.writNecessity3_5 = "14";
+rales.writNecessity3_6 = "15";
+rales.writNecessity3_7 = "16";
+rales.writNecessity3_8 = "17";
+rales.writNecessity3_9 = "18";
+rales.writNecessity4_1 = "19";
+rales.writNecessity4_2 = "20";
+rales.writNecessity4_3 = "21";
+rales.writNecessity4_4 = "22";
+rales.writNecessity5_1 = "23";
+rales.writNecessity6_1 = "24";
+rales.writNecessity6_2 = "25";
+
+//文书对应值(非必要文书)
+rales.writOptional1_1 = "101";
+rales.writOptional1_2 = "102";
+rales.writOptional1_3 = "103";
+rales.writOptional1_4 = "104";
+rales.writOptional1_5 = "105";
+rales.writOptional1_6 = "106";
+rales.writOptional1_7 = "107";
+rales.writOptional1_8 = "108";
+rales.writOptional1_9 = "109";
+rales.writOptional1_10 = "110";
+rales.writOptional1_11 = "111";
+rales.writOptional1_12 = "112";
+rales.writOptional1_13 = "113";
+rales.writOptional1_14 = "114";
+rales.writOptional1_15 = "115";
+rales.writOptional1_16 = "116";
+rales.writOptional1_17 = "117";
+rales.writOptional1_18 = "118";
+rales.writOptional2_1 = "201";
+rales.writOptional2_2 = "202";
+rales.writOptional2_3 = "203";
+rales.writOptional3_1 = "301";
+rales.writOptional3_2 = "302";
+rales.writOptional3_3 = "303";
+rales.writOptional3_4 = "304";
+rales.writOptional3_5 = "305";
+rales.writOptional3_6 = "306";
+rales.writOptional3_7 = "307";
+rales.writOptional3_8 = "308";
+rales.writOptional3_9 = "309";
+rales.writOptional3_10 = "310";
+rales.writOptional3_11 = "311";
+rales.writOptional3_12 = "312";
+rales.writOptional4_1 = "401";
+rales.writOptional4_2 = "402";
+rales.writOptional5_1 = "501";
+rales.writOptional6_1 = "601";
+rales.writOptional7_1 = "701";
+rales.writOptional7_2 = "702";
+rales.writOptional7_3 = "703";
+rales.writOptional7_4 = "704";
+rales.writOptional7_5 = "705";
+rales.writOptional8_1 = "801";
+rales.writOptional9_1 = "901";
+rales.writOptional9_2 = "902";
+rales.writOptional9_3 = "903";
+rales.writOptional10_1 = "1001";
+rales.writOptional10_2 = "1002";
+rales.writOptional10_3 = "1003";
+rales.writOptional10_4 = "1004";
+
 rales.getDictByCode = function(dictTypeValue){
 	var dictData = [];
 	$.ajax({
@@ -213,192 +291,21 @@ rales.initCodeRelevance = function(relevanceId){
 	});
 }
 
-rales.previewCodeRelevance = function(registerId, code, tableName, tableId, tableIdVal){
-	var url = "";
-	if("rales_ael_register" == tableName) {
-		url = '/rales/ael/case/necessity/case-register-pre.html';
-    }else if("rales_ael_filing" == tableName) {
-    		url = '/rales/ael/case/necessity/put-on-record-audit-pre.html';
-    }else if("rales_ael_filingnotice" == tableName) {
-    		url = '/rales/ael/case/necessity/put-on-record-notice-pre.html';
-    }else if("rales_ael_casetransfer" == tableName) {
-    		url = '/rales/ael/case/necessity/case-tran-notice-pre.html';
-    }else if("rales_ael_report" == tableName) {
-		url = '/rales/ael/case/necessity/case-survey-report-pre.html';
-    }else if("rales_ael_punish_1" == tableName) {
-		url = '/rales/ael/case/necessity/punish-notice-pre.html';
-    }else if("rales_ael_punish_2" == tableName) {
-		url = '/rales/ael/case/necessity/punish-hearing-notice-pre.html';
-    }else if("rales_ael_punishverify" == tableName) {
-		url = '/rales/ael/case/necessity/punish-audit-pre.html';
-    }else if("rales_ael_spotpunish" == tableName) {
-		url = '/rales/ael/case/necessity/cur-punish-decision-pre.html';
-    }else if("rales_ael_punishdecision" == tableName) {
-		url = '/rales/ael/case/necessity/punish-decision-pre.html';
-    }else if("rales_ael_closed" == tableName) {
-		url = '/rales/ael/case/necessity/case-end-report-pre.html';
-    }else if("rales_ael_volume" == tableName) {
-		url = '/rales/ael/case/necessity/case-volume-pre.html';
-    }else if("rales_ael_catalog" == tableName) {
-		url = '/rales/ael/case/necessity/case-catalog-pre.html';
-    }
-    //调查取证
-    else if("rales_ael_fieldinspection" == tableName) {
-		url = '/rales/ael/case/optional/scene-check-record-pre.html';
-    }else if("rales_ael_record" == tableName) {
-		url = '/rales/ael/case/optional/investigative-record-pre.html';
-    }else if("rales_ael_forensicmaterials" == tableName) {
-		url = '/rales/ael/case/optional/obtain-evidence-materials-notice-pre.html';
-    }else if("rales_ael_inquiry" == tableName) {
-		url = '/rales/ael/case/optional/inquiry-notice-pre.html';
-    }else if("rales_ael_assistinvestigation" == tableName) {
-		url = '/rales/ael/case/optional/case-assist-inquiry-pre.html';
-    }else if("rales_ael_ordercorrect" == tableName) {
-		url = '/rales/ael/case/optional/instruct-to-correct-notice-pre.html';
-    }
-    //证据保存
-    else if("rales_ael_papersapproval" == tableName) {
-		url = '/rales/ael/case/optional/evidence-preserve-audit-pre.html';
-    }else if("rales_ael_preservation" == tableName) {
-		url = '/rales/ael/case/optional/evidence-preserve-decision-pre.html';
-    }else if("rales_ael_entrustment" == tableName) {
-		url = '/rales/ael/case/optional/delegation-storage-pre.html';
-    }else if("rales_ael_relieve" == tableName) {
-		url = '/rales/ael/case/optional/remove-evidence-preserve-decision-pre.html';
-    }
-    //鉴定检验
-    else if("rales_ael_appraisal" == tableName) {
-		url = '/rales/ael/case/optional/auth-delegation-pre.html';
-    }
-    //集体讨论案件记录
-    else if("rales_ael_collectiverecord" == tableName) {
-		url = '/rales/ael/case/optional/collective-discuss-record-pre.html';
-    }
-    //陈述申辩
-    else if("rales_ael_pleadrecord" == tableName) {
-		url = '/rales/ael/case/optional/parties-justify-record-pre.html';
-    }
-    //听证
-    else if("rales_ael_hearing" == tableName) {
-		url = '/rales/ael/case/optional/hearing-audit-pre.html';
-    }else if("rales_ael_hearingmeeting" == tableName) {
-		url = '/rales/ael/case/optional/hearing-notice-pre.html';
-    }else if("rales_ael_hearingrecord" == tableName) {
-		url = '/rales/ael/case/optional/hearing-record-pre.html';
-    }else if("rales_ael_nohearing" == tableName) {
-		url = '/rales/ael/case/optional/no-hearing-notice-pre.html';
-    }else if("rales_ael_hearingreport" == tableName) {
-		url = '/rales/ael/case/optional/hearing-report-pre.html';
-    }
-    //强制执行
-    else if("rales_ael_implement_1" == tableName) {
-		url = '/rales/ael/case/optional/perform-application-pre-1.html';
-    }else if("rales_ael_implement_2" == tableName) {
-		url = '/rales/ael/case/optional/perform-application-pre-2.html';
-    }else if("rales_ael_implement_3" == tableName) {
-		url = '/rales/ael/case/optional/perform-application-pre-3.html';
-    }
-    //送达归案
-    else if("rales_ael_receipt" == tableName) {
-		url = '/rales/ael/case/optional/delivery-evidence-pre.html';
-    }
-	
-	//设置参数
-	var params = {};
-	params.data = {};
-	params.data.tableTitleMark = code;
-	$.ajax({
-		url: top.app.conf.url.apigateway + "/api/rales/ael/case/getCaseWritDetail",
-	    method: 'GET',
-	   	data:{
-	   		access_token: top.app.cookies.getCookiesToken(),
-	   		tableName: tableName,
-	   		tableIdVal: tableIdVal
-	   	},
-	   	success: function(data){
-	   		if(top.app.message.code.success == data.RetCode){
-	   			params.data = data.RetData;
-	   			params.data.tableTitleMark = code;
-	   			params.registerRow = g_params.row;
-	   			params.loadData = "1";
-	   			//打开预览页面
-	   			top.app.layer.editLayer('预览', ['725px', '600px'], url, params, function(){});
-	   		}
-	   	}
-	});
-}
-
-//获取立案审批信息
-rales.getCaseFilingInfo = function(registerId){
-	return rales.getTableDataInfo(registerId, "CaseFilingInfo");
-}
-
-//获取听证通知书
-rales.getHearingNoticeInfo = function(registerId){
-	return rales.getTableDataInfo(registerId, "HearingNoticeInfo");
-}
-
-//获取证据保全措施审批表信息
-rales.getEvidencePreserveInfo = function(registerId){
-	return rales.getTableDataInfo(registerId, "EvidencePreserveInfo");
-}
-
-//获取听证审批信息
-rales.getHearingAuditInfo = function(registerId){
-	return rales.getTableDataInfo(registerId, "HearingAuditInfo");
-}
-
-//获取听证报告书信息
-rales.getHearingReportInfo = function(registerId){
-	return rales.getTableDataInfo(registerId, "HearingReportInfo");
-}
-
-//获取保全决定书信息
-rales.getEvidencePreserveDecision = function(registerId){
-	return rales.getTableDataInfo(registerId, "EvidencePreserveDecision");
-}
-
-//获取委托保管书
-rales.getDelegationStorage = function(registerId){
-	return rales.getTableDataInfo(registerId, "DelegationStorage");
-}
-
-//责令（限期）整改通知书
-rales.getOrderCorrect = function(registerId){
-	return rales.getTableDataInfo(registerId, "OrderCorrect");
-}
-
-//当场行政处罚决定书
-rales.getCurPunishDecision = function(registerId){
-	return rales.getTableDataInfo(registerId, "CurPunishDecision");
-}
-
-//当事人陈述申辩笔录
-rales.getPleadRecord= function(registerId){
-	return rales.getTableDataInfo(registerId, "PleadRecord");
-}
-
-rales.getTableDataInfo = function(registerId, tableName){
-	var url = "";
-	if(tableName == 'CaseFilingInfo') url = '/api/rales/ael/case/getCaseFilingList';
-	else if(tableName == 'HearingNoticeInfo') url = '/api/rales/ael/case/getHearingNoticeList';
-	else if(tableName == 'EvidencePreserveInfo') url = '/api/rales/ael/case/getEvidencePreserveList';
-	else if(tableName == 'HearingAuditInfo') url = '/api/rales/ael/case/getHearingAuditList';
-	else if(tableName == 'HearingReportInfo') url = '/api/rales/ael/case/getHearingReportList';
-	else if(tableName == 'EvidencePreserveDecision') url = '/api/rales/ael/case/getEvidencePreserveDecisionList';
-	else if(tableName == 'DelegationStorage') url = '/api/rales/ael/case/getDelegationStorageList';
-	else if(tableName == 'OrderCorrect') url = '/api/rales/ael/case/getOrderCorrectList';
-	else if(tableName == 'CurPunishDecision') url = '/api/rales/ael/case/getCurPunishDecisionList';
-	else if(tableName == 'PleadRecord') url = '/api/rales/ael/case/getPleadRecordList';
+/**
+ * 获取文书内容
+ */
+rales.getWritContent = function(registerId, writType, subType){
 	var dataInfo = [];
 	$.ajax({
-		url: top.app.conf.url.apigateway + url,
+		url: top.app.conf.url.apigateway + "/api/rales/ael/writ/getWritList",
 	    method: 'GET',
 	    async: false,
 	   	timeout:5000,
 	   	data:{
 	   		access_token: top.app.cookies.getCookiesToken(),
-	   		registerId: registerId
+	   		registerId: registerId,
+	   		writType: writType,
+	   		subType: subType,
 	   	},
 		success: function(data){
 			if(top.app.message.code.success == data.RetCode){
@@ -411,6 +318,111 @@ rales.getTableDataInfo = function(registerId, tableName){
 	return dataInfo;
 }
 
+rales.previewCodeRelevance = function(registerId, code, tableName, tableId, tableIdVal){
+	//设置参数
+	var params = {};
+	params.data = {};
+	params.data.tableTitleMark = code;
+	$.ajax({
+		url: top.app.conf.url.apigateway + "/api/rales/ael/writ/getWritList",
+	    method: 'GET',
+	   	data:{
+	   		access_token: top.app.cookies.getCookiesToken(),
+	   		id: tableIdVal
+	   	},
+	   	success: function(data){
+	   		if(top.app.message.code.success == data.RetCode){
+	   			if(!$.utils.isNull(data.rows) && data.rows.length > 0){
+		   			params.registerRow = g_params.row;
+//		   			params.data.tableTitleMark = code;
+		   			params.data = eval("(" + data.rows[0].content + ")");
+//		   			params.loadData = "1";
+		   			//打开预览页面
+		   			top.app.layer.editLayer('预览', ['725px', '600px'], rales.getWritPreviewUrl(data.rows[0].writType), params, function(){});
+	   			}
+	   		}
+	   	}
+	});
+}
+
+/**
+ * 获取文书预览url
+ */
+rales.getWritPreviewUrl = function(writType){
+	if(writType == rales.writNecessity1_1){return '/rales/ael/case/necessity/writ-pre1_1.html';}
+	else if(writType == rales.writNecessity2_1){return '/rales/ael/case/necessity/writ-pre2_1.html';}
+	else if(writType == rales.writNecessity2_2){return '/rales/ael/case/necessity/writ-pre2_2.html';}
+	else if(writType == rales.writNecessity2_3){return '/rales/ael/case/necessity/writ-pre2_3.html';}
+	else if(writType == rales.writNecessity2_4){return '/rales/ael/case/necessity/writ-pre2_4.html';}
+	else if(writType == rales.writNecessity2_5){return '/rales/ael/case/necessity/writ-pre2_5.html';}
+	else if(writType == rales.writNecessity2_6){return '/rales/ael/case/necessity/writ-pre2_6.html';}
+	else if(writType == rales.writNecessity2_7){return '/rales/ael/case/necessity/writ-pre2_7.html';}
+	else if(writType == rales.writNecessity2_8){return '/rales/ael/case/necessity/writ-pre2_8.html';}
+	else if(writType == rales.writNecessity3_1){return '/rales/ael/case/necessity/writ-pre3_1.html';}
+	else if(writType == rales.writNecessity3_2){return '/rales/ael/case/necessity/writ-pre3_2.html';}
+	else if(writType == rales.writNecessity3_3){return '/rales/ael/case/necessity/writ-pre3_3.html';}
+	else if(writType == rales.writNecessity3_4){return '/rales/ael/case/necessity/writ-pre3_4.html';}
+	else if(writType == rales.writNecessity3_5){return '/rales/ael/case/necessity/writ-pre3_5.html';}
+	else if(writType == rales.writNecessity3_6){return '/rales/ael/case/necessity/writ-pre3_6.html';}
+	else if(writType == rales.writNecessity3_7){return '/rales/ael/case/necessity/writ-pre3_7.html';}
+	else if(writType == rales.writNecessity3_8){return '/rales/ael/case/necessity/writ-pre3_8.html';}
+	else if(writType == rales.writNecessity3_9){return '/rales/ael/case/necessity/writ-pre3_9.html';}
+	else if(writType == rales.writNecessity4_1){return '/rales/ael/case/necessity/writ-pre4_1.html';}
+	else if(writType == rales.writNecessity4_2){return '/rales/ael/case/necessity/writ-pre4_2.html';}
+	else if(writType == rales.writNecessity4_3){return '/rales/ael/case/necessity/writ-pre4_3.html';}
+	else if(writType == rales.writNecessity4_4){return '/rales/ael/case/necessity/writ-pre4_4.html';}
+	else if(writType == rales.writNecessity4_1){return '/rales/ael/case/necessity/writ-pre5_1.html';}
+	else if(writType == rales.writNecessity5_1){return '/rales/ael/case/necessity/writ-pre6_1.html';}
+	else if(writType == rales.writNecessity6_2){return '/rales/ael/case/necessity/writ-pre6_2.html';}
+	else if(writType == rales.writOptional1_1){return '/rales/ael/case/optional/writ-pre1_1.html';}
+	else if(writType == rales.writOptional1_2){return '/rales/ael/case/optional/writ-pre1_2.html';}
+	else if(writType == rales.writOptional1_3){return '/rales/ael/case/optional/writ-pre1_3.html';}
+	else if(writType == rales.writOptional1_4){return '/rales/ael/case/optional/writ-pre1_4.html';}
+	else if(writType == rales.writOptional1_5){return '/rales/ael/case/optional/writ-pre1_5.html';}
+	else if(writType == rales.writOptional1_6){return '/rales/ael/case/optional/writ-pre1_6.html';}
+	else if(writType == rales.writOptional1_7){return '/rales/ael/case/optional/writ-pre1_7.html';}
+	else if(writType == rales.writOptional1_8){return '/rales/ael/case/optional/writ-pre1_8.html';}
+	else if(writType == rales.writOptional1_9){return '/rales/ael/case/optional/writ-pre1_9.html';}
+	else if(writType == rales.writOptional1_10){return '/rales/ael/case/optional/writ-pre1_10.html';}
+	else if(writType == rales.writOptional1_11){return '/rales/ael/case/optional/writ-pre1_11.html';}
+	else if(writType == rales.writOptional1_12){return '/rales/ael/case/optional/writ-pre1_12.html';}
+	else if(writType == rales.writOptional1_13){return '/rales/ael/case/optional/writ-pre1_13.html';}
+	else if(writType == rales.writOptional1_14){return '/rales/ael/case/optional/writ-pre1_14.html';}
+	else if(writType == rales.writOptional1_15){return '/rales/ael/case/optional/writ-pre1_15.html';}
+	else if(writType == rales.writOptional1_16){return '/rales/ael/case/optional/writ-pre1_16.html';}
+	else if(writType == rales.writOptional2_1){return '/rales/ael/case/optional/writ-pre2_1.html';}
+	else if(writType == rales.writOptional2_2){return '/rales/ael/case/optional/writ-pre2_2.html';}
+	else if(writType == rales.writOptional2_3){return '/rales/ael/case/optional/writ-pre2_3.html';}
+	else if(writType == rales.writOptional3_1){return '/rales/ael/case/optional/writ-pre3_1.html';}
+	else if(writType == rales.writOptional3_2){return '/rales/ael/case/optional/writ-pre3_2.html';}
+	else if(writType == rales.writOptional3_3){return '/rales/ael/case/optional/writ-pre3_3.html';}
+	else if(writType == rales.writOptional3_4){return '/rales/ael/case/optional/writ-pre3_4.html';}
+	else if(writType == rales.writOptional3_5){return '/rales/ael/case/optional/writ-pre3_5.html';}
+	else if(writType == rales.writOptional3_6){return '/rales/ael/case/optional/writ-pre3_6.html';}
+	else if(writType == rales.writOptional3_7){return '/rales/ael/case/optional/writ-pre3_7.html';}
+	else if(writType == rales.writOptional3_8){return '/rales/ael/case/optional/writ-pre3_8.html';}
+	else if(writType == rales.writOptional3_9){return '/rales/ael/case/optional/writ-pre3_9.html';}
+	else if(writType == rales.writOptional3_10){return '/rales/ael/case/optional/writ-pre3_10.html';}
+	else if(writType == rales.writOptional3_11){return '/rales/ael/case/optional/writ-pre3_11.html';}
+	else if(writType == rales.writOptional3_12){return '/rales/ael/case/optional/writ-pre3_12.html';}
+	else if(writType == rales.writOptional4_1){return '/rales/ael/case/optional/writ-pre4_1.html';}
+	else if(writType == rales.writOptional4_2){return '/rales/ael/case/optional/writ-pre4_2.html';}
+	else if(writType == rales.writOptional5_1){return '/rales/ael/case/optional/writ-pre5_1.html';}
+	else if(writType == rales.writOptional6_1){return '/rales/ael/case/optional/writ-pre6_1.html';}
+	else if(writType == rales.writOptional7_1){return '/rales/ael/case/optional/writ-pre7_1.html';}
+	else if(writType == rales.writOptional7_2){return '/rales/ael/case/optional/writ-pre7_2.html';}
+	else if(writType == rales.writOptional7_3){return '/rales/ael/case/optional/writ-pre7_3.html';}
+	else if(writType == rales.writOptional7_4){return '/rales/ael/case/optional/writ-pre7_4.html';}
+	else if(writType == rales.writOptional7_5){return '/rales/ael/case/optional/writ-pre7_5.html';}
+	else if(writType == rales.writOptional8_1){return '/rales/ael/case/optional/writ-pre8_1.html';}
+	else if(writType == rales.writOptional9_1){return '/rales/ael/case/optional/writ-pre9_1.html';}
+	else if(writType == rales.writOptional9_2){return '/rales/ael/case/optional/writ-pre9_2.html';}
+	else if(writType == rales.writOptional9_3){return '/rales/ael/case/optional/writ-pre9_3.html';}
+	else if(writType == rales.writOptional10_1){return '/rales/ael/case/optional/writ-pre10_1.html';}
+	else if(writType == rales.writOptional10_2){return '/rales/ael/case/optional/writ-pre10_2.html';}
+	else if(writType == rales.writOptional10_3){return '/rales/ael/case/optional/writ-pre10_3.html';}
+	else if(writType == rales.writOptional10_4){return '/rales/ael/case/optional/writ-pre10_4.html';}
+}
 
 /**###########################################################################
  * 地图相关

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>通用信息管理平台-审批列表</title>
+    <title>通用信息管理平台-综合查询</title>
     <meta name="keywords" content="通用信息管理平台">
     <meta name="description" content="通用信息管理平台">
 	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
@@ -62,13 +62,14 @@
 				data-mobile-responsive="true">
                 <thead>
                     <tr>
-                			<th data-field="tableMulti" data-formatter="appTable.tableFormatCheckbox" data-checkbox="true" data-visible="false"></th>                        
+                		<th data-field="tableMulti" data-formatter="appTable.tableFormatCheckbox" data-checkbox="true" data-visible="false"></th>                        
 					   	<th data-field="serialNumber" data-formatter="serialNumberTable" data-width="60px">序号</th>
-                        	<th data-field="rapCode">文书编号</th>
-                        	<th data-field="rapLastHandleUserName">最后处理人</th>
-                        	<th data-field="rapLastHandleTime" data-formatter="appTable.tableFormatDate">最后处理时间</th>
-                        	<th data-field="activityName" data-formatter="formatProgress">进度</th>
-                        	<th data-field="operate" data-formatter="formatOperate" data-width="150px">操作</th>
+					   	<th data-field="caseType" data-formatter="formatCaseType">文书类型</th>
+                       	<th data-field="rawCode" data-formatter="formatCaseCode">文书编号</th>
+                       	<th data-field="lastHandleUserName">最后处理人</th>
+                       	<th data-field="lastHandleTime" data-formatter="appTable.tableFormatDate">最后处理时间</th>
+                       	<th data-field="activityName" data-formatter="formatProgress">进度</th>
+                       	<th data-field="operate" data-formatter="formatOperate" data-width="150px">操作</th>
                     </tr>
                 </thead>
             </table>

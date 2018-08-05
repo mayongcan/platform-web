@@ -51,7 +51,7 @@ function initTable(){
         queryParams: searchParams,										//传递参数（*）
         uniqueId: 'id',
         onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+	        appTable.setRowClickStatus($table, row, $el);
         }
     });
 	//初始化Table相关信息
@@ -88,14 +88,25 @@ function formatProgress(value,row,index){
 	else return value;
 }
 
+function formatCaseCode(value,row,index){
+	if($.utils.isNull(row.otherFlowParams)) return ""
+	else return row.otherFlowParams.code;
+}
+
+function formatCaseType(value,row,index){
+	if(row.isNormalCase == '2' || row.isNormalCase == '3') return "行政强制";
+	else if(row.isNormalCase == '6' || row.isNormalCase == '7') return "先行登记保存";
+	else return "";
+}
+
 function formatOperate(value, row, index){
-	if(row.activityId == 'backToEditTask'){
+	if(row.activityName == '先行登记保存草稿' || row.activityName == '重新编辑' || row.activityName == '行政强制措施草稿'){
 		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + row.id + ')">' + 
 					'编辑' + 
 				'</button>';
 	}else{
 		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit(' + row.id + ')">' + 
-					'审批' + 
+					'查看' + 
 				'</button>';
 	}
 }
@@ -104,11 +115,13 @@ function btnEventEdit(id){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
 	//设置传送对象
 	top.app.info.iframe.params = {};
-	top.app.info.iframe.params.type = 2;	//1新增 2编辑 3查看
-	top.app.info.iframe.params.reaudit = 1;	//1新增 2编辑 3查看
+	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.backUrl = "/rales/ael/force/audit-todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
-	var url = "/rales/ael/force/audit-detail.html?_pid=" + pid + "&backUrl=/rales/ael/force/audit-todo-list.html";
+	var url = "";
+	if(row.isNormalCase == '2' || row.isNormalCase == '3')  url = "/rales/ael/force/audit-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
+	else if(row.isNormalCase == '6' || row.isNormalCase == '7') url = "/rales/ael/force/register-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
 	window.location.href = encodeURI(url);
 }
 
@@ -116,9 +129,16 @@ function btnEventAudit(id){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
 	//设置传送对象
 	top.app.info.iframe.params = {};
-	top.app.info.iframe.params.type = 3;	//1新增 2编辑 3查看
+
+	if(row.activityName == '先行登记保存草稿' || row.activityName == '行政强制措施草稿' || 
+			row.activityName == '重新编辑' || row.activityName == '第二承办人审批'){
+		top.app.info.iframe.params.isEdit = true;
+	}
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.backUrl = "/rales/ael/force/audit-todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
-	var url = "/rales/ael/force/audit.html?_pid=" + pid + "&backUrl=/rales/ael/force/audit-todo-list.html";
+	var url = "";
+	if(row.isNormalCase == '2' || row.isNormalCase == '3')  url = "/rales/ael/force/audit-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
+	else if(row.isNormalCase == '6' || row.isNormalCase == '7') url = "/rales/ael/force/register-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
 	window.location.href = encodeURI(url);
 }

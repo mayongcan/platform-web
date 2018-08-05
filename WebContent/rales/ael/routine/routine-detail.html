@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>通用信息管理平台-日常巡查详情</title>
+    <title>通用信息管理平台-详情</title>
     <meta name="keywords" content="通用信息管理平台">
     <meta name="description" content="通用信息管理平台">
 	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
@@ -15,31 +15,337 @@
     <link href="../../../css/platform.css" rel="stylesheet">
     <link href="../case/css/case.css" rel="stylesheet">
     <style type="text/css">
-    .nav-detail ul li {
-	    width:auto;
+	.main-step-title{
+	    border-top: 1px solid #d4d4d4;
+	    border-left: 1px solid #d4d4d4;
+	    border-right: 1px solid #d4d4d4;
+	    margin-top:25px;
+	    padding: 0px 15px;
+	    color: #000;
+	    height:45px; 
+	    vertical-align: middle;
+	    padding-top: 8px;
 	}
-	.nav-detail ul li a {
-	    font-size: 18px;
-	    padding-left: 15px;
-	    padding-right: 5px;
+	.main-step-title-info{
+		float: left;
+		margin-top: 7px;
+	}
+	.main-step-title-btn{
+		padding: 4px 15px;
+		float:right;
+		height: 30px;
+	}
+	
+    table.reference1, table.tecspec {
+	    border-collapse: collapse;
+	    width: 100%;
+	}
+	.reference-th {
+	    color: #fff;
+	    background-color: #555;
+	    border: 1px solid #555;
+	    font-size: 13px;
+	    padding: 3px;
+	    vertical-align: top;
+	    text-align: left;
+	}
+	.reference-td {
+	    line-height: 34px;
+	    /* min-width: 95px; */
+	    border: 1px solid #d4d4d4;
+	    padding: 5px;
+	    padding-top: 7px;
+	    padding-bottom: 7px;
+	    vertical-align: top;
+	    font-size: 13px;
+	    padding-left:10px;
+	    padding-right:10px;
+	    vertical-align: middle;
+	}
+	.optional-content{
+		display: none;
+	}
+	.activity{
+		display: block;
 	}
     </style>
 </head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeIn">
 		<div class="ibox-content">
-			<div class="nav-detail">
-			    <ul>
-			   		<li id="navDetail1"><a style="color: #000;">日常巡查记录表</a><span style="background: #1FAEFF;"></span></li>
-			    	<li id="navDetail2"><a>调查笔录</a><span></span></li>
-			     	<li id="navDetail3"><a>责令（限期）整改通知书</a><span></span></li>
-			     	<li id="navDetail4"><a>当场行政处罚决定书</a><span></span></li>
-			     	<li id="navDetail5"><a>当事人陈述申辩笔录</a><span></span></li>
-			    </ul>
-		  	</div>
-		  	<div class="row index-main-content" id="case-main">
-                <iframe class="case-iframe" id="case-iframe" name="case-iframe" width="100%" src="/rales/ael/routine/form-1.html" frameborder="0" seamless></iframe>
-            </div>
+			<div style="padding-top:10px;margin-bottom:10px;">
+				<span id="caseRegisterCode" style="font-size:18px;margin-left:20px;">穗工信无登〔2017〕 0045  号</span>
+			</div>
+			<div id="auditNoticeTip" style="height:40px; border: 1px solid #d4d4d4;vertical-align: middle;padding-top: 6px;">
+				<div id="caseAuditType" style="font-size:13px;margin-left:20px;float: left;margin-top: 5px;"><span id="flowProgressName">案件登记</span><span id="flowProgressNotice">待审批，请审批！</span></div>
+				<button type="button" class="btn btn-primary btn-table-opreate" id="btnAudit" style="padding: 0px 12px;float: right;margin-right: 20px;">审 批</button>
+			</div>
+		  	<div id="optionalContent1" class="optional-content activity">
+				<div class="main-step-title">
+	           		<div class="main-step-title-info">行政检查登记表【<span id="tableCnt1-1">0</span>】</div>
+	           		<!-- <button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-1" style="margin-left:20px;"> 
+						新建文书
+					</button>
+					<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnSubmitAudit1-1"> 
+						提交审批
+					</button> -->
+	   			</div>
+	         	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-1"></tbody>
+				</table>
+				
+	     		<div class="main-step-title">
+	           		<div class="main-step-title-info">现场检查笔录【<span id="tableCnt1-2">0</span>】</div>
+	           		<div style="float:right;">
+		           		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-2"> 
+							新建文书
+						</button>
+					</div>
+	   			</div>
+	         	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-2"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">涉案物品清单【<span id="tableCnt1-3">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-3"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-3"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">视听资料/电子数据【<span id="tableCnt1-4">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-4"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-4"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">行政检查抽样取证通知书【<span id="tableCnt1-5">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-5"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-5"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">抽样取证物品清单【<span id="tableCnt1-6">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-6"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-6"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">抽样取证记录【<span id="tableCnt1-7">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-7"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-7"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">证据清单【<span id="tableCnt1-8">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-8"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-8"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">鉴定结果告知书【<span id="tableCnt1-9">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-9"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-9"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">责令改正违法行为通知书【<span id="tableCnt1-10">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-10"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-10"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">当场行政处罚决定书【<span id="tableCnt1-11">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-11"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-11"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">行政检查案卷封面【<span id="tableCnt1-17">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-17"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-17"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">行政检查案卷目录【<span id="tableCnt1-18">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc1-18"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList1-18"></tbody>
+				</table>
+			</div>
         </div>
     </div>
     

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/preview.css" rel="stylesheet">
+    <style type="text/css">
+    .reference-td {
+	    min-width: 15px;
+	}
+    </style>
+</head>
+<body>
+    <div class="animated fadeIn" id="printBody">
+		<div class="ibox-content box-info">
+			<div class="box-title">
+				<span class="table-title">送达地址确认书</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01送达地〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td"style="text-align: center;width:80px;">
+						   	案  号
+						</td>
+						<td class="reference-td" colspan="4" id="tdCaseNo"></td>
+					</tr>
+					<tr>
+						<td class="reference-td"style="text-align: center;width:80px;">
+						   	案  由
+						</td>
+						<td class="reference-td" colspan="4" id="tdIllegalAction"></td>
+					</tr>
+					<tr>
+						<td class="reference-td"style="text-align: center;width:80px;">
+						   	告知事项
+						</td>
+						<td class="reference-td" colspan="4" >
+							1.为便于当事人及时收到相关文书，当事人应当如实提供确切的送达地址。 <br/>
+							2．确认的送达地址适用于行政执法全过程程序。如果送达地址有变更，应当及时书面告知我单位变更后的送达地址。<br/>
+							3．如果提供的地址不确切，或者不及时告知变更后的地址，使文书无法送达或者未及时送达，当事人将自行承担由此可能产生的后果。<br/> 
+							4．接受电子送达方式的，以发送方设备显示发送成功视为送达。  <br/>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" rowspan="6" style="text-align: center;width:80px;">
+						   	送达地址<br/>及方式
+						</td>
+						<td class="reference-td" >
+							指定签收人
+						</td>
+						<td class="reference-td" colspan="3" id="tdSignUser"></td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="width:100px;">
+						   	证件类型
+						</td>
+						<td class="reference-td" id="tdCardType"></td>
+						<td class="reference-td" style="width:80px;">
+							证件号码
+						</td>
+						<td class="reference-td" id="tdCardNo"></td>
+					</tr>
+					<tr>
+						<td class="reference-td" >
+							确认送达地址
+						</td>
+						<td class="reference-td" colspan="3" id="tdAddress"></td>
+					</tr>
+					<tr>
+						<td class="reference-td" >
+							是否接受电子送达
+						</td>
+						<td class="reference-td" id="tdReceiveType" colspan="3" >
+						   	<label class="checkbox-inline">
+								<input type="radio" name="receiveType" value="1" checked> 是
+							</label>
+						   	<label class="checkbox-inline">
+								<input type="radio" name="receiveType" value="2"> 否
+							</label>
+						   	<label class="checkbox-inline">
+								<input type="radio" name="receiveType" value="3"> 手机号码：<span id="phone"></span>
+							</label>
+						   	<label class="checkbox-inline">
+								<input type="radio" name="receiveType" value="4"> 传真号码：<span id="fax"></span>
+							</label>
+						   	<label class="checkbox-inline">
+								<input type="radio" name="receiveType" value="5"> 电子邮件地址：<span id="email"></span>
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" >
+						   	手机号码
+						</td>
+						<td class="reference-td" id="tdPhone"></td>
+						<td class="reference-td" >
+							邮  编
+						</td>
+						<td class="reference-td" id="tdEmail"></td>
+					</tr>
+					<tr>
+						<td class="reference-td" >
+							其他联系方式
+						</td>
+						<td class="reference-td" colspan="3" id="tdZip"></td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;" colspan="1">
+						   	受送达人<br/>确认
+						</td>
+						<td class="reference-td" colspan="4" style="height:180px;vertical-align: top;position: relative;">
+							<div style="float:left;text-indent: 2em">
+								我已阅读(听明白)本确认书的告知事项，提供了上栏送达地址，确认了上栏送达方式，并保证所提供的送达地址各项内容是正确的、有效的。如在案件办理过程中送达地址发生变化，将及时通知贵单位。
+							</div>
+							<div style="position: absolute;right: 10px;bottom: 0;">
+								<span style="margin-right:100px;">受送达人：</span>
+								<br/>
+								<span>年　　　月　　　日</span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td" style="text-align: center;">
+						   	备  注
+						</td>
+						<td class="reference-td" colspan="4" id="tdMemo"></td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/jquery.print.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/writ-pre1_16.js" type="text/javascript"></script>
+</body>
+</html>

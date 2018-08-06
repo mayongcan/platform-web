@@ -37,10 +37,13 @@ function initView(){
 		}else if(g_params.row.activityName == '委领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
 			if($("#auditStatus").val() == '10'){
-				if(g_inquiryReportProcedure == '1')
-					submitData["flowProgress"] = '4';
-				else
-					submitData["flowProgress"] = '5';
+				//不予立案流程
+//				if(g_inquiryReportProcedure == '1')
+//					submitData["flowProgress"] = '4';
+//				else
+//					submitData["flowProgress"] = '5';
+				
+				submitData["flowProgress"] = '4';
 			}
 		}else if(g_params.row.activityName == '法规处指派'){
 			if(g_userIdList == ''){

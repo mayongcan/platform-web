@@ -22,10 +22,6 @@ function initView(){
 		submitData["processInstanceId"] = g_params.row.processInstanceId;
 		submitData["processDefinitionId"] = g_params.row.processDefinitionId;
 		submitData["registerId"] = g_params.row.id;
-		if(!$.utils.isEmpty(g_params.row.subFlowProgress)){
-			submitData["subFlowProgress"] = g_params.row.subFlowProgress;
-			submitData["otherFlowId"] = g_params.row.otherFlowId;
-		}
 		submitData["counterpartType"] = g_counterpartType;
 		submitData["result"] = $('#result').val();
 		
@@ -71,7 +67,7 @@ function initView(){
 					parent.app.layer.editLayerRet = true;
 		   			top.app.message.notice("数据提交成功！");
 		   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
-		   			window.location.href = g_backUrl + "?_pid=" + pid;
+		   			window.location.href = "/rales/ael/case/case-todo.html?_pid=" + pid;
 		   		}else{
 		   			top.app.message.error(data.RetMsg);
 		   		}

@@ -60,6 +60,13 @@ function initFuncBtnEvent(){
 	$("#optionalFlow10").click(function () {
 		setTabStatus('10');
     });
+	$("#optionalFlow11").click(function () {
+		setTabStatus('11');
+    });
+	//电力执法系统才有销案模块
+	if(top.app.info.tenantsInfo.tenantsName != '电力执法系统'){
+		$("#optionalFlow11").remove();
+	}
 }
 
 /**
@@ -192,6 +199,9 @@ function initData(){
 		addList('tableList10-2', 'tableCnt10-2', '/api/rales/ael/writ/getWritList', 10, 2, rales.writOptional10_2, '', true);
 		addList('tableList10-3', 'tableCnt10-3', '/api/rales/ael/writ/getWritList', 10, 3, rales.writOptional10_3, '', true);
 		addList('tableList10-4', 'tableCnt10-4', '/api/rales/ael/writ/getWritList', 10, 4, rales.writOptional10_4, '', true);
+	}else if(g_optionalFlowIndex == '11'){
+		addFlowList('tableList11-1', 'tableCnt11-1', '/api/rales/ael/writ/getWritList', 11, 1, rales.writOptional11_1, '', true);
+		addList('tableList11-2', 'tableCnt11-2', '/api/rales/ael/writ/getWritList', 11, 2, rales.writOptional11_2, '', true);
 	}
 }
 
@@ -410,6 +420,10 @@ function btnSubmitAudit(index, subIndex){
 		if(index == 10 && subIndex == 1) {
 			url = "/api/rales/ael/case/startAdminCoerciveExecuteFlow";
 			submitData["subFlowProgress"] = "20";
+		}
+		if(index == 11 && subIndex == 1) {
+			url = "/api/rales/ael/case/startCloseCaseFlow";
+			submitData["subFlowProgress"] = "21";
 		}
 
 		if($.utils.isEmpty(parent.g_params.row.associateExecutor)){

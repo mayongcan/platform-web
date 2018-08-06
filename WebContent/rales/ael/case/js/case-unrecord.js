@@ -107,6 +107,7 @@ function tableFormatFlowProgress(value, row) {
 		else if(row.subFlowProgress == '18') return "行政处罚没收财物处理审批";
 		else if(row.subFlowProgress == '19') return "行政处罚延期（分期）缴纳罚款审批";
 		else if(row.subFlowProgress == '20') return "行政强制执行及相关事项内部审批";		
+		else if(row.subFlowProgress == '21') return "销案审批流程";
 	}
 }
 

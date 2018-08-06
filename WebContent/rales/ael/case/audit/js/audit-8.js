@@ -22,10 +22,6 @@ function initView(){
 		submitData["processInstanceId"] = g_params.row.processInstanceId;
 		submitData["processDefinitionId"] = g_params.row.processDefinitionId;
 		submitData["registerId"] = g_params.row.id;
-		if(!$.utils.isEmpty(g_params.row.subFlowProgress)){
-			submitData["subFlowProgress"] = g_params.row.subFlowProgress;
-			submitData["otherFlowId"] = g_params.row.otherFlowId;
-		}
 		submitData["counterpartType"] = g_counterpartType;
 		submitData["result"] = $('#result').val();
 		

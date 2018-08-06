@@ -78,6 +78,8 @@ rales.writOptional10_1 = "1001";
 rales.writOptional10_2 = "1002";
 rales.writOptional10_3 = "1003";
 rales.writOptional10_4 = "1004";
+rales.writOptional11_1 = "1101";
+rales.writOptional11_2 = "1102";
 
 rales.getDictByCode = function(dictTypeValue){
 	var dictData = [];
@@ -422,6 +424,8 @@ rales.getWritPreviewUrl = function(writType){
 	else if(writType == rales.writOptional10_2){return '/rales/ael/case/optional/writ-pre10_2.html';}
 	else if(writType == rales.writOptional10_3){return '/rales/ael/case/optional/writ-pre10_3.html';}
 	else if(writType == rales.writOptional10_4){return '/rales/ael/case/optional/writ-pre10_4.html';}
+	else if(writType == rales.writOptional11_1){return '/rales/ael/case/optional/writ-pre11_1.html';}
+	else if(writType == rales.writOptional11_2){return '/rales/ael/case/optional/writ-pre11_2.html';}
 }
 
 /**###########################################################################

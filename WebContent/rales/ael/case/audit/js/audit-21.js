@@ -1,4 +1,4 @@
-var g_params = {}, g_backUrl = null, g_counterpartType = "12";
+var g_params = {}, g_backUrl = null, g_counterpartType = "21";
 
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
@@ -46,12 +46,12 @@ function initView(){
 			//设置进入子流程的时候，设置流程启动人
 			submitData["setApplyUser"] = "1";
 		}
-
 		//用于处理非必要流程
 		if(!$.utils.isEmpty(g_params.row.subFlowProgress)){
 			submitData["subFlowProgress"] = g_params.row.subFlowProgress;
 			submitData["otherFlowId"] = g_params.row.otherFlowId;
 		}
+
 		top.app.message.loading();
 		//异步处理
 		$.ajax({
@@ -84,57 +84,23 @@ function initData(){
 		var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 		//转换json
 		if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
-		if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
-		else $("#personType2").attr("checked",true);
-
-		$('#tdIllegalAction').text($.utils.getNotNullVal(dataInfo.content.illegalAction));
+		
 		$('#tdPartiesName').text($.utils.getNotNullVal(dataInfo.content.partiesName));
-		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
-		$('#tdPartiesAge').text($.utils.getNotNullVal(dataInfo.content.partiesAge));
-		$('#tdPartiesAddr').text($.utils.getNotNullVal(dataInfo.content.partiesAddr));
-		$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
-		$('#tdPartiesPhone').text($.utils.getNotNullVal(dataInfo.content.partiesPhone));
-		$('#tdCompanyName').text($.utils.getNotNullVal(dataInfo.content.companyName));
 		$('#tdLegalRepresentative').text($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
-		$('#tdCompanyAddr').text($.utils.getNotNullVal(dataInfo.content.companyAddr));
-		$('#tdCompanyPhone').text($.utils.getNotNullVal(dataInfo.content.companyPhone));
-		$('#tdReason').text($.utils.getNotNullVal(dataInfo.content.reason));
+		$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
+		$('#tdPartiesContact').text($.utils.getNotNullVal(dataInfo.content.partiesContact));
+		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
+		$('#tdPartiesPhone').text($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+		$('#tdPartiesAddr').text($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+		$('#tdPartiesZip').text($.utils.getNotNullVal(dataInfo.content.partiesZip));
+		
+		$('#tdCaseAddr').text($.utils.getNotNullVal(dataInfo.content.caseAddr));
+		$('#tdCaseSource').text($.utils.getNotNullVal(dataInfo.content.caseSource));
 		$('#tdBase').text($.utils.getNotNullVal(dataInfo.content.base));
-
-		//转换json
-		if(!$.utils.isEmpty(dataInfo.content.list)){
-//			g_dataList = eval("(" + dataInfo.content.list + ")");
-			g_dataList = dataInfo.content.list;
-			if($.utils.isNull(g_dataList)) g_dataList = [];
-			refreshView();
-		}	
+		$('#tdAdvice').text($.utils.getNotNullVal(dataInfo.content.advice));
 	}
 	
 	//初始化文件列表和文书列表
 	rales.initFilesList(dataInfo.files);
 	rales.initCodeRelevance(dataInfo.relevanceId);
-}
-
-
-function refreshView(){
-	$('#tableContentList').empty();
-	for(var i = 0; i < g_dataList.length; i++){
-		$('#tableContentList').append('<tr>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].name + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].totalCnt + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].type + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].addr + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].deadline + 
-										'</td>' + 
-									'</tr>')
-	}
 }

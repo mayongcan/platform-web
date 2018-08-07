@@ -45,8 +45,16 @@ function setData(){
 	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 	if($.utils.isNull(g_params.caseSourceDict)) g_params.caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_TASK_SOURCE');
 
-	if(g_params.data.personType == '1') $("#personType1").attr("checked",true);
-	else if(g_params.data.personType == '2') $("#personType2").attr("checked",true);
+	if(g_params.data.personType == '1') {
+		$("#personType1").attr("checked",true);
+		$('#trPersonType2_1').css('display', 'none');
+		$('#trPersonType2_2').css('display', 'none');
+	}
+	else if(g_params.data.personType == '2') {
+		$("#personType2").attr("checked",true);
+		$('#trPersonType1_1').css('display', 'none');
+		$('#trPersonType1_2').css('display', 'none');
+	}
 	
 	top.app.addRadioButton($("#divCaseSource"), g_params.caseSourceDict, 'radioCaseSource', g_params.data.caseSource);
 

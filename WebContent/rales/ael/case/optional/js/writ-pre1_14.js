@@ -28,8 +28,14 @@ function setData(){
 	//获取字典
 	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 
-	if(g_params.data.personType == '1') $("#personType1").attr("checked",true);
-	else if(g_params.data.personType == '2') $("#personType2").attr("checked",true);
+	if(g_params.data.personType == '1') {
+		$("#personType1").attr("checked",true);
+		$('#divPersonType2').css('display', 'none');
+	}
+	else if(g_params.data.personType == '2') {
+		$("#personType2").attr("checked",true);
+		$('#divPersonType1').css('display', 'none');
+	}
 	
 	rales.setDatetimeInfo($('#dataYear'), $('#dataMonth'), $('#dataDay'), $('#dataHour'), $('#dataMinute'), g_params.data.checkDateBegin);
 	rales.setDatetimeInfo($('#dataYear1'), $('#dataMonth1'), $('#dataDay1'), $('#dataHour1'), $('#dataMinute1'), g_params.data.checkDateEnd);

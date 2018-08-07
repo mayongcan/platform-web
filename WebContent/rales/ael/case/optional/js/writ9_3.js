@@ -39,6 +39,9 @@ function initView(){
 			$('#stepDate').val(g_params.subRow.content.stepDate);
 			$('#stepCnt').val(g_params.subRow.content.stepCnt);
 			$('#eachStep').val(g_params.subRow.content.eachStep);
+			
+			if(g_params.subRow.content.checkboxDeadlineDate == '1') $("#checkboxDeadlineDate").attr("checked",true);
+			if(g_params.subRow.content.checkboxStepDate == '1') $("#checkboxStepDate").attr("checked",true);
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -65,6 +68,9 @@ function initView(){
 			$('#tdStepDate').text($.utils.getNotNullVal(g_params.subRow.content.stepDate));
 			$('#tdStepCnt').text($.utils.getNotNullVal(g_params.subRow.content.stepCnt));
 			$('#tdEachStep').text($.utils.getNotNullVal(g_params.subRow.content.eachStep));
+
+			if(g_params.subRow.content.checkboxDeadlineDate == '1') $("#checkboxDeadlineDate").attr("checked",true);
+			if(g_params.subRow.content.checkboxStepDate == '1') $("#checkboxStepDate").attr("checked",true);
 		}
 
 		//设置右侧的高度和左侧一致
@@ -117,6 +123,12 @@ function getTableParams(){
 		data.stepDate = $('#stepDate').val();
 		data.stepCnt = $('#stepCnt').val();
 		data.eachStep = $('#eachStep').val();
+		
+		if($('#checkboxDeadlineDate').prop('checked')) data.checkboxDeadlineDate = '1';
+		else data.checkboxDeadlineDate = '0';
+
+		if($('#checkboxStepDate').prop('checked')) data.checkboxStepDate = '1';
+		else data.checkboxStepDate = '0';
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}

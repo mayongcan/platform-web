@@ -49,6 +49,7 @@ function setData(){
 	$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
 	$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.data.partiesZip));
 	$("input[type='radio'][name=relationship][value=" + g_params.data.relationship + "]").attr("checked",true);
+	$('#tdOther').text($.utils.getNotNullVal(g_params.data.other));
 	
 	$('#tdLawOffice').text($.utils.getNotNullVal(g_params.data.lawOffice));
 	$('#tdLawUser').text($.utils.getNotNullVal(g_params.data.lawUser1) + "、" + $.utils.getNotNullVal(g_params.data.lawUser2));

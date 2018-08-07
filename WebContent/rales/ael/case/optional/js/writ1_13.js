@@ -49,6 +49,7 @@ function initView(){
 			$('#partiesAddr').val(g_params.subRow.content.partiesAddr);
 			$('#partiesZip').val(g_params.subRow.content.partiesZip);
 			$("input[type='radio'][name=relationship][value=" + g_params.subRow.content.relationship + "]").attr("checked",true);
+			$('#other').val(g_params.subRow.content.other);
 			
 			$('#lawOffice').val(g_params.subRow.content.lawOffice);
 			$('#lawUser1').val(g_params.subRow.content.lawUser1);
@@ -102,6 +103,7 @@ function initView(){
 			$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.subRow.content.partiesAddr));
 			$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.subRow.content.partiesZip));
 			$("input[type='radio'][name=relationship][value=" + g_params.subRow.content.relationship + "]").attr("checked",true);
+			$('#tdOther').text($.utils.getNotNullVal(g_params.subRow.content.other));
 			
 			$('#tdLawOffice').text($.utils.getNotNullVal(g_params.subRow.content.lawOffice));
 			$('#tdLawUser1').text($.utils.getNotNullVal(g_params.subRow.content.lawUser1));
@@ -182,6 +184,8 @@ function getTableParams(){
 		data.partiesAddr = $('#partiesAddr').val();
 		data.partiesZip = $('#partiesZip').val();
 		data.relationship = $('#tdRelationship input:radio:checked').val();
+		data.other = $('#other').val();
+		
 		data.lawOffice = $('#lawOffice').val();
 		data.lawUser1 = $('#lawUser1').val();
 		data.lawUser2 = $('#lawUser2').val();

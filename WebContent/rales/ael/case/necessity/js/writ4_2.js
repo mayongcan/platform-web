@@ -102,7 +102,7 @@ function initView(){
 		var params = {};
 		params.isPrint = true;
 		params.data = getTableParams();
-		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pr4_2.html', params, function(){});
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre4_2.html', params, function(){});
     });
 	//提交
 	$("#btnOK").click(function () {

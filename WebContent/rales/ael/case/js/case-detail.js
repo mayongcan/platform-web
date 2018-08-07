@@ -195,47 +195,49 @@ function submitAudit(){
 			return;
 		}
 	}
-	//跳转页面进行提交
-	jumpToAuditPage();
-	
-//	var notice = "确定要提交审批？";
-//	if(g_btnType == 4) notice = "确定要重新提交审批？";
-//	if(g_btnType == 3) notice = "确定要结束流程？";
-//	top.app.message.confirm(notice, function(){
-//		top.app.message.loading();
-//		var submitData = {};
-//		submitData["taskId"] = g_params.row.taskId;
-//		submitData["processInstanceId"] = g_params.row.processInstanceId;
-//		submitData["processDefinitionId"] = g_params.row.processDefinitionId;
-//		submitData["registerId"] = g_params.row.id;
-//		//用于处理非必要流程
-//		if(!$.utils.isEmpty(g_params.row.subFlowProgress)){
-//			submitData["subFlowProgress"] = g_params.row.subFlowProgress;
-//			submitData["otherFlowId"] = g_params.row.otherFlowId;
-//		}
-//		//判断是否需要写入调查报告的程序处理类型
-//		if(g_addInquiryReportProcedure){
-//			//设置案件处理程序默认为1
-//			submitData["inquiryReportProcedure"] = "1";
-//		}
-//		//提交审批
-//		$.ajax({
-//			url: top.app.conf.url.apigateway + "/api/rales/ael/case/caseFlowNext?access_token=" + top.app.cookies.getCookiesToken(),
-//		    method: 'POST',
-//			data:JSON.stringify(submitData),
-//			contentType: "application/json",
-//			success: function(data){
-//				top.app.message.loadingClose();
-//				if(top.app.message.code.success == data.RetCode){
-//		   			top.app.message.notice("数据提交成功！");
-//		   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
-//		   			window.location.href = "/rales/ael/case/case-todo.html?_pid=" + pid;
-//		   		}else{
-//		   			top.app.message.error(data.RetMsg);
-//		   		}
-//	        }
-//		});
-//	});
+	if(g_btnType == 3){
+		var notice = "确定要提交审批？";
+		if(g_btnType == 4) notice = "确定要重新提交审批？";
+		if(g_btnType == 3) notice = "确定要结束流程？";
+		top.app.message.confirm(notice, function(){
+			top.app.message.loading();
+			var submitData = {};
+			submitData["taskId"] = g_params.row.taskId;
+			submitData["processInstanceId"] = g_params.row.processInstanceId;
+			submitData["processDefinitionId"] = g_params.row.processDefinitionId;
+			submitData["registerId"] = g_params.row.id;
+			//用于处理非必要流程
+			if(!$.utils.isEmpty(g_params.row.subFlowProgress)){
+				submitData["subFlowProgress"] = g_params.row.subFlowProgress;
+				submitData["otherFlowId"] = g_params.row.otherFlowId;
+			}
+			//判断是否需要写入调查报告的程序处理类型
+			if(g_addInquiryReportProcedure){
+				//设置案件处理程序默认为1
+				submitData["inquiryReportProcedure"] = "1";
+			}
+			//提交审批
+			$.ajax({
+				url: top.app.conf.url.apigateway + "/api/rales/ael/case/caseFlowNext?access_token=" + top.app.cookies.getCookiesToken(),
+			    method: 'POST',
+				data:JSON.stringify(submitData),
+				contentType: "application/json",
+				success: function(data){
+					top.app.message.loadingClose();
+					if(top.app.message.code.success == data.RetCode){
+			   			top.app.message.notice("数据提交成功！");
+			   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
+			   			window.location.href = "/rales/ael/case/case-todo.html?_pid=" + pid;
+			   		}else{
+			   			top.app.message.error(data.RetMsg);
+			   		}
+		        }
+			});
+		});
+	}else{
+		//跳转页面进行提交
+		jumpToAuditPage();
+	}
 }
 
 function jumpToAuditPage(){

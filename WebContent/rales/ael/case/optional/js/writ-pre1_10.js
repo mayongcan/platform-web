@@ -37,9 +37,18 @@ function setData(){
 	$('#tdRule6').text($.utils.getNotNullVal(g_params.data.rule6));
 	$('#tdRule7').text($.utils.getNotNullVal(g_params.data.rule7));
 	$('#tdRule8').text($.utils.getNotNullVal(g_params.data.rule8));
-	if(g_params.data.stopAction1 == '1') $("#stopAction1").attr("checked",true);
-	if(g_params.data.stopAction2 == '1') $("#stopAction2").attr("checked",true);
-	if(g_params.data.stopAction3 == '1') $("#stopAction3").attr("checked",true);
+	if(g_params.data.stopAction1 == '1') {
+		$("#stopAction1").attr("checked",true);
+		$('#divStopAction1').css('display', "");
+	}
+	if(g_params.data.stopAction2 == '1') {
+		$("#stopAction2").attr("checked",true);
+		$('#divStopAction2').css('display', "");
+	}
+	if(g_params.data.stopAction3 == '1') {
+		$("#stopAction3").attr("checked",true);
+		$('#divStopAction3').css('display', "");
+	}
 	rales.setDateInfo($('#dataYear'), $('#dataMonth'), $('#dataDay'), g_params.data.stopDate);
 //	$('#tdStopDate').text($.utils.getNotNullVal(g_params.data.stopDate));
 	$('#tdContent').text($.utils.getNotNullVal(g_params.data.content));

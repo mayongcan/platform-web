@@ -34,4 +34,13 @@ function setData(){
 	rales.setDateInfo($('#dataYear2'), $('#dataMonth2'), $('#dataDay2'), g_params.data.stepDate);
 	$('#tdStepCnt').text($.utils.getNotNullVal(g_params.data.stepCnt));
 	$('#tdEachStep').text($.utils.getNotNullVal(g_params.data.eachStep));
+	
+	if(g_params.data.checkboxDeadlineDate == '1') {
+		$("#checkboxDeadlineDate").attr("checked",true);
+		$('#divCheckboxDeadlineDate').css('display', '');
+	}
+	if(g_params.data.checkboxStepDate == '1') {
+		$("#checkboxStepDate").attr("checked",true);
+		$('#divCheckboxStepDate').css('display', '');
+	}
 }

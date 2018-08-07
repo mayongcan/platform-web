@@ -8,6 +8,7 @@ $(function () {
 });
 
 function initView(){
+	$('#divApplyDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
 	//1新增 2编辑 3查看
 	if(g_params.type == 1){
 		//增加表单验证

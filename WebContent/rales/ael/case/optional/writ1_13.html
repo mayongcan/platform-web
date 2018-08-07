@@ -162,15 +162,23 @@
 								<label class="checkbox-inline">
 									<input type="radio" name="relationship" value="1" checked> 当事人
 								</label>
-								<label style="margin-bottom:0px;font-weight: normal;">
+								<label class="checkbox-inline">
 									<input type="radio" name="relationship" value="2"> 法人代表
 								</label>
-								<label style="margin-bottom:0px;font-weight: normal;">
+								<label class="checkbox-inline">
 									<input type="radio" name="relationship" value="3"> 现场负责人
 								</label>
-								<label style="margin-bottom:0px;font-weight: normal;">
+								<label class="checkbox-inline">
 									<input type="radio" name="relationship" value="4"> 其他
 								</label>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="width:60px;">
+							   	其他
+							</td>
+							<td class="reference-td" id="tdOther" colspan="5">
+							   	<input type="text" id="other" name="other" class="form-control">
 							</td>
 						</tr>
 					</tbody>
@@ -216,7 +224,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	名称
+							   	被告之人
 							</td>
 							<td class="reference-td" id="tdNoticeUser" colspan="3">
 							   	<input type="text" id="noticeUser" name="noticeUser" class="form-control">
@@ -224,7 +232,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	回答
+							   	是否申请回避
 							</td>
 							<td class="reference-td" id="tdNoticeAnswer" colspan="3">
 							   	<input type="text" id="noticeAnswer" name="noticeAnswer" class="form-control">

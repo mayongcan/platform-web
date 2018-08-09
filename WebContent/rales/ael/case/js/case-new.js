@@ -130,7 +130,10 @@ function initView(){
 	
 	//填写微信案件登记的快捷登记
 	if(!$.utils.isNull(g_params) && !$.utils.isNull(g_params.reportRow)){
-		$("#defendantName").val(g_params.reportRow.name);
+//		$("#defendantName").val(g_params.reportRow.name);
+		$("#reporterName").val(g_params.reportRow.name);
+		$("#reporterContacts").val(g_params.reportRow.name);
+		$("#reporterPhone").val(g_params.reportRow.contactPhone);
 		$("#defendantAddress").val(g_params.reportRow.address);
 		$("#defendantDate").val($.date.dateFormat(g_params.reportRow.reportDate, "yyyy-MM-dd"));
 		$("#clueSummary").val(g_params.reportRow.content);

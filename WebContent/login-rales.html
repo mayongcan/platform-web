@@ -18,11 +18,10 @@
     <script src="js/platform/jquery-gimp.js" type="text/javascript"></script>
     <script src="js/platform/appconfig.js" type="text/javascript"></script>
     <script src="js/platform/Browser.js" type="text/javascript"></script>
-    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
-    <script type="text/javascript">
-    	var g_adminIndexPage = app.info.rootPath + "/admin/index-rales.html";
-		if(app.isLogin()) window.location.href = g_adminIndexPage;
-    </script>
+    <script>
+	    if(window.top !== window.self){ window.top.location = window.location;}
+		var g_adminIndexPage = app.info.rootPath + "/admin/index-rales.html";
+	</script>
 </head>
 <body>
 	<div class="login-containter">
@@ -114,6 +113,37 @@
 			    },
 			    repeat: true //重复调用
 			});
+	        
+	      	//获取传送参数
+			var access_token = $.utils.getUrlParam(window.location.search, "access_token");
+			var loginUrl = $.utils.getUrlParam(window.location.search, "loginUrl");
+			//判断是否自动登录
+			if(!$.utils.isEmpty(access_token) && !$.utils.isEmpty(loginUrl)){
+				$.ajax({
+				    url: app.conf.url.apigateway + "/api/rales/user/checkAuth",
+				    method: 'GET',
+				    async: false,
+				   	timeout:5000,
+				    data: {
+			    		access_token: access_token,
+			    		loginUrl: loginUrl
+				    },
+				    success: function(data){
+				    	if(app.message.code.success == data.RetCode){
+					    	//进行登录
+					    	$('#username').val(data.loginUser);
+					    	$('#password').val(data.loginPassword);
+					    	setTimeout(function () {loginAction();}, 50);
+				   		}else{
+				   			app.message.error(data.RetMsg);
+				   		}
+					},
+					error:function(xhr, textStatus, errorThrown){
+			   		}
+				});
+			}else{
+				if(app.isLogin()) window.location.href = g_adminIndexPage;
+			}
 		});
 		//刷新验证码
 	    function refreshCode(){

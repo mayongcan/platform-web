@@ -1,4 +1,4 @@
-var g_optionalFlowIndex = 1, g_statTypeDict = [], g_statWorkDict = [], g_netTsDict = [];
+var g_optionalFlowIndex = 1, g_statTypeDict = [], g_statWorkDict = [], g_netTsDict = [], g_statAreaCodeDict = [];
 
 $(function () {
 	//实现日期联动
@@ -6,6 +6,7 @@ $(function () {
 	g_statTypeDict = rales.getDictByCode("00052006");
 	g_statWorkDict = rales.getDictByCode("00062006");
 	g_netTsDict = rales.getDictByCode("00452006");
+	g_statAreaCodeDict = rales.getDictByCode("00032006");
 	top.app.addComboBoxOption($("#searchStatType"), g_statTypeDict, true);
 	top.app.addComboBoxOption($("#searchStatWork"), g_statWorkDict, true);
 	initFuncBtnEvent();

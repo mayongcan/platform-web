@@ -114,6 +114,7 @@ function initData(){
 	$('#tdDefendantCheckDate').text($.date.dateFormat(g_params.row.checkDate, "yyyy-MM-dd"));
 	$('#tdClueSummary').text(g_params.row.clueSummary);
 	$('#tdCaseVerification').text(g_params.row.caseVerification);
+	$('#tdCaseType').text($.utils.getNotNullVal(top.app.getDictName(g_params.row.caseType, g_params.caseTypeDict)));
 	
 	rales.initFilesList(g_params.row.files);
 	rales.initCodeRelevance(g_params.row.relevanceId);

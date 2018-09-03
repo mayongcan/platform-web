@@ -1,12 +1,17 @@
 var $table = $('#tableList');
+var g_statWorkDict = [], g_statPfDict = [], g_statMbDict = [];
 
 $(function () {
 	//初始化字典
 	initDict();
+	//初始化搜索面板
+	initSearchPanel();
 	//初始化权限
 	initFunc();
 	//初始化列表信息
 	initTable();
+	//初始化权限功能按钮点击事件
+	initFuncBtnEvent();
 });
 
 /**
@@ -14,26 +19,17 @@ $(function () {
  * @returns
  */
 function initDict(){
-	$.date.initSearchDate('divHandleBegin', 'divHandleEnd');
-	var datetime = new Date();
-	var searchYearDict = [], curYear = parseInt(datetime.getFullYear()), html = "";
-	//年度
-	$('#searchYear').empty();
-	html += "<option value=''>全部</option>";
-	for(var i = curYear; i >= curYear - 10; i--){
-		html += "<option value='" + i + "'>" + i + "</option>";
-	}
-	$('#searchYear').append(html);
-	
-	//最近年审年度
-	html = ""
-	$('#searchLastYear').empty();
-	html += "<option value=''>全部</option>";
-	for(var i = curYear; i >= curYear - 10; i--){
-		html += "<option value='" + i + "'>" + i + "</option>";
-	}
-	$('#searchLastYear').append(html);
-	$('.selectpicker').selectpicker('refresh');
+	g_statWorkDict = rales.getDictByCode("00062006");
+	g_statPfDict = rales.getDictByCode("00082006");
+	g_statMbDict = rales.getDictByCode("00342006");
+}
+
+/**
+ * 初始化搜索面板
+ * @returns
+ */
+function initSearchPanel(){
+	top.app.addComboBoxOption($("#searchStatWork"), g_statWorkDict, true);
 }
 
 /**
@@ -64,24 +60,23 @@ function initTable(){
 		    access_token: top.app.cookies.getCookiesToken(),
             size: params.limit,   						//页面大小
             page: params.offset / params.limit,  		//当前页
-            statOrg: $("#searchOrgName").val(),
-			statName: $("#searchStatName").val(),
-			status: $("#searchStatus").val(),
-			year: $("#searchYear").val(),
-			begin: $("#searchBegin").val(),
-			end: $("#searchEnd").val(),
-			lastYear: $("#searchLastYear").val(),
+			statWork: $("#searchStatWork").val(),
+			deviceType: $("#searchDeviceType").val(),
+			deviceAuth: $("#searchDeviceAuth").val(),
         };
         return param;
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/oracleInf/getStationRecordList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/oracleInf/getEquList",   		//请求后台的URL（*）
         queryParams: searchParams,											//传递参数（*）
         uniqueId: 'id',
         onClickRow: function(row, $el){
         		appTable.setRowClickStatus($table, row, $el);
-        }
+        },
+        onDblClickRow: function(row, $el){
+        		btnDetail(row);
+	    }
     });
 	//初始化Table相关信息
 	appTable.initTable($table);
@@ -91,20 +86,27 @@ function initTable(){
 		$table.bootstrapTable('refresh');
     });
 	$("#btnReset").click(function () {
-		$("#searchOrgName").val("");
-		$("#searchStatName").val("");
-		$("#searchStatus").val("");
-		$("#searchYear").val("");
-		$("#searchBegin").val("");
-		$("#searchEnd").val("");
-		$("#searchLastYear").val("");
+		$("#searchStatWork").val("");
+		$("#searchDeviceType").val("");
+		$("#searchDeviceAuth").val("");
 		$('.selectpicker').selectpicker('refresh');
 		$table.bootstrapTable('refresh');
     });
 }
 
+/**
+ * 初始化权限功能点击事件
+ */
+function initFuncBtnEvent(){
+}
 
-function tableFormatStatus(value, row) {
-	if(value == '1') return '已年审';
-	else return '未年审';
+
+function tableFormatType(value, row) {
+	return appTable.tableFormatDictValue(g_statWorkDict, value);
+}
+function tableFormatPf(value, row) {
+	return appTable.tableFormatDictValue(g_statPfDict, value);
+}
+function tableFormatMb(value, row) {
+	return appTable.tableFormatDictValue(g_statMbDict, value);
 }

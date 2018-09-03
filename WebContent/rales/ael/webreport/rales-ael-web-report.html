@@ -21,10 +21,19 @@
 		<div class="ibox-content">
        		<div class="panel panel-default search-panel" id="searchPannel">
 	   			<div class="panel-body form-horizontal">
-	           		<label class="control-label page-search-label">报案姓名</label>
+	           		<label class="control-label page-search-label">姓名</label>
 	               	<input type="text" class="form-control page-search-input" id="searchName">
-	           		<label class="control-label page-search-label">报案人手机号码</label>
+	           		<label class="control-label page-search-label">手机号码</label>
 	               	<input type="text" class="form-control page-search-input" id="searchContactPhone">
+	           		<label class="control-label page-search-label">地址</label>
+	               	<input type="text" class="form-control page-search-input" id="searchAddress">
+	           		<label class="control-label page-search-label">时间</label>
+	           		<div class="input-group date" id="divSearchReportDate" style="width: 150px;float: left;margin: 0px 15px;">
+                   		<input type="text" class="form-control" id="searchReportDate"/>
+                   		<span class="input-group-addon">
+                       		<span class="glyphicon glyphicon-calendar"></span>
+                   		</span>
+               		</div>
 	           		<button type="button" style="margin-right:10px" id="btnSearch" class="btn btn-primary">查 询</button>                  		
 	           		<button type="button" class="btn btn-white" id="btnReset">重 置</button>
 	   			</div>
@@ -54,7 +63,7 @@
                         	<th data-field="content">报案内容</th>
                         	<th data-field="address">地址</th>
                         	<th data-field="reportDate">报案时间</th>
-                        	<th data-field="reportReply">回复</th>
+                        	<th data-field="reportReply">最后回复</th>
 						<th data-field="operate" data-formatter="formatOperate" data-width="250px">操作</th>
                     </tr>
                 </thead>

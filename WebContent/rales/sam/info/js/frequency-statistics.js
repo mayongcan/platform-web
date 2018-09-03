@@ -1,36 +1,42 @@
 var $table = $('#tableList'), g_loadDataRow = null;
-var g_stationTypeDict = [{ID:'1', NAME: '广播电台'}, {ID:'2', NAME: '高频电台'}, {ID:'3', NAME: '微波接力站'}, {ID:'4', NAME: '蜂窝移动通信系统'},
-	{ID:'5', NAME: '卫星地球站'}, {ID:'6', NAME: '业余电台'}, {ID:'7', NAME: '甚高频、特高频站台'}, {ID:'8', NAME: '集群'}, {ID:'9', NAME: '其他电台'}];
+var g_statTypeDict = [];
 $(function () {
 	initView();
 	//获取权限菜单
 	initFunc();
 	//初始化列表信息
-	initTable();
-	
-	initPieCharts();
-	initBarCharts();
-	initLineCharts();
+//	initTable();
 });
 
 function initView(){
-	top.app.addCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType');
-	$('#stationTypeCheckAll').change(function(){
-		if($(this).prop('checked')){
-			top.app.setCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType', true);
-		}else{
-			top.app.setCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType', false);
-		}
-	});
+	g_statTypeDict = rales.getDictByCode("00052006");
+	top.app.addComboBoxOption($("#searchStatType"), g_statTypeDict, false);
+	
 	//搜索点击事件
 	$("#btnSearch").click(function () {
-		
+		if($.utils.isEmpty($.trim($("#searchFrequency").val()))){
+   			top.app.message.notice("请输入发射频率！");
+   			return;
+		}
+		if($.utils.isEmpty($.trim($("#searchStatType").val()))){
+   			top.app.message.notice("请选择需要统计的台站类型！");
+   			return;
+		}
+		$('#tableList').css('display', '');
+		$('#chats').css('display', '');
+		$table.bootstrapTable('destroy');
+		loadTable();
+//		$table.bootstrapTable('refresh');
     });
 	$("#btnReset").click(function () {
-		$('#searchFrequencyBegin').val('');
-		$('#searchFrequencyEnd').val('');
-		$('#stationTypeCheckAll').prop('checked', false);
-		top.app.setCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType', false);
+		$('#tableList').css('display', 'none');
+		$('#chats').css('display', 'none');
+		$('#searchFrequency').val("");
+		$('#searchStatType').val("");
+		//刷新数据，否则下拉框显示不出内容
+		$('.selectpicker').selectpicker('refresh');
+		$table.bootstrapTable('destroy');
+//		$table.bootstrapTable('refresh');
     });
 }
 
@@ -51,69 +57,93 @@ function initFunc(){
 	$("#tableToolbar").append(htmlTable);
 }
 
-function initTable(){
+function loadTable(){
 	//搜索参数
 	var searchParams = function (params) {
         var param = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 		    access_token: top.app.cookies.getCookiesToken(),
             size: params.limit,   						//页面大小
             page: params.offset / params.limit,  		//当前页
-            frequencyBegin: $('#searchFrequencyBegin').val(),
-            frequencyEnd: $('#searchFrequencyEnd').val(),
-            stationType: top.app.getCheckBoxButton($('#divCheckboxStationType'), g_stationTypeDict, 'checkboxStationType'),
+            frequency: $('#searchFrequency').val(),
+            stationType: $.trim($("#searchStatType").val()),
         };
         return param;
     };
+
+    var columnsArray = [];
+    columnsArray.push({
+		field:"tableMulti",
+		formatter:"appTable.tableFormatCheckbox",
+		checkbox: true,
+		visible: false,
+    });
+    columnsArray.push({
+		title: '序号',
+		field:"serialNumber",
+		align: 'center',
+		formatter:"serialNumberTable",
+		width: '100px',
+    });
+    columnsArray.push({
+		title: '发射频率',
+		field:"frequency",
+    });
+    if($("#searchStatType").val() != ''){
+        var type = $.trim($("#searchStatType").val()).split(',');
+        for(var i = 0; i < type.length; i++){
+            columnsArray.push({
+        		title: top.app.getDictName(type[i], g_statTypeDict),
+        		field: type[i],
+            });
+        }
+    }
+    columnsArray.push({
+		title: '台站总数',
+		field:"totalCnt",
+    });
+    
     //初始化列表
 	$table.bootstrapTable({
-		url: top.app.conf.url.apigateway + "/api/rales/sam/info/getFrequencyStatisticList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/sam/info/getFrequencyStatisticList",   		//请求后台的URL（*）
         queryParams: searchParams,										//传递参数（*）
         height: 400,
         onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+	        appTable.setRowClickStatus($table, row, $el);
         },
-        onPostBody:function () {
-	    		setTimeout(function () {
-	    	    	    if($.utils.isNull(g_loadDataRow) || g_loadDataRow.length == 0){
-	    	    	    		$('.fixed-table-footer').remove();
-	    	    	    }else{
-	    	    	    		//合并页脚
-	    	        		var footerTbody = $('.fixed-table-footer table tbody');
-	    	            var footerTr = footerTbody.find('>tr');
-	    	            var footerTd = footerTr.find('>td');
-	    	            var footerTd0 = footerTd.eq(0);
-	    	            //隐藏其他列
-	    	            for(var i = 0; i < 2; i++) {
-	    	                footerTd.eq(i).hide();
-	    	            }
-	    	            footerTd0.attr('colspan', 2).show();
-	    	            footerTd.eq(2).attr('width', "150px").show();
-	    	            footerTd.eq(3).attr('width', "150px").show();
-	    	            footerTd.eq(4).attr('width', "150px").show();
-	    	            footerTd.eq(5).attr('width', "150px").show();
-	    	    	    }
-		    }, 300);
-	    }
+        columns: columnsArray,
     });
 	//初始化Table相关信息
 	appTable.initTable($table, false);
 	$table.on('load-success.bs.table', function (data) {
 	    g_loadDataRow = $table.bootstrapTable('getData');
 	    if($.utils.isNull(g_loadDataRow) || g_loadDataRow.length == 0){
-	    		//移除图表
-	    		$('#charts').remove();
+	    	//移除图表
+	    	$('#chats').css('display', 'none');
 	    }else{
-//		    initCharts(g_loadDataRow);
+	    	$('#chats').css('display', '');
+		    initCharts(g_loadDataRow);
 	    }
     });
+}
+
+function initCharts(loadData){
+	initPieCharts(loadData);
+	initBarCharts(loadData);
+	initLineCharts(loadData);
 }
 
 //初始化饼图
 function initPieCharts(data){
 	var pieCharts = echarts.init(document.getElementById('pieCharts'));
+	//初始化数据
+	var dataName = [], dataValue = [];
+	for(var i = 0; i < data.length; i++){
+		dataName.push(data[i].frequency);
+		dataValue.push({value:data[i].totalCnt, name: data[i].frequency});
+	}
 	option = {
 	    title: {
-	        text: '市内各频段使用数量统计图',
+	        text: '各频段使用数量统计图',
 	        left: 'center'
 	    },
 	    tooltip : {
@@ -123,12 +153,11 @@ function initPieCharts(data){
 	    legend: {
 	        bottom: 10,
 	        left: 'center',
-	        data: ['100-200MHz', '200-300MHz','300-400MHz','400-500MHz']
-//	        data: dataName
+	        data: dataName
 	    },
 	    series : [
 	        {
-	            name:'市内各频段使用数量统计图',
+	            name:'各频段使用数量统计图',
 	            type: 'pie',
 	            radius : '45%',
 	            center: ['50%', '50%'],
@@ -138,13 +167,7 @@ function initPieCharts(data){
 	                    color: '#000'
 	                }
 	            },
-	            data:[
-	                {value:12,name: '100-200MHz'},
-	                {value:19, name: '200-300MHz'},
-	                {value:24, name: '300-400MHz'},
-	                {value:25, name: '400-500MHz'},
-	            ],
-//	            data: dataValue,
+	            data: dataValue,
 	            itemStyle: {
 	                emphasis: {
 	                    shadowBlur: 10,
@@ -169,9 +192,31 @@ function initBarCharts(data){
 	        textBorderWidth: 2
 	    }
 	}
+	//初始化数据
+	var dataXName = [], dataYName = [];
+	for(var i = 0; i < data.length; i++){
+		dataXName.push(data[i].frequency);
+	}
+	var tmpData = $.trim($("#searchStatType").val()).split(',');
+	for(var i = 0; i < tmpData.length; i++){
+		dataYName.push(top.app.getDictName(tmpData[i], g_statTypeDict));
+	}
+	var dataValue = [];
+	for(var i = 0; i < data.length; i++){
+		var seriesData = [];
+		for(var j = 0; j < tmpData.length; j++){
+			seriesData.push(data[i][tmpData[j]]);
+		}
+		dataValue.push({
+            name: data[i].frequency,
+            type: 'bar',
+            label: seriesLabel,
+            data: seriesData,
+        });
+	}
 	option = {
 	    title: {
-	        text: '市内各频段不同调制方式统计图',
+	        text: '各频段不同类别台站数量统计图',
 	        left: 'center'
 	    },
 	    tooltip: {
@@ -181,14 +226,11 @@ function initBarCharts(data){
 	        }
 	    },
 	    legend: {
-	    		data: ['100-200MHz', '200-300MHz','300-400MHz'],
+	    	data: dataXName,
 	        bottom: 0,
 	    },
-	    toolbox: {
-	        show: true,
-	        feature: {
-	            saveAsImage: {}
-	        }
+	    grid: {
+	        left: 150
 	    },
 	    xAxis: {
 	        type: 'value',
@@ -199,28 +241,9 @@ function initBarCharts(data){
 	    yAxis: {
 	        type: 'category',
 	        inverse: true,
-	        data: ['广播电台', '高频电台', '微波接力站'],
+	        data: dataYName,
 	    },
-	    series: [
-	        {
-	            name: '100-200MHz',
-	            type: 'bar',
-	            label: seriesLabel,
-	            data: [165, 170, 30],
-	        },
-	        {
-	            name: '200-300MHz',
-	            type: 'bar',
-	            label: seriesLabel,
-	            data: [150, 105, 110]
-	        },
-	        {
-	            name: '300-400MHz',
-	            type: 'bar',
-	            label: seriesLabel,
-	            data: [220, 82, 63]
-	        }
-	    ]
+	    series: dataValue,
 	};
 	// 使用刚指定的配置项和数据显示图表。
 	barCharts.setOption(option);
@@ -229,22 +252,57 @@ function initBarCharts(data){
 //初始化线图
 function initLineCharts(data){
 	var lineCharts = echarts.init(document.getElementById('lineCharts'));
+
+	//初始化数据
+	var dataXName = [], dataYName = [];
+	for(var i = 0; i < data.length; i++){
+		dataXName.push(data[i].frequency);
+	}
+	var tmpData = $.trim($("#searchStatType").val()).split(',');
+	for(var i = 0; i < tmpData.length; i++){
+		dataYName.push(top.app.getDictName(tmpData[i], g_statTypeDict));
+	}
+	var dataValue = [];
+	for(var i = 0; i < data.length; i++){
+		var seriesData = [];
+		for(var j = 0; j < tmpData.length; j++){
+			seriesData.push(data[i][tmpData[j]]);
+		}
+		dataValue.push({
+            name: data[i].frequency,
+            type:'line',
+            stack: '总量',
+            data: seriesData,
+        });
+	}
+	
 	option = {
 	    title: {
-	        text: '市内不同调制方式频段数量统计图',
-	        left: 'center'
+	        text: '各频段不同类别台站数量统计图',
+		    left: 'center',
+	    },
+	    tooltip: {
+	        trigger: 'axis'
+	    },
+	    legend: {
+	        data: dataXName,
+	        top: 30
+	    },
+	    grid: {
+	        left: '3%',
+	        right: '4%',
+	        bottom: '3%',
+	        containLabel: true
 	    },
 	    xAxis: {
 	        type: 'category',
-	        data: ['幅移键控', '相移键控', '正交频分复用调制']
+	        boundaryGap: false,
+	        data: dataYName
 	    },
 	    yAxis: {
 	        type: 'value'
 	    },
-	    series: [{
-	        data: [60, 40, 80],
-	        type: 'line'
-	    }]
+	    series: dataValue
 	};
 	// 使用刚指定的配置项和数据显示图表。
 	lineCharts.setOption(option);

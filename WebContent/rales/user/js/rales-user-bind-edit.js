@@ -9,7 +9,7 @@ $(function () {
     });
 	//设置select的宽度
 	$('.selectpicker').selectpicker({
-		width: '555px'
+		width: '545px'
 	});
 });
 

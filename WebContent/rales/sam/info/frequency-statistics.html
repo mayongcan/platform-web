@@ -30,36 +30,24 @@
 </head>
 <body>
     <div class="wrapper wrapper-content animated fadeIn" style="padding: 15px;">
-		<div class="ibox-content" style="border: 1px solid #d4d4d4;padding:20px">
-			<div class="nav-search" style="border: 1px solid #d4d4d4;height:120px;padding:20px">
-				<div>
-					<div style="font-weight: bold;float:left;margin-right:0px;height:34px;line-height:34px;">发射频率：</div>
-				    <div style="float:left; margin-right:25px;">
-	                   	<input type="text" class="form-control page-search-input" id="searchFrequencyBegin" style="width: 109px;margin-right: 5px;">
-	                   	<input type="text" class="form-control page-search-input" id="searchFrequencyEnd" style="width: 109px;margin-right: 15px;">
-	                   	<label class="control-label page-search-label" style="border: 1px solid #E5E6E7;padding: 5px 5px;">MHz</label>
-                   	</div>
+		<div class="ibox-content" style="border: 1px solid #d4d4d4;padding:20px;padding-top: 0px;">
+		  	<div class="panel panel-default search-panel" id="searchPannel">
+       			<div class="panel-body form-horizontal">
+					<div style="font-weight: bold;float:left;margin-right:0px;height:34px;line-height:34px;">发射频率</div>
+					<input type="text" class="form-control page-search-input" id="searchFrequency">
+               		<label class="control-label page-search-label">台站类型</label>
+               		<div id="divSearchStatus" class="page-search-input" style="width: 300px">
+              			<select class="form-control m-b selectpicker" multiple data-selected-text-format="count > 4" id="searchStatType"></select>
+              		</div>
 					<button type="button" style="margin-right: 10px;" id="btnSearch" class="btn btn-primary">查 询</button>                  		
               		<button type="button" class="btn btn-white" id="btnReset">重 置</button>
 			   	</div>
-		  		<div style="clear:both"></div>
-			   	<div style="margin-top:20px;">
-			   		<div style="font-weight: bold;float:left;margin-right:14px;">台站类别：</div>
-				    <div style="float:left">
-		                <label style="margin-right:20px;margin-bottom:0px;font-weight: normal;">
-		                    <input type="checkbox" id="stationTypeCheckAll" value=""> 全选
-		                </label>
-		            </div> 
-		            <div id="divCheckboxStationType" style="float:left;"></div>
-			   	</div>
-		  		<div style="clear:both"></div>
 		  	</div>
-		  	<div style="clear:both"></div>
-		  	<div class="btn-group hidden-xs" id="tableToolbar" role="group"></div>
-            <table id="tableList" 
+		  	<!-- <div class="btn-group hidden-xs" id="tableToolbar" role="group"></div> -->
+            <table id="tableList" class="table text-nowrap"
 				data-toolbar="#tableToolbar"
 				data-show-toggle="false"
-				data-show-columns="true"
+				data-show-columns="false"
 				data-striped="true"
 				data-cache="false"
 				data-sortable="false"
@@ -72,21 +60,10 @@
 				data-side-pagination="server"	
 				data-page-list="[15, 30, 50, 100, ALL]"
 				data-mobile-responsive="true"
-				data-show-footer="true">
-                <thead>
-                    <tr>
-                			<th data-field="tableMulti" data-formatter="appTable.tableFormatCheckbox" data-checkbox="true" data-visible="false"></th>                        
-					   	<th data-field="serialNumber" data-align="center" data-formatter="serialNumberTable" data-width="100px" data-footer-formatter="tableFormatTotalText">序号</th>          
-                        	<th data-field="name" data-align="center">发射频率</th>
-                        	<th data-field="timeScope" data-align="center" data-footer-formatter="tableFormatTotalValue" data-width="150px">幅移键控</th>
-                        	<th data-field="value" data-align="center" data-footer-formatter="tableFormatTotalValue" data-width="150px">相移键控</th>
-                        	<th data-field="value" data-align="center" data-footer-formatter="tableFormatTotalValue" data-width="150px">正交频分复用调制</th>
-                        	<th data-field="value" data-align="center" data-footer-formatter="tableFormatTotalValue" data-width="150px">总量</th>
-                    </tr>
-                </thead>
+				data-show-footer="false">
             </table>
 		  	<div style="clear:both"></div>
-			<div style="margin-top:30px;">
+			<div style="margin-top:30px;display: none" id="chats">
 				<div style="background-color: white;float:left;width:40%">
 					<div id="pieCharts" style="min-height:350px;"></div>
 				</div>

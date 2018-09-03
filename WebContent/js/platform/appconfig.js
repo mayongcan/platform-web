@@ -941,9 +941,31 @@ var app = app || {};
 		if(retVal != "") retVal = retVal.substring(0, retVal.length - 1);
 		return retVal;
 	}
+	
+	app.getCheckBoxButtonVal = function(checkList, dict, divide){
+		if( dict == null || dict == undefined || dict.length == 0) return;
+		if($.utils.isEmpty(divide)) divide = ";"
+		var html = "";
+		var length = dict.length;
+		var arrayCheck = [];
+		if(checkList == null || checkList == undefined){
+			for (var i = 0; i < length; i++) {
+				arrayCheck[i] = '0';
+			}
+		}else{
+			arrayCheck = checkList.split(',');
+		}
+		var retVal = "";
+		for (var i = 0; i < length; i++) {
+			var check = "";
+			if(arrayCheck[i] == '1') retVal += dict[i].NAME + divide ;
+		}
+		if(retVal != "") retVal = retVal.substring(0, retVal.length - 1);
+		return retVal;
+	}
 
 	//+---------------------------------------------------   
-	//| 获取多选框字典值
+	//| 设置多选框字典值
 	//+---------------------------------------------------
 	app.setCheckBoxButton = function(htmlObj, dict, name, stat){
 		if(htmlObj == null || htmlObj == undefined || dict == null || dict == undefined || dict.length == 0) return;

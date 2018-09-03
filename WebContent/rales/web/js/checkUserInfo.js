@@ -72,6 +72,8 @@ function openApp(){
 		if(result.status==1){
 
 		}else{
+			//打开APP下载地址
+			window.open(top.app.conf.url.res.url + "File/dlzf-app.apk");
 			console.log(result.message);
 		}
 	});

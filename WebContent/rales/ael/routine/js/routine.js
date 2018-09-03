@@ -94,30 +94,18 @@ function formatCaseCode(value,row,index){
 }
 
 function formatOperate(value, row, index){
-	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit(' + row.id + ')">' + 
+	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail(' + row.id + ')">' + 
 				'查看' + 
 			'</button>';
 }
 
-function btnEventEdit(id){
+function btnEventDetail(id){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
 	//设置传送对象
 	top.app.info.iframe.params = {};
-	top.app.info.iframe.params.isEdit = true;
-	top.app.info.iframe.params.row = row;
-	top.app.info.iframe.params.backUrl = "/rales/ael/routine/routine.html";
-	var pid = $.utils.getUrlParam(window.location.search,"_pid");
-	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
-	window.location.href = encodeURI(url);
-}
-
-function btnEventAudit(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	//设置传送对象
-	top.app.info.iframe.params = {};
-	if(row.activityName == '行政检查编辑' || row.activityName == '行政检查草稿' ||  row.activityName == '第二承办人审批'){
-		top.app.info.iframe.params.isEdit = true;
-	}
+//	if(row.activityName == '行政检查编辑' || row.activityName == '行政检查草稿' ||  row.activityName == '第二承办人审批'){
+//		top.app.info.iframe.params.isEdit = true;
+//	}
 	top.app.info.iframe.params.row = row;
 	top.app.info.iframe.params.backUrl = "/rales/ael/routine/routine.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");

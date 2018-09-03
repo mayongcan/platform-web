@@ -164,6 +164,7 @@ function formValidate(){
 	$("#divEditForm").validate({
         rules: {
         	illegalAction: {required: true},
+        	reason: {required: true},
         },
         messages: {
         },

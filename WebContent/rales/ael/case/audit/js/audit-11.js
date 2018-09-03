@@ -89,8 +89,10 @@ function initData(){
 		if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
 		else $("#personType2").attr("checked",true);
 
-		top.app.addRadioButton($("#divTaskSource"), g_taskSourceDict, 'radioTaskSource', dataInfo.content.taskSource);
-		top.app.addCheckBoxButtonLine($("#divCheckUserAdvice"), g_checkRegisterAdviceDict, 'checkUserAdvice', dataInfo.content.checkUserAdvice);
+		$('#tdTaskSource').text(top.app.getDictName(dataInfo.content.taskSource, g_taskSourceDict));
+		$('#tdCheckUserAdvice').text(top.app.getCheckBoxButtonVal(dataInfo.content.checkUserAdvice, g_checkRegisterAdviceDict));
+//		top.app.addRadioButton($("#divTaskSource"), g_taskSourceDict, 'radioTaskSource', dataInfo.content.taskSource);
+//		top.app.addCheckBoxButtonLine($("#divCheckUserAdvice"), g_checkRegisterAdviceDict, 'checkUserAdvice', dataInfo.content.checkUserAdvice);
 
 		$('#tdPartiesName').text($.utils.getNotNullVal(dataInfo.content.partiesName));
 		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));

@@ -210,6 +210,24 @@ var appTable = appTable || {};
 		$("#toolbarMultiCheck").click(function () {
 			appTable.multiCheck($table, $("#toolbarMultiCheck i"));
 	    });
+
+		//在表格 body 渲染完成后触发。
+		table.on('post-body.bs.table', function () {
+			 $("#" + table.attr("id") + " input[type=checkbox]").each(function(i){
+		    	var $check = $(this);
+		        if ($check.attr("id") && $check.next("label")) {
+		            return;
+		        }
+		        var name = $check.attr("name");
+		        if(!name) return;
+		        var id = name + "-" + i;
+		        var $label = $('<label for="'+ id +'"></label>');
+		        if(name == 'btSelectAll')
+			        $check.attr("id", id).parent().addClass("platform-checkbox").append($label);
+		        else
+		        	$check.parent().addClass("platform-checkbox").append($label);
+		    });
+	    });
 	}
 	
 	/**
@@ -220,7 +238,7 @@ var appTable = appTable || {};
 			    	"<i class='glyphicon glyphicon-export' aria-hidden='true'></i> 导出" +
 				"</button>" +
 				"<button type='button' class='btn btn-outline btn-default' id='toolbarMultiCheck'>" + 
-				    "<i class='glyphicon glyphicon-unchecked' aria-hidden='true'></i> 开启多选" +
+				    "<i class='glyphicon glyphicon-unchecked' aria-hidden='true'></i> <span>开启多选</span>" +
 				"</button>";
 		return "";
 	}
@@ -308,16 +326,19 @@ var appTable = appTable || {};
 		appTable.selections = [];
 		appTable.allPageSelections = [];
 		table.bootstrapTable('uncheckAll');
+		var labelSpan = checkBtn.parent().find("span");
 		if(appTable.multiCheckStatus == 1){
 			table.bootstrapTable('showColumn', 'tableMulti');
         	appTable.multiCheckStatus = 2;
         	checkBtn.removeClass("glyphicon-unchecked");
         	checkBtn.addClass("glyphicon-check");
+        	if(labelSpan) labelSpan.text("关闭多选");
         }else{
         	table.bootstrapTable('hideColumn', 'tableMulti');
         	appTable.multiCheckStatus = 1;
         	checkBtn.removeClass("glyphicon-check");
         	checkBtn.addClass("glyphicon-unchecked");
+        	if(labelSpan) labelSpan.text("开启多选");
         }
 	}
 	

@@ -1,11 +1,13 @@
 var $table = $('#tableList'), g_timeScopeType = "0", g_searchBeginMonth = "", g_searchEndMonth = "", g_searchBeginYear = "", g_searchEndYear = "";
 var g_loadDataRow = [];
+var g_caseTypeDict = [];
 $(function () {
 	g_timeScopeType = parent.$('#divSearchTime input:radio:checked').val();
 	g_searchBeginMonth = parent.$('#searchBeginMonth').val();
 	g_searchEndMonth = parent.$('#searchEndMonth').val();
 	g_searchBeginYear = parseInt(parent.$('#searchBeginYear').val());
 	g_searchEndYear = parseInt(parent.$('#searchEndYear').val());
+	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
 	//获取权限菜单
 	initFunc();
 	//初始化列表信息
@@ -54,11 +56,11 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticTranList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticCaseTypeList",   		//请求后台的URL（*）
         queryParams: searchParams,										//传递参数（*）
         height: 400,
         onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+	        appTable.setRowClickStatus($table, row, $el);
         }
     });
 	//初始化Table相关信息
@@ -91,17 +93,6 @@ function initCharts(data){
 	        position: 'top',
 	        formatter: '{c}',
 	        color: '#000',
-//	        position: 'insideBottom',
-//	        distance: 15,
-//	        align: 'left',
-//	        verticalAlign: 'middle',
-//	        rotate: 90,
-//	        formatter: '{c}  {name|{a}}',
-//	        rich: {
-//	            name: {
-//	                textBorderColor: '#fff'
-//	            }
-//	        }
 	    }
 	};
 	
@@ -109,7 +100,7 @@ function initCharts(data){
 	//获取X轴坐标数据
 	var nameData = [];
 	for(var i = 0; i < data.length; i++){
-		nameData[i] = data[i].name == '0' ? '全办' : '移交';
+		nameData[i] = top.app.getDictName(data[i].name, g_caseTypeDict);
 	}
 	//数组去重
 	xAxisData = Array.from(new Set(nameData));
@@ -127,7 +118,7 @@ function initCharts(data){
 				var hasValue = false;
 				for(var k = 0; k < data.length; k++){
 					if(!$.utils.isNull(data[k].name)) {
-						var tmpName = data[k].name == '0' ? '全办' : '移交';
+						var tmpName = top.app.getDictName(data[k].name, g_caseTypeDict);
 						var tmpMonth = data[k].checkTimeMonth + "月";
 						if(tmpName == xAxisData[j] && tmpMonth == legendArray[i]){
 							objData.push(data[k].value);
@@ -156,7 +147,7 @@ function initCharts(data){
 				var hasValue = false;
 				for(var k = 0; k < data.length; k++){
 					if(!$.utils.isNull(data[k].name)) {
-						var tmpName = data[k].name == '0' ? '全办' : '移交';
+						var tmpName = top.app.getDictName(data[k].name, g_caseTypeDict);
 						var tmpYear = data[k].checkTimeYear + "年";
 						if(tmpName == xAxisData[j] && tmpYear == legendArray[i]){
 							objData.push(data[k].value);
@@ -174,10 +165,9 @@ function initCharts(data){
 	}
 	option = {
 	    title: {
-	        text: '移交/全办',
+	        text: '案件类型',
 	        left: 'center'
 	    },
-//	    color: ['#a74848', '#4973a7', '#63a0a7'],
 	    tooltip: {
 	        trigger: 'axis',
 	        axisPointer: {
@@ -187,7 +177,6 @@ function initCharts(data){
 	    legend: {
 	        bottom: 0,
 	        right: 70,
-//	        data: ['1月', '2月' '3月'],
 	        data: legendArray
 	    },
 	    toolbox: {
@@ -199,7 +188,7 @@ function initCharts(data){
 	    calculable: true,
 	    xAxis: [
 	        {
-	            name : '移交/全办',
+	            name : '案件类型',
 	            nameLocation: 'middle',
 	            nameTextStyle:{
 	                padding: [12, 0, 0, 0],
@@ -208,7 +197,6 @@ function initCharts(data){
 	            },
 	            type: 'category',
 	            axisTick: {show: false},
-//	            data: ['天河', '花都', '海珠', '番禺', '荔湾']
 	            data: xAxisData
 	        }
 	    ],
@@ -226,27 +214,6 @@ function initCharts(data){
 	        }
 	    ],
 	    series: seriesData
-//	    series: [
-//	        {
-//	            name: '1月',
-//	            type: 'bar',
-//	            barGap: 0,
-//	            label: labelOption,
-//	            data: [10, 12, 14, 8, 16]
-//	        },
-//	        {
-//	            name: '2月',
-//	            type: 'bar',
-//	            label: labelOption,
-//	            data: [5, 3, 8, 12, 14]
-//	        },
-//	        {
-//	            name: '3月',
-//	            type: 'bar',
-//	            label: labelOption,
-//	            data: [7, 17, 10, 15, 12]
-//	        }
-//	    ]
 	};
  	// 使用刚指定的配置项和数据显示图表。
 	charts.setOption(option);
@@ -257,6 +224,5 @@ function serialNumberTable(value,row,index){
 }
 
 function tableFormatName(value,row,index){
-	if(value == '0') return '全办';
-	else return '移交';
+	return appTable.tableFormatDictValue(g_caseTypeDict, value);
 }

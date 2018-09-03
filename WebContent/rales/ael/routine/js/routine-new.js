@@ -147,6 +147,20 @@ function submitAction(){
 		top.app.message.notice("请输入组织名称！");
 		return;
 	}
+	
+	var taskSource = $('#divTaskSource input:radio:checked').val();
+	var isCheck = false;
+	$.each($("#divCheckUserAdvice").find("label").find("input"), function(i, item){
+		if($(item).prop('checked') == '1')isCheck = true;
+	});
+	if($.utils.isEmpty(taskSource)){
+		top.app.message.notice("请选择任务来源！");
+		return;
+	}
+	if(!isCheck){
+		top.app.message.notice("请选择承办人意见！");
+		return;
+	}
 
 	if($.utils.isEmpty(g_userIdList)){
 		top.app.message.notice("请选择第二承办人！");

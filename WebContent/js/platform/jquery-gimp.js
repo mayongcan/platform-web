@@ -301,6 +301,36 @@ jQuery.support.cors = true;
 	             return value1 - value2;     // 升序
 	         }
 	    },
+	    changeCheckboxStyle:function(){
+	    	$("input[type=checkbox]").each(function(i){
+		    	var $check = $(this);
+//		        if ($check.attr("id") && $check.next("label")) {
+//		            return;
+//		        }
+		        var name = $check.attr("name");
+		        if(!name) { name = $check.attr("id");}
+		        if(!name) return;
+		        var id = name + "-" + i;
+		        var $label = $('<label for="'+ id +'"></label>');
+		        //$check.attr("id", id).parent().addClass("checkbox").append($label);
+		        $check.parent().addClass("checkbox").append($label);
+		    });
+	    },
+	    changeRadioStyle:function(){
+	    	$("input[type=radio]").each(function(i){
+		    	var $check = $(this);
+		        if ($check.attr("id") && $check.next("label")) {
+		            return;
+		        }
+		        var name = $check.attr("name");
+		        if(!name) {name = $check.attr("id");}
+		        if(!name) return;
+		        var id = name + "-" + i;
+		        var $label = $('<label for="'+ id +'"></label>');
+		        //$check.attr("id", id).parent().addClass("radio").append($label);
+		        $check.parent().addClass("radio").append($label);
+		    });
+	    }
 	});
 	
 	$.fn.serializeFormJSON = function () {
@@ -842,3 +872,12 @@ jQuery.support.cors = true;
     })
     
 })(jQuery);
+
+$(document).ready(function() {
+	setTimeout(function () {
+		//更改checkbox样式
+		$.utils.changeCheckboxStyle();
+		//更改radio样式
+		$.utils.changeRadioStyle();
+    }, 400);
+});

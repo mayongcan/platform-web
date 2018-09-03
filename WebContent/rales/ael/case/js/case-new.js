@@ -1,13 +1,13 @@
 var g_params = null, g_backUrl = "", g_oldRegisterId = "", g_registerType = "";
 var g_filePath = null, g_fileSize = 0;
 var g_relevanceIdList = "", g_relevanceCodeList = "";
-var g_caseSourceDict = "", g_caseProcedureDict = "";
+var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "";
 var g_userIdList = "", g_userCodeList = "", g_userNameList = "";
 var g_codeType = "1", g_codeCurNum = "";
 var g_saveType = 1;		//1草稿 2提交
 
 $(function () {
-	//用于案件快捷登记
+	//用于案件登记
 	g_backUrl = $.utils.getUrlParam(window.location.search, "backUrl");
 	g_oldRegisterId = $.utils.getUrlParam(window.location.search, "oldRegisterId");
 	g_registerType = $.utils.getUrlParam(window.location.search, "registerType");
@@ -19,6 +19,7 @@ $(function () {
 	initView();
 	formValidate();
 	top.app.message.loadingClose();
+	
 });
 
 /**
@@ -28,6 +29,7 @@ $(function () {
 function initDict(){
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
 	g_caseProcedureDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_PROCEDURE');
+	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
 }
 
 /**
@@ -57,6 +59,7 @@ function initView(){
 	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource');
 	//top.app.addCheckBoxButton($("#divCaseSource"), g_caseSourceDict, 'checkboxCaseSource');
 	top.app.addComboBoxOption($("#caseProcedure"), g_caseProcedureDict);
+	top.app.addComboBoxOption($("#caseType"), g_caseTypeDict);
 	
 	//初始化文件选择器
 	fileupload.initFileNewSelector('files');
@@ -224,6 +227,7 @@ function submitAction(){
 	submitData["memo"] = $("#memo").val();
 	submitData["caseProcedure"] = $("#caseProcedure").val();
 	submitData["notPutOn"] = $("#notPutOn").val();
+	submitData["caseType"] = $("#caseType").val();
 	submitData["associateExecutor"] = g_userIdList;
 	submitData["relevanceId"] = g_relevanceIdList;
 	submitData["relevanceName"] = g_relevanceCodeList;
@@ -234,7 +238,7 @@ function submitAction(){
 	if(g_saveType == 1)submitData["flowProgress"] = "0";
 	else submitData["flowProgress"] = "1";
 	
-	//判断是否是案件快捷登记
+	//判断是否是案件登记
 	if(!$.utils.isEmpty(g_oldRegisterId)) {
 		submitData["oldRegisterId"] = g_oldRegisterId;
 		submitData["registerType"] = g_registerType;

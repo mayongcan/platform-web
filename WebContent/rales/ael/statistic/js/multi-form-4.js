@@ -1,12 +1,11 @@
 var $table = $('#tableList'), g_timeScopeType = "0", g_searchBeginMonth = "", g_searchEndMonth = "", g_searchBeginYear = "", g_searchEndYear = "";
-var g_loadDataRow = [], g_dict = [];
+var g_loadDataRow = [];
 $(function () {
 	g_timeScopeType = parent.$('#divSearchTime input:radio:checked').val();
 	g_searchBeginMonth = parent.$('#searchBeginMonth').val();
 	g_searchEndMonth = parent.$('#searchEndMonth').val();
 	g_searchBeginYear = parseInt(parent.$('#searchBeginYear').val());
 	g_searchEndYear = parseInt(parent.$('#searchEndYear').val());
-	g_dict = top.app.getDictDataByDictTypeValue('AEL_PUNISH_ACTION_TYPE');
 	//获取权限菜单
 	initFunc();
 	//初始化列表信息
@@ -55,11 +54,11 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticIllegalList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticLawResultList",   		//请求后台的URL（*）
         queryParams: searchParams,										//传递参数（*）
         height: 400,
         onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+	        appTable.setRowClickStatus($table, row, $el);
         }
     });
 	//初始化Table相关信息
@@ -92,25 +91,14 @@ function initCharts(data){
 	        position: 'top',
 	        formatter: '{c}',
 	        color: '#000',
-//	        position: 'insideBottom',
-//	        distance: 15,
-//	        align: 'left',
-//	        verticalAlign: 'middle',
-//	        rotate: 90,
-//	        formatter: '{c}  {name|{a}}',
-//	        rich: {
-//	            name: {
-//	                textBorderColor: '#fff'
-//	            }
-//	        }
 	    }
 	};
 	
 	var legendArray = [], xAxisData = [], seriesData = [];
 	//获取X轴坐标数据
 	var nameData = [];
-	for(var i = 0; i < g_dict.length; i++){
-		nameData[i] = g_dict[i].NAME;
+	for(var i = 0; i < data.length; i++){
+		nameData[i] = data[i].name;
 	}
 	//数组去重
 	xAxisData = Array.from(new Set(nameData));
@@ -175,10 +163,9 @@ function initCharts(data){
 	}
 	option = {
 	    title: {
-	        text: '违法事项',
+	        text: '执法结果',
 	        left: 'center'
 	    },
-//	    color: ['#a74848', '#4973a7', '#63a0a7'],
 	    tooltip: {
 	        trigger: 'axis',
 	        axisPointer: {
@@ -188,7 +175,6 @@ function initCharts(data){
 	    legend: {
 	        bottom: 0,
 	        right: 70,
-//	        data: ['1月', '2月' '3月'],
 	        data: legendArray
 	    },
 	    toolbox: {
@@ -200,7 +186,7 @@ function initCharts(data){
 	    calculable: true,
 	    xAxis: [
 	        {
-	            name : '违法事项',
+	            name : '执法结果',
 	            nameLocation: 'middle',
 	            nameTextStyle:{
 	                padding: [12, 0, 0, 0],
@@ -209,7 +195,6 @@ function initCharts(data){
 	            },
 	            type: 'category',
 	            axisTick: {show: false},
-//	            data: ['天河', '花都', '海珠', '番禺', '荔湾']
 	            data: xAxisData
 	        }
 	    ],
@@ -227,27 +212,6 @@ function initCharts(data){
 	        }
 	    ],
 	    series: seriesData
-//	    series: [
-//	        {
-//	            name: '1月',
-//	            type: 'bar',
-//	            barGap: 0,
-//	            label: labelOption,
-//	            data: [10, 12, 14, 8, 16]
-//	        },
-//	        {
-//	            name: '2月',
-//	            type: 'bar',
-//	            label: labelOption,
-//	            data: [5, 3, 8, 12, 14]
-//	        },
-//	        {
-//	            name: '3月',
-//	            type: 'bar',
-//	            label: labelOption,
-//	            data: [7, 17, 10, 15, 12]
-//	        }
-//	    ]
 	};
  	// 使用刚指定的配置项和数据显示图表。
 	charts.setOption(option);

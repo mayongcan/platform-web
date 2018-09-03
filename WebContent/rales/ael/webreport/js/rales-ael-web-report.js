@@ -16,6 +16,7 @@ $(function () {
  * @returns
  */
 function initView(){
+	$('#divSearchReportDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
 }
 
 /**
@@ -51,6 +52,8 @@ function initTable(){
             page: params.offset / params.limit,  		//当前页
             name: $('#searchName').val(),
             contactPhone: $('#searchContactPhone').val(),
+            address: $('#searchAddress').val(),
+            reportDate: $('#searchReportDate').val(),
         };
         return param;
     };
@@ -73,6 +76,8 @@ function initTable(){
 	$("#btnReset").click(function () {
 		$("#searchName").val("");
 		$("#searchContactPhone").val("");
+		$("#searchAddress").val("");
+		$("#searchReportDate").val("");
 		$('.selectpicker').selectpicker('refresh');
 		$table.bootstrapTable('refresh');
     });

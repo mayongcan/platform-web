@@ -1,5 +1,5 @@
 var g_params = {}, g_backUrl = null;
-var g_caseSourceDict = "", g_caseProcedureDict = "";
+var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -30,12 +30,14 @@ function initView(){
 	$('#tableTitleMark').text(g_params.row.code);
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
 	g_caseProcedureDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_PROCEDURE');
+	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
 	if(g_params.type == 2){
 		initDistrict();
 		$('#divDefendantDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
 		$('#divDefendantCheckDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
 		top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource', g_params.row.sourceCase);
 		top.app.addComboBoxOption($("#caseProcedure"), g_caseProcedureDict);
+		top.app.addComboBoxOption($("#caseType"), g_caseTypeDict);
 		
 		$('#divAcceptanceDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
 		$('#divFormDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date(),});
@@ -60,6 +62,7 @@ function initView(){
 		$("#caseProcedure").val(g_params.row.caseProcedure);
 		$("#notPutOn").val(g_params.row.notPutOn);
 		$('#tdUndertaker').text($.utils.getNotNullVal(g_params.row.associateUserName));
+		$("#caseType").val(g_params.row.caseType);
 	}else{
 		$("#btnOK").remove();
 		$("#btnCancel").text('返 回');
@@ -83,6 +86,7 @@ function initView(){
 		$('#tdCaseVerification').text($.utils.getNotNullVal(g_params.row.caseVerification));
 		$('#tdAdvice').text($.utils.getNotNullVal(g_params.row.advice));
 		$('#tdMemo').text($.utils.getNotNullVal(g_params.row.memo));
+		$('#tdCaseType').text($.utils.getNotNullVal(top.app.getDictName(g_params.row.caseType, g_caseTypeDict)));
 	}
 
 	//提交

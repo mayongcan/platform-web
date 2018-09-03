@@ -31,25 +31,25 @@
 							<td class="reference-td" colspan="5" style="font-weight: bold;">调查过程中务必注意保护举报人</td>
 						</tr>
 						<tr>
-							<td class="reference-td" colspan="2" style="text-align: center;">
-							   	案件来源
+							<td class="reference-td" colspan="2">
+							   	<span class="input-request">＊</span>案件来源
 							</td>
 							<td class="reference-td" colspan="3" >
 							   	<div id="divCaseSource" style="float:left;"></div>
 							</td>
 						</tr>
 						<tr>
-							<td class="reference-td" colspan="1" rowspan="4" style="width:100px;">
+							<td class="reference-td" colspan="1" rowspan="4" style="width:120px;">
 							   	报告人
 							</td>
-							<td class="reference-td" style="width:100px;">
-							   	姓名
+							<td class="reference-td" style="width:120px;">
+							   	姓名<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td">
 							   	<input type="text" id="reporterName" name="reporterName" class="form-control">
 							</td>
 							<td class="reference-td" style="width:100px;">
-							   	证件号码
+							   	证件号码<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td">
 							   	<input type="text" id="reporterCertificateNo" name="reporterCertificateNo" class="form-control">
@@ -57,13 +57,13 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	单位
+							   	单位<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td">
 							   	<input type="text" id="reporterCompany" name="reporterCompany" class="form-control">
 							</td>
 							<td class="reference-td">
-							   	联系人
+							   	联系人<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td">
 							   	<input type="text" id="reporterContacts" name="reporterContacts" class="form-control">
@@ -71,7 +71,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	联系地址
+							   	联系地址<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td" colspan="3">
 							   	<input type="text" id="reporterAddress" name="reporterAddress" class="form-control">
@@ -85,7 +85,7 @@
 							   	<input type="text" id="reporterZip" name="reporterZip" class="form-control">
 							</td>
 							<td class="reference-td">
-							   	联系电话
+							   	联系电话<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td">
 							   	<input type="text" id="reporterPhone" name="reporterPhone" class="form-control">
@@ -96,7 +96,7 @@
 							   	被报告人
 							</td>
 							<td class="reference-td">
-							   	单位/姓名
+							   	<span class="input-request">＊</span>单位/姓名
 							</td>
 							<td class="reference-td" colspan="3">
 							   	<input type="text" id="defendantName" name="defendantName" class="form-control">
@@ -114,7 +114,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	问题发生地
+							   	<span class="input-request">＊</span>问题发生地
 							</td>
 							<td class="reference-td" colspan="3">
 							   	<input type="text" id="defendantAddress" name="defendantAddress" class="form-control">
@@ -122,7 +122,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	问题发生时间
+							   	<span class="input-request">＊</span>问题发生时间
 							</td>
 							<td class="reference-td">
 								<div class="input-group date edit-layer-input" id="divDefendantDate">
@@ -133,7 +133,7 @@
 				            	</div>
 							</td>
 							<td class="reference-td">
-							   	登记时间
+							   	登记时间<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td">
 								<div class="input-group date edit-layer-input" id="divDefendantCheckDate">
@@ -160,17 +160,25 @@
 							   	<input type="text" id="notPutOn" name="notPutOn" class="form-control">
 							</td>
 						</tr>
+						<tr>
+							<td class="reference-td">
+							   	案件类型
+							</td>
+							<td class="reference-td" colspan="4">
+							   	<select class="selectpicker form-control" id="caseType"></select>
+							</td>
+						</tr>
 						<!-- <tr>
 							<td class="reference-td">
 							   	第二承办人
 							</td>
 							<td class="reference-td" colspan="4">
-							   	<input type="text" id="undertaker" name="undertaker" class="form-control" readonly style="cursor: pointer;">
+							   	<input type="text" id="undertaker" name="undertaker" class="form-control" readonly style="cursor: pointer;background: #fff;" placeholder="请选择第二承办人">
 							</td>
 						</tr> -->
 						<tr>
 							<td class="reference-td">
-							   	线索摘要
+							   	线索摘要<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td" colspan="4">
 								<textarea id="clueSummary" name="clueSummary" class="form-control" style="height:120px"></textarea>
@@ -178,7 +186,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	情况核实
+							   	情况核实<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td" colspan="4">
 								<textarea id="caseVerification" name="caseVerification" class="form-control" style="height:120px"></textarea>
@@ -186,7 +194,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	承办人意见
+							   	<span class="input-request">＊</span>承办人意见
 							</td>
 							<td class="reference-td" colspan="4">
 								<textarea id="advice" name="advice" class="form-control" style="height:120px"></textarea>
@@ -205,7 +213,7 @@
 				<table id="tableUploadList" class="reference1" style="margin-top:20px;">
 					<tbody>
 						<tr>
-							<td class="reference-td" style="width:100px;">附件上传</td>
+							<td class="reference-td" style="width:120px;">附件上传</td>
 							<td class="reference-td" colspan="4" style="line-height: normal;">
 								<div class="file-loading"> 
 									<input type="file" accept="*" id="files" name="files" multiple="multiple">
@@ -215,7 +223,7 @@
 						<tr>
 							<td class="reference-td">文书关联</td>
 							<td class="reference-td" colspan="4">
-								<input type="text" id="relevanceId" name="relevanceId" class="form-control" readonly style="cursor: pointer;">
+								<input type="text" id="relevanceId" name="relevanceId" class="form-control" readonly style="cursor: pointer;background: #fff;" placeholder="请选择关联文书">
 							</td>
 						</tr>
 					</tbody>

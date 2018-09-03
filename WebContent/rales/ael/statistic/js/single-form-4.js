@@ -50,11 +50,11 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticIllegalList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticLawResultList",   		//请求后台的URL（*）
         queryParams: searchParams,		
-        height: 450,
+        height: 400,
         onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+	        appTable.setRowClickStatus($table, row, $el);
         },
         onPostBody:function () {
         		setTimeout(function () {
@@ -99,8 +99,7 @@ function initTable(){
 function initPieCharts(data){
 	var dataName = [], dataValue = [];
 	for(var i = 0; i < data.length; i++){
-		if($.utils.isNull(data[i].name)) dataName[i] = "";
-		else dataName[i] = data[i].name;
+		dataName[i] = data[i].name;
 		var obj = {};
 		obj.name = dataName[i];
 		obj.value = data[i].value;
@@ -109,7 +108,7 @@ function initPieCharts(data){
 	var pieCharts = echarts.init(document.getElementById('pieCharts'));
 	option = {
 	    title: {
-	        text: '违法事项',
+	        text: '执法结果',
 	        left: 'center'
 	    },
 	    tooltip : {
@@ -119,12 +118,11 @@ function initPieCharts(data){
 	    legend: {
 	        bottom: 0,
 	        left: 'center',
-	        //data: ['天河', '花都','海珠','番禺','荔湾']
 	        data: dataName
 	    },
 	    series : [
 	        {
-	            name:'违法事项',
+	            name:'执法结果',
 	            type: 'pie',
 	            radius : '45%',
 	            center: ['40%', '40%'],
@@ -153,14 +151,13 @@ function initPieCharts(data){
 function initBarCharts(data){
 	var dataName = [], dataValue = [];
 	for(var i = 0; i < data.length; i++){
-		if($.utils.isNull(data[i].name)) dataName[i] = "";
-		else dataName[i] = data[i].name;
+		dataName[i] = data[i].name;
 		dataValue[i] = data[i].value;
 	}
 	var barCharts = echarts.init(document.getElementById('barCharts'));
 	option = {
 	    title: {
-	        text: '违法事项',
+	        text: '执法结果',
 	        left: 'center'
 	    },
 	    color: ['#4973a7'],
@@ -175,7 +172,7 @@ function initBarCharts(data){
 	    },
 	    xAxis : [
 	        {
-	            name : '违法事项',
+	            name : '执法结果',
 	            nameLocation: 'middle',
 	            nameTextStyle:{
 	                padding: [12, 0, 0, 0],
@@ -183,7 +180,6 @@ function initBarCharts(data){
 	                fontWeight: 'bold',
 	            },
 	            type : 'category',
-//	            data : ['天河', '花都','海珠','番禺','荔湾'],
 	            data : dataName,
 	            axisTick: {
 	                alignWithLabel: true
@@ -208,7 +204,6 @@ function initBarCharts(data){
 	            name:'案件总数',
 	            type:'bar',
 	            barWidth: '50%',
-//	            data:[12, 19, 24, 25, 15]
 	            data: dataValue
 	        }
 	    ]

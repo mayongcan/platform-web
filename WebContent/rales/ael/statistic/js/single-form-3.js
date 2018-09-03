@@ -1,10 +1,12 @@
 var $table = $('#tableList'), g_timeScopeType = "0", g_searchBegin = "", g_searchEnd = "", g_searchYear = "";
 var g_loadDataRow = [];
+var g_caseTypeDict = [];
 $(function () {
 	g_timeScopeType = parent.$('#divSearchTime input:radio:checked').val();
 	g_searchBegin = parent.$('#searchBegin').val();
 	g_searchEnd = parent.$('#searchEnd').val();
 	g_searchYear = parseInt(parent.$('#searchYear').val());
+	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
 	//获取权限菜单
 	initFunc();
 	//初始化列表信息
@@ -50,11 +52,11 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticTranList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticCaseTypeList",   		//请求后台的URL（*）
         queryParams: searchParams,		
         height: 400,
         onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+	        appTable.setRowClickStatus($table, row, $el);
         },
         onPostBody:function () {
         		setTimeout(function () {
@@ -100,7 +102,7 @@ function initPieCharts(data){
 	var dataName = [], dataValue = [];
 	for(var i = 0; i < data.length; i++){
 		if($.utils.isNull(data[i].name)) dataName[i] = "";
-		else dataName[i] = data[i].name == '0' ? '全办' : '移交';
+		else dataName[i] = top.app.getDictName(data[i].name, g_caseTypeDict);
 		var obj = {};
 		obj.name = dataName[i];
 		obj.value = data[i].value;
@@ -109,7 +111,7 @@ function initPieCharts(data){
 	var pieCharts = echarts.init(document.getElementById('pieCharts'));
 	option = {
 	    title: {
-	        text: '移交/全办',
+	        text: '案件类型',
 	        left: 'center'
 	    },
 	    tooltip : {
@@ -119,12 +121,11 @@ function initPieCharts(data){
 	    legend: {
 	        bottom: 0,
 	        left: 'center',
-	        //data: ['天河', '花都','海珠','番禺','荔湾']
 	        data: dataName
 	    },
 	    series : [
 	        {
-	            name:'移交/全办',
+	            name:'案件类型',
 	            type: 'pie',
 	            radius : '45%',
 	            center: ['40%', '40%'],
@@ -134,13 +135,6 @@ function initPieCharts(data){
 	                    color: '#000'
 	                }
 	            },
-//	            data:[
-//	                {value:12,name: '天河'},
-//	                {value:19, name: '花都'},
-//	                {value:24, name: '海珠'},
-//	                {value:25, name: '番禺'},
-//	                {value:15, name: '荔湾'}
-//	            ],
 	            data: dataValue,
 	            itemStyle: {
 	                emphasis: {
@@ -161,13 +155,13 @@ function initBarCharts(data){
 	var dataName = [], dataValue = [];
 	for(var i = 0; i < data.length; i++){
 		if($.utils.isNull(data[i].name)) dataName[i] = "";
-		else dataName[i] = data[i].name == '0' ? '全办' : '移交';
+		else dataName[i] = top.app.getDictName(data[i].name, g_caseTypeDict);
 		dataValue[i] = data[i].value;
 	}
 	var barCharts = echarts.init(document.getElementById('barCharts'));
 	option = {
 	    title: {
-	        text: '移交/全办',
+	        text: '案件类型',
 	        left: 'center'
 	    },
 	    color: ['#4973a7'],
@@ -182,7 +176,7 @@ function initBarCharts(data){
 	    },
 	    xAxis : [
 	        {
-	            name : '移交/全办',
+	            name : '案件类型',
 	            nameLocation: 'middle',
 	            nameTextStyle:{
 	                padding: [12, 0, 0, 0],
@@ -190,7 +184,6 @@ function initBarCharts(data){
 	                fontWeight: 'bold',
 	            },
 	            type : 'category',
-//	            data : ['天河', '花都','海珠','番禺','荔湾'],
 	            data : dataName,
 	            axisTick: {
 	                alignWithLabel: true
@@ -215,7 +208,6 @@ function initBarCharts(data){
 	            name:'案件总数',
 	            type:'bar',
 	            barWidth: '50%',
-//	            data:[12, 19, 24, 25, 15]
 	            data: dataValue
 	        }
 	    ]
@@ -228,6 +220,10 @@ function serialNumberTable(value,row,index){
 	return appTable.tableFormatSerialNumber($table, index);
 }
 
+function tableFormatName(value,row,index){
+	return appTable.tableFormatDictValue(g_caseTypeDict, value);
+}
+
 function tableFormatTimeScope(value, row) {
 	if(g_timeScopeType == '1'){
 		return $.date.dateFormat(g_searchBegin, "yyyy年MM月dd日") + " - " + $.date.dateFormat(g_searchEnd, "yyyy年MM月dd日");
@@ -236,11 +232,6 @@ function tableFormatTimeScope(value, row) {
 	}else{
 		return "全部";
 	}
-}
-
-function tableFormatName(value,row,index){
-	if(value == '0') return '全办';
-	else return '移交';
 }
 
 //格式化统计-文字

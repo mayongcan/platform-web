@@ -51,4 +51,7 @@ function tableFormatStatType(value, row) {
 function tableFormatStatWork(value, row) {
 	return appTable.tableFormatDictValue(parent.g_statWorkDict, value);
 }
+function tableFormatStatAreaCode(value, row) {
+	return appTable.tableFormatDictValue(parent.g_statAreaCodeDict, value);
+}
 

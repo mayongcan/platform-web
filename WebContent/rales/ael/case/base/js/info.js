@@ -9,16 +9,17 @@ $(function () {
 	$('#defendantAddress').text(parent.g_params.row.address);
 	$('#defendantDate').text($.date.dateFormat(parent.g_params.row.occurrenceDate, "yyyy-MM-dd"));
 	$('#reporterName').text(parent.g_params.row.defendantName);	//自动获取“案件登记表”的【被报告人】的“姓名/单位”字段。
+
+	$('#reporterCertificateNo').text($.utils.getNotNullVal(parent.g_params.row.reporterCertificateNo));
+	$('#reporterAddress').text($.utils.getNotNullVal(parent.g_params.row.reporterAddress));
+	$('#reporterZip').text(parent.g_params.row.reporterZip);
+	$('#reporterPhone').text($.utils.getNotNullVal(parent.g_params.row.reporterPhone));
+	$('#memo').text(parent.g_params.row.memo);
 	
 	//获取立案审批表文书
 	var dataInfo = rales.getWritContent(parent.g_params.row.id, rales.writNecessity2_1, "");
 	if(!$.utils.isNull(dataInfo.content)){
 		dataInfo.content = eval("(" + dataInfo.content + ")");
 		$('#illegalContent').text($.utils.getNotNullVal(dataInfo.content.illegalContent));
-		$('#reporterCertificateNo').text($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
-		$('#reporterAddress').text($.utils.getNotNullVal(dataInfo.content.partiesAddr));
-//		$('#reporterZip').text(filingInfo.zip);
-		$('#reporterPhone').text($.utils.getNotNullVal(dataInfo.content.partiesPhone));
-//		$('#memo').text(parent.g_params.row.memo);
 	}
 });

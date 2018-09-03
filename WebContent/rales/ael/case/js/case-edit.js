@@ -1,7 +1,7 @@
 var g_params = null, g_backUrl = "";
 var g_filePath = null, g_fileSize = 0;
 var g_relevanceIdList = "", g_relevanceCodeList = "";
-var g_caseSourceDict = "", g_caseProcedureDict = "";
+var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "";
 var g_userIdList = "", g_userCodeList = "", g_userNameList = "";
 var g_saveType = 1;		//1草稿 2提交
 
@@ -11,6 +11,7 @@ $(function () {
 	top.app.message.loading();
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
 	g_caseProcedureDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_PROCEDURE');
+	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
 	initDistrict();
 	initView();
 	initData();
@@ -41,6 +42,7 @@ function initView(){
 	$('#divDefendantCheckDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
 	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource');
 	top.app.addComboBoxOption($("#caseProcedure"), g_caseProcedureDict);
+	top.app.addComboBoxOption($("#caseType"), g_caseTypeDict);
 	
 	//选择第二承办人
 	$("#undertaker").click(function () {
@@ -127,6 +129,7 @@ function initData(){
 	$("#memo").val(g_params.row.memo);
 	$("#caseProcedure").val(g_params.row.caseProcedure);
 	$("#notPutOn").val(g_params.row.notPutOn);
+	$("#caseType").val(g_params.row.caseType);
 
 	g_userIdList = g_params.row.associateExecutor;
 	g_userNameList = g_params.row.associateUserName;
@@ -215,6 +218,7 @@ function submitAction(){
 	submitData["memo"] = $("#memo").val();
 	submitData["caseProcedure"] = $("#caseProcedure").val();
 	submitData["notPutOn"] = $("#notPutOn").val();
+	submitData["caseType"] = $("#caseType").val();
 	submitData["associateExecutor"] = g_userIdList;
 	submitData["relevanceId"] = g_relevanceIdList;
 	submitData["relevanceName"] = g_relevanceCodeList;

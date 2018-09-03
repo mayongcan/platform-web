@@ -46,9 +46,11 @@ function setData(){
 
 	if(g_params.data.personType == '1') $("#personType1").attr("checked",true);
 	else if(g_params.data.personType == '2') $("#personType2").attr("checked",true);
-	
-	top.app.addRadioButton($("#divTaskSource"), g_params.taskSourceDict, 'radioTaskSource', g_params.data.taskSource);
-	top.app.addCheckBoxButtonLine($("#divCheckUserAdvice"), g_params.checkRegisterAdviceDict, 'checkUserAdvice', g_params.data.checkUserAdvice);
+
+	$('#tdTaskSource').text(top.app.getDictName(g_params.data.taskSource, g_params.taskSourceDict));
+	$('#tdCheckUserAdvice').text(top.app.getCheckBoxButtonVal(g_params.data.checkUserAdvice, g_params.checkRegisterAdviceDict));
+//	top.app.addRadioButton($("#divTaskSource"), g_params.taskSourceDict, 'radioTaskSource', g_params.data.taskSource);
+//	top.app.addCheckBoxButtonLine($("#divCheckUserAdvice"), g_params.checkRegisterAdviceDict, 'checkUserAdvice', g_params.data.checkUserAdvice);
 
 	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
 	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));

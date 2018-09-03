@@ -6,6 +6,9 @@ $(function () {
 	initView();
 	initNavButton();
 	initData();
+	if(!g_params.isEdit){
+		$('#auditNoticeTip').remove();
+	}
 });
 
 function initView(){

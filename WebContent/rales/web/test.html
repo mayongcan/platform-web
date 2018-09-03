@@ -3,6 +3,21 @@
 <body>
 <h1>Test Android Scheme</h1> 
 <!--手动点击跳转-->
-<a href="dlzf://?openId=123456789">Click</a>
+<a href="dlzf://?openId=123456789">open app</a>
+<a href="#" id="download">download app</a>
 </body>  
+	<script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+	<script src="../../../js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+ 	<script src="../../../js/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+   	<script src="../../../js/plugins/loadingoverlay/loadingoverlay.js" type="text/javascript"></script>
+    <script src="../../../js/timer.jquery.min.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/appconfig.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	$(function(){
+	    $("#download").click(function () {
+	    	window.open(top.app.conf.url.res.url + "File/rales-app.apk");
+	    });
+	})
+    </script>
 </html>

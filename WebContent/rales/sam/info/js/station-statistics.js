@@ -20,11 +20,19 @@ function initView(){
    			top.app.message.notice("请选择需要统计的所在地！");
    			return;
 		}
+		if($.utils.isEmpty($.trim($("#searchStatType").val()))){
+   			top.app.message.notice("请选择需要统计的台站类型！");
+   			return;
+		}
+		$('#tableList').css('display', '');
+		$('#chats').css('display', '');
 		$table.bootstrapTable('destroy');
 		loadTable();
 //		$table.bootstrapTable('refresh');
     });
 	$("#btnReset").click(function () {
+		$('#tableList').css('display', 'none');
+		$('#chats').css('display', 'none');
 		$('#searchStatType').val("");
 		$('#searchStatAreaCode').val("");
 		//刷新数据，否则下拉框显示不出内容
@@ -82,12 +90,14 @@ function loadTable(){
 		field:"areaCode",
 		formatter:"tableFormatAreaCode",
     });
-    var type = $.trim($("#searchStatType").val()).split(',');
-    for(var i = 0; i < type.length; i++){
-        columnsArray.push({
-    		title: top.app.getDictName(type[i], g_statTypeDict),
-    		field: type[i],
-        });
+    if($("#searchStatType").val() != ''){
+        var type = $.trim($("#searchStatType").val()).split(',');
+        for(var i = 0; i < type.length; i++){
+            columnsArray.push({
+        		title: top.app.getDictName(type[i], g_statTypeDict),
+        		field: type[i],
+            });
+        }
     }
     columnsArray.push({
 		title: '台站总数',

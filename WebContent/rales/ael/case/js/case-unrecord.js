@@ -1,10 +1,11 @@
-var $table = $('#tableList'), g_flowProgressDict = [], g_caseSourceDict = [];
+var $table = $('#tableList'), g_flowProgressDict = [], g_caseSourceDict = [], g_caseTypeDict = [];
 
 $(function () {
 	//实现日期联动
 	$.date.initSearchDate('divHandleBegin', 'divHandleEnd');
 	g_flowProgressDict = top.app.getDictDataByDictTypeValue('AEL_CASE_FLOW_PROCEDURE');
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
 	top.app.addComboBoxOption($("#searchFlowProgress"), g_flowProgressDict, true);
 	//获取权限菜单
 	initFunc();
@@ -125,6 +126,7 @@ function btnEventDetail(id){
 	top.app.info.iframe.params.isFinish = true;
 	top.app.info.iframe.params.flowProgressDict = g_flowProgressDict;
 	top.app.info.iframe.params.caseSourceDict = g_caseSourceDict;
+	top.app.info.iframe.params.caseTypeDict = g_caseTypeDict;
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/case/case-detail.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-unrecord.html";
 	window.location.href = encodeURI(url);

@@ -4,7 +4,7 @@ $(function () {
 	//初始化字典
 	initDict();
 	//初始化权限
-//	initFunc();
+	initFunc();
 	//初始化列表信息
 	initTable();
 	//初始化权限功能按钮点击事件

@@ -1,82 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>初始页-判断用户信息</title>
-<style>
-	.content{
-		width:100%;
-		height:100%;
-	}
-	.logindiv{
-		width:60%;
-		/* border:1px solid black; */
-		position:relative;
-		left:20%;
-		box-shadow: 1px 14px 40px 1px #e0dcdc;
-		height:500px;
-		top:100px;
-	}
-	form{
-		margin-left:80px;
-	}
-	label{
-		color:#808080;
-		font-size:20px;
-		margin-left:40px;
-	}
-	.name,.password{
-		height:30px;
-		width:200px;
-		border:0px;
-	}
-	.namediv,.passworddiv{
-		border-bottom:1px solid #cdcdcd;
-		margin-right:60px;
-		height:40px;
-		line-height:40px;
-	}
-	input::-webkit-input-placeholder {
-    	font-size:20px;
-    	padding-left:10px;
-    	margin-bottom:4px;    
- 	}
- 	input {
- 		outline:none;
- 		border:0px;
- 	}
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>初始页-判断用户信息</title>
+	<style>
+		.content {
+			width: 100%;
+			height: 100%;
+		}
+
+		.logindiv {
+			/* width:60%; */
+			/* border:1px solid black; */
+			position: relative;
+			/* box-shadow: 1px 14px 40px 1px #e0dcdc; */
+			height: 500px;
+			top: 50px;
+		}
+
+		form {
+			margin-left: 40px;
+		}
+
+		label {
+			color: #808080;
+			font-size: 20px;
+		}
+
+		.name, .password {
+			height: 30px;
+			border: 0px;
+		}
+
+		.namediv, .passworddiv {
+			border-bottom: 1px solid #cdcdcd;
+			margin-right: 60px;
+			height: 40px;
+			line-height: 40px;
+		}
+
+		input::-webkit-input-placeholder {
+			font-size: 20px;
+			padding-left: 10px;
+			margin-bottom: 4px;
+		}
+
+		input {
+			outline: none;
+			border: 0px;
+			/*font-size: 14px;*/
+		}
+	</style>
 </head>
 <body>
-	<div class="content">
-		<div class="logindiv" style="display:none;">
-			<form>
-				<div style="text-align:center;margin-left:-80px;padding-top:40px;font-size:22px;color:#808080;">
-					<p>绑定账号</p>
+<div class="content">
+	<div class="logindiv" style="display:none;">
+		<!--style="display:none;"-->
+		<form>
+			<div style="text-align:center;margin-left:-60px;padding-top:40px;font-size:22px;color:#808080;">
+				<p>绑定账号</p>
+			</div>
+			<div class="namediv" style="margin-top:60px;">
+				<div style="float: left">
+					<label>账号：</label></div>
+				<div style="float: left;width:80px;font-size:14px">
+					<input type="text" class="userCode" required=required>
 				</div>
-				<div class="namediv" style="margin-top:80px;">
-					<label>账号：</label>
-					<input type="text" class="userCode" required=required> 
-				</div>
-				<div class="passworddiv" style="margin-top:40px;">
+			</div>
+			<div class="passworddiv" style="margin-top:40px;">
+				<div style="float: left">
 					<label>密码：</label>
-					<input type="password" class="password required" />
 				</div>
-				<div class="submitdiv" > 
-					<input type="button" class="savebtn required"  onclick="saveUserInfo()" value="绑定" style="color:#fff;background: #1bb394;border-radius: 4px;width:100px;height:40px;margin-top:50px;margin-left:40px;"> 
-				</div>			
-			</form>
-		</div>
+				<div style="float: left;width:80px;font-size:14px" >
+					<input type="password" class="password required"/>
+				</div>
+			</div>
+			<div  style="margin-top:40px;"></div>
+			<div class="submitdiv" style="margin:0 auto">
+				<input type="button" class="savebtn required" onclick="saveUserInfo()" value="绑定"
+					   style="color:#fff;background: #1bb394;border-radius: 4px;width:200px;height:40px;">
+			</div>
+		</form>
 	</div>
-	
+</div>
+
 </body>
-	<script type="text/javascript" src="https://mbi.51mw.club/Wchat_V20C_170222/Jvs/0000000000/wchat.js"></script>
-	<script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
-	<script src="../../../js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
- 	<script src="../../../js/plugins/toastr/toastr.min.js" type="text/javascript"></script>
-   	<script src="../../../js/plugins/loadingoverlay/loadingoverlay.js" type="text/javascript"></script>
-    <script src="../../../js/timer.jquery.min.js" type="text/javascript"></script>
-    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
-    <script src="../../../js/platform/appconfig.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/checkUserInfo.js"></script>
+<script type="text/javascript" src="https://mbi.51mw.club/Wchat_V20C_170222/Jvs/0000000000/wchat.js"></script>
+<script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="../../../js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/loadingoverlay/loadingoverlay.js" type="text/javascript"></script>
+<script src="../../../js/timer.jquery.min.js" type="text/javascript"></script>
+<script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+<script src="../../../js/platform/appconfig.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/checkUserInfo.js"></script>
 </html>

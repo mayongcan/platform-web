@@ -106,6 +106,7 @@ function btnEventDetail(id){
 //	if(row.activityName == '行政检查编辑' || row.activityName == '行政检查草稿' ||  row.activityName == '第二承办人审批'){
 //		top.app.info.iframe.params.isEdit = true;
 //	}
+	top.app.info.iframe.params.isEdit = false;
 	top.app.info.iframe.params.row = row;
 	top.app.info.iframe.params.backUrl = "/rales/ael/routine/routine-handle.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");

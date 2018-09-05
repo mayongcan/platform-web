@@ -13,7 +13,34 @@
     <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
     <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
     <link href="../../../css/platform.css" rel="stylesheet">
-<body class="gray-bg">
+    <style type="text/css">
+    table.reference td {
+    	min-width: 15px;
+    }
+    .checkbox, .radio {
+	    position: relative;
+	    display: block;
+	    margin-top: 0px;
+	    margin-bottom: 0px;
+	}
+	.checkbox label::before {
+	    content: "";
+	    display: inline-block;
+	    position: absolute;
+	    width: 17px;
+	    height: 17px;
+	    left: 0;
+	    top: 4px;
+	    margin-left: 0px;
+	    border: 1px solid #cccccc;
+	    border-radius: 3px;
+	    background-color: #fff;
+	    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+	    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+	    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+	}
+    </style>
+<body>
     <div class="wrapper wrapper-content animated fadeIn">
     	<form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
 	    
@@ -22,15 +49,25 @@
                 <input type="text" id="name" name="name" class="form-control m-b edit-layer-input" style="width:520px;">
             </div>
 		
-            <div class="form-group edit-group-style">
+            <div class="form-group edit-group-style" style="display: none">
                 <label class="col-sm-2 control-label edit-layer-title" style="width: 115px;">附件列表</label>
                 <select class="selectpicker" id="selectFile"></select>
             </div>
-		
-		
+            <div class="form-group" style="padding-left: 15px;padding-right: 45px;">
+            <table class="reference" >
+				<tbody>
+					<tr>
+						<td class="reference-td" style="width:40px;"></td>
+						<td class="reference-td">附件名称</td>
+						<td class="reference-td" style="width:170px;">操作</td>
+					</tr>
+				</tbody>
+				<tbody id="resultList"></tbody>
+			</table>
+			</div>
             <div class="edit-box-button">
-		        <button type="submit" class="btn btn-primary edit-layer-button" id="layerOk">下 载</button>
-		        <button type="reset" class="btn btn-white edit-layer-button" id="layerCancel">取 消</button>
+		        <button type="submit" class="btn btn-primary edit-layer-button" id="layerOk">批量下载</button>
+		        <button type="reset" class="btn btn-white edit-layer-button" id="layerCancel">关 闭</button>
 	        </div>
         </form>
     </div>

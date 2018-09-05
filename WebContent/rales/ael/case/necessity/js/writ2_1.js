@@ -261,7 +261,7 @@ function submitAction(){
 		top.app.message.notice("请选择第二承办人！");
 		return;
 	}
-	if(g_userIdList == top.app.info.userInfo.userId){
+	if(g_params.type == 1 && g_userIdList == top.app.info.userInfo.userId){
 		top.app.message.notice("不能选择自己作为第二承办人！");
 		return;
 	}

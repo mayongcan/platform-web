@@ -312,7 +312,7 @@ jQuery.support.cors = true;
 		        if(!name) return;
 		        var id = name + "-" + i;
 		        var $label = $('<label for="'+ id +'"></label>');
-		        //$check.attr("id", id).parent().addClass("checkbox").append($label);
+//		        $check.attr("id", id).parent().addClass("checkbox").append($label);
 		        $check.parent().addClass("checkbox").append($label);
 		    });
 	    },
@@ -873,11 +873,14 @@ jQuery.support.cors = true;
     
 })(jQuery);
 
+var g_loadCheckBoxStyle = true;
 $(document).ready(function() {
-	setTimeout(function () {
-		//更改checkbox样式
-		$.utils.changeCheckboxStyle();
-		//更改radio样式
-		$.utils.changeRadioStyle();
-    }, 400);
+	if(g_loadCheckBoxStyle){
+		setTimeout(function () {
+			//更改checkbox样式
+			$.utils.changeCheckboxStyle();
+			//更改radio样式
+			$.utils.changeRadioStyle();
+	    }, 400);	
+	}
 });

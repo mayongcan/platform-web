@@ -113,6 +113,7 @@ function btnEventDetail(id){
 //			row.activityName == '重新编辑' || row.activityName == '第二承办人审批'){
 //		top.app.info.iframe.params.isEdit = true;
 //	}
+	top.app.info.iframe.params.isEdit = false;
 	top.app.info.iframe.params.row = row;
 	top.app.info.iframe.params.backUrl = "/rales/ael/force/audit-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");

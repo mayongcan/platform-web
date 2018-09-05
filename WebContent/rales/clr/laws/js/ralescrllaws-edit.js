@@ -74,7 +74,7 @@ function submitAction(){
 	submitData["name"] = $("#name").val();
 	if(g_filePath != null && g_filePath != undefined){
 		submitData["files"] = g_filePath;
-		submitData["num"] = g_fileNum;
+		submitData["num"] = g_params.rows.num + g_fileNum;
 		submitData["size"] = g_fileSize;
 	}
 	//异步处理

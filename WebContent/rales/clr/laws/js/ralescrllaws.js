@@ -58,7 +58,7 @@ function initTable(){
         queryParams: searchParams,											//传递参数（*）
         uniqueId: 'id',
         onClickRow: function(row, $el){
-        		appTable.setRowClickStatus($table, row, $el);
+        	appTable.setRowClickStatus($table, row, $el);
         }
     });
 	//初始化Table相关信息
@@ -136,5 +136,8 @@ function ralesCrlLawsDetail(id){
 	//设置参数
 	var params = {};
 	params.row = row;
-	top.app.layer.editLayer('详情', ['710px', '500px'], '/rales/clr/laws/ralescrllaws-detail.html', params, function(){});
+	top.app.layer.editLayer('详情', ['710px', '500px'], '/rales/clr/laws/ralescrllaws-detail.html', params, function(){
+		//重新加载列表
+		$table.bootstrapTable('refresh');
+	});
 }

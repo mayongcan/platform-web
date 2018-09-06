@@ -68,32 +68,58 @@ function submitAction(){
 		top.app.message.alert("请选择需要上传的监测站数据！");
 		return;
 	}
-	// 启动加载层
 	top.app.message.loading(60000);
-	var formData = new FormData();
-	formData.append("file",	$("#filesPath")[0].files[0]);
-	$.ajax({  
-		url: g_params.operUrl + "?access_token=" + top.app.cookies.getCookiesToken() + "&id=" + g_params.row.id,
-        type: 'POST',  
-        data: formData,  
-        // 告诉jQuery不要去处理发送的数据
-        processData : false, 
-        // 告诉jQuery不要去设置Content-Type请求头
-        contentType : false,
-        success : function(data) { 
-   			top.app.message.loadingClose();
-   			if(top.app.message.code.success == data.RetCode){
-   				// 关闭页面前设置结果
-				parent.app.layer.editLayerRet = true;
-	   			top.app.message.notice("监测站数据上传成功！");
-				parent.layer.close(g_iframeIndex);
-	   		}else{
-	   			top.app.message.noticeError(data.RetMsg);
-	   		}
-        },  
-        error : function(responseStr) { 
-   			top.app.message.loadingClose();
-   			top.app.message.noticeError("监测站数据上传失败，请稍后重试！");
-        }  
-    }); 
+	// 上传图片到资源服务器
+	top.app.uploadFile($("#filesPath")[0].files[0], function(data) {
+		// 分析数据
+		// 定义提交数据
+		var submitData = {};
+		submitData['id'] = g_params.row.id;
+		submitData["filePath"] = data;
+		// 异步处理
+		$.ajax({
+			url : g_params.operUrl + "?access_token=" + top.app.cookies.getCookiesToken(),
+			method : 'POST',
+			data : JSON.stringify(submitData),
+			contentType : "application/json",
+			success : function(data) {
+				if (top.app.message.code.success == data.RetCode) {
+					// 关闭页面前设置结果
+					parent.app.layer.editLayerRet = true;
+		   			top.app.message.notice("监测站数据上传成功！");
+					parent.layer.close(g_iframeIndex);
+				} else {
+					top.app.message.error(data.RetMsg);
+				}
+			}
+		});
+		
+//		var formData = new FormData();
+//		formData.append("file",	$("#filesPath")[0].files[0]);
+//		$.ajax({  
+//			url: g_params.operUrl + "?access_token=" + top.app.cookies.getCookiesToken() + "&id=" + g_params.row.id,
+////			url: top.app.conf.url.apigateway + "/zuul/api/rales/sam/frequency/uploadMonitorData?access_token=" + top.app.cookies.getCookiesToken() + "&id=" + g_params.row.id,
+//	        type: 'POST',  
+//	        data: formData,  
+//	        // 告诉jQuery不要去处理发送的数据
+//	        processData : false, 
+//	        // 告诉jQuery不要去设置Content-Type请求头
+//	        contentType : false,
+//	        success : function(data) { 
+//	   			top.app.message.loadingClose();
+//	   			if(top.app.message.code.success == data.RetCode){
+//	   				// 关闭页面前设置结果
+//					parent.app.layer.editLayerRet = true;
+//		   			top.app.message.notice("监测站数据上传成功！");
+//					parent.layer.close(g_iframeIndex);
+//		   		}else{
+//		   			top.app.message.noticeError(data.RetMsg);
+//		   		}
+//	        },  
+//	        error : function(responseStr) { 
+//	   			top.app.message.loadingClose();
+//	   			top.app.message.noticeError("监测站数据上传失败，请稍后重试！");
+//	        }  
+//	    }); 
+	});
 }

@@ -164,13 +164,20 @@ function formValidate(){
 }
 
 function submitAction(){
-	if($('#mobileStation1').val() == '' || $('#mobileStation2').val() == ''){
-		top.app.message.notice("请输入移动台发射频率！");
-		return;
-	}
-	if($('#baseStation1').val() == '' || $('#baseStation2').val() == ''){
-		top.app.message.notice("请输入基地台发射频率！");
-		return;
+	if ($('#network').val() == '1' || $('#network').val() == '2'){
+		if($('#centerFrequency1').val() == '' || $('#centerFrequency1').val() == ''){
+			top.app.message.notice("请输入中心频率！");
+			return;
+		}
+	}else{
+		if($('#mobileStation1').val() == '' || $('#mobileStation2').val() == ''){
+			top.app.message.notice("请输入移动台发射频率！");
+			return;
+		}
+		if($('#baseStation1').val() == '' || $('#baseStation2').val() == ''){
+			top.app.message.notice("请输入基地台发射频率！");
+			return;
+		}
 	}
 	if($('#address').val() == ''){
 		top.app.message.notice("请输入地址！");

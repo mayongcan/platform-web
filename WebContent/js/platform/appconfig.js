@@ -1210,6 +1210,7 @@ var app = app || {};
 	app.message = {};
 	app.message.code = {};
 	app.message.code.success = "000000";
+	app.loaderTimer;
 	
 	//+---------------------------------------------------   
 	//| 消息提示框
@@ -1325,9 +1326,16 @@ var app = app || {};
 			    fontawesome : "fa fa-spinner fa-spin"
 			});
 		}  
-		//防止没关闭，10秒后默认关闭
-		if($.utils.isNull(closeTime)) closeTime = 12000;
-		setTimeout("$.LoadingOverlay('hide')", closeTime);
+		//防止没关闭，12秒后默认关闭
+		if(closeTime != 0){
+			//先清空原来的timer
+			if(app.loaderTimer) {
+				clearTimeout(app.loaderTimer);
+				app.loaderTimer = null;
+			}
+			if($.utils.isNull(closeTime)) closeTime = 12000;
+			app.loaderTimer = setTimeout("$.LoadingOverlay('hide')", closeTime);
+		}
 	}
 	
 	//+---------------------------------------------------   
@@ -1339,6 +1347,10 @@ var app = app || {};
 			setTimeout("$.LoadingOverlay('hide')", time);
 		}else
 			$.LoadingOverlay("hide");
+		if(app.loaderTimer) {
+			clearTimeout(app.loaderTimer);
+			app.loaderTimer = null;
+		}
 	}
 	
 	//+---------------------------------------------------   
@@ -1355,8 +1367,6 @@ var app = app || {};
 		toastr["error"](message);
 	};
 })();
-
-
 
 //+---------------------------------------------------   
 //| 封装app弹层

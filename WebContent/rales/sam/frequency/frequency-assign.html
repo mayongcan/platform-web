@@ -116,7 +116,7 @@
 						            </div>
 						            <div id="divFrequencyList"></div>
 						            <div class="form-group edit-group-style" id="divFrequencyAdd">
-						            		<label class="col-sm-2 control-label edit-layer-title"></label>
+						            		<label class="col-sm-2 control-label edit-layer-title"></label> 
 						                <button type="button" class="btn btn-outline btn-default" id="btnAddFrequency" style="width: 220px;padding: 0px 20px;height:30px;">
 						                		<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> 添加频点
 						                	</button>
@@ -185,16 +185,16 @@
 		                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 		                        <div class="panel-body">
 						            <div class="form-group edit-group-style">
-						            		<label class="col-sm-2 control-label edit-layer-title">监测站点数据</label>
+						            	<label class="col-sm-2 control-label edit-layer-title">监测站点数据</label>
 						                <textarea id="monitoringStation" name="monitoringStation" class="form-control m-b edit-layer-input" style="height:150px;"></textarea>
 						            </div>
 						            <div style="clear:both;margin-top:165px;"></div>
-						            <div class="form-group edit-group-style">
-						            		<label class="col-sm-2 control-label edit-layer-title"></label>
+						            <!-- <div class="form-group edit-group-style">
+						            	<label class="col-sm-2 control-label edit-layer-title"></label>
 						                <button type="button" class="btn btn-primary" id="btnStationSelect" style="width: 220px;padding: 0px 20px;height:30px;">选择</button>
-						            </div>
-		                        		<div class="form-group edit-group-style">
-		                            		<label class="col-sm-2 control-label edit-layer-title">监测开始时间</label>
+						            </div> -->
+	                        		<div class="form-group edit-group-style">
+	                            		<label class="col-sm-2 control-label edit-layer-title">监测开始时间</label>
 					                   	<div class="input-group date" id="divBeginDate" style="width: 220px;float: left;">
 					                   		<input type="text" class="form-control" id="beginDate" name="beginDate"/>
 					                   		<span class="input-group-addon">
@@ -202,8 +202,8 @@
 					                   		</span>
 					               		</div>
 					               	</div>
-		                        		<div class="form-group edit-group-style">
-		                            		<label class="col-sm-2 control-label edit-layer-title">检测结束时间</label>
+	                        		<div class="form-group edit-group-style">
+	                            		<label class="col-sm-2 control-label edit-layer-title">检测结束时间</label>
 					                   	<div class="input-group date" id="divEndDate" style="width: 220px;float: left;">
 					                   		<input type="text" class="form-control" id="endDate" name="endDate"/>
 					                   		<span class="input-group-addon">
@@ -225,28 +225,34 @@
 		                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 		                        <div class="panel-body">
 						            <div class="form-group edit-group-style">
-						            		<label class="col-sm-2 control-label edit-layer-title">接收门限</label>
-						                <input type="text" id="receivingThreshold" name="receivingThreshold" class="form-control m-b edit-layer-input">
+						            	<label class="col-sm-2 control-label edit-layer-title">接收门限</label>
+						                <input type="text" id="receivingThreshold" name="receivingThreshold" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;width: 43px;">dBm</label>
 						            </div>
 						            <div class="form-group edit-group-style">
 						            		<label class="col-sm-2 control-label edit-layer-title">C/I门限</label>
-						                <input type="text" id="ciThreshold" name="ciThreshold" class="form-control m-b edit-layer-input">
+						                <input type="text" id="ciThreshold" name="ciThreshold" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;width: 43px;">dB</label>
 						            </div>
 						            <div class="form-group edit-group-style">
 						            		<label class="col-sm-2 control-label edit-layer-title">接收高度</label>
-						                <input type="text" id="receivingHeight" name="receivingHeight" class="form-control m-b edit-layer-input">
+						                <input type="text" id="receivingHeight" name="receivingHeight" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;width: 43px;">m</label>
 						            </div>
 						            <div class="form-group edit-group-style">
 						            		<label class="col-sm-2 control-label edit-layer-title">功率</label>
-						                <input type="text" id="pow" name="pow" class="form-control m-b edit-layer-input">
+						                <input type="text" id="pow" name="pow" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;width: 43px;">dBm</label>
 						            </div>
 						            <div class="form-group edit-group-style">
 						            		<label class="col-sm-2 control-label edit-layer-title">增益</label>
-						                <input type="text" id="gain" name="gain" class="form-control m-b edit-layer-input">
+						                <input type="text" id="gain" name="gain" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;width: 43px;">dBi</label>
 						            </div>
 						            <div class="form-group edit-group-style">
 						            		<label class="col-sm-2 control-label edit-layer-title">馈损</label>
-						                <input type="text" id="feedLoss" name="feedLoss" class="form-control m-b edit-layer-input">
+						                <input type="text" id="feedLoss" name="feedLoss" class="form-control m-b edit-layer-input" style="width:165px;">
+						                <label class="control-label page-search-label" style="border: 1px solid #E5E6E7;margin-left: 10px;padding: 5px 5px;width: 43px;">dB</label>
 						            </div>
 		                        </div>
 		                    </div>

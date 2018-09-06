@@ -64,7 +64,7 @@ function initTable(){
 		    access_token: top.app.cookies.getCookiesToken(),
             size: params.limit,   						//页面大小
             page: params.offset / params.limit,  		//当前页
-            analysisType: '1',
+            analysisType: '2',
 			type: $("#searchType").val(),
 			coverageArea: $("#searchCoverageArea").val(),
 			network: $("#searchNetwork").val(),
@@ -133,7 +133,7 @@ function operateButtonEdit(id, url){
 	top.app.info.iframe.params.coverageAreaDict = g_coverageAreaDict;
 	top.app.info.iframe.params.networkDict = g_networkDict;
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
-	var url = "/rales/sam/frequency/frequency-detail.html?_pid=" + pid + "&backUrl=/rales/sam/frequency/frequency-list.html";
+	var url = "/rales/sam/frequency/frequency-detail.html?_pid=" + pid + "&backUrl=/rales/sam/frequency/frequency-assign-list.html";
 	window.location.href = encodeURI(url);
 }
 

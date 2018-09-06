@@ -202,17 +202,17 @@ function formValidate(){
         rules: {
         	frequency: {required: true},
         	address: {required: true},
-        	serviceRadius: {required: true},
+        	serviceRadius: {required: true, digits: true},
         	recommendNumber: {required: true, digits: true},
-        	monitoringStation: {required: true},
-        	beginDate: {required: true},
-        	endDate: {required: true},
-        	receivingThreshold: {required: true},
-        	ciThreshold: {required: true},
-        	receivingHeight: {required: true},
-        	pow: {required: true},
-        	gain: {required: true},
-        	feedLoss: {required: true},
+//        	monitoringStation: {required: true},
+//        	beginDate: {required: true},
+//        	endDate: {required: true},
+//        	receivingThreshold: {required: true},
+//        	ciThreshold: {required: true},
+//        	receivingHeight: {required: true},
+//        	pow: {required: true},
+//        	gain: {required: true},
+//        	feedLoss: {required: true},
         },
         messages: {
         },
@@ -257,22 +257,26 @@ function submitAction(){
 		top.app.message.notice("请输入服务半径！");
 		return;
 	}
+	if(parseInt($('#serviceRadius').val()) < 1){
+		top.app.message.notice("服务半径必须不小于1km！");
+		return;
+	}
 	if($('#recommendNumber').val() == '' || !$.validate.isPositiveInt($('#recommendNumber').val())){
 		top.app.message.notice("请输入正确的推荐频点数量！");
 		return;
 	}
-	if($('#monitoringStation').val() == ''){
-		top.app.message.notice("请输入监测站点数据！");
-		return;
-	}
-	if($('#beginDate').val() == ''){
-		top.app.message.notice("请输入监测开始时间！");
-		return;
-	}
-	if($('#endDate').val() == ''){
-		top.app.message.notice("请输入检测结束时间！");
-		return;
-	}
+//	if($('#monitoringStation').val() == ''){
+//		top.app.message.notice("请输入监测站点数据！");
+//		return;
+//	}
+//	if($('#beginDate').val() == ''){
+//		top.app.message.notice("请输入监测开始时间！");
+//		return;
+//	}
+//	if($('#endDate').val() == ''){
+//		top.app.message.notice("请输入检测结束时间！");
+//		return;
+//	}
 	//获取所有频点列表
 	var frequencyList = $('#frequency').val() + ",";
 	for(var i = 0; i < g_frequencyIndex; i++){

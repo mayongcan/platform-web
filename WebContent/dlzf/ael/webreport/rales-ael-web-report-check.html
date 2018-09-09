@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-微信报案-查看</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+		<div class="ibox-content" style="border-width: 5px 0px;">
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td" width="150px">
+						   	报案姓名
+						</td>
+						<td class="reference-td" id="name"></td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   报案人手机号码
+						</td>
+						<td class="reference-td" id="contactPhone"></td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	报案内容
+						</td>
+						<td class="reference-td" id="content"></td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	地址
+						</td>
+						<td class="reference-td" id="address"></td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	报案时间
+						</td>
+						<td class="reference-td" id="reportDate"></td>
+					</tr>
+					<tr>
+						<td class="reference-td">回复历史</td>
+						<td class="reference-td" colspan="7">
+							<table style="width: 100%;">
+								<tbody>
+									<tr>
+										<td class="reference-td1">回复内容</td>
+										<td class="reference-td1" style="width:150px;">回复人</td>
+										<td class="reference-td1" style="width:170px;">回复时间</td>
+									</tr>
+								</tbody>
+								<tbody id="resultList"></tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+            <div style="text-align: center;margin-top:30px">
+		        <button type="button" class="btn btn-white" id="btnCancel" style="width: 100px;">返 回</button>
+	        </div>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+    <script src="../../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="js/rales-ael-web-report-check.js" type="text/javascript"></script>
+</body>
+</html>

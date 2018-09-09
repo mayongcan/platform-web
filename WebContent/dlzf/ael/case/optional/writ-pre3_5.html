@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/preview.css" rel="stylesheet">
+</head>
+<body>
+    <div class="animated fadeIn" id="printBody">
+		<div class="ibox-content box-info">
+			<div class="box-title">
+				<span class="table-title">查封（扣押）决定书</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01封扣〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<div class="box-content">
+				当事人：<a class="content-fill-in" style="min-width:100px;" id="tdPartiesName">　</a>
+			</div>
+			<div class="box-content">
+				（公民）姓名：<a class="content-fill-in" style="min-width:100px;" id="tdName">　</a>
+			</div>
+			<div class="box-content">
+				身份证号码：<a class="content-fill-in" style="min-width:100px;" id="tdPartiesIdCard">　</a>
+			</div>
+			<div class="box-content">
+				（法人或其他组织）名称：<a class="content-fill-in" style="min-width:100px;" id="tdCompanyName">　</a>
+			</div>
+			<div class="box-content">
+				法定代表人（负责人）：<a class="content-fill-in" style="min-width:100px;" id="tdLegalRepresentative">　</a>
+			</div>
+			<div class="box-content">
+				住所（地址）：<a class="content-fill-in" style="min-width:100px;" id="tdAddress">　</a>
+			</div>
+			<div class="box-content">
+				经查，你（单位）涉嫌<a class="content-fill-in" style="min-width:100px;" id="tdIllegalAction">　</a>
+				的违法行为，依据<a class="content-fill-in" style="min-width:100px;" id="tdIllegalRule">　</a>
+				的规定，决定对你（单位）的
+				<a class="content-fill-in" style="min-width:100px;" id="tdContent">　</a>
+				予以<a class="content-fill-in" style="min-width:100px;">查封/扣押</a>。
+			</div>
+			<div class="box-content">
+				查封（扣押）期限为<a class="content-fill-in" style="min-width:40px;" id="tdDeadline">　</a>
+				日。如因检测、检验、检疫或者技术鉴定需要顺延期限的，或因情况复杂依法需要延长期限的，本机关将另行书面告知。在查封（扣押）期限内，你（单位）不得
+				<a class="content-fill-in" style="min-width:100px;" id="tdHandleType">　</a>
+				该
+				<a class="content-fill-in" style="min-width:100px;" id="tdHandleContent">　</a>
+			</div>
+			<div class="box-content">
+				查封（扣押）物品存放（在）地点：<a class="content-fill-in" style="min-width:100px;" id="tdPlaceAddr">　</a>
+			</div>
+			<div class="box-content">
+				你（单位）如不服本决定，可以自收到本决定书之日起60日内向
+				<a class="content-fill-in" style="min-width:80px;" id="tdReview1">　</a>
+				或者<a class="content-fill-in" style="min-width:80px;" id="tdReview2">　</a>
+				申请行政复议，也可以自收到本决定书之日起6个月内依法向
+				<a class="content-fill-in" style="min-width:80px;" id="tdLawsuit">　</a>
+				人民法院提起行政诉讼。
+			</div>
+			<div class="box-content">
+				附件：查封（扣押）物品清单
+			</div>
+			
+			<div style="margin-top:30px;float:right;margin-right:50px;">
+				<div style="text-align: center;">广东省经济和信息化委员会</div>
+				<div style="margin-top:10px;text-align: center;">（印章）</div>
+				<div style="margin-top:10px;text-align: center;">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+			</div>
+			<div style="clear: both"></div>
+			
+			<div class="box-content-noindent">
+				当事人：<a class="content-fill-in" style="min-width:150px;">　</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				见证人：<a class="content-fill-in" style="min-width:150px;">　</a>
+			</div>
+			
+			<div class="box-content-noindent">
+				<div style="float:left;text-align: center;margin-left:60px;">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+				<div style="float:left;text-align: center;margin-left:150px;">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+			</div>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/jquery.print.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/writ-pre3_5.js" type="text/javascript"></script>
+</body>
+</html>

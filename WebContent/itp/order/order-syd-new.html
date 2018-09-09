@@ -65,12 +65,14 @@
 						</td>
 						<td class="reference-td">
 							<div id="divCustomerKnow">
-								<label class="checkbox-inline">
-							      	<input type="radio" name="radioCustomerKnow" value="1"  checked="checked"> 客户
-							    </label>
-								<label class="checkbox-inline">
-							      	<input type="radio" name="radioCustomerKnow" value="2"> 供货商
-							    </label>
+						   		<div class="radio">
+									<input type="radio" name="radioCustomerKnow" id="radioCustomerKnow_id_0" value="1" checked="checked">
+									<label for="radioCustomerKnow_id_0">客户</label>
+								</div>
+						   		<div class="radio">
+									<input type="radio" name="radioCustomerKnow" id="radioCustomerKnow_id_1" value="2">
+									<label for="radioCustomerKnow_id_1">供货商</label>
+								</div>
 						    </div>  
 						</td>
 					</tr>
@@ -132,9 +134,10 @@
 						</td>
 						<td class="reference-td">
 							余额：<span id="customerBalance" style="color:red;margin-right:50px;">¥0.00</span>
-							<label style="line-height: 3px;">
-                                <input type="checkbox" id="checkIsCombinePay" value="" > 是否合并付款
-                            </label>
+							<div class="checkbox">
+							    <input type="checkbox" id="checkIsCombinePay">
+							    <label for="checkIsCombinePay">是否合并付款</label>
+							</div>
 						</td>
 					</tr>
 					<tr>

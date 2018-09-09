@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/preview.css" rel="stylesheet">
+    <style type="text/css">
+    .reference-td{
+    	text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <div class="animated fadeIn" id="printBody">
+		<div class="ibox-content box-info">
+			<div class="box-title">
+				<span class="table-title">行政处罚听证报告</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01听报〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<div class="box-content-noindent">
+				案由：<span id="tdIllegalAction"></span>
+			</div>
+			<div class="box-content-noindent">
+				执法人员：<a class="content-fill-in" style="min-width:80px;" id=tdLawUser1>　</a>
+				执法证号：<a class="content-fill-in" style="min-width:80px;" id=tdLawUserCardNo1>　</a>
+			</div>
+			<div class="box-content-noindent">
+				执法人员：<a class="content-fill-in" style="min-width:80px;" id=tdLawUser2>　</a>
+				执法证号：<a class="content-fill-in" style="min-width:80px;" id=tdLawUserCardNo2>　</a>
+			</div>
+			<div class="box-content-noindent">
+				主持听证机关：<span id="tdHearingOrg"></span>
+			</div>
+			<div class="box-content-noindent">
+				听证主持人：<a class="content-fill-in" style="min-width:80px;" id=tdMainUser1>　</a>
+				工作单位及职务：<a class="content-fill-in" style="min-width:80px;" id=tdMainUserJob1>　</a>
+			</div>
+			<div class="box-content-noindent">
+				听证员（2-4名）：<a class="content-fill-in" style="min-width:80px;" id=tdMainUser2>　</a>
+				工作单位及职务：<a class="content-fill-in" style="min-width:80px;" id=tdMainUserJob2>　</a>
+			</div>
+			<div class="box-content-noindent">
+				书记员：<a class="content-fill-in" style="min-width:80px;" id=tdMainUser3>　</a>
+				工作单位及职务：<a class="content-fill-in" style="min-width:80px;" id=tdMainUserJob3>　</a>
+			</div>
+			<div class="box-content-noindent">
+				听证时间：<a class="content-fill-in" id="dataYear">　</a>
+					年
+					<a class="content-fill-in" id="dataMonth">　</a>
+					月
+					<a class="content-fill-in" id="dataDay">　</a>
+					日
+					<a class="content-fill-in" id="dataHour">　</a>
+					时
+					<a class="content-fill-in" id="dataMinute">　</a>
+					分至
+					<a class="content-fill-in" id="dataDay1">　</a>
+					日
+					<a class="content-fill-in" id="dataHour1">　</a>
+					时
+					<a class="content-fill-in" id="dataMinute1">　</a>
+					分
+			</div>
+			<div class="box-content-noindent">
+				听证地点：<a class="content-fill-in" style="min-width:80px;" id=tdCheckAddr>　</a>
+			</div>
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				一、当事人基本情况
+			</div>
+			<div class="box-content-noindent">
+				听证申请人：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesName1>　</a>
+				工作单位及职务：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesNameJob1>　</a>
+			</div>
+			<div class="box-content-noindent">
+				委托代理人：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesName2>　</a>
+				工作单位及职务：<a class="content-fill-in" style="min-width:80px;" id=tdPartiesNameJob2>　</a>
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				二、听证会基本情况
+			</div>
+			<div class="box-content">
+				<span id="tdBaseInfo"></span>
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				三、案件事实与理由 
+			</div>
+			<div class="box-content">
+				<span id="tdContent"></span>
+			</div>
+			
+			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+				四、处理意见和建议
+			</div>
+			<div class="box-content">
+				<span id="tdAdvice"></span>
+			</div>
+			
+			<div class="box-content" style="float: right;width: 250px;">
+				听证主持人：
+			</div>
+			<div style="clear: both"></div>
+			<div class="box-content" style="float: right;width: 250px;">
+				听证员：
+			</div>
+			<div style="clear: both"></div>
+			<div class="box-content" style="float: right;">
+				第<span>　　</span>页（共<span>　　</span>页）
+			</div>
+			<div style="clear: both"></div>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/jquery.print.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/writ-pre7_5.js" type="text/javascript"></script>
+</body>
+</html>

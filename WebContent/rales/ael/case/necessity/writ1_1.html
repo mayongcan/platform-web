@@ -48,7 +48,7 @@
 							   	<input type="text" id="reporterName" name="reporterName" class="form-control">
 							</td>
 							<td class="reference-td" style="width:100px;">
-							   	证件号码<span class="input-request">＊</span>
+							   	证件号码
 							</td>
 							<td class="reference-td" id="tdReporterCertificateNo">
 							   	<input type="text" id="reporterCertificateNo" name="reporterCertificateNo" class="form-control">
@@ -95,7 +95,7 @@
 							   	被报告人
 							</td>
 							<td class="reference-td">
-							   	<span class="input-request">＊</span>单位/姓名
+							   	单位/姓名
 							</td>
 							<td class="reference-td" colspan="3" id="tdDefendantName">
 							   	<input type="text" id="defendantName" name="defendantName" class="form-control">
@@ -113,7 +113,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	<span class="input-request">＊</span>问题发生地
+							   	问题发生地
 							</td>
 							<td class="reference-td" colspan="3" id="tdDefendantAddress">
 							   	<input type="text" id="defendantAddress" name="defendantAddress" class="form-control">
@@ -121,7 +121,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	<span class="input-request">＊</span>问题发生时间
+							   	问题发生时间
 							</td>
 							<td class="reference-td" id="tdDefendantDate">
 								<div class="input-group date edit-layer-input" id="divDefendantDate">
@@ -132,7 +132,7 @@
 					            	</div>
 							</td>
 							<td class="reference-td">
-							   	登记时间<span class="input-request">＊</span>
+							   	登记时间
 							</td>
 							<td class="reference-td" id="tdDefendantCheckDate">
 								<div class="input-group date edit-layer-input" id="divDefendantCheckDate">
@@ -151,7 +151,7 @@
 							   	<select class="selectpicker form-control" id="caseProcedure"></select>
 							</td>
 						</tr>
-						<tr>
+						<tr style="display: none" id="trNotPutOn">
 							<td class="reference-td">
 							   	不予立案原因
 							</td>
@@ -169,7 +169,7 @@
 						</tr>
 						<!-- <tr>
 							<td class="reference-td">
-							   	第二承办人
+							   	第二承办人<span class="input-request">＊</span>
 							</td>
 							<td class="reference-td" colspan="4" id="tdUndertaker">
 							   	<input type="text" id="undertaker" name="undertaker" class="form-control" readonly style="cursor: pointer;background: #fff;" placeholder="请选择第二承办人">

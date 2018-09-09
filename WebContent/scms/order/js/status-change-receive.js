@@ -90,9 +90,10 @@ function loadGoodsDataList(){
 							'<tbody>' +
 								'<tr>' +
 									'<td class="reference-td" style="width:30px;">' + 
-										'<label style="line-height: 3px;">' + 
-			                                '<input type="checkbox" id="checkAll" value="" onclick="checkAll(' + i + ')" > ' + 
-			                            '</label>' + 
+										'<div class="checkbox">' + 
+										    '<input type="checkbox" id="checkAll" onclick="checkAll(' + i + ')" >' + 
+										    '<label for="checkAll"> </label>' + 
+										'</div>' +  
 									'</td>' +
 									'<td class="reference-td">店铺</td>' +
 									'<td class="reference-td">颜色</td>' +
@@ -105,9 +106,10 @@ function loadGoodsDataList(){
 		for(var j = 0; j < g_goodsOrderList[i].goodsDataList.length; j++){
 			html += '<tr>' +
 						'<td class="reference-td">' + 
-							'<label style="line-height: 3px;">' + 
-				                '<input type="checkbox" id="checkSingle_' + i + '_' + j + '" value="' + g_goodsOrderList[i].goodsDataList[j].id + '" > ' + 
-				            '</label>' + 
+							'<div class="checkbox">' + 
+							    '<input type="checkbox" id="checkSingle_' + i + '_' + j + '" value="' + g_goodsOrderList[i].goodsDataList[j].id + '" >' + 
+							    '<label for="checkSingle_' + i + '_' + j + '"> </label>' + 
+							'</div>' + 
 						'</td>' +
 						'<td class="reference-td">' + g_params.orderInfo.row.shopName + '</td>' +
 						'<td class="reference-td">' + g_goodsOrderList[i].goodsDataList[j].goodsColorName + '</td>' +

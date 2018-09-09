@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/preview.css" rel="stylesheet">
+</head>
+<body>
+    <div class="animated fadeIn" id="printBody">
+		<div class="ibox-content box-info">
+			<div class="box-title">
+				<span class="table-title">抽样取证记录</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01抽记录〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td" style="width: 120px;">
+						   	抽样时间
+						</td>
+						<td class="reference-td" colspan="3" id="tdCreateDate">
+						   	<div class="input-group date edit-layer-input" id="divCreateDate">
+			            		<input type="text" class="form-control" id="createDate" name="createDate"/>
+			            		<span class="input-group-addon">
+			                		<span class="glyphicon glyphicon-calendar"></span>
+			            		</span>
+			            	</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	抽样地点
+						</td>
+						<td class="reference-td" colspan="3" id="tdSampleAddr">
+						   	<input type="text" class="form-control" id="sampleAddr" name="sampleAddr"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	抽样人员1
+						</td>
+						<td class="reference-td" id="tdLawUser1">
+						   	<input type="text" class="form-control" id="lawUser1" name="lawUser1"/>
+						</td>
+						<td class="reference-td" style="width: 100px;">
+						   	抽样人员2
+						</td>
+						<td class="reference-td" id="tdLawUser2">
+						   	<input type="text" class="form-control" id="lawUser2" name="lawUser2"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	执法证号1
+						</td>
+						<td class="reference-td" id="tdLawUserCardNo1">
+						   	<input type="text" class="form-control" id="lawUserCardNo1" name="lawUserCardNo1"/>
+						</td>
+						<td class="reference-td">
+						   	执法证号2
+						</td>
+						<td class="reference-td" id="tdLawUserCardNo2">
+						   	<input type="text" class="form-control" id="lawUserCardNo2" name="lawUserCardNo2"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	当事人
+						</td>
+						<td class="reference-td" colspan="3" id="tdPartiesName">
+						   	<input type="text" class="form-control" id="partiesName" name="partiesName"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	抽样物品
+						</td>
+						<td class="reference-td" id="tdSampleObj">
+						   	<input type="text" class="form-control" id="sampleObj" name="sampleObj"/>
+						</td>
+						<td class="reference-td">
+						   	数量
+						</td>
+						<td class="reference-td" id="tdSampleNum">
+						   	<input type="text" class="form-control" id="sampleNum" name="sampleNum"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	抽样方式
+						</td>
+						<td class="reference-td" colspan="3" id="tdSampleType">
+						   	<input type="text" class="form-control" id="sampleType" name="sampleType"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	抽样情况
+						</td>
+						<td class="reference-td" id="tdSampleDetail" colspan="3">
+						   	<input type="text" id="sampleDetail" name="sampleDetail" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	样品封存情况
+						</td>
+						<td class="reference-td" id="tdSampleResult" colspan="3">
+						   	<input type="text" id="sampleResult" name="sampleResult" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	当事人确认签名
+						</td>
+						<td class="reference-td" colspan="3"></td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	备注
+						</td>
+						<td class="reference-td" colspan="3" id="tdMemo">
+						   	<input type="text" class="form-control" id="memo" name="memo"/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/jquery.print.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/writ-pre1_7.js" type="text/javascript"></script>
+</body>
+</html>

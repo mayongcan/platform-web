@@ -6,7 +6,7 @@
 var fileupload = fileupload || {};
 (function() {
 	//文件上传框-名称
-	fileupload.inputFileName = "";
+	fileupload.fileObjId = "";
 	//上传成功后的文件路径
 	fileupload.filePath = "";
 	//文件列表
@@ -20,7 +20,7 @@ var fileupload = fileupload || {};
 	 * 初始化新建文件选择器
 	 */
 	fileupload.initFileNewSelector = function(inputFileId){
-		fileupload.inputFileName = inputFileId;
+		fileupload.fileObjId = inputFileId;
 		$("#" + inputFileId).fileinput({
 	        showUpload: false,
 	        dropZoneEnabled: false,
@@ -51,7 +51,7 @@ var fileupload = fileupload || {};
 	 * 初始化修改文件选择器
 	 */
 	fileupload.initFileEditSelector = function(inputFileId, filesList){
-		fileupload.inputFileName = inputFileId;
+		fileupload.fileObjId = inputFileId;
 		if(!$.utils.isEmpty(filesList)){
 			fileupload.fileList = filesList.split(",");
 			for(var i = 0; i < fileupload.fileList.length; i++){
@@ -150,7 +150,7 @@ var fileupload = fileupload || {};
 			//判断是否需要校验,如果校验函数结果不通过，则返回
 			if(!checkFunc()) return;
 		}
-		if($.utils.isNull($("#" + fileupload.inputFileName)[0]) || $.utils.isNull($("#" + fileupload.inputFileName)[0].files[0])){
+		if($.utils.isNull($("#" + fileupload.fileObjId)[0]) || $.utils.isNull($("#" + fileupload.fileObjId)[0].files[0])){
 			if(callbackFunc) callbackFunc();
 			return;
 		}
@@ -158,13 +158,13 @@ var fileupload = fileupload || {};
 		if(isImage){
 			if(isMulti){
 				//多个
-				top.app.uploadMultiImage($("#" + fileupload.inputFileName)[0].files, function(data){
+				top.app.uploadMultiImage($("#" + fileupload.fileObjId)[0].files, function(data){
 					fileupload.filePath = data;
 					//回调
 					if(callbackFunc) callbackFunc();
 				}, modifyName);
 			}else{
-				top.app.uploadImage($("#" + fileupload.inputFileName)[0].files[0], function(data){
+				top.app.uploadImage($("#" + fileupload.fileObjId)[0].files[0], function(data){
 					fileupload.filePath = data;
 					//回调
 					if(callbackFunc) callbackFunc();
@@ -174,13 +174,13 @@ var fileupload = fileupload || {};
 			//上传文件
 			if(isMulti){
 				//多个
-				top.app.uploadMultiFile($("#" + fileupload.inputFileName)[0].files, function(data){
+				top.app.uploadMultiFile($("#" + fileupload.fileObjId)[0].files, function(data){
 					fileupload.filePath = data;
 					//回调
 					if(callbackFunc) callbackFunc();
 				}, modifyName);
 			}else{
-				top.app.uploadFile($("#" + fileupload.inputFileName)[0].files[0], function(data){
+				top.app.uploadFile($("#" + fileupload.fileObjId)[0].files[0], function(data){
 					fileupload.filePath = data;
 					//回调
 					if(callbackFunc) callbackFunc();

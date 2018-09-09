@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../../css/platform.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    <link href="/rales/ael/case/css/preview.css" rel="stylesheet">
+    <style type="text/css">
+    .reference-td {
+	    min-width: 15px;
+	}
+    </style>
+</head>
+<body>
+    <div class="animated fadeIn" id="printBody">
+		<div class="ibox-content box-info">
+			<div class="box-title">
+				<span class="table-title">检测、检验、检疫、技术鉴定委托书</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01鉴委〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<div class="box-content-noindent">
+				<a class="content-fill-in" style="min-width:200px;" id="tdOrg">　</a>：
+			</div>
+			<div class="box-content">
+				因调查有关<a class="content-fill-in" style="min-width:100px;" id="tdIllegalAction">　</a>
+				案件的需要，现委托你单位对下列物品进行鉴定：
+			</div>
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td">
+						   	物品名称
+						</td>
+						<td class="reference-td">
+						   	规格型号
+						</td>
+						<td class="reference-td">
+						   	数量
+						</td>
+						<td class="reference-td">
+						   	备注
+						</td>
+					</tr>
+				</tbody>
+				<tbody id="tableContentList"></tbody>
+			</table>
+			<div class="box-content">
+				鉴定要求：<a class="content-fill-in" style="min-width:100px;" id="tdRequire">　</a>
+			</div>
+			<div class="box-content" style="margin-top: 10px;">
+				请于<a class="content-fill-in" id="dataYear">　</a>
+				年
+				<a class="content-fill-in" id="dataMonth">　</a>
+				月
+				<a class="content-fill-in" id="dataDay">　</a>
+				日前提交鉴定结果。（鉴定结果请提出具体鉴定报告书，并由鉴定人员签名或盖章，加盖鉴定机构印章。）
+			</div>
+			
+			<div class="box-content" style="margin-top: 20px;">
+				联系人：<a class="content-fill-in" style="min-width:100px;" id="tdContactUser">　</a>
+			</div>
+			<div class="box-content">
+				联系电话：<a class="content-fill-in" style="min-width:100px;" id="tdContactPhone">　</a>
+			</div>
+			<div class="box-content">
+				单位地址：<a class="content-fill-in" style="min-width:100px;" id="tdContactAddr">　</a>
+			</div>
+			
+			<div style="margin-top:30px;float:right;margin-right:50px;">
+				<div style="text-align: center;">广东省经济和信息化委员会</div>
+				<div style="margin-top:10px;text-align: center;">（印章）</div>
+				<div style="margin-top:10px;text-align: center;">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</div>
+			</div>
+        </div>
+    </div>
+    
+    <script src="../../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../../js/jquery.print.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/writ-pre4_1.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无线电行政执法系统-微信报案</title>
+    <meta name="keywords" content="无线电行政执法系统">
+    <meta name="description" content="无线电行政执法系统">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../fonts/iconfont/iconfont.css" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="../../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <link href="../ael/case/css/case.css" rel="stylesheet">
+    <style type="text/css">
+    body{
+    	color: #232323;
+    }
+    input[type="text"] {
+	  -webkit-appearance: none;
+	}
+	textarea{
+	  -webkit-appearance: none;
+	}
+    </style>
+<body>
+    <div class="wrapper wrapper-content animated fadeIn" style="padding:0px;">
+    	<div style="height:45px;background-color: #3963af; color: #fff;text-align: center; line-height: 45px;font-size: 17px;font-weight: bold;">微信报案</div>
+   	 	<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off style="padding-left:10px;padding-right:10px">
+			<table class="reference1">
+				<tbody>
+					<tr>
+						<td class="reference-td" width="115px">
+						   	报案姓名
+						</td>
+						<td class="reference-td">
+						   	<input type="text" id="name" name="name" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	报案人手机号码
+						</td>
+						<td class="reference-td">
+						   	<input type="text" id="contactPhone" name="contactPhone" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	报案内容
+						</td>
+						<td class="reference-td">
+							<textarea id="content" name="content" class="form-control" style="height:120px"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	地址
+						</td>
+						<td class="reference-td">
+						   	<input type="text" id="address" name="address" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td class="reference-td">
+						   	报案时间
+						</td>
+						<td class="reference-td">
+						   	<div class="input-group date edit-layer-input" id="divReportDate">
+			            		<input type="text" class="form-control" id="reportDate" name="reportDate"/>
+			            		<span class="input-group-addon">
+			                		<span class="glyphicon glyphicon-calendar"></span>
+			            		</span>
+			            	</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+            <div style="text-align: center;margin-top:30px">
+		        <button type="button" class="btn btn-primary" id="btnOK" style="width: 90%;background-color: #3963af;border-color: #3963af;">提 交</button>
+	        </div>
+		</form>
+    </div>
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+	<script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/loadingoverlay/loadingoverlay.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
+    <script src="../../../js/platform/appconfig.js" type="text/javascript"></script>
+    <script src="js/case-register.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用信息管理平台-详情</title>
+    <meta name="keywords" content="通用信息管理平台">
+    <meta name="description" content="通用信息管理平台">
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="../../../css/platform.css" rel="stylesheet">
+    <link href="../case/css/case.css" rel="stylesheet">
+    <style type="text/css">
+	.main-step-title{
+	    border-top: 1px solid #d4d4d4;
+	    border-left: 1px solid #d4d4d4;
+	    border-right: 1px solid #d4d4d4;
+	    margin-top:25px;
+	    padding: 0px 15px;
+	    color: #000;
+	    height:45px; 
+	    vertical-align: middle;
+	    padding-top: 8px;
+	}
+	.main-step-title-info{
+		float: left;
+		margin-top: 7px;
+	}
+	.main-step-title-btn{
+		padding: 4px 15px;
+		float:right;
+		height: 30px;
+	}
+	
+    table.reference1, table.tecspec {
+	    border-collapse: collapse;
+	    width: 100%;
+	}
+	.reference-th {
+	    color: #fff;
+	    background-color: #555;
+	    border: 1px solid #555;
+	    font-size: 13px;
+	    padding: 3px;
+	    vertical-align: top;
+	    text-align: left;
+	}
+	.reference-td {
+	    line-height: 34px;
+	    /* min-width: 95px; */
+	    border: 1px solid #d4d4d4;
+	    padding: 5px;
+	    padding-top: 7px;
+	    padding-bottom: 7px;
+	    vertical-align: top;
+	    font-size: 13px;
+	    padding-left:10px;
+	    padding-right:10px;
+	    vertical-align: middle;
+	}
+	.optional-content{
+		display: none;
+	}
+	.activity{
+		display: block;
+	}
+    </style>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+		<div class="ibox-content">
+			<div style="padding-top:10px;margin-bottom:10px;">
+				<span id="caseRegisterCode" style="font-size:18px;margin-left:20px;">穗工信无登〔2017〕 0045  号</span>
+			</div>
+			<div id="auditNoticeTip" style="height:40px; border: 1px solid #d4d4d4;vertical-align: middle;padding-top: 6px;">
+				<div id="caseAuditType" style="font-size:13px;margin-left:20px;float: left;margin-top: 5px;"><span id="flowProgressName">案件登记</span><span id="flowProgressNotice">待审批，请审批！</span></div>
+				<button type="button" class="btn btn-primary btn-table-opreate" id="btnAudit" style="padding: 0px 12px;float: right;margin-right: 20px;">审 批</button>
+			</div>
+		  	<div id="optionalContent1" class="optional-content activity">
+	     		<div class="main-step-title">
+	           		<div class="main-step-title-info">先行登记保存证据审批表【<span id="tableCnt2-1">0</span>】</div>
+	           		<!-- <button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc2-1" style="margin-left:20px;"> 
+						新建文书
+					</button>
+					<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnSubmitAudit2-1"> 
+						提交审批
+					</button> -->
+	   			</div>
+	         	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList2-1"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	           		<div class="main-step-title-info">先行登记保存证据通知书（决定书）【<span id="tableCnt2-2">0</span>】</div>
+	         		<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc2-2"> 
+						新建文书
+					</button>
+	          	</div>
+	          	<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList2-2"></tbody>
+				</table>
+		
+	      		<div class="main-step-title" style="margin-top:25px;">
+	        			<div class="main-step-title-info">先行登记保存证据物品清单【<span id="tableCnt2-3">0</span>】</div>
+	     			<button type="button" class="btn btn-primary btn-table-opreate main-step-title-btn" id="btnNewDoc2-3"> 
+						新建文书
+					</button>
+	     		</div>
+	       		<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:60px;">序号</td>
+							<td class="reference-td" style="width:300px">文书编号</td>
+							<td class="reference-td" style="width:200px">最后处理人</td>
+							<td class="reference-td" style="width:150px">最后处理时间</td>
+							<td class="reference-td">审批进度</td>
+							<td class="reference-td" style="width:160px;">操作</td>
+						</tr>
+					</tbody>
+					<tbody id="tableList2-3"></tbody>
+				</table>
+			</div>
+        </div>
+    </div>
+    
+    <script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-table/tableExport.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+    <script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
+    <script src="../../js/rales-utils.js" type="text/javascript"></script>
+    <script src="js/register-detail.js" type="text/javascript"></script>
+</body>
+</html>

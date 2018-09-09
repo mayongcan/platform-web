@@ -1,0 +1,111 @@
+.table-title{
+ 	display: block;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.table-title-mark{
+    font-size: 15px;
+}
+table.reference1, table.tecspec {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+.reference-th {
+    color: #fff;
+    background-color: #555;
+    border: 1px solid #555;
+    font-size: 13px;
+    padding: 3px;
+    vertical-align: top;
+    text-align: left;
+}
+.reference-td {
+    line-height: 34px;
+    min-width: 95px;
+    border: 1px solid #d4d4d4;
+    padding: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    vertical-align: top;
+    font-size: 13px;
+    padding-left:10px;
+    padding-right:10px;
+    vertical-align: middle;
+}
+.reference-td1 {
+    line-height: 28px;
+    min-width: 95px;
+    border: 1px solid #d4d4d4;
+    padding: 5px;
+    vertical-align: top;
+    font-size: 13px;
+    padding-left:10px;
+    padding-right:10px;
+    vertical-align: middle;
+}
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+   		width: 100%;
+}
+.float-e-margins .btn {
+    margin-bottom: 0px;
+}
+.input-file{
+	width:100%;
+}
+.edit-layer-input{
+	width:100%;
+}
+
+.files-list{
+    border: 1px solid #d4d4d4;
+    min-height: 230px;
+}
+.files-list-title{
+	height:40px;
+	padding-top:12px;
+	padding-left:15px;
+    border-bottom: 1px solid #d4d4d4;
+}
+.files-list-content{
+	padding:15px 10px;
+}
+.files-list-content div{
+	margin-bottom:10px;
+}
+.files-list-content div a{
+	color: #676a6c;
+}
+.relevance-list{
+	margin-top:20px;
+    border: 1px solid #d4d4d4;
+    min-height: 230px;
+}
+.relevance-list-title{
+	height:40px;
+	padding-top:12px;
+	padding-left:15px;
+    border-bottom: 1px solid #d4d4d4;
+}
+.relevance-list-content{
+	padding:15px 10px;
+}
+.relevance-list-content div{
+	margin-bottom:10px;
+}
+.relevance-list-content div a{
+	color: #676a6c;
+}
+.box-title{
+	text-align: center;
+	padding-top:15px;
+	margin-bottom:20px;
+}
+.box-view-float-left{
+	width: 74%;
+	float:left;
+	clear: none;
+	margin-bottom: 20px;
+}

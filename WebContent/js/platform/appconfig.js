@@ -63,7 +63,7 @@ var app = app || {};
 	app.conf = {};
 	app.conf.isDebug = true;
 	app.conf.url = {};
-	app.conf.url.apigateway = "http://127.0.0.1:8050";
+	app.conf.url.apigateway = "http://192.168.1.108:8050";
 	app.conf.url.getTokenUrl = app.conf.url.apigateway + "/authServer/oauth/token";
 	app.conf.url.getVerifyCode = app.conf.url.apigateway + "/authServer/kaptcha/getKaptchaCode";
 	app.conf.url.checkVerifyCode = app.conf.url.apigateway + "/authServer/kaptcha/checkKaptchaCode";
@@ -869,9 +869,12 @@ var app = app || {};
 		for (var i = 0; i < length; i++) {
 			var check = ""
 			if(!$.utils.isNull(checkDefVal) && checkDefVal == dict[i].ID) check = "checked";
-			html += '<label class="checkbox-inline">' +
-				      	'<input type="radio" name="' + name + '" value="' + dict[i].ID + '" ' + check + '> ' + dict[i].NAME +
-				    '</label>';
+			html += '<div class="radio">' +
+						'<input type="radio" name="' + name + '" id="' + name + '_id_' + i + '" value="' + dict[i].ID + '" ' + check + '>' +
+						'<label for="' + name + '_id_' + i + '">' +
+							dict[i].NAME +
+					    '</label>' +
+					'</div>'
 		}
 		htmlObj.append(html);
 	}
@@ -879,7 +882,7 @@ var app = app || {};
 	//+---------------------------------------------------   
 	//| 将字典值写入多选框
 	//+---------------------------------------------------
-	app.addCheckBoxButton = function(htmlObj, dict, name, checkList){
+	app.addCheckBoxButton = function(htmlObj, dict, name, checkList, isLine){
 		if(htmlObj == null || htmlObj == undefined || dict == null || dict == undefined || dict.length == 0) return;
 		htmlObj.empty();
 		var html = "";
@@ -895,36 +898,13 @@ var app = app || {};
 		for (var i = 0; i < length; i++) {
 			var check = "";
 			if(arrayCheck[i] == '1') check = 'checked';
-			html += '<label style="margin-right:20px;margin-bottom:0px;font-weight: normal;">' +
-				      	'<input type="checkbox" id="' + name + dict[i].ID + '" value="" ' + check + '> ' + dict[i].NAME +
-				    '</label>';
-		}
-		htmlObj.append(html);
-	}
-
-	//+---------------------------------------------------   
-	//| 将字典值写入多选框(每个选项换行)
-	//+---------------------------------------------------
-	app.addCheckBoxButtonLine = function(htmlObj, dict, name, checkList){
-		if(htmlObj == null || htmlObj == undefined || dict == null || dict == undefined || dict.length == 0) return;
-		htmlObj.empty();
-		var html = "";
-		var length = dict.length;
-		var arrayCheck = [];
-		if(checkList == null || checkList == undefined){
-			for (var i = 0; i < length; i++) {
-				arrayCheck[i] = '0';
-			}
-		}else{
-			arrayCheck = checkList.split(',');
-		}
-		for (var i = 0; i < length; i++) {
-			var check = "";
-			if(arrayCheck[i] == '1') check = 'checked';
-			html += '<label style="margin-right:20px;margin-bottom:0px;font-weight: normal;">' +
-				      	'<input type="checkbox" id="' + name + dict[i].ID + '" value="" ' + check + '> ' + dict[i].NAME +
-				    '</label>' + 
-				    '<br/>';
+			html += '<div class="checkbox" style="line-height: normal;display: inline;">' +
+						'<input type="checkbox" id="' + name + dict[i].ID + '" ' + check + '>' +
+					    '<label for="' + name + dict[i].ID + '">' +
+					    	dict[i].NAME +
+					    '</label>' +
+					'</div>';
+			if(isLine) html += '<br/>';
 		}
 		htmlObj.append(html);
 	}
@@ -935,7 +915,7 @@ var app = app || {};
 	app.getCheckBoxButton = function(htmlObj, dict, name){
 		if(htmlObj == null || htmlObj == undefined || dict == null || dict == undefined || dict.length == 0) return;
 		var retVal = "";
-		$.each(htmlObj.find("label").find("input"), function(i, item){
+		$.each(htmlObj.find("div").find("input"), function(i, item){
 			retVal += ($(item).prop('checked') ? '1' : '0') + ',';
 		});
 		if(retVal != "") retVal = retVal.substring(0, retVal.length - 1);

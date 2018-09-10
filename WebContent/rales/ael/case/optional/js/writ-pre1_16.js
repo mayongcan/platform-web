@@ -31,7 +31,9 @@ function setData(){
 	$('#tdCardType').text($.utils.getNotNullVal(g_params.data.cardType));
 	$('#tdCardNo').text($.utils.getNotNullVal(g_params.data.cardNo));
 	$('#tdAddress').text($.utils.getNotNullVal(g_params.data.address));
-	$("input[type='radio'][name=receiveType][value=" + g_params.data.receiveType + "]").attr("checked",true);
+	//$("input[type='radio'][name=receiveType][value=" + g_params.data.receiveType + "]").attr("checked",true);
+	if(g_params.data.receiveType == '1') $('#tdReceiveType').text("是");
+	else $('#tdReceiveType').text("否");
 	$('#phone').text($.utils.getNotNullVal(g_params.data.phone));
 	$('#fax').text($.utils.getNotNullVal(g_params.data.fax));
 	$('#email').text($.utils.getNotNullVal(g_params.data.email));

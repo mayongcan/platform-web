@@ -150,7 +150,7 @@ function submitAction(){
 	
 	var taskSource = $('#divTaskSource input:radio:checked').val();
 	var isCheck = false;
-	$.each($("#divCheckUserAdvice").find("label").find("input"), function(i, item){
+	$.each($("#divCheckUserAdvice").find("div").find("input"), function(i, item){
 		if($(item).prop('checked') == '1')isCheck = true;
 	});
 //	if($.utils.isEmpty(taskSource)){

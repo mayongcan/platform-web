@@ -7494,7 +7494,7 @@ table.reference td {
   display: inline-block;
   vertical-align: middle;
   position: relative;
-  padding-left: 5px;
+  padding-left: 3px;
 }
 .checkbox label::before {
   content: "";
@@ -7679,7 +7679,7 @@ table.reference td {
 }
 
 .radio {
-  padding-left: 20px;
+  /* padding-left: 20px; */
   line-height: normal;
   display: inline;
   margin-right: 20px;
@@ -7688,7 +7688,7 @@ table.reference td {
   display: inline-block;
   vertical-align: middle;
   position: relative;
-  padding-left: 5px;
+  padding-left: 23px;
 }
 .radio label::before {
   content: "";
@@ -7697,7 +7697,7 @@ table.reference td {
   width: 17px;
   height: 17px;
   left: 0;
-  margin-left: -20px;
+  /* margin-left: -20px; */
   border: 1px solid #cccccc;
   border-radius: 50%;
   background-color: #fff;
@@ -7713,7 +7713,7 @@ table.reference td {
   height: 11px;
   left: 3px;
   top: 3px;
-  margin-left: -20px;
+  /* margin-left: -20px; */
   border-radius: 50%;
   background-color: #555555;
   -webkit-transform: scale(0, 0);

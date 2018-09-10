@@ -74,7 +74,7 @@ function setData(){
 	if(!$.utils.isEmpty(g_params.data.applyList)){
 		var array = g_params.data.applyList.split(',');
 		for(var i = 0; i < array.length;i++){
-			if(array[i] == '1') $("#apply" + (i + 1)).attr("checked",true);
+			if(array[i] != '1') $("#apply" + (i + 1)).remove();
 		}
 	}
 }

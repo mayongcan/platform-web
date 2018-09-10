@@ -31,34 +31,15 @@
 						<td class="reference-td" style="text-align: center;width:90px;">
 						   	案由
 						</td>
-						<td class="reference-td" id="tdIllegalContent" colspan="3">
-						   		<div class="radio">
-									<input type="radio" name="illegalContent" id="illegalContent_id_0" value="1" checked="checked">
-									<label for="illegalContent_id_0">一般违法案件</label>
-								</div>
-						   		<div class="radio">
-									<input type="radio" name="illegalContent" id="illegalContent_id_1" value="2">
-									<label for="illegalContent_id_1">涉嫌刑事犯罪案件</label>
-								</div>
-						</td>
+						<td class="reference-td" id="tdIllegalContent" colspan="3"></td>
 						<td class="reference-td" style="text-align: center;">
 						   	案件来源
 						</td>
-						<td class="reference-td" colspan="3" >
-						   	<div id="divCaseSource" style="float:left;"></div>
-						</td>
+						<td class="reference-td" colspan="3" id="tdCaseSource" ></td>
 					</tr>
-					<tr>
-						<td class="reference-td" colspan="1" rowspan="4" style="text-align: center;width:80px;">
-						   	当 事 人<br/>基本情况
-						</td>
-						<td class="reference-td" colspan="1" rowspan="2" style="width:80px;">
-							<div class="checkbox">
-							    <input type="checkbox" id="personType1">
-							    <label for="personType1">
-							        公民
-							    </label>
-							</div>
+					<tr id="trPersonType1_1">
+						<td class="reference-td" colspan="1" rowspan="2" style="width:80px;text-align: center;">
+							公民
 						</td>
 						<td class="reference-td" style="width:60px;">
 						   	姓名
@@ -79,7 +60,7 @@
 						   	<input type="text" id="partiesAge" name="partiesAge" class="form-control">
 						</td>
 					</tr>
-					<tr>
+					<tr id="trPersonType1_2">
 						<td class="reference-td" style="width:60px;">
 						   	住址
 						</td>
@@ -99,14 +80,9 @@
 						   	<input type="text" id="partiesPhone" name="partiesPhone" class="form-control">
 						</td>
 					</tr>
-					<tr>
-						<td class="reference-td" colspan="1" rowspan="2" style="width:150px;">
-							<div class="checkbox">
-							    <input type="checkbox" id="personType2">
-							    <label for="personType2">
-							        法人或其他组织
-							    </label>
-							</div>
+					<tr id="trPersonType2_1">
+						<td class="reference-td" colspan="1" rowspan="2" style="width:150px;text-align: center;">
+							法人或其他组织
 						</td>
 						<td class="reference-td" style="width:60px;">
 						   	名称
@@ -121,7 +97,7 @@
 						   	<input type="text" id="legalRepresentative" name="legalRepresentative" class="form-control">
 						</td>
 					</tr>
-					<tr>
+					<tr id="trPersonType2_2">
 						<td class="reference-td" style="width:60px;">
 						   	住址
 						</td>

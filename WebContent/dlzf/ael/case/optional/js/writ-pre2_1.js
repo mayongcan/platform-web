@@ -40,7 +40,17 @@ function initView(){
 //写入数据内容
 function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
-	
+
+	if(g_params.data.personType == '1') {
+		$("#personType1").attr("checked",true);
+		$('#trPersonType2_1').css('display', 'none');
+		$('#trPersonType2_2').css('display', 'none');
+	}
+	else if(g_params.data.personType == '2') {
+		$("#personType2").attr("checked",true);
+		$('#trPersonType1_1').css('display', 'none');
+		$('#trPersonType1_2').css('display', 'none');
+	}
 	//获取字典
 	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 

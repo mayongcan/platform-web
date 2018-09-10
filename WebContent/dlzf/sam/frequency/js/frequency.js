@@ -270,6 +270,7 @@ function formValidate(){
 }
 
 function submitAction(){
+	top.app.message.loading();
 	//提交数据
 	var submitData = {};
 	submitData["analysisType"] = "1";

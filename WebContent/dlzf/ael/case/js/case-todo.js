@@ -1,5 +1,5 @@
 var $table = $('#tableList'), g_flowProgressDict = [], g_caseSourceDict = [], g_caseTypeDict = [];
-
+var g_rows = [];
 $(function () {
 	//实现日期联动
 	$.date.initSearchDate('divHandleBegin', 'divHandleEnd');
@@ -153,19 +153,21 @@ function tableFormatHandleTime(value, row) {
 }
 
 function formatOperate(value, row, index){
+	g_rows[index] = row;
 	if(row.flowProgress == '0'){
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ')">' + 
 					'编辑' + 
 				'</button>';
 	}else{
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail(' + index + ')">' + 
 					'查看' + 
 				'</button>';
 	}
 }
 
-function btnEventDetail(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
+function btnEventDetail(index){
+	//var row = $table.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.row = row;
@@ -177,8 +179,9 @@ function btnEventDetail(id){
 	window.location.href = encodeURI(url);
 }
 
-function btnEventEdit(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
+function btnEventEdit(index){
+	//var row = $table.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.row = row;

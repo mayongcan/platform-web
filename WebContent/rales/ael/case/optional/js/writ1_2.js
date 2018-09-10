@@ -74,7 +74,7 @@ function initView(){
 			$('#lawUserCardNo1').val(g_params.subRow.content.lawUserCardNo1);
 			$('#lawUserCardNo2').val(g_params.subRow.content.lawUserCardNo2);
 			$('#noticeUser').val(g_params.subRow.content.noticeUser);
-			$('#noticeAnswer').val(g_params.subRow.content.noticeAnswer);
+			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
 			$('#checkDetail').val(g_params.subRow.content.checkDetail);
 			$('#inquiryQuestion').val(g_params.subRow.content.inquiryQuestion);
 			$('#inquiryAnswer').val(g_params.subRow.content.inquiryAnswer);
@@ -91,15 +91,18 @@ function initView(){
 			if(!$.utils.isEmpty(g_params.subRow.content.askList)){
 				var askList = eval("(" + g_params.subRow.content.askList + ")");
 				for(var index = 0; index < askList.length; index++){
-					$('#tbodyAskList').append('<tr>' + 
+					$('#tbodyAskList').append('<tr id="trQuestion' + g_askListIndex + '">' + 
 							'<td class="reference-td" style="width:100px;">' + 
 							   	'问' + 
 							'</td>' + 
 							'<td class="reference-td" id="tdInquiryQuestion' +  g_askListIndex + '" colspan="3">' + 
 								'<textarea id="inquiryQuestion' +  g_askListIndex + '" name="inquiryQuestion' +  g_askListIndex + '" class="form-control" style="height:120px">' + askList[index].inquiryQuestion + '</textarea>' + 
 							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;">' + 
+								'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(' + g_askListIndex + ')">删 除</button>' + 
+							'</td>' + 
 						'</tr>' + 
-						'<tr>' + 
+						'<tr id="trAnswer' + g_askListIndex + '">' + 
 							'<td class="reference-td">' + 
 							   	'答' + 
 							'</td>' + 
@@ -158,7 +161,7 @@ function initView(){
 			$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo1));
 			$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo2));
 			$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.subRow.content.noticeUser));
-			$('#tdNoticeAnswer').text($.utils.getNotNullVal(g_params.subRow.content.noticeAnswer));
+			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
 			$('#tdCheckDetail').text($.utils.getNotNullVal(g_params.subRow.content.checkDetail));
 			$('#tdInquiryQuestion').text($.utils.getNotNullVal(g_params.subRow.content.inquiryQuestion));
 			$('#tdInquiryAnswer').text($.utils.getNotNullVal(g_params.subRow.content.inquiryAnswer));
@@ -173,7 +176,7 @@ function initView(){
 			if(!$.utils.isEmpty(g_params.subRow.content.askList)){
 				var askList = eval("(" + g_params.subRow.content.askList + ")");
 				for(var index = 0; index < askList.length; index++){
-					$('#tbodyAskList').append('<tr>' + 
+					$('#tbodyAskList').append('<tr id="trQuestion' + g_askListIndex + '">' + 
 							'<td class="reference-td" style="width:100px;">' + 
 							   	'问' + 
 							'</td>' + 
@@ -181,7 +184,7 @@ function initView(){
 								askList[index].inquiryQuestion + 
 							'</td>' + 
 						'</tr>' + 
-						'<tr>' + 
+						'<tr id="trAnswer' + g_askListIndex + '">' + 
 							'<td class="reference-td">' + 
 							   	'答' + 
 							'</td>' + 
@@ -232,15 +235,18 @@ function initView(){
     });
 	//新增
 	$("#btnAddAsk").click(function () {
-		$('#tbodyAskList').append('<tr>' + 
+		$('#tbodyAskList').append('<tr id="trQuestion' + g_askListIndex + '">' + 
 										'<td class="reference-td" style="width:100px;">' + 
 										   	'问' + 
 										'</td>' + 
 										'<td class="reference-td" id="tdInquiryQuestion' +  g_askListIndex + '" colspan="3">' + 
 											'<textarea id="inquiryQuestion' +  g_askListIndex + '" name="inquiryQuestion' +  g_askListIndex + '" class="form-control" style="height:120px"></textarea>' + 
 										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;">' + 
+											'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(' + g_askListIndex + ')">删 除</button>' + 
+										'</td>' + 
 									'</tr>' + 
-									'<tr>' + 
+									'<tr id="trAnswer' + g_askListIndex + '">' + 
 										'<td class="reference-td">' + 
 										   	'答' + 
 										'</td>' + 
@@ -250,6 +256,11 @@ function initView(){
 									'</tr>')
 		g_askListIndex++;
     });
+}
+
+function removeQuestion(index){
+	$('#trQuestion' + index).remove();
+	$('#trAnswer' + index).remove();
 }
 
 /**
@@ -293,7 +304,7 @@ function getTableParams(){
 		data.lawUserCardNo1 = $('#lawUserCardNo1').val();
 		data.lawUserCardNo2 = $('#lawUserCardNo2').val();
 		data.noticeUser = $('#noticeUser').val();
-		data.noticeAnswer = $('#noticeAnswer').val();
+		data.noticeAnswer = $('#tdNoticeAnswer input:radio:checked').val();
 		data.checkDetail = $('#checkDetail').val();
 		data.inquiryQuestion = $('#inquiryQuestion').val();
 		data.inquiryAnswer = $('#inquiryAnswer').val();

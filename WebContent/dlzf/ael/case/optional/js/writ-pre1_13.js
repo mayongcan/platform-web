@@ -49,7 +49,14 @@ function setData(){
 	$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
 	$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.data.partiesZip));
 	$("input[type='radio'][name=relationship][value=" + g_params.data.relationship + "]").attr("checked",true);
-	$('#tdOther').text($.utils.getNotNullVal(g_params.data.other));
+	if(g_params.data.relationship == '1') $('#tdRelationship').text("当事人");
+	else if(g_params.data.relationship == '2') $('#tdRelationship').text("法人代表");
+	else if(g_params.data.relationship == '3') $('#tdRelationship').text("现场负责人");
+	else if(g_params.data.relationship == '4') {
+		$('#tdRelationship').text("其他：");
+		$('#tdOther').text($.utils.getNotNullVal(g_params.data.other));
+	}
+	
 	
 	$('#tdLawOffice').text($.utils.getNotNullVal(g_params.data.lawOffice));
 	$('#tdLawUser').text($.utils.getNotNullVal(g_params.data.lawUser1) + "、" + $.utils.getNotNullVal(g_params.data.lawUser2));
@@ -59,7 +66,10 @@ function setData(){
 //	$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.data.lawUserCardNo1));
 //	$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.data.lawUserCardNo2));
 	$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.data.noticeUser));
-	$('#tdNoticeAnswer').text($.utils.getNotNullVal(g_params.data.noticeAnswer));
+	if(g_params.data.noticeAnswer == '1')
+		$('#tdNoticeAnswer').text($.utils.getNotNullVal("是"));
+	else
+		$('#tdNoticeAnswer').text($.utils.getNotNullVal("否"));
 	
 	$('#tdInquiryQuestion').text($.utils.getNotNullVal(g_params.data.inquiryQuestion));
 	$('#tdInquiryAnswer').text($.utils.getNotNullVal(g_params.data.inquiryAnswer));
@@ -69,4 +79,40 @@ function setData(){
 
 	$('#tdAddrQuestion').text($.utils.getNotNullVal(g_params.data.addrQuestion));
 	$('#tdAddrAnswer').text($.utils.getNotNullVal(g_params.data.addrAnswer));
+
+	if(!$.utils.isEmpty(g_params.data.askList1)){
+		var askList1 = eval("(" + g_params.data.askList1 + ")");
+		for(var index = 0; index < askList1.length; index++){
+			$('#divAakList1').append('<div class="box-content">' +
+									'问：<span>' + askList1[index].inquiryQuestion + '</span>' +
+									'</div>' +
+									'<div class="box-content">' +
+										'答：<span>' + askList1[index].inquiryAnswer + '</span>' +
+									'</div>')
+		}
+	}
+
+	if(!$.utils.isEmpty(g_params.data.askList2)){
+		var askList2 = eval("(" + g_params.data.askList2 + ")");
+		for(var index = 0; index < askList2.length; index++){
+			$('#divAakList2').append('<div class="box-content">' +
+									'问：<span>' + askList2[index].inquiryQuestion + '</span>' +
+									'</div>' +
+									'<div class="box-content">' +
+										'答：<span>' + askList2[index].inquiryAnswer + '</span>' +
+									'</div>')
+		}
+	}
+
+	if(!$.utils.isEmpty(g_params.data.askList3)){
+		var askList3 = eval("(" + g_params.data.askList3 + ")");
+		for(var index = 0; index < askList3.length; index++){
+			$('#divAakList3').append('<div class="box-content">' +
+									'问：<span>' + askList3[index].inquiryQuestion + '</span>' +
+									'</div>' +
+									'<div class="box-content">' +
+										'答：<span>' + askList3[index].inquiryAnswer + '</span>' +
+									'</div>')
+		}
+	}
 }

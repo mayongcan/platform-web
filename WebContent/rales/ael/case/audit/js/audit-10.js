@@ -80,7 +80,7 @@ function initData(){
 	var dataInfo = g_params.row.otherFlowParams;
 	$('#tableTitleMark').text(dataInfo.code);
 	
-	if(!$.utils.isNull(dataInfo.content)){debugger
+	if(!$.utils.isNull(dataInfo.content)){
 		var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 		var g_taskSourceDict = top.app.getDictDataByDictTypeValue('AEL_TASK_SOURCE');
 		var g_checkRegisterAdviceDict = top.app.getDictDataByDictTypeValue('AEL_CHECK_REGISTER_ADVICE');

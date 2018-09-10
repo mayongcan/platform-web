@@ -78,7 +78,7 @@ function initView(){
 			$('#lawUserCardNo1').val(g_params.subRow.content.lawUserCardNo1);
 			$('#lawUserCardNo2').val(g_params.subRow.content.lawUserCardNo2);
 			$('#noticeUser').val(g_params.subRow.content.noticeUser);
-			$('#noticeAnswer').val(g_params.subRow.content.noticeAnswer);
+			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
 			$('#checkDetail').val(g_params.subRow.content.checkDetail);
 			$('#askInfo').val(g_params.subRow.content.askInfo);
 			$('#handleInfo').val(g_params.subRow.content.handleInfo);
@@ -138,7 +138,7 @@ function initView(){
 			$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo1));
 			$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo2));
 			$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.subRow.content.noticeUser));
-			$('#tdNoticeAnswer').text($.utils.getNotNullVal(g_params.subRow.content.noticeAnswer));
+			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
 			$('#tdCheckDetail').text($.utils.getNotNullVal(g_params.subRow.content.checkDetail));
 			$('#tdAskInfo').text($.utils.getNotNullVal(g_params.subRow.content.askInfo));
 			$('#tdHandleInfo').text($.utils.getNotNullVal(g_params.subRow.content.handleInfo));
@@ -229,7 +229,7 @@ function getTableParams(){
 		data.lawUserCardNo1 = $('#lawUserCardNo1').val();
 		data.lawUserCardNo2 = $('#lawUserCardNo2').val();
 		data.noticeUser = $('#noticeUser').val();
-		data.noticeAnswer = $('#noticeAnswer').val();
+		data.noticeAnswer = $('#tdNoticeAnswer input:radio:checked').val();
 		data.checkDetail = $('#checkDetail').val();
 		data.askInfo = $('#askInfo').val();
 		data.handleInfo = $('#handleInfo').val();

@@ -72,6 +72,11 @@ function setData(){
 	$('#tdPunish').text($.utils.getNotNullVal(g_params.data.punish));
 	$('#tdTotalCnt').text($.utils.getNotNullVal(g_params.data.totalCnt));
 	$("input[type='radio'][name=handleType][value=" + g_params.data.handleType + "]").attr("checked",true);
+	if(g_params.data.handleType == '1') $('#tdHandleType').text("返还"); 
+	else if(g_params.data.handleType == '2') $('#tdHandleType').text("变卖或拍卖后上缴国库"); 
+	else if(g_params.data.handleType == '3') $('#tdHandleType').text("销毁"); 
+	else if(g_params.data.handleType == '4') $('#tdHandleType').text("厂家回收"); 
+	else if(g_params.data.handleType == '5') $('#tdHandleType').text("其他处理方式"); 
 	$('#tdAdviceContent').text($.utils.getNotNullVal(g_params.data.advice));
 	
 }

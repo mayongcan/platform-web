@@ -136,7 +136,7 @@ function initData(){
 	if(g_params.row.activityId == 'deputyDirectorAuditTask1'){
 		top.app.addComboBoxOption($("#auditStatus"), [{ID:'10', NAME:'通过'}, {ID:'0', NAME:'回退重新编辑'}]);
 	}else if(g_params.row.activityId == 'directorAuditTask1'){
-		top.app.addComboBoxOption($("#auditStatus"), [{ID:'10', NAME:'通过'}, {ID:'0', NAME:'回退重新编辑'}, {ID:'1', NAME:'回退到无线电处副处长处理'}]);
+		top.app.addComboBoxOption($("#auditStatus"), [{ID:'10', NAME:'通过'}, {ID:'0', NAME:'回退重新编辑'}, {ID:'1', NAME:'回退到电力处副处长处理'}]);
 	}else if(g_params.row.activityId == 'deputyChiefAuditTask'){
 		top.app.addComboBoxOption($("#auditStatus"), [{ID:'10', NAME:'通过'}, {ID:'0', NAME:'回退'}]);
 //		$('#trFeedback').css('display', '');
@@ -152,7 +152,7 @@ function initData(){
 //		$('#tdFeedback').text(g_params.row.feedback);
 //		$('#trDraftOpinion').css('display', '');
 //		$('#tdDraftOpinion').text(g_params.row.draftOpinion);
-		top.app.addComboBoxOption($("#auditStatus"), [{ID:'10', NAME:'通过'}, {ID:'0', NAME:'回退到处理反馈'}, {ID:'1', NAME:'回退到草拟答复意见'}, {ID:'2', NAME:'回退到无线电处副处长处理'}]);
+		top.app.addComboBoxOption($("#auditStatus"), [{ID:'10', NAME:'通过'}, {ID:'0', NAME:'回退到处理反馈'}, {ID:'1', NAME:'回退到草拟答复意见'}, {ID:'2', NAME:'回退到电力处副处长处理'}]);
 	}else if(g_params.row.activityId == 'draftReplyTask'){		//草拟审批意见，增加通过和回退
 //		$('#trFeedback').css('display', '');
 //		$('#tdFeedback').text(g_params.row.feedback);

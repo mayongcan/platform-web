@@ -42,7 +42,17 @@ function initView(){
 //写入数据内容
 function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
-	
+
+	if(g_params.data.personType == '1') {
+		$("#personType1").attr("checked",true);
+		$('#trPersonType2_1').css('display', 'none');
+		$('#trPersonType2_2').css('display', 'none');
+	}
+	else if(g_params.data.personType == '2') {
+		$("#personType2").attr("checked",true);
+		$('#trPersonType1_1').css('display', 'none');
+		$('#trPersonType1_2').css('display', 'none');
+	}
 	//获取字典
 	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 
@@ -62,6 +72,8 @@ function setData(){
 	$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.data.companyAddr));
 	$('#tdCompanyPhone').text($.utils.getNotNullVal(g_params.data.companyPhone));
 	$("input[type='radio'][name=auditType][value=" + g_params.data.auditType + "]").attr("checked",true);
+	if(g_params.data.illegalContent == '1') $('#tdAuditType').text("先行登记保存证据");
+	else $('#tdAuditType').text("解除行政强制措施种类");
 	$('#tdBaseContent').text($.utils.getNotNullVal(g_params.data.base));
 	
 }

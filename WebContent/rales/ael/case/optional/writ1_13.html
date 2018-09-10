@@ -239,7 +239,14 @@
 							   	是否申请回避
 							</td>
 							<td class="reference-td" id="tdNoticeAnswer" colspan="3">
-							   	<input type="text" id="noticeAnswer" name="noticeAnswer" class="form-control">
+								<div class="radio">
+									<input type="radio" name="noticeAnswer" id="noticeAnswer_id_0" value="1" checked="checked">
+									<label for="receiveType_id_0">是</label>
+								</div>
+						   		<div class="radio">
+									<input type="radio" name="noticeAnswer" id="noticeAnswer_id_1" value="2">
+									<label for="noticeAnswer_id_1">否</label>
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -251,7 +258,7 @@
 							<td class="reference-td" style="width:100px;">
 							   	问
 							</td>
-							<td class="reference-td" id="tdInquiryQuestion" colspan="3">
+							<td class="reference-td" id="tdInquiryQuestion" colspan="4">
 								<textarea id="inquiryQuestion" name="inquiryQuestion" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
@@ -259,12 +266,16 @@
 							<td class="reference-td">
 							   	答
 							</td>
-							<td class="reference-td" id="tdInquiryAnswer" colspan="3">
+							<td class="reference-td" id="tdInquiryAnswer" colspan="4">
 								<textarea id="inquiryAnswer" name="inquiryAnswer" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 					</tbody>
+					<tbody id="tbodyAskList1"></tbody>
 				</table>
+	            <div style="margin-top:10px">
+			        <button type="button" class="btn btn-primary no-print" id="btnAddAsk1" style="margin-right:30px;width: 100px;">新 增</button>
+		        </div>
 				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">四、陈述（申辩）情况：</div>
 				<table class="reference1">
 					<tbody>
@@ -272,7 +283,7 @@
 							<td class="reference-td" style="width:100px;">
 							   	问
 							</td>
-							<td class="reference-td" id="tdDefendQuestion" colspan="3">
+							<td class="reference-td" id="tdDefendQuestion" colspan="4">
 								<textarea id="defendQuestion" name="defendQuestion" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
@@ -280,20 +291,24 @@
 							<td class="reference-td">
 							   	答
 							</td>
-							<td class="reference-td" id="tdDefendAnswer" colspan="3">
+							<td class="reference-td" id="tdDefendAnswer" colspan="4">
 								<textarea id="defendAnswer" name="defendAnswer" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 					</tbody>
+					<tbody id="tbodyAskList2"></tbody>
 				</table>
+	            <div style="margin-top:10px">
+			        <button type="button" class="btn btn-primary no-print" id="btnAddAsk2" style="margin-right:30px;width: 100px;">新 增</button>
+		        </div>
 				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">五、送达地址确认：</div>
-				<table class="reference1">
+				<table class="reference">
 					<tbody>
 						<tr>
 							<td class="reference-td" style="width:100px;">
 							   	问
 							</td>
-							<td class="reference-td" id="tdAddrQuestion" colspan="3">
+							<td class="reference-td" id="tdAddrQuestion" colspan="4">
 								<textarea id="addrQuestion" name="addrQuestion" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
@@ -301,12 +316,16 @@
 							<td class="reference-td">
 							   	答
 							</td>
-							<td class="reference-td" id="tdAddrAnswer" colspan="3">
+							<td class="reference-td" id="tdAddrAnswer" colspan="4">
 								<textarea id="addrAnswer" name="addrAnswer" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 					</tbody>
+					<tbody id="tbodyAskList3"></tbody>
 				</table>
+	            <div style="margin-top:10px">
+			        <button type="button" class="btn btn-primary no-print" id="btnAddAsk3" style="margin-right:30px;width: 100px;">新 增</button>
+		        </div>
 				
 				<table id="tableUploadList" class="reference1" style="margin-top:20px;">
 					<tbody>

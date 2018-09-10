@@ -55,4 +55,10 @@ function setData(){
 //										'</td>' + 
 									'</tr>')
 	}
+
+	$('#tdUserName').text($.utils.getNotNullVal(g_params.data.userName));
+	$('#tdLawUser1').text($.utils.getNotNullVal(g_params.data.lawUser1));
+	$('#tdLawUser2').text($.utils.getNotNullVal(g_params.data.lawUser2));
+	$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.data.lawUserCardNo1));
+	$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.data.lawUserCardNo2));
 }

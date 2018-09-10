@@ -26,6 +26,13 @@ function initView(){
 function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
 
+	if(g_params.data.personType == '1') {
+		$("#divPersonType2").remove();
+	}
+	else if(g_params.data.personType == '2') {
+		$("#divPersonType1").remove();
+	}
+	
 	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
 	$('#tdCaseName').text($.utils.getNotNullVal(g_params.data.caseName));
 	rales.setDateInfo($('#dataYear'), $('#dataMonth'), $('#dataDay'), g_params.data.inquiryDate1);

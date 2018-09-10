@@ -20,20 +20,12 @@
 				<span class="table-title">当场行政处罚决定书</span>
 				<span class="table-title-mark" id="tableTitleMark">粤经信无01当场罚〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
 			</div>
-			<div class="box-content-noindent">
-				<div class="checkbox">
-				    <input type="checkbox" id="personType1">
-				    <label for="personType1"> </label>
-				</div>
+			<div class="box-content-noindent" id="divPersonType1">
 				当事人名称或姓名：<a class="content-fill-in" style="min-width:80px;" id="tdPartiesName">　</a>
 				性别：<a class="content-fill-in" style="min-width:80px;" id="tdPartiesSex">　</a>
 				身份证号：<a class="content-fill-in" style="min-width:80px;" id="tdPartiesCertificateNo">　</a>
 			</div>
-			<div class="box-content-noindent">
-				<div class="checkbox">
-				    <input type="checkbox" id="personType2">
-				    <label for="personType2"> </label>
-				</div>
+			<div class="box-content-noindent" id="divPersonType2">
 				法定代表人或负责人姓名：<a class="content-fill-in" style="min-width:80px;" id="tdCompanyName">　</a>
 				职务：<a class="content-fill-in" style="min-width:80px;" id="tdCompanyJob">　</a>
 				地址：<a class="content-fill-in" style="min-width:80px;" id="tdCompanyAddr">　</a>
@@ -54,37 +46,27 @@
 				<a class="content-fill-in" style="min-width:80px;" id="tdDefendType"></a>。
 				现依据<a class="content-fill-in" style="min-width:80px;" id="tdBaseRule">　</a>，本机关决定对你（单位）处以下行政处罚：
 			</div>
-			<div class="box-content">
-				<div class="checkbox">
-				    <input type="checkbox" id="punishType1">
-				    <label for="punishType1">警告；</label>
-				</div>
+			<div class="box-content" id="divPunishType1">
+				警告；
 			</div>
-			<div class="box-content">
-				<div class="checkbox">
-				    <input type="checkbox" id="punishType2">
-				    <label for="punishType2">罚款人民币</label>
-				</div>
-				<a class="content-fill-in" style="min-width:40px;" id="punishMoney1">　</a>
+			<div class="box-content" id="divPunishType2">
+				罚款人民币
+				<a class="content-fill-in" style="min-width:40px;" id="punishMoneyVal">　</a>
+				<!-- <a class="content-fill-in" style="min-width:40px;" id="punishMoney1">　</a>
 				千<a class="content-fill-in" style="min-width:40px;" id="punishMoney2">　</a>
 				百<a class="content-fill-in" style="min-width:40px;" id="punishMoney3">　</a>
-				拾<a class="content-fill-in" style="min-width:40px;" id="punishMoney4">　</a>元整（大写）。￥：
+				拾<a class="content-fill-in" style="min-width:40px;" id="punishMoney4">　</a> -->
+				元整（大写）。￥：
 				<a class="content-fill-in" style="min-width:40px;" id="tdPunishMoneyAll">　</a>
 			</div>
 			<div class="box-content">
 				缴纳罚款方式：
 			</div>
-			<div class="box-content">
-				<div class="checkbox">
-				    <input type="checkbox" id="punishMoneyType1">
-				    <label for="punishMoneyType1">当场收缴。（依据《中华人民共和国行政处罚法》第四十七条、第四十八条的规定）</label>
-				</div>
+			<div class="box-content" id="divPunishMoneyType1">
+				当场收缴。（依据《中华人民共和国行政处罚法》第四十七条、第四十八条的规定）
 			</div>
-			<div class="box-content">
-				<div class="checkbox">
-				    <input type="checkbox" id="punishMoneyType2">
-				    <label for="punishMoneyType2">自收到本决定书之日起15日内将罚款交至</label>
-				</div>
+			<div class="box-content" id="divPunishMoneyType2">
+				自收到本决定书之日起15日内将罚款交至
 				<a class="content-fill-in" style="min-width:80px;" id="tdBankName">　</a>
 				。账号：<a class="content-fill-in" style="min-width:80px;" id="tdBankCode">　</a>
 				户名：<a class="content-fill-in" style="min-width:80px;" id="tdBankUserName">　</a>

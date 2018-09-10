@@ -55,8 +55,7 @@ function setData(){
 		$('#trPersonType1_1').css('display', 'none');
 		$('#trPersonType1_2').css('display', 'none');
 	}
-	
-	top.app.addRadioButton($("#divCaseSource"), g_params.caseSourceDict, 'radioCaseSource', g_params.data.caseSource);
+	$('#tdCaseSource').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.caseSource, g_params.caseSourceDict)));
 
 	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
 	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));

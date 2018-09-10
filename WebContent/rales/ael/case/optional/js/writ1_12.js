@@ -9,8 +9,8 @@ $(function () {
 });
 
 function initView(){
-	$('#tdInquiryDate1').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
-	$('#tdInquiryDate2').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
+	$('#divInquiryDate1').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
+	$('#divInquiryDate2').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
 	
 	//1新增 2编辑 3查看
 	if(g_params.type == 1){

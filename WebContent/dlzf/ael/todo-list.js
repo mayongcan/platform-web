@@ -195,10 +195,11 @@ function btnEventAudit2(id){
 	//设置传送对象
 	top.app.info.iframe.params = {};
 
-	if(row.activityName == '先行登记保存草稿' || row.activityName == '行政强制措施草稿' || 
-			row.activityName == '重新编辑' || row.activityName == '第二承办人审批'){
-		top.app.info.iframe.params.isEdit = true;
-	}
+//	if(row.activityName == '先行登记保存草稿' || row.activityName == '行政强制措施草稿' || 
+//			row.activityName == '重新编辑' || row.activityName == '第二承办人审批'){
+//		top.app.info.iframe.params.isEdit = true;
+//	}
+	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
 	top.app.info.iframe.params.backUrl = "/rales/ael/todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
@@ -277,9 +278,10 @@ function btnEventAudit3(id){
 	var row = $table3.bootstrapTable("getRowByUniqueId", id);
 	//设置传送对象
 	top.app.info.iframe.params = {};
-	if(row.activityName == '行政检查编辑' || row.activityName == '行政检查草稿' ||  row.activityName == '第二承办人审批'){
-		top.app.info.iframe.params.isEdit = true;
-	}
+//	if(row.activityName == '行政检查编辑' || row.activityName == '行政检查草稿' ||  row.activityName == '第二承办人审批'){
+//		top.app.info.iframe.params.isEdit = true;
+//	}
+	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
 	top.app.info.iframe.params.backUrl = "/rales/ael/todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");

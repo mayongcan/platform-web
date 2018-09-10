@@ -2,6 +2,7 @@ var g_params = {}, g_backUrl = null;
 var g_codeType = rales.writOptional1_14, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
 var g_sexDict = "";
+var g_askListIndex = 1;
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -93,6 +94,33 @@ function initView(){
 			$('#ruleAnswer').val(g_params.subRow.content.ruleAnswer);
 			if(g_params.subRow.content.selectUser1 == '1') $("#selectUser1").attr("checked",true);
 			if(g_params.subRow.content.selectUser2 == '1') $("#selectUser2").attr("checked",true);
+
+			
+			if(!$.utils.isEmpty(g_params.subRow.content.askList)){
+				var askList = eval("(" + g_params.subRow.content.askList + ")");
+				for(var index = 0; index < askList.length; index++){
+					$('#tbodyAskList').append('<tr id="trQuestion' + g_askListIndex + '">' + 
+							'<td class="reference-td" style="width:100px;">' + 
+							   	'问' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion' +  g_askListIndex + '" colspan="3">' + 
+								'<textarea id="inquiryQuestion' +  g_askListIndex + '" name="inquiryQuestion' +  g_askListIndex + '" class="form-control" style="height:120px">' + askList[index].inquiryQuestion + '</textarea>' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;">' + 
+								'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(' + g_askListIndex + ')">删 除</button>' + 
+							'</td>' + 
+						'</tr>' + 
+						'<tr id="trAnswer' + g_askListIndex + '">' + 
+							'<td class="reference-td">' + 
+							   	'答' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryAnswer' +  g_askListIndex + '" colspan="3">' + 
+								'<textarea id="inquiryAnswer' +  g_askListIndex + '" name="inquiryAnswer' +  g_askListIndex + '" class="form-control" style="height:120px">' + askList[index].inquiryAnswer + '</textarea>' + 
+							'</td>' + 
+						'</tr>')
+						g_askListIndex++;
+				}
+			}
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -162,8 +190,33 @@ function initView(){
 			$('#tdRuleAnswer').text($.utils.getNotNullVal(g_params.subRow.content.ruleAnswer));
 			if(g_params.subRow.content.selectUser1 == '1') $("#selectUser1").attr("checked",true);
 			if(g_params.subRow.content.selectUser2 == '1') $("#selectUser2").attr("checked",true);
+			
+			if(!$.utils.isEmpty(g_params.subRow.content.askList)){
+				var askList = eval("(" + g_params.subRow.content.askList + ")");
+				for(var index = 0; index < askList.length; index++){
+					$('#tbodyAskList').append('<tr>' + 
+							'<td class="reference-td" style="width:100px;">' + 
+							   	'问' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion' +  g_askListIndex + '" colspan="3">' + 
+								askList[index].inquiryQuestion + 
+							'</td>' + 
+						'</tr>' + 
+						'<tr>' + 
+							'<td class="reference-td">' + 
+							   	'答' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryAnswer' +  g_askListIndex + '" colspan="3">' + 
+								askList[index].inquiryAnswer + 
+							'</td>' + 
+						'</tr>')
+						g_askListIndex++;
+				}
+			}
 		}
 
+		//移除增加按钮
+		$("#btnAddAsk").remove();
 		//设置右侧的高度和左侧一致
 		if($("#content-left").height() < 500) $("#content-left").height(500);
 		$("#content-right").height($("#content-left").height());
@@ -198,8 +251,36 @@ function initView(){
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		window.location.href = g_backUrl + "?_pid=" + pid + "&navIndex=" + g_params.navIndex + "&subIndex=" + g_params.subIndex;
     });
+
+	//新增
+	$("#btnAddAsk").click(function () {
+		$('#tbodyAskList').append('<tr id="trQuestion' + g_askListIndex + '">' + 
+										'<td class="reference-td" style="width:100px;">' + 
+										   	'问' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion' +  g_askListIndex + '" colspan="3">' + 
+											'<textarea id="inquiryQuestion' +  g_askListIndex + '" name="inquiryQuestion' +  g_askListIndex + '" class="form-control" style="height:120px"></textarea>' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;">' + 
+											'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(' + g_askListIndex + ')">删 除</button>' + 
+										'</td>' + 
+									'</tr>' + 
+									'<tr id="trAnswer' + g_askListIndex + '">' + 
+										'<td class="reference-td">' + 
+										   	'答' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryAnswer' +  g_askListIndex + '" colspan="3">' + 
+											'<textarea id="inquiryAnswer' +  g_askListIndex + '" name="inquiryAnswer' +  g_askListIndex + '" class="form-control" style="height:120px"></textarea>' + 
+										'</td>' + 
+									'</tr>')
+		g_askListIndex++;
+    });
 }
 
+function removeQuestion(index){
+	$('#trQuestion' + index).remove();
+	$('#trAnswer' + index).remove();
+}
 /**
  * 获取页面表格参数值
  * @returns
@@ -264,6 +345,18 @@ function getTableParams(){
 		else data.selectUser1 = '0';
 		if($('#selectUser2').prop('checked')) data.selectUser2 = '1';
 		else data.selectUser2 = '0';
+		
+
+		var askList = [];
+		for(var i = 1; i < g_askListIndex;i++){
+			var obj = {};
+			obj.inquiryQuestion = $('#inquiryQuestion' + i).val();
+			obj.inquiryAnswer = $('#inquiryAnswer' + i).val();
+			if(!$.utils.isEmpty(obj.inquiryQuestion) && !$.utils.isEmpty(obj.inquiryAnswer)){
+				askList.push(obj)
+			}
+		}
+		data.askList = JSON.stringify(askList);
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}

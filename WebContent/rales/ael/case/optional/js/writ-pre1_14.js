@@ -90,4 +90,16 @@ function setData(){
 	$('#tdRuleAnswer').text($.utils.getNotNullVal(g_params.data.ruleAnswer));
 	if(g_params.data.selectUser1 == '1') $("#selectUser1").css('display', '');
 	if(g_params.data.selectUser2 == '1') $("#selectUser2").css('display', '');
+
+	if(!$.utils.isEmpty(g_params.data.askList)){
+		var askList = eval("(" + g_params.data.askList + ")");
+		for(var index = 0; index < askList.length; index++){
+			$('#divAakList').append('<div class="box-content">' +
+									'问：<span>' + askList[index].inquiryQuestion + '</span>' +
+									'</div>' +
+									'<div class="box-content">' +
+										'答：<span>' + askList[index].inquiryAnswer + '</span>' +
+									'</div>')
+		}
+	}
 }

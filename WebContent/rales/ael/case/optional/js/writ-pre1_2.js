@@ -68,8 +68,14 @@ function setData(){
 //	$('#tdLawUser2').text($.utils.getNotNullVal(g_params.data.lawUser2));
 //	$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.data.lawUserCardNo1));
 //	$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.data.lawUserCardNo2));
+	
 	$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.data.noticeUser));
-	$('#tdNoticeAnswer').text($.utils.getNotNullVal(g_params.data.noticeAnswer));
+	if(g_params.data.noticeAnswer == '1')
+		$('#tdNoticeAnswer').text($.utils.getNotNullVal("是"));
+	else
+		$('#tdNoticeAnswer').text($.utils.getNotNullVal("否"));
+	
+	
 	$('#tdCheckDetail').text($.utils.getNotNullVal(g_params.data.checkDetail));
 	$('#tdInquiryQuestion').text($.utils.getNotNullVal(g_params.data.inquiryQuestion));
 	$('#tdInquiryAnswer').text($.utils.getNotNullVal(g_params.data.inquiryAnswer));

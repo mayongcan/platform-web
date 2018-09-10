@@ -20,6 +20,13 @@ function initView(){
 		if(!$.utils.isNull(g_params.subRow.content)){
 			//转换json
 			var content = eval("(" + g_params.subRow.content + ")");
+
+			$('#userName').val(g_params.subRow.content.userName);
+			$('#lawUser1').val(g_params.subRow.content.lawUser1);
+			$('#lawUser2').val(g_params.subRow.content.lawUser2);
+			$('#lawUserCardNo1').val(g_params.subRow.content.lawUserCardNo1);
+			$('#lawUserCardNo2').val(g_params.subRow.content.lawUserCardNo2);
+			
 			g_dataList = eval("(" + content.list + ")");
 			if($.utils.isNull(g_dataList)) g_dataList = [];
 			refreshView();	
@@ -35,6 +42,13 @@ function initView(){
 		if(!$.utils.isNull(g_params.subRow.content)){
 			//转换json
 			var content = eval("(" + g_params.subRow.content + ")");
+
+			$('#tdUserName').text($.utils.getNotNullVal(g_params.subRow.content.userName));
+			$('#tdLawUser1').text($.utils.getNotNullVal(g_params.subRow.content.lawUser1));
+			$('#tdLawUser2').text($.utils.getNotNullVal(g_params.subRow.content.lawUser2));
+			$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo1));
+			$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo2));
+			
 			g_dataList = eval("(" + content.list + ")");
 			if($.utils.isNull(g_dataList)) g_dataList = [];
 			refreshView();	
@@ -154,6 +168,16 @@ function getTableParams(){
 	var data = {};
 	data.tableTitleMark = $('#tableTitleMark').text();
 	data.list = g_dataList;
+	
+	if(g_params.type == 1 || g_params.type == 2){	
+		data.userName = $('#userName').val();
+		data.lawUser1 = $('#lawUser1').val();
+		data.lawUser2 = $('#lawUser2').val();
+		data.lawUserCardNo1 = $('#lawUserCardNo1').val();
+		data.lawUserCardNo2 = $('#lawUserCardNo2').val();
+	}else{
+		data = $.extend(data, g_params.subRow.content);
+	}
 	return data;
 }
 

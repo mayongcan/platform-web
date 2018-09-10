@@ -26,10 +26,50 @@
 				<span class="table-title">抽样取证物品清单</span>
 				<span class="table-title-mark" id="tableTitleMark">粤经信无01抽清单〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
 			</div>
-			<div style="margin-top:30px" id="divBtnAdd">
-		        <button type="button" class="btn btn-primary no-print" id="btnAdd" style="margin-right:30px;width: 100px;">新 增</button>
-	        </div>
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
+				<table class="reference1">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width: 130px;">
+							   	取证人
+							</td>
+							<td class="reference-td" colspan="3" id="tdUserName">
+							   	<input type="text" class="form-control" id="userName" name="userName"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="width: 130px;">
+							   	执法人员1
+							</td>
+							<td class="reference-td" id="tdLawUser1">
+							   	<input type="text" id="lawUser1" name="lawUser1" class="form-control">
+							</td>
+							<td class="reference-td" style="width: 130px;">
+							   	执法人员2
+							</td>
+							<td class="reference-td" id="tdLawUser2">
+							   	<input type="text" id="lawUser2" name="lawUser2" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	执法人员证号1
+							</td>
+							<td class="reference-td" id="tdLawUserCardNo1">
+							   	<input type="text" id="lawUserCardNo1" name="lawUserCardNo1" class="form-control">
+							</td>
+							<td class="reference-td">
+							   	执法人员证号2
+							</td>
+							<td class="reference-td" id="tdLawUserCardNo2">
+							   	<input type="text" id="lawUserCardNo2" name="lawUserCardNo2" class="form-control">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div style="margin-top:30px" id="divBtnAdd">
+			        <button type="button" class="btn btn-primary no-print" id="btnAdd" style="margin-right:30px;width: 100px;">新 增</button>
+		        </div>
 				<table class="reference1">
 					<tbody>
 						<tr>

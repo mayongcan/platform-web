@@ -2,6 +2,7 @@ var g_params = {}, g_backUrl = null;
 var g_codeType = rales.writOptional1_13, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
 var g_sexDict = "";
+var g_askListIndex1 = 1, g_askListIndex2 = 1, g_askListIndex3 = 1;
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -57,7 +58,7 @@ function initView(){
 			$('#lawUserCardNo1').val(g_params.subRow.content.lawUserCardNo1);
 			$('#lawUserCardNo2').val(g_params.subRow.content.lawUserCardNo2);
 			$('#noticeUser').val(g_params.subRow.content.noticeUser);
-			$('#noticeAnswer').val(g_params.subRow.content.noticeAnswer);
+			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
 			
 			$('#inquiryQuestion').val(g_params.subRow.content.inquiryQuestion);
 			$('#inquiryAnswer').val(g_params.subRow.content.inquiryAnswer);
@@ -67,6 +68,85 @@ function initView(){
 
 			$('#addrQuestion').val(g_params.subRow.content.addrQuestion);
 			$('#addrAnswer').val(g_params.subRow.content.addrAnswer);
+			
+
+			if(!$.utils.isEmpty(g_params.subRow.content.askList1)){
+				var askList1 = eval("(" + g_params.subRow.content.askList1 + ")");
+				for(var index = 0; index < askList1.length; index++){
+					$('#tbodyAskList1').append('<tr id="trQuestion1_' + g_askListIndex1 + '">' + 
+							'<td class="reference-td" style="width:100px;">' + 
+							   	'问' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion1_' +  g_askListIndex1 + '" colspan="3">' + 
+								'<textarea id="inquiryQuestion1_' +  g_askListIndex1 + '" name="inquiryQuestion1_' +  g_askListIndex1 + '" class="form-control" style="height:120px">' + askList1[index].inquiryQuestion + '</textarea>' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;">' + 
+								'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(1, ' + g_askListIndex1 + ')">删 除</button>' + 
+							'</td>' + 
+						'</tr>' + 
+						'<tr id="trAnswer1_' + g_askListIndex1 + '">' + 
+							'<td class="reference-td">' + 
+							   	'答' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryAnswer1_' +  g_askListIndex1 + '" colspan="3">' + 
+								'<textarea id="inquiryAnswer1_' +  g_askListIndex1 + '" name="inquiryAnswer1_' +  g_askListIndex1 + '" class="form-control" style="height:120px">' + askList1[index].inquiryAnswer + '</textarea>' + 
+							'</td>' + 
+						'</tr>')
+						g_askListIndex1++;
+				}
+			}
+
+			if(!$.utils.isEmpty(g_params.subRow.content.askList2)){
+				var askList2 = eval("(" + g_params.subRow.content.askList2 + ")");
+				for(var index = 0; index < askList2.length; index++){
+					$('#tbodyAskList2').append('<tr id="trQuestion2_' + g_askListIndex2 + '">' + 
+							'<td class="reference-td" style="width:100px;">' + 
+							   	'问' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion2_' +  g_askListIndex2 + '" colspan="3">' + 
+								'<textarea id="inquiryQuestion2_' +  g_askListIndex2 + '" name="inquiryQuestion2_' +  g_askListIndex2 + '" class="form-control" style="height:120px">' + askList2[index].inquiryQuestion + '</textarea>' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;">' + 
+								'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(2, ' + g_askListIndex2 + ')">删 除</button>' + 
+							'</td>' + 
+						'</tr>' + 
+						'<tr id="trAnswer2_' + g_askListIndex2 + '">' + 
+							'<td class="reference-td">' + 
+							   	'答' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryAnswer2_' +  g_askListIndex2 + '" colspan="3">' + 
+								'<textarea id="inquiryAnswer2_' +  g_askListIndex2 + '" name="inquiryAnswer2_' +  g_askListIndex2 + '" class="form-control" style="height:120px">' + askList2[index].inquiryAnswer + '</textarea>' + 
+							'</td>' + 
+						'</tr>')
+						g_askListIndex2++;
+				}
+			}
+
+			if(!$.utils.isEmpty(g_params.subRow.content.askList3)){
+				var askList3 = eval("(" + g_params.subRow.content.askList3 + ")");
+				for(var index = 0; index < askList3.length; index++){
+					$('#tbodyAskList3').append('<tr id="trQuestion3_' + g_askListIndex3 + '">' + 
+							'<td class="reference-td" style="width:100px;">' + 
+							   	'问' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion3_' +  g_askListIndex3 + '" colspan="3">' + 
+								'<textarea id="inquiryQuestion3_' +  g_askListIndex3 + '" name="inquiryQuestion3_' +  g_askListIndex3 + '" class="form-control" style="height:120px">' + askList3[index].inquiryQuestion + '</textarea>' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;vertical-align: middle;">' + 
+								'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(3, ' + g_askListIndex3 + ')">删 除</button>' + 
+							'</td>' + 
+						'</tr>' + 
+						'<tr id="trAnswer3_' + g_askListIndex3 + '">' + 
+							'<td class="reference-td">' + 
+							   	'答' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryAnswer3_' +  g_askListIndex3 + '" colspan="3">' + 
+								'<textarea id="inquiryAnswer3_' +  g_askListIndex3 + '" name="inquiryAnswer3_' +  g_askListIndex3 + '" class="form-control" style="height:120px">' + askList3[index].inquiryAnswer + '</textarea>' + 
+							'</td>' + 
+						'</tr>')
+						g_askListIndex3++;
+				}
+			}
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -111,7 +191,7 @@ function initView(){
 			$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo1));
 			$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo2));
 			$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.subRow.content.noticeUser));
-			$('#tdNoticeAnswer').text($.utils.getNotNullVal(g_params.subRow.content.noticeAnswer));
+			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
 			
 			$('#tdInquiryQuestion').text($.utils.getNotNullVal(g_params.subRow.content.inquiryQuestion));
 			$('#tdInquiryAnswer').text($.utils.getNotNullVal(g_params.subRow.content.inquiryAnswer));
@@ -121,8 +201,82 @@ function initView(){
 
 			$('#tdAddrQuestion').text($.utils.getNotNullVal(g_params.subRow.content.addrQuestion));
 			$('#tdAddrAnswer').text($.utils.getNotNullVal(g_params.subRow.content.addrAnswer));
+
+			if(!$.utils.isEmpty(g_params.subRow.content.askList1)){
+				var askList1 = eval("(" + g_params.subRow.content.askList1 + ")");
+				for(var index = 0; index < askList1.length; index++){
+					$('#tbodyAskList1').append('<tr>' + 
+							'<td class="reference-td" style="width:100px;">' + 
+							   	'问' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion1_' +  g_askListIndex1 + '" colspan="3">' + 
+								askList1[index].inquiryQuestion + 
+							'</td>' + 
+						'</tr>' + 
+						'<tr>' + 
+							'<td class="reference-td">' + 
+							   	'答' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryAnswer1_' +  g_askListIndex1 + '" colspan="3">' + 
+								askList1[index].inquiryAnswer + 
+							'</td>' + 
+						'</tr>')
+						g_askListIndex1++;
+				}
+			}
+
+			if(!$.utils.isEmpty(g_params.subRow.content.askList2)){
+				var askList2 = eval("(" + g_params.subRow.content.askList2 + ")");
+				for(var index = 0; index < askList2.length; index++){
+					$('#tbodyAskList2').append('<tr>' + 
+							'<td class="reference-td" style="width:100px;">' + 
+							   	'问' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion2_' +  g_askListIndex2 + '" colspan="3">' + 
+								askList2[index].inquiryQuestion + 
+							'</td>' + 
+						'</tr>' + 
+						'<tr>' + 
+							'<td class="reference-td">' + 
+							   	'答' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryAnswer2_' +  g_askListIndex2 + '" colspan="3">' + 
+								askList2[index].inquiryAnswer + 
+							'</td>' + 
+						'</tr>')
+						g_askListIndex2++;
+				}
+			}
+
+			if(!$.utils.isEmpty(g_params.subRow.content.askList3)){
+				var askList3 = eval("(" + g_params.subRow.content.askList3 + ")");
+				for(var index = 0; index < askList3.length; index++){
+					$('#tbodyAskList3').append('<tr>' + 
+							'<td class="reference-td" style="width:100px;">' + 
+							   	'问' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryQuestion3_' +  g_askListIndex3 + '" colspan="3">' + 
+								askList3[index].inquiryQuestion + 
+							'</td>' + 
+						'</tr>' + 
+						'<tr>' + 
+							'<td class="reference-td">' + 
+							   	'答' + 
+							'</td>' + 
+							'<td class="reference-td" id="tdInquiryAnswer3_' +  g_askListIndex3 + '" colspan="3">' + 
+								askList3[index].inquiryAnswer + 
+							'</td>' + 
+						'</tr>')
+						g_askListIndex3++;
+				}
+			}
 		}
 
+		//移除增加按钮
+		$("#btnAddAsk1").remove();
+		$("#btnAddAsk2").remove();
+		$("#btnAddAsk3").remove();
+		
 		//设置右侧的高度和左侧一致
 		if($("#content-left").height() < 500) $("#content-left").height(500);
 		$("#content-right").height($("#content-left").height());
@@ -157,6 +311,78 @@ function initView(){
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		window.location.href = g_backUrl + "?_pid=" + pid + "&navIndex=" + g_params.navIndex + "&subIndex=" + g_params.subIndex;
     });
+
+	//新增
+	$("#btnAddAsk1").click(function () {
+		$('#tbodyAskList1').append('<tr id="trQuestion1_' + g_askListIndex1 + '">' + 
+										'<td class="reference-td" style="width:100px;">' + 
+										   	'问' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion1_' +  g_askListIndex1 + '" colspan="3">' + 
+											'<textarea id="inquiryQuestion1_' +  g_askListIndex1 + '" name="inquiryQuestion1_' +  g_askListIndex1 + '" class="form-control" style="height:120px"></textarea>' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;">' + 
+											'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(1, ' + g_askListIndex1 + ')">删 除</button>' + 
+										'</td>' + 
+									'</tr>' + 
+									'<tr id="trAnswer1_' + g_askListIndex1 + '">' + 
+										'<td class="reference-td">' + 
+										   	'答' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryAnswer1_' +  g_askListIndex1 + '" colspan="3">' + 
+											'<textarea id="inquiryAnswer1_' +  g_askListIndex1 + '" name="inquiryAnswer1_' +  g_askListIndex1 + '" class="form-control" style="height:120px"></textarea>' + 
+										'</td>' + 
+									'</tr>')
+		g_askListIndex1++;
+    });
+	$("#btnAddAsk2").click(function () {
+		$('#tbodyAskList2').append('<tr id="trQuestion2_' + g_askListIndex2 + '">' + 
+										'<td class="reference-td" style="width:100px;">' + 
+										   	'问' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion2_' +  g_askListIndex2 + '" colspan="3">' + 
+											'<textarea id="inquiryQuestion2_' +  g_askListIndex2 + '" name="inquiryQuestion2_' +  g_askListIndex2 + '" class="form-control" style="height:120px"></textarea>' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;">' + 
+											'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(2, ' + g_askListIndex2 + ')">删 除</button>' + 
+										'</td>' + 
+									'</tr>' + 
+									'<tr id="trAnswer2_' + g_askListIndex2 + '">' + 
+										'<td class="reference-td">' + 
+										   	'答' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryAnswer2_' +  g_askListIndex2 + '" colspan="3">' + 
+											'<textarea id="inquiryAnswer2_' +  g_askListIndex2 + '" name="inquiryAnswer2_' +  g_askListIndex2 + '" class="form-control" style="height:120px"></textarea>' + 
+										'</td>' + 
+									'</tr>')
+		g_askListIndex2++;
+    });
+	$("#btnAddAsk3").click(function () {
+		$('#tbodyAskList3').append('<tr id="trQuestion3_' + g_askListIndex3 + '">' +
+										'<td class="reference-td" style="width:100px;">' + 
+										   	'问' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion3_' +  g_askListIndex3 + '" colspan="3">' + 
+											'<textarea id="inquiryQuestion3_' +  g_askListIndex3 + '" name="inquiryQuestion3_' +  g_askListIndex3 + '" class="form-control" style="height:120px"></textarea>' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryQuestion" rowspan="2" style="width: 120px;vertical-align: middle;">' + 
+											'<button type="button" class="btn btn-primary no-print" style="margin-right:30px;width: 100px;" onclick="removeQuestion(3, ' + g_askListIndex3 + ')">删 除</button>' + 
+										'</td>' + 
+									'</tr>' + 
+									'<tr id="trAnswer3_' + g_askListIndex3 + '">' + 
+										'<td class="reference-td">' + 
+										   	'答' + 
+										'</td>' + 
+										'<td class="reference-td" id="tdInquiryAnswer3_' +  g_askListIndex3 + '" colspan="3">' + 
+											'<textarea id="inquiryAnswer3_' +  g_askListIndex3 + '" name="inquiryAnswer3_' +  g_askListIndex3 + '" class="form-control" style="height:120px"></textarea>' + 
+										'</td>' + 
+									'</tr>')
+		g_askListIndex3++;
+    });
+}
+function removeQuestion(index, sub){
+	$('#trQuestion' + index + "_" + sub).remove();
+	$('#trAnswer' + index + "_" + sub).remove();
 }
 
 /**
@@ -192,7 +418,7 @@ function getTableParams(){
 		data.lawUserCardNo1 = $('#lawUserCardNo1').val();
 		data.lawUserCardNo2 = $('#lawUserCardNo2').val();
 		data.noticeUser = $('#noticeUser').val();
-		data.noticeAnswer = $('#noticeAnswer').val();
+		data.noticeAnswer = $('#tdNoticeAnswer input:radio:checked').val();
 		
 		data.inquiryQuestion = $('#inquiryQuestion').val();
 		data.inquiryAnswer = $('#inquiryAnswer').val();
@@ -202,6 +428,39 @@ function getTableParams(){
 
 		data.addrQuestion = $('#addrQuestion').val();
 		data.addrAnswer = $('#addrAnswer').val();
+
+		var askList1 = [];
+		for(var i = 1; i < g_askListIndex1;i++){
+			var obj = {};
+			obj.inquiryQuestion = $('#inquiryQuestion1_' + i).val();
+			obj.inquiryAnswer = $('#inquiryAnswer1_' + i).val();
+			if(!$.utils.isEmpty(obj.inquiryQuestion) && !$.utils.isEmpty(obj.inquiryAnswer)){
+				askList1.push(obj)
+			}
+		}
+		data.askList1 = JSON.stringify(askList1);
+
+		var askList2 = [];
+		for(var i = 1; i < g_askListIndex2;i++){
+			var obj = {};
+			obj.inquiryQuestion = $('#inquiryQuestion2_' + i).val();
+			obj.inquiryAnswer = $('#inquiryAnswer2_' + i).val();
+			if(!$.utils.isEmpty(obj.inquiryQuestion) && !$.utils.isEmpty(obj.inquiryAnswer)){
+				askList2.push(obj)
+			}
+		}
+		data.askList2 = JSON.stringify(askList2);
+
+		var askList3 = [];
+		for(var i = 1; i < g_askListIndex3;i++){
+			var obj = {};
+			obj.inquiryQuestion = $('#inquiryQuestion3_' + i).val();
+			obj.inquiryAnswer = $('#inquiryAnswer3_' + i).val();
+			if(!$.utils.isEmpty(obj.inquiryQuestion) && !$.utils.isEmpty(obj.inquiryAnswer)){
+				askList3.push(obj)
+			}
+		}
+		data.askList3 = JSON.stringify(askList3);
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}

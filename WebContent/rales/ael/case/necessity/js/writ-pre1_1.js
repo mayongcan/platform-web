@@ -36,7 +36,7 @@ function initView(){
 //写入数据内容
 function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
-	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource', g_params.data.sourceCase);
+	$('#tdCaseSource').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.caseSource, g_params.caseSourceDict)));
 
 	$('#tdReporterName').text($.utils.getNotNullVal(g_params.data.reporterName));
 	$('#tdReporterCertificateNo').text($.utils.getNotNullVal(g_params.data.reporterCertificateNo));

@@ -155,6 +155,12 @@ function formValidate(){
         //失去焦点时不验证
         onfocusout: false,
         submitHandler: function () {
+        	if($('#tdReceiveType input:radio:checked').val() == '2'){
+        		if($('#phone').val() == '' && $('#fax').val() == '' && $('#email').val() == '' && $('#zip').val() == '' && $('#otherType').val() == ''){
+        			top.app.message.notice("必须填写一种联系方式！");
+        			return;
+        		}
+        	}
             //提交内容
         	fileupload.uploadAction(null, false, true, "-1", function(){submitAction();});
         }

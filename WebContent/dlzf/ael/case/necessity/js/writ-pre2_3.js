@@ -42,6 +42,17 @@ function initView(){
 //写入数据内容
 function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
+
+	if(g_params.data.personType == '1') {
+		$("#personType1").attr("checked",true);
+		$('#trPersonType2_1').css('display', 'none');
+		$('#trPersonType2_2').css('display', 'none');
+	}
+	else if(g_params.data.personType == '2') {
+		$("#personType2").attr("checked",true);
+		$('#trPersonType1_1').css('display', 'none');
+		$('#trPersonType1_2').css('display', 'none');
+	}
 	
 	//获取字典
 	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
@@ -50,8 +61,9 @@ function setData(){
 	if(g_params.data.personType == '1') $("#personType1").attr("checked",true);
 	else if(g_params.data.personType == '2') $("#personType2").attr("checked",true);
 	
-	top.app.addRadioButton($("#divCaseSource"), g_params.caseSourceDict, 'radioCaseSource', g_params.data.caseSource);
-	$("input[type='radio'][name=illegalContent][value=" + g_params.data.illegalContent + "]").attr("checked",true);
+	$('#tdCaseSource').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.caseSource, g_params.caseSourceDict)));
+	if(g_params.data.illegalContent == '1') $('#tdIllegalContent').text("一般违法案件");
+	else $('#tdIllegalContent').text("涉嫌刑事犯罪案件");
 
 	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
 	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));

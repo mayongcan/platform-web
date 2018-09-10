@@ -76,11 +76,26 @@ function initView(){
 
 	//选择需要关联的文书
 	$("#relevanceId").click(function () {
+//		//设置参数
+//		var params = {};
+//		params.relevanceIdList = g_relevanceIdList;
+//		params.relevanceCodeList = g_relevanceCodeList;
+//		top.app.layer.editLayer('选择需要关联的日常巡查文书', ['700px', '550px'], '/rales/ael/case/case-routine-list.html', params, function(retParams){
+//			if(retParams == null || retParams == undefined && retParams.length > 0) {
+//				top.app.message.alert("获取返回内容失败！");
+//				return;
+//			}
+//			g_relevanceIdList = retParams[0].relevanceIdList;
+//			g_relevanceCodeList = retParams[0].relevanceCodeList;
+//			$("#relevanceId").val(retParams[0].relevanceCodeList);
+//		});
+
 		//设置参数
 		var params = {};
+		params.registerId = g_params.row.id;
 		params.relevanceIdList = g_relevanceIdList;
 		params.relevanceCodeList = g_relevanceCodeList;
-		top.app.layer.editLayer('选择需要关联的日常巡查文书', ['700px', '550px'], '/rales/ael/case/case-routine-list.html', params, function(retParams){
+		top.app.layer.editLayer('选择需要关联的文书', ['700px', '550px'], '/rales/ael/case/case-writ-list.html', params, function(retParams){
 			if(retParams == null || retParams == undefined && retParams.length > 0) {
 				top.app.message.alert("获取返回内容失败！");
 				return;

@@ -98,6 +98,9 @@ function initView(){
 }
 
 function initData(){
+	if($.utils.isNull(g_params.caseSourceDict)) g_params.caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	if($.utils.isNull(g_params.caseTypeDict)) g_params.caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
+	
 	$('#tableTitleMark').text(g_params.row.code);
 	$('#tdCaseSource').text(top.app.getDictName(g_params.row.sourceCase, g_params.caseSourceDict));
 	$('#tdReporterName').text(g_params.row.reporterName);

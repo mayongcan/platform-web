@@ -35,6 +35,7 @@ function receiveParams(value){
  * 初始化界面
  */
 function initView(){
+	if($.utils.isEmpty(g_params.registerId)) g_params.registerId = -1;
 	//搜索参数
 	var searchParams = function (p) {
         var retParam = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的

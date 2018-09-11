@@ -58,7 +58,9 @@ function initView(){
 			$('#lawUserCardNo1').val(g_params.subRow.content.lawUserCardNo1);
 			$('#lawUserCardNo2').val(g_params.subRow.content.lawUserCardNo2);
 			$('#noticeUser').val(g_params.subRow.content.noticeUser);
-			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
+			
+			if(!$.utils.isEmpty(g_params.subRow.content.noticeAnswer))
+				$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
 			
 			$('#inquiryQuestion').val(g_params.subRow.content.inquiryQuestion);
 			$('#inquiryAnswer').val(g_params.subRow.content.inquiryAnswer);

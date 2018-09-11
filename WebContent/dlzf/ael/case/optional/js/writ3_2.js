@@ -78,7 +78,9 @@ function initView(){
 			$('#lawUserCardNo1').val(g_params.subRow.content.lawUserCardNo1);
 			$('#lawUserCardNo2').val(g_params.subRow.content.lawUserCardNo2);
 			$('#noticeUser').val(g_params.subRow.content.noticeUser);
-			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
+
+			if(!$.utils.isEmpty(g_params.subRow.content.noticeAnswer))
+				$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
 			$('#checkDetail').val(g_params.subRow.content.checkDetail);
 			$('#askInfo').val(g_params.subRow.content.askInfo);
 			$('#handleInfo').val(g_params.subRow.content.handleInfo);
@@ -138,7 +140,10 @@ function initView(){
 			$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo1));
 			$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo2));
 			$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.subRow.content.noticeUser));
-			$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
+
+			if(!$.utils.isEmpty(g_params.subRow.content.noticeAnswer))
+				$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
+			
 			$('#tdCheckDetail').text($.utils.getNotNullVal(g_params.subRow.content.checkDetail));
 			$('#tdAskInfo').text($.utils.getNotNullVal(g_params.subRow.content.askInfo));
 			$('#tdHandleInfo').text($.utils.getNotNullVal(g_params.subRow.content.handleInfo));

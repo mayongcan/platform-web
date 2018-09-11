@@ -121,28 +121,6 @@ function formValidate(){
         //失去焦点时不验证
         onfocusout: false,
         submitHandler: function () {
-        	var personType = '0'
-    		if($('#personType1').prop('checked')) personType = '1';
-    		if($('#personType2').prop('checked')) personType = '2';
-    		
-    		var taskSource = $('#divTaskSource input:radio:checked').val();
-    		var isCheck = false;
-    		$.each($("#divCheckUserAdvice").find("div").find("input"), function(i, item){
-    			if($(item).prop('checked') == '1')isCheck = true;
-    		});
-    		if(!isCheck){
-    			top.app.message.notice("请选择承办人意见！");
-    			return;
-    		}
-
-    		if($.utils.isEmpty(g_userIdList)){
-    			top.app.message.notice("请选择第二承办人！");
-    			return;
-    		}
-    		if(g_userIdList == top.app.info.userInfo.userId){
-    			top.app.message.notice("不能选择自己作为第二承办人！");
-    			return;
-    		}
             //提交内容
         	fileupload.uploadAction(null, false, true, "-1", function(){submitAction();});
         }
@@ -206,7 +184,7 @@ function submitAction(){
 	submitData["associateExecutor"] = g_userIdList;
 	submitData["relevanceId"] = g_relevanceIdList;
 	submitData["files"] = fileupload.getUploadFilePath();
-	return;
+	
 	//异步处理
 	$.ajax({
 		url: url,

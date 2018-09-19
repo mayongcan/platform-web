@@ -35,6 +35,11 @@ function initView(){
 				btnEventNew($(this).attr('index'), $(this).attr('subIndex'));
 		    });
 			if(!g_params.isEdit){
+				if(g_params.isFinish && i == 1 && j == 17){
+					continue;
+				}else if(g_params.isFinish && i == 1 && j == 18){
+					continue;
+				}
 				$("#btnNewDoc" + i + "-" + j).remove();
 			}
 		}
@@ -141,8 +146,32 @@ function addList(tableListId, tableCntId, url, index, subIndex, writType, subTyp
 				for(var i = 0; i < length; i++){
 					var editButton = "";
 					if(g_params.isEdit){
+						if(g_params.removeAuditEdit && index == 1 && subIndex == 1){
+							//移除审批表的编辑
+						}else{
+							editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+											'编 辑' + 
+										 '</button>' + 
+										 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+											'删 除' + 
+										 '</button>'; 
+						}
+					}
+					//办结案件，可以编辑封面和目录
+					if(g_params.isFinish && index == 1 && subIndex == 17){
 						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
 										'编 辑' + 
+									 '</button>' + 
+									 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'删 除' + 
+									 '</button>'; 
+					}
+					if(g_params.isFinish && index == 1 && subIndex == 18){
+						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'编 辑' + 
+									 '</button>' + 
+									 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'删 除' + 
 									 '</button>'; 
 					}
 					html += '<tr>' + 
@@ -172,6 +201,7 @@ function btnEventNew(index, subIndex){
 	top.app.info.iframe.params.navIndex = 3;
 	top.app.info.iframe.params.subIndex = index;
 	top.app.info.iframe.params.type = 1;	//1新增 2编辑 3查看
+	top.app.info.iframe.params.caseIsNormalCase = "1";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/case/optional/writ" + index + "_" + subIndex + ".html?_pid=" + pid + "&backUrl=/rales/ael/routine/routine-detail.html";
 	location.href = encodeURI(url);
@@ -185,6 +215,7 @@ function btnEventDetail(index, subIndex, id){
 	top.app.info.iframe.params.subIndex = index;
 	top.app.info.iframe.params.type = 3;	//1新增 2编辑 3查看
 	top.app.info.iframe.params.id = id;
+	top.app.info.iframe.params.caseIsNormalCase = "1";
 	top.app.info.iframe.params.subRow = getSubRow(subIndex, id);
 	//iframe上层跳转
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
@@ -200,11 +231,36 @@ function btnEventEdit(index, subIndex, id){
 	top.app.info.iframe.params.subIndex = index;
 	top.app.info.iframe.params.type = 2;
 	top.app.info.iframe.params.id = id;
+	top.app.info.iframe.params.caseIsNormalCase = "1";
 	top.app.info.iframe.params.subRow = getSubRow(subIndex, id);
 	//iframe上层跳转
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/case/optional/writ" + index + "_" + subIndex + ".html?_pid=" + pid + "&backUrl=/rales/ael/routine/routine-detail.html";
 	location.href = encodeURI(url);
+}
+
+//删除
+function btnEventDel(index, subIndex, id){
+	top.app.message.confirm("确定删除文书？", function(){
+		var subRow = getSubRow(subIndex, id);
+		top.app.message.loading();
+		$.ajax({
+			url: top.app.conf.url.apigateway + "/api/rales/ael/writ/delWrit?access_token=" + top.app.cookies.getCookiesToken(),
+		    method: 'POST',
+			data: subRow.id + "",
+			contentType: "application/json",
+			success: function(data){
+				top.app.message.loadingClose();
+				if(top.app.message.code.success == data.RetCode){
+		   			//重新加载列表
+					initData();
+		   			top.app.message.notice("文书删除成功！");
+		   		}else{
+		   			top.app.message.error(data.RetMsg);
+		   		}
+	        }
+		});
+	});
 }
 
 function getSubRow(subIndex, id){

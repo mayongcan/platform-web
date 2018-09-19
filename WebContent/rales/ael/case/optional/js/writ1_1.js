@@ -114,6 +114,13 @@ function initView(){
 		
 		rales.initFilesList(g_params.subRow.files);
 		rales.initCodeRelevance(g_params.subRow.relevanceId);
+
+		//显示历史审批意见
+		$('#trHistoryAuditList').css('display', '');
+		if(g_params.caseIsNormalCase == '1')
+			getHistoryAuditList(g_params.row.id, "11");
+		else
+			getHistoryAuditList(g_params.row.id, "10");
 	}
 
 	//打印
@@ -172,6 +179,7 @@ function initView(){
  */
 function getTableParams(){
 	var data = {};
+	data.registerId = g_params.row.id;
 	data.tableTitleMark = $('#tableTitleMark').text();
 	var personType = '0'
 	if($('#personType1').prop('checked')) personType = '1';
@@ -209,7 +217,7 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	checkContent: {required: true},
+//        	checkContent: {required: true},
         },
         messages: {
         },

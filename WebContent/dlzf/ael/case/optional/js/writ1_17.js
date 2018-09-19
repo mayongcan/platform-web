@@ -129,7 +129,7 @@ function initView(){
 		params.isPrint = true;
 		params.sexDict = g_sexDict;
 		params.data = getTableParams();
-		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre6_1.html', params, function(){});
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/optional/writ-pre1_17.html', params, function(){});
     });
 	//预览
 	$("#btnPreview").click(function () {
@@ -137,7 +137,7 @@ function initView(){
 		var params = {};
 		params.sexDict = g_sexDict;
 		params.data = getTableParams();
-		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre6_1.html', params, function(){});
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/optional/writ-pre1_17.html', params, function(){});
     });
 	//提交
 	$("#btnOK").click(function () {

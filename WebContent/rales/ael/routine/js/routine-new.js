@@ -157,10 +157,10 @@ function submitAction(){
 //		top.app.message.notice("请选择任务来源！");
 //		return;
 //	}
-	if(!isCheck){
-		top.app.message.notice("请选择承办人意见！");
-		return;
-	}
+//	if(!isCheck){
+//		top.app.message.notice("请选择承办人意见！");
+//		return;
+//	}
 
 	if($.utils.isEmpty(g_userIdList)){
 		top.app.message.notice("请选择第二承办人！");

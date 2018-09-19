@@ -114,6 +114,13 @@ function initView(){
 		
 		rales.initFilesList(g_params.subRow.files);
 		rales.initCodeRelevance(g_params.subRow.relevanceId);
+
+		//显示历史审批意见
+		$('#trHistoryAuditList').css('display', '');
+		if(g_params.caseIsNormalCase == '1')
+			getHistoryAuditList(g_params.row.id, "13");
+		else 
+			getHistoryAuditList(g_params.row.id, "12");
 	}
 
 	//打印
@@ -273,7 +280,7 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	illegalAction: {required: true},
+//        	illegalAction: {required: true},
         },
         messages: {
         },

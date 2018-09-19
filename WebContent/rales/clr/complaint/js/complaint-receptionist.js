@@ -141,7 +141,7 @@ function submitAction(){
 	var rows = g_selectRowsId;
 	var userIdList = "", userCodeList = "", userNameList = "";
 	if(rows.length == 0){
-		top.app.message.alert("请选择接待员！");
+		top.app.message.alert("请选择受理人员！");
 		return;
 	}
 	$.each(rows, function(i, rowData) {

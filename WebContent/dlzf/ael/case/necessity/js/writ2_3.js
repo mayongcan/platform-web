@@ -12,7 +12,7 @@ function initView(){
 	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
 	top.app.addComboBoxOption($("#partiesSex"), g_sexDict, true, ' ');;
-	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource');
+	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource', g_params.row.sourceCase);
 	//公民选择
 	$('input[type=checkbox][id=personType1]').change(function() { 
 		$("#personType1").attr("checked",true);
@@ -199,7 +199,7 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	illegalContent: {required: true},
+//        	illegalContent: {required: true},
         },
         messages: {
         },

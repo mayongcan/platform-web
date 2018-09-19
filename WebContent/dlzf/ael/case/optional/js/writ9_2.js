@@ -136,7 +136,7 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	illegalAction: {required: true},
+//        	illegalAction: {required: true},
         },
         messages: {
         },

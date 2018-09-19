@@ -139,8 +139,8 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	caseNo: {required: true},
-        	illegalAction: {required: true},
+//        	caseNo: {required: true},
+//        	illegalAction: {required: true},
         },
         messages: {
         },

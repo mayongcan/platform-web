@@ -44,7 +44,7 @@ function initView(){
 			if($("#auditStatus").val() == '10')
 				submitData["flowProgress"] = '6';
 		}else if(g_params.row.activityName == '法规处指派'){
-			if(g_userIdList == ''){
+			if(g_userIdList == '' && $("#auditStatus").val() == '10'){
 				top.app.message.notice("请选择指派人员！");
 				return;
 			}

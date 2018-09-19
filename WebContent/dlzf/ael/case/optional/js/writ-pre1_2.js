@@ -14,6 +14,9 @@ function receiveParams(value){
 }
 
 function initView(){
+	//移除文书编号
+	$('#tableTitleMark').remove();
+	
 	setData();
 	rales.fixALinkWidth();
 	//是否触发打印
@@ -95,15 +98,36 @@ function setData(){
 	if($.utils.isEmpty(g_params.data.rule3)) $('#spanRule3').remove();
 	if($.utils.isEmpty(g_params.data.rule4)) $('#spanRule4').remove();
 	
+	if(!$.utils.isEmpty(g_params.data.relevanceCodeList)) {
+		var codeList = g_params.data.relevanceCodeList.split(',');
+		for(var index = 0; index < codeList.length; index++){
+			if(index == 0){
+				$('#fileCode').append('<div class="box-content-noindent">' + 
+										'附件：' + (index + 1) + '.' + codeList[index] + 
+									'</div>');
+			}else{
+				$('#fileCode').append('<div class="box-content-noindent" style="padding-left: 40px">' + 
+										 (index + 1) + '.' + codeList[index] + 
+									'</div>');
+			}
+		}
+	}
+	
 	if(!$.utils.isEmpty(g_params.data.askList)){
 		var askList = eval("(" + g_params.data.askList + ")");
-		for(var index = 0; index < askList.length; index++){
-			$('#divAakList').append('<div class="box-content">' +
-									'问：<span>' + askList[index].inquiryQuestion + '</span>' +
-									'</div>' +
-									'<div class="box-content">' +
-										'答：<span>' + askList[index].inquiryAnswer + '</span>' +
-									'</div>')
+		if($.utils.isNull(askList) || askList.length == 0){
+//			$('#divAakContent').remove();
+		}else{
+			for(var index = 0; index < askList.length; index++){
+				$('#divAakList').append('<div class="box-content">' +
+										'问：<span>' + askList[index].inquiryQuestion + '</span>' +
+										'</div>' +
+										'<div class="box-content">' +
+											'答：<span>' + askList[index].inquiryAnswer + '</span>' +
+										'</div>')
+			}
 		}
+	}else{
+//		$('#divAakContent').remove();
 	}
 }

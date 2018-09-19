@@ -13,6 +13,57 @@ function initView(){
 		//获取最新文书编号
 		g_codeCurNum = rales.showCodeCurNum(g_codeType);
 		$('#content-right').remove();
+		
+		//自动加载所有文书
+		$.ajax({
+			url: top.app.conf.url.apigateway + "/api/rales/ael/writ/getWritList",
+		    method: 'GET',
+		    async: false,
+		   	timeout:5000,
+		   	data:{
+		   		access_token: top.app.cookies.getCookiesToken(),
+		   		registerId: g_params.row.id,
+		   	},
+		   	success: function(data){
+		   		if(top.app.message.code.success == data.RetCode){
+		   			g_dataList = [];
+		   			for(var i = 0; i < data.rows.length; i++){
+		   				var obj = {};
+		   				obj.name = data.rows[i].code;
+		   				obj.pageNo = "";
+		   				obj.memo = "";
+		   				if(data.rows[i].writType == rales.writOptional1_1){
+		   					obj.order = 1;
+		   					g_dataList.push(obj);
+		   				}else if(data.rows[i].writType == rales.writOptional1_2){
+		   					obj.order = 2;
+		   					g_dataList.push(obj);
+		   				}else if(data.rows[i].writType == rales.writOptional1_4){
+		   					obj.order = 3;
+		   					g_dataList.push(obj);
+		   				}else if(data.rows[i].writType == rales.writOptional1_5){
+		   					obj.order = 4;
+		   					g_dataList.push(obj);
+		   				}else if(data.rows[i].writType == rales.writOptional1_7){
+		   					obj.order = 5;
+		   					g_dataList.push(obj);
+		   				}else if(data.rows[i].writType == rales.writOptional1_8){
+		   					obj.order = 6;
+		   					g_dataList.push(obj);
+		   				}else if(data.rows[i].writType == rales.writOptional1_9){
+		   					obj.order = 7;
+		   					g_dataList.push(obj);
+		   				}else if(data.rows[i].writType == rales.writOptional1_11){
+		   					obj.order = 8;
+		   					g_dataList.push(obj);
+		   				}
+		   			}
+		   			//重新排序
+		   			g_dataList = g_dataList.sort($.utils.objArrayCompare("order"));
+		   			refreshView();	
+		   		}
+		   	}
+		});
 	}else if(g_params.type == 2){
 		$('#tableTitleMark').text(g_params.subRow.code);
 		$('#content-right').remove();

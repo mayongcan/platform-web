@@ -14,6 +14,9 @@ function receiveParams(value){
 }
 
 function initView(){
+	//移除文书编号
+	$('#tableTitleMark').remove();
+	
 	//公民选择
 	$('input[type=checkbox][id=personType1]').change(function() { 
 		$("#personType1").attr("checked",true);

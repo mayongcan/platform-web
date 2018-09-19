@@ -149,8 +149,8 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	illegalAction: {required: true},
-        	partiesName: {required: true},
+//        	illegalAction: {required: true},
+//        	partiesName: {required: true},
         },
         messages: {
         },

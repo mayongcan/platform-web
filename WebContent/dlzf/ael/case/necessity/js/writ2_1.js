@@ -13,7 +13,7 @@ function initView(){
 	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
 	top.app.addComboBoxOption($("#partiesSex"), g_sexDict, true, ' ');;
-	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource');
+	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource', g_params.row.sourceCase);
 	//公民选择
 	$('input[type=checkbox][id=personType1]').change(function() { 
 		$("#personType1").attr("checked",true);
@@ -33,6 +33,8 @@ function initView(){
 		g_codeCurNum = rales.showCodeCurNum(g_codeType);
 		$('#content-right').remove();
 		fileupload.initFileNewSelector('files');
+		//关联内容
+		$('#caseDesc').val(g_params.row.clueSummary);
 	}else if(g_params.type == 2){
 		//增加表单验证
 		formValidate();
@@ -110,6 +112,10 @@ function initView(){
 		
 		rales.initFilesList(g_params.subRow.files);
 		rales.initCodeRelevance(g_params.subRow.relevanceId);
+
+		//显示历史审批意见
+		$('#trHistoryAuditList').css('display', '');
+		getHistoryAuditList(g_params.row.id, "2");
 	}
 
 	//打印
@@ -184,6 +190,7 @@ function initView(){
  */
 function getTableParams(){
 	var data = {};
+	data.registerId = g_params.row.id;
 	data.tableTitleMark = $('#tableTitleMark').text();
 	var personType = '0'
 	if($('#personType1').prop('checked')) personType = '1';
@@ -216,7 +223,7 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	illegalContent: {required: true},
+//        	illegalContent: {required: true},
         },
         messages: {
         },

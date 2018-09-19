@@ -116,6 +116,7 @@ function btnEventDetail(id){
 //		top.app.info.iframe.params.isEdit = true;
 //	}
 	top.app.info.iframe.params.isEdit = false;
+	top.app.info.iframe.params.isFinish = true;
 	top.app.info.iframe.params.row = row;
 	top.app.info.iframe.params.backUrl = "/rales/ael/routine/routine-finish.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");

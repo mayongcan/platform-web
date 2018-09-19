@@ -57,14 +57,14 @@ function initView(){
 		window.location.href = g_backUrl + "?_pid=" + pid;
     });
 
-	//选择接待员
+	//选择受理人员
 	$("#sendBy").click(function () {
 		//设置参数
 		var params = {};
 		params.userIdList = g_userIdList;
 		params.userCodeList = g_userCodeList;
 		params.userNameList = g_userNameList;
-		top.app.layer.editLayer('选择接待员', ['900px', '550px'], '/rales/clr/complaint/complaint-receptionist.html', params, function(retParams){
+		top.app.layer.editLayer('选择受理人员', ['900px', '550px'], '/rales/clr/complaint/complaint-receptionist.html', params, function(retParams){
 			if(retParams == null || retParams == undefined && retParams.length > 0) {
 				top.app.message.alert("获取返回内容失败！");
 				return;

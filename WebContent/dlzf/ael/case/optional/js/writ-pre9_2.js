@@ -14,6 +14,9 @@ function receiveParams(value){
 }
 
 function initView(){
+	//移除文书编号
+	$('#tableTitleMark').remove();
+	
 	setData();
 	var height = ($('#tdAdviceContent').height() < 80) ? 130 : ($('#tdAdviceContent').height() + 20);
 	$('#tdAdvice').height(height);

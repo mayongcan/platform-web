@@ -14,6 +14,7 @@ $(function () {
 	$('#reporterAddress').text($.utils.getNotNullVal(parent.g_params.row.reporterAddress));
 	$('#reporterZip').text(parent.g_params.row.reporterZip);
 	$('#reporterPhone').text($.utils.getNotNullVal(parent.g_params.row.reporterPhone));
+	$('#clueSummary').text(parent.g_params.row.clueSummary);
 	$('#memo').text(parent.g_params.row.memo);
 	
 	//获取立案审批表文书

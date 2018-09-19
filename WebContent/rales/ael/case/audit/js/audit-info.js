@@ -58,7 +58,7 @@ function initOtherInfo(){
 		params.userIdList = g_userIdList;
 		params.userCodeList = g_userCodeList;
 		params.userNameList = g_userNameList;
-		top.app.layer.editLayer('选择指派人', ['900px', '550px'], '/rales/ael/case/case-new-undertaker.html', params, function(retParams){
+		top.app.layer.editLayer('选择指派人', ['900px', '550px'], '/rales/ael/case/case-law-user.html', params, function(retParams){
 			if(retParams == null || retParams == undefined && retParams.length > 0) {
 				top.app.message.alert("获取返回内容失败！");
 				return;
@@ -85,9 +85,9 @@ function initOtherInfo(){
 		g_auditStatusDict4 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_4');
 		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict4);
 	}else if(g_params.row.activityName == '法规处指派'){
-//		g_auditStatusDict3 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_3');
-//		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict3);
-		$('#trAuditStatus').css('display', 'none');
+		g_auditStatusDict3 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_3');
+		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict3);
+//		$('#trAuditStatus').css('display', 'none');
 		//显示指派选择框
 		$('#trAssignHandleUser').css('display', '');
 	}else{

@@ -168,6 +168,9 @@ function addList(tableListId, tableCntId, url, index, subIndex, writType, subTyp
 					if(!isBackWizard && addEditBtn && parent.g_isEdit == 1 && !parent.g_params.isFinish){
 						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
 										'编 辑' + 
+									 '</button>' + 
+									 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'删 除' + 
 									 '</button>'; 
 					}
 					html += '<tr>' + 
@@ -306,6 +309,30 @@ function btnEventEdit(index, subIndex, id){
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/case/necessity/writ" + index + "_" + subIndex + ".html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
 	parent.location.href = encodeURI(url);
+}
+
+//删除
+function btnEventDel(index, subIndex, id){
+	top.app.message.confirm("确定删除文书？", function(){
+		var subRow = getSubRow(subIndex, id);
+		top.app.message.loading();
+		$.ajax({
+			url: top.app.conf.url.apigateway + "/api/rales/ael/writ/delWrit?access_token=" + top.app.cookies.getCookiesToken(),
+		    method: 'POST',
+			data: subRow.id + "",
+			contentType: "application/json",
+			success: function(data){
+				top.app.message.loadingClose();
+				if(top.app.message.code.success == data.RetCode){
+		   			//重新加载列表
+					reloadData(g_wizardIndex);
+		   			top.app.message.notice("文书删除成功！");
+		   		}else{
+		   			top.app.message.error(data.RetMsg);
+		   		}
+	        }
+		});
+	});
 }
 
 function getSubRow(subIndex, id){

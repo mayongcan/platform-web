@@ -14,6 +14,9 @@ function receiveParams(value){
 }
 
 function initView(){
+	//移除文书编号
+	$('#tableTitleMark').remove();
+	
 	setData();
 	//是否触发打印
 	if(g_params.isPrint){

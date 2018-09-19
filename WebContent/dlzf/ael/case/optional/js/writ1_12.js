@@ -153,8 +153,8 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	partiesName: {required: true},
-        	caseName: {required: true},
+//        	partiesName: {required: true},
+//        	caseName: {required: true},
         },
         messages: {
         },

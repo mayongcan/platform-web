@@ -118,7 +118,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td" style="width:60px;">
-							   	案由<span class="input-request">＊</span>
+							   	案由
 							</td>
 							<td class="reference-td" id="tdIllegalContent" colspan="3">
 							   	<input type="text" id="illegalContent" name="illegalContent" class="form-control">
@@ -152,6 +152,21 @@
 							</td>
 							<td class="reference-td" colspan="7">
 							   	<input type="text" id="undertaker" name="undertaker" class="form-control" readonly style="cursor: pointer;background: #fff;" placeholder="请选择第二承办人">
+							</td>
+						</tr>
+						<tr id="trHistoryAuditList" style="display: none">
+							<td class="reference-td">历史审批意见</td>
+							<td class="reference-td" colspan="7">
+								<table style="width: 100%;">
+									<tbody>
+										<tr>
+											<td class="reference-td1" style="width:100px;">审批人</td>
+											<td class="reference-td1">审批意见</td>
+											<td class="reference-td1" style="width:170px;">审批时间</td>
+										</tr>
+									</tbody>
+									<tbody id="resultList"></tbody>
+								</table>
 							</td>
 						</tr>
 					</tbody>

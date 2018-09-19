@@ -475,9 +475,9 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	checkDateBegin: {required: true},
-        	checkDateEnd: {required: true},
-        	checkAddr: {required: true},
+//        	checkDateBegin: {required: true},
+//        	checkDateEnd: {required: true},
+//        	checkAddr: {required: true},
         },
         messages: {
         },

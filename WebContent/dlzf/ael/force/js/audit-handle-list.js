@@ -115,6 +115,7 @@ function btnEventDetail(id){
 //	}
 	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.removeAuditNotice = true;	//移除审批
+	top.app.info.iframe.params.removeAuditEdit = true;		//移除审批表的编辑
 	top.app.info.iframe.params.row = row;
 	top.app.info.iframe.params.backUrl = "/rales/ael/force/audit-handle-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");

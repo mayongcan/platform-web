@@ -13,6 +13,180 @@ function initView(){
 		//获取最新文书编号
 		g_codeCurNum = rales.showCodeCurNum(g_codeType);
 		$('#content-right').remove();
+		
+		//自动加载所有文书
+		$.ajax({
+			url: top.app.conf.url.apigateway + "/api/rales/ael/writ/getWritList",
+		    method: 'GET',
+		    async: false,
+		   	timeout:5000,
+		   	data:{
+		   		access_token: top.app.cookies.getCookiesToken(),
+		   		registerId: g_params.row.id,
+		   	},
+		   	success: function(data){
+		   		if(top.app.message.code.success == data.RetCode){
+		   			g_dataList = [];
+		   			//一般程序
+		   			if(g_params.row.caseProcedure == '1'){
+		   				for(var i = 0; i < data.rows.length; i++){
+			   				var obj = {};
+			   				obj.name = data.rows[i].code;
+			   				obj.pageNo = "";
+			   				obj.memo = "";
+			   				if(data.rows[i].writType == rales.writNecessity2_1){
+			   					obj.order = 1;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_12){
+			   					obj.order = 2;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_13){
+			   					obj.order = 3;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_2){
+			   					obj.order = 4;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_3){
+			   					obj.order = 5;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_5){
+			   					obj.order = 6;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_7){
+			   					obj.order = 7;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional2_1){
+			   					obj.order = 8;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional2_2){
+			   					obj.order = 9;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional3_9){
+			   					obj.order = 10;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional3_1){
+			   					obj.order = 11;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional3_2){
+			   					obj.order = 12;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional3_5){
+			   					obj.order = 13;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional3_7){
+			   					obj.order = 14;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional4_1){
+			   					obj.order = 15;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional4_2){
+			   					obj.order = 16;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional3_8){
+			   					obj.order = 17;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional3_11){
+			   					obj.order = 18;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_8){
+			   					obj.order = 19;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_10){
+			   					obj.order = 20;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity3_2){
+			   					obj.order = 21;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional6_1){
+			   					obj.order = 22;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional5_1){
+			   					obj.order = 23;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional7_2){
+			   					obj.order = 24;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional7_3){
+			   					obj.order = 25;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional7_4){
+			   					obj.order = 26;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional7_5){
+			   					obj.order = 27;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity4_3){
+			   					obj.order = 28;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity4_4){
+			   					obj.order = 29;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity4_1){
+			   					obj.order = 30;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity4_2){
+			   					obj.order = 31;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_16){
+			   					obj.order = 32;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional8_1){
+			   					obj.order = 33;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional9_1){
+			   					obj.order = 34;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional9_2){
+			   					obj.order = 35;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional9_3){
+			   					obj.order = 36;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity2_3){
+			   					obj.order = 37;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity2_4){
+			   					obj.order = 38;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity2_6){
+			   					obj.order = 39;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity2_8){
+			   					obj.order = 40;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity5_1){
+			   					obj.order = 41;
+			   					g_dataList.push(obj);
+			   				}
+			   			}
+		   			}
+		   			//简易程序
+		   			else if(g_params.row.caseProcedure == '2'){
+		   				for(var i = 0; i < data.rows.length; i++){
+			   				var obj = {};
+			   				obj.name = data.rows[i].code;
+			   				obj.pageNo = "";
+			   				obj.memo = "";
+			   				if(data.rows[i].writType == rales.writOptional1_14){
+			   					obj.order = 1;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writOptional1_11){
+			   					obj.order = 2;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity5_1){
+			   					obj.order = 3;
+			   					g_dataList.push(obj);
+			   				}
+			   			}
+		   			}
+
+		   			//重新排序
+		   			g_dataList = g_dataList.sort($.utils.objArrayCompare("order"));
+		   			refreshView();	
+		   		}
+		   	}
+		});
+		
 	}else if(g_params.type == 2){
 		$('#tableTitleMark').text(g_params.subRow.code);
 		$('#content-right').remove();

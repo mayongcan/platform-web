@@ -14,6 +14,9 @@ function receiveParams(value){
 }
 
 function initView(){
+	//移除文书编号
+	$('#tableTitleMark').remove();
+	
 	//公民选择
 	$('input[type=checkbox][id=personType1]').change(function() { 
 		$("#personType1").attr("checked",true);
@@ -70,5 +73,8 @@ function setData(){
 	$('#tdCompanyPhone').text($.utils.getNotNullVal(g_params.data.companyPhone));
 	$('#tdIllegalContent').text($.utils.getNotNullVal(g_params.data.illegalContent));
 	$('#tdCaseDesc').text($.utils.getNotNullVal(g_params.data.caseDesc));
-	$('#tdSuggestContent').text($.utils.getNotNullVal(g_params.data.advice));
+//	$('#tdSuggestContent').text($.utils.getNotNullVal(g_params.data.advice));
+	
+	//承办人意见，显示历史处理意见
+	getHistoryAuditListPreview(g_params.data.registerId, "2", $('#tdSuggestContent'), $('#tdSuggest'));
 }

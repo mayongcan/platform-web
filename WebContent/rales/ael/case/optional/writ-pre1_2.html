@@ -58,8 +58,8 @@
 				住所：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyAddr>　</a>
 				统一社会信用代码：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyCreditCode>　</a>
 				联系电话：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyPhone>　</a>
-				<span id="spanCompanyPrincipal">现场负责人（可选）：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyPrincipal>　</a></span>
-				<span id="spanCompanyCurUser">在场人（可选）：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyCurUser>　</a></span>
+				<span id="spanCompanyPrincipal">现场负责人：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyPrincipal>　</a></span>
+				<span id="spanCompanyCurUser">在场人：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyCurUser>　</a></span>
 				身份证号码：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyIdCard>　</a>
 				工作岗位：<a class="content-fill-in" style="min-width:80px;" id=tdCompanyPost>　</a>				
 			</div>
@@ -95,16 +95,18 @@
 				<span id="tdCheckDetail">　</span>
 			</div>
 			
-			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
-				四、询问内容（可选）
+			<div id="divAakContent">
+				<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
+					四、询问内容
+				</div>
+				<div class="box-content">
+					问：<span id="tdInquiryQuestion">　</span>
+				</div>
+				<div class="box-content">
+					答：<span id="tdInquiryAnswer">　</span>
+				</div>
+				<div id="divAakList"></div>
 			</div>
-			<div class="box-content">
-				问：<span id="tdInquiryQuestion">　</span>
-			</div>
-			<div class="box-content">
-				答：<span id="tdInquiryAnswer">　</span>
-			</div>
-			<div id="divAakList"></div>
 			
 			<div class="box-content-noindent" style="margin-top: 5px;font-size: 16px;font-weight: bold;">
 				五、告知权利
@@ -112,7 +114,7 @@
 			<div class="box-content">
 				问：你（单位）违反了
 				<span class="content-fill-in">
-					<span id="spanRule1">《<span class="content-fill-in-not" id="tdRule1" style="padding: 0px;">　</span>法》</span>
+					<span id="spanRule1">《<span class="content-fill-in-not" id="tdRule1" style="padding: 0px;">　</span>》</span>
 					<span id="spanRule2">第<span class="content-fill-in-not" id="tdRule2" style="padding: 0px;">　</span>条</span>
 					<span id="spanRule3">第<span class="content-fill-in-not" id="tdRule3" style="padding: 0px;">　</span>款</span>
 					<span id="spanRule4">第<span class="content-fill-in-not" id="tdRule4" style="padding: 0px;">　</span>项 </span>
@@ -124,23 +126,23 @@
 			</div>
 			
 			<div class="box-content-noindent" style="margin-top:20px;">
-				<a class="content-fill-in">被检查人（现场负责人）应当逐页签字确认</a>
+				<a class="content-fill-in">被检查人应当逐页签字确认</a>
 			</div>
 			<div class="box-content-noindent">
 				<a class="content-fill-in" style="padding-left: 50px">（以下是笔录尾页）</a>
 			</div>
 			<div class="box-content-noindent">
-				<a class="content-fill-in">被检查人（现场负责人）阅核后签注“笔录上述内容，记录属实。”</a>
+				<a class="content-fill-in" style="min-width:600px;"></a>
 			</div>
 			
 			<div class="box-content-noindent">
-				被检查人（现场负责人）：<a class="content-fill-in" style="min-width:200px;">　</a>
+				被检查人：<a class="content-fill-in" style="min-width:200px;">　</a>
 			</div>
 			<div class="box-content-noindent" id="selectUser1" style="display: none">
-				在场人（可选）：<a class="content-fill-in" style="min-width:200px;">　</a>
+				在场人：<a class="content-fill-in" style="min-width:200px;">　</a>
 			</div>
 			<div class="box-content-noindent" id="selectUser2" style="display: none">
-				见证人（可选）：<a class="content-fill-in" style="min-width:200px;">　</a>
+				见证人：<a class="content-fill-in" style="min-width:200px;">　</a>
 			</div>
 			<div class="box-content-noindent">
 				检查人：<a class="content-fill-in" style="min-width:200px;">　</a>
@@ -156,6 +158,7 @@
 			</div> -->
 			
 			<div style="clear:both;"></div>
+			<div id="fileCode" style="margin-top:20px;"></div>
 			<!-- <div class="box-content-noindent">
 				附件(可选)：1.涉案物品清单
 			</div>

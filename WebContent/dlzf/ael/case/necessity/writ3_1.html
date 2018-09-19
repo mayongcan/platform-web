@@ -31,7 +31,7 @@
 					<tbody>
 						<tr>
 							<td class="reference-td" style="text-align: center;width:120px;">
-							   	案由<span class="input-request">＊</span>
+							   	案由
 							</td>
 							<td class="reference-td" id="tdIllegalAction" colspan="4">
 							   	<input type="text" id="illegalAction" name="illegalAction" class="form-control">
@@ -117,6 +117,21 @@
 							   备注
 							<td class="reference-td" id="tdMemo" colspan="4">
 							   	<textarea id="memo" name="memo" class="form-control" style="height:120px"></textarea>
+							</td>
+						</tr>
+						<tr id="trHistoryAuditList" style="display: none">
+							<td class="reference-td">历史审批意见</td>
+							<td class="reference-td" colspan="4">
+								<table style="width: 100%;">
+									<tbody>
+										<tr>
+											<td class="reference-td1" style="width:100px;">审批人</td>
+											<td class="reference-td1">审批意见</td>
+											<td class="reference-td1" style="width:170px;">审批时间</td>
+										</tr>
+									</tbody>
+									<tbody id="resultList"></tbody>
+								</table>
 							</td>
 						</tr>
 					</tbody>

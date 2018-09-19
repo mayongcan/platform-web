@@ -63,6 +63,9 @@ function initFuncBtnEvent(){
 	$("#optionalFlow11").click(function () {
 		setTabStatus('11');
     });
+	$("#optionalFlow12").click(function () {
+		setTabStatus('12');
+    });
 	//电力执法系统才有销案模块
 	if(top.app.info.tenantsInfo.tenantsName != '电力执法系统'){
 		$("#optionalFlow11").remove();
@@ -202,6 +205,8 @@ function initData(){
 	}else if(g_optionalFlowIndex == '11'){
 		addFlowList('tableList11-1', 'tableCnt11-1', '/api/rales/ael/writ/getWritList', 11, 1, rales.writOptional11_1, '', true);
 		addList('tableList11-2', 'tableCnt11-2', '/api/rales/ael/writ/getWritList', 11, 2, rales.writOptional11_2, '', true);
+	}else if(g_optionalFlowIndex == '12'){
+		addFlowList('tableList12-1', 'tableCnt12-1', '/api/rales/ael/writ/getWritList', 12, 1, rales.writOptional12_1, '', true);
 	}
 }
 
@@ -228,6 +233,9 @@ function addList(tableListId, tableCntId, url, index, subIndex, writType, subTyp
 					if(!parent.g_params.isFinish){
 						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
 										'编 辑' + 
+									 '</button>' + 
+									 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'删 除' + 
 									 '</button>'; 
 					}
 					html += '<tr>' + 
@@ -276,6 +284,8 @@ function addFlowList(tableListId, tableCntId, url, index, subIndex, writType, su
 				if(index == 9 && subIndex == 1) flowProgress = "行政处罚没收财物处理审批流程";
 				if(index == 9 && subIndex == 2) flowProgress = "行政处罚延期（分期）缴纳罚款审批流程";
 				if(index == 10 && subIndex == 1) flowProgress = "行政强制执行及相关事项内部审批流程";
+				if(index == 11 && subIndex == 1) flowProgress = "销案审批流程";
+				if(index == 12 && subIndex == 1) flowProgress = "内部呈批流程";
 				g_dataListArray[subIndex] = data.rows;
 				var length = data.rows.length;
 				$('#' + tableCntId).text(length);
@@ -296,6 +306,8 @@ function addFlowList(tableListId, tableCntId, url, index, subIndex, writType, su
 					if(parent.g_params.row.activityName == '行政处罚没收财物处理审批编辑' && index == 9 && subIndex == 1)  addEditBtn = true;
 					if(parent.g_params.row.activityName == '行政处罚延期（分期）缴纳罚款审批编辑' && index == 9 && subIndex == 2)  addEditBtn = true;
 					if(parent.g_params.row.activityName == '行政强制执行及相关事项内部审批编辑' && index == 10 && subIndex == 1)  addEditBtn = true;
+					if(parent.g_params.row.activityName == '销案审批编辑' && index == 11 && subIndex == 1)  addEditBtn = true;
+					if(parent.g_params.row.activityName == '审批编辑' && index == 12 && subIndex == 1)  addEditBtn = true;
 					var editButton = "";
 					if(addEditBtn && !parent.g_params.isFinish){
 						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
@@ -373,6 +385,31 @@ function btnEventEdit(index, subIndex, id){
 	parent.location.href = encodeURI(url);
 }
 
+//删除
+function btnEventDel(index, subIndex, id){
+	top.app.message.confirm("确定删除文书？", function(){
+		var subRow = getSubRow(subIndex, id);
+		top.app.message.loading();
+		$.ajax({
+			url: top.app.conf.url.apigateway + "/api/rales/ael/writ/delWrit?access_token=" + top.app.cookies.getCookiesToken(),
+		    method: 'POST',
+			data: subRow.id + "",
+			contentType: "application/json",
+			success: function(data){
+				top.app.message.loadingClose();
+				if(top.app.message.code.success == data.RetCode){
+		   			//重新加载列表
+					initButton();
+					initData();
+		   			top.app.message.notice("文书删除成功！");
+		   		}else{
+		   			top.app.message.error(data.RetMsg);
+		   		}
+	        }
+		});
+	});
+}
+
 function getSubRow(subIndex, id){
 	if(g_dataListArray[subIndex] != null && g_dataListArray[subIndex] != undefined){
 		var length = g_dataListArray[subIndex].length;
@@ -424,6 +461,10 @@ function btnSubmitAudit(index, subIndex){
 		if(index == 11 && subIndex == 1) {
 			url = "/api/rales/ael/case/startCloseCaseFlow";
 			submitData["subFlowProgress"] = "21";
+		}
+		if(index == 12 && subIndex == 1) {
+			url = "/api/rales/ael/case/startInteriorAuditFlow";
+			submitData["subFlowProgress"] = "22";
 		}
 
 		if($.utils.isEmpty(parent.g_params.row.associateExecutor)){

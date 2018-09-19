@@ -58,7 +58,6 @@ function setData(){
 	else if(g_params.data.personType == '2') $("#personType2").attr("checked",true);
 
 	$('#tdTaskSource').text(top.app.getDictName(g_params.data.taskSource, g_params.taskSourceDict));
-	$('#divCheckUserAdvice').text(top.app.getCheckBoxButtonVal(g_params.data.checkUserAdvice, g_params.checkRegisterAdviceDict));
 
 	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
 	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));
@@ -77,4 +76,8 @@ function setData(){
 	$('#tdCheckContent').text($.utils.getNotNullVal(g_params.data.checkContent));
 	$('#tdCheckDate').text($.utils.getNotNullVal(g_params.data.checkDate));
 	$('#tdMainCheckDetail').text($.utils.getNotNullVal(g_params.data.mainCheckDetail));
+
+//	$('#divCheckUserAdvice').text(top.app.getCheckBoxButtonVal(g_params.data.checkUserAdvice, g_params.checkRegisterAdviceDict));
+	//承办人意见，显示历史处理意见
+	getHistoryAuditListPreview(g_params.data.registerId, "11", $('#divCheckUserAdvice'), $('#tdSuggest'));
 }

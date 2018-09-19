@@ -260,6 +260,24 @@ function initView(){
 									'</tr>')
 		g_askListIndex++;
     });
+
+	//选择需要关联的文书
+	$("#relevanceId").click(function () {
+		//设置参数
+		var params = {};
+		params.registerId = g_params.row.id;
+		params.relevanceIdList = g_relevanceIdList;
+		params.relevanceCodeList = g_relevanceCodeList;
+		top.app.layer.editLayer('选择需要关联的文书', ['700px', '550px'], '/rales/ael/case/case-writ-list.html', params, function(retParams){
+			if(retParams == null || retParams == undefined && retParams.length > 0) {
+				top.app.message.alert("获取返回内容失败！");
+				return;
+			}
+			g_relevanceIdList = retParams[0].relevanceIdList;
+			g_relevanceCodeList = retParams[0].relevanceCodeList;
+			$("#relevanceId").val(retParams[0].relevanceCodeList);
+		});
+    });
 }
 
 function removeQuestion(index){
@@ -279,6 +297,8 @@ function getTableParams(){
 	if($('#personType1').prop('checked')) personType = '1';
 	if($('#personType2').prop('checked')) personType = '2';
 	data.personType = personType;
+	
+	data.relevanceCodeList = g_relevanceCodeList;
 	
 	if(g_params.type == 1 || g_params.type == 2){		
 		data.checkDateBegin = $('#checkDateBegin').val();
@@ -344,10 +364,10 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	checkDateBegin: {required: true},
-        	checkDateEnd: {required: true},
-        	checkAddr: {required: true},
-        	checkContent: {required: true},
+//        	checkDateBegin: {required: true},
+//        	checkDateEnd: {required: true},
+//        	checkAddr: {required: true},
+//        	checkContent: {required: true},
         },
         messages: {
         },

@@ -869,6 +869,8 @@ var app = app || {};
 		for (var i = 0; i < length; i++) {
 			var check = ""
 			if(!$.utils.isNull(checkDefVal) && checkDefVal == dict[i].ID) check = "checked";
+			//第一个为默认选中
+			if($.utils.isNull(checkDefVal) && i == 0) check = "checked";
 			html += '<div class="radio">' +
 						'<input type="radio" name="' + name + '" id="' + name + '_id_' + i + '" value="' + dict[i].ID + '" ' + check + '>' +
 						'<label for="' + name + '_id_' + i + '">' +

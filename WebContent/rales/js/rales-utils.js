@@ -80,6 +80,7 @@ rales.writOptional10_3 = "1003";
 rales.writOptional10_4 = "1004";
 rales.writOptional11_1 = "1101";
 rales.writOptional11_2 = "1102";
+rales.writOptional12_1 = "1201";
 
 rales.getDictByCode = function(dictTypeValue){
 	var dictData = [];
@@ -372,6 +373,7 @@ rales.previewCodeRelevance = function(registerId, code, tableName, tableId, tabl
 		   			params.registerRow = g_params.row;
 //		   			params.data.tableTitleMark = code;
 		   			params.data = eval("(" + data.rows[0].content + ")");
+		   			params.data.registerId = g_params.row.id;
 //		   			params.loadData = "1";
 		   			//打开预览页面
 		   			top.app.layer.editLayer('预览', ['725px', '600px'], rales.getWritPreviewUrl(data.rows[0].writType), params, function(){});
@@ -460,6 +462,71 @@ rales.getWritPreviewUrl = function(writType){
 	else if(writType == rales.writOptional10_4){return '/rales/ael/case/optional/writ-pre10_4.html';}
 	else if(writType == rales.writOptional11_1){return '/rales/ael/case/optional/writ-pre11_1.html';}
 	else if(writType == rales.writOptional11_2){return '/rales/ael/case/optional/writ-pre11_2.html';}
+}
+
+//获取历史审批意见列表
+function getHistoryAuditList(id, counterpartType){
+	if(!$.utils.isEmpty(id)){
+		$.ajax({
+	        url: top.app.conf.url.apigateway + "/api/rales/ael/case/getCaseSuggestList",   		//请求后台的URL（*）
+		    method: 'GET',
+		    data: {
+	    		access_token: top.app.cookies.getCookiesToken(),
+	    		registerId: id,
+	    		counterpartType: counterpartType,
+				page: 0,
+				size:50
+		    },success: function(data){
+		    	if(top.app.message.code.success == data.RetCode){
+		    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
+		    			$('#resultList').empty();
+		    			for(var i = 0; i < data.rows.length; i++){
+		    				var html = '<tr>' + 
+	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createUserName) + '</td>' + 
+	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].result) + '</td>' + 
+	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createDate) + '</td>' + 
+	    								'</tr>';
+		    				$('#resultList').append(html);
+		    			}
+		    		}
+		   		}
+			}
+		});
+	}
+}
+
+//获取历史审批意见列表
+function getHistoryAuditListPreview(id, counterpartType, divObj, divContain){
+	if(!$.utils.isEmpty(id)){
+		$.ajax({
+	        url: top.app.conf.url.apigateway + "/api/rales/ael/case/getCaseSuggestList",   		//请求后台的URL（*）
+		    method: 'GET',
+		    async: false,
+		   	timeout:5000,
+		    data: {
+	    		access_token: top.app.cookies.getCookiesToken(),
+	    		registerId: id,
+	    		counterpartType: counterpartType,
+				page: 0,
+				size:50
+		    },success: function(data){
+		    	if(top.app.message.code.success == data.RetCode){
+		    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
+		    			divObj.empty();
+		    			var html = "";
+		    			for(var i = 0; i < data.rows.length; i++){
+		    				html += $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
+		    						"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
+		    			}
+	    				divObj.html(html);
+	    				//重置高度
+	    				var height = (divObj.height() < 80) ? 130 : (divObj.height() + 70);
+	    				divContain.height(height);
+		    		}
+		   		}
+			}
+		});
+	}
 }
 
 /**###########################################################################

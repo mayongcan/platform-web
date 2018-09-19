@@ -17,6 +17,29 @@ function initView(){
 		g_codeCurNum = rales.showCodeCurNum(g_codeType);
 		$('#content-right').remove();
 		fileupload.initFileNewSelector('files');
+		
+		//关联内容-立案审批表
+		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
+		if(!$.utils.isNull(dataInfo.content)){
+			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
+			//转换json
+			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
+			if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
+			else $("#personType2").attr("checked",true);
+
+			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
+			$('#partiesSex').val($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
+			$('#partiesAge').val($.utils.getNotNullVal(dataInfo.content.partiesAge));
+			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+			$('#partiesCertificateNo').val($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
+			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.companyName));
+			$('#legalRepresentative').val($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
+			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.companyAddr));
+			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.companyPhone));
+			
+			$('#illegalAction').val(dataInfo.content.illegalContent);
+		}
 	}else if(g_params.type == 2){
 		//增加表单验证
 		formValidate();
@@ -87,6 +110,10 @@ function initView(){
 		
 		rales.initFilesList(g_params.subRow.files);
 		rales.initCodeRelevance(g_params.subRow.relevanceId);
+		
+		//显示历史审批意见
+		$('#trHistoryAuditList').css('display', '');
+		getHistoryAuditList(g_params.row.id, "3");
 	}
 
 	//打印
@@ -227,7 +254,7 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	illegalAction: {required: true},
+//        	illegalAction: {required: true},
         },
         messages: {
         },

@@ -78,7 +78,12 @@ function initView(){
 	//提交
 	$("#btnOK").click(function () {
 		if($('#content').val() == ''){
-   			top.app.message.notice("请填写审批意见！");
+			if(g_params.row.activityId == 'draftReplyTask' || g_params.row.activityId == 'feedbackTask' || 
+					g_params.row.activityId == 'finalOpinionTask' || g_params.row.activityId == 'backToEditTask'){
+				top.app.message.notice("请填写办理意见！");
+			}else{
+				top.app.message.notice("请填写审批意见！");	
+			}
 			return;
 		}
         //判断是否上传附件
@@ -162,13 +167,14 @@ function initData(){
 	}else{
 		if(g_params.row.activityId == 'feedbackTask'){
 //			$('#trFeedback').css('display', '');
-			$('#trAuditContent').remove();		//移除审核意见
+//			$('#trAuditContent').remove();		//移除审核意见
+			$('#tdAuditContent').html('<span class="input-request">＊</span>办理意见');
 		}else if(g_params.row.activityId == 'finalOpinionTask'){
 //			$('#trFeedback').css('display', '');
 //			$('#tdFeedback').text(g_params.row.feedback);
 //			$('#trDraftOpinion').css('display', '');
 //			$('#tdDraftOpinion').text(g_params.row.draftOpinion);
-			$('#trFinalOpinion').css('display', '');
+//			$('#trFinalOpinion').css('display', '');
 			$('#tdAuditContent').html('<span class="input-request">＊</span>办理意见');
 		}
 		if(g_params.row.activityId == 'backToEditTask'){

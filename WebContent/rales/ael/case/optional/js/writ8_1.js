@@ -126,10 +126,10 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-        	illegalAction: {required: true},
-        	checkDateBegin: {required: true},
-        	checkDateEnd: {required: true},
-        	checkAddr: {required: true},
+//        	illegalAction: {required: true},
+//        	checkDateBegin: {required: true},
+//        	checkDateEnd: {required: true},
+//        	checkAddr: {required: true},
         },
         messages: {
         },

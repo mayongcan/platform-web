@@ -32,7 +32,7 @@ function initDistrict(){
 	$('#areaDistrict').selectpicker({
 		width: '192px'
 	});
-	top.app.initDistrict($("#areaProvince"), $("#areaCity"), $("#areaDistrict"), g_params.row.areaCode, true);
+	top.app.initDistrict($("#areaProvince"), $("#areaCity"), $("#areaDistrict"), g_params.row.areaCode, false);
 	$('#areaProvince').prop('disabled', true);
 	$('#areaCity').prop('disabled', true);
 }
@@ -168,20 +168,20 @@ function initData(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-//        	reporterName: {required: true},
-//        	reporterCertificateNo: {isIdCardNo: true},
-//        	reporterCompany: {required: true},
-        	reporterContacts: {required: true},
-        	reporterZip: {isZipCode: true},
-        	reporterPhone: {required: true, isMobile: true},
-        	reporterAddress: {required: true},
-//        	defendantName: {required: true},
-//        	address: {required: true},
-//        	occurrenceDate: {required: true},
-//        	checkDate: {required: true},
-        	clueSummary: {required: true},
-        	caseVerification: {required: true},
-        	advice: {required: true},
+////        	reporterName: {required: true},
+////        	reporterCertificateNo: {isIdCardNo: true},
+////        	reporterCompany: {required: true},
+//        	reporterContacts: {required: true},
+////        	reporterZip: {isZipCode: true},
+////        	reporterPhone: {required: true, isMobile: true},
+//        	reporterAddress: {required: true},
+////        	defendantName: {required: true},
+////        	address: {required: true},
+////        	occurrenceDate: {required: true},
+////        	checkDate: {required: true},
+//        	clueSummary: {required: true},
+//        	caseVerification: {required: true},
+//        	advice: {required: true},
         },
         messages: {
         },

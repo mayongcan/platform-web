@@ -84,11 +84,13 @@ function initView(){
 			$('#flowProgressName').text("行政强制执行及相关事项内部审批");
 		else if(g_params.row.subFlowProgress == '21')
 			$('#flowProgressName').text("销案审批流程");
+		else if(g_params.row.subFlowProgress == '22')
+			$('#flowProgressName').text("内部呈批流程");
 		
 		if(g_params.row.activityName == '行政检查编辑' || g_params.row.activityName == '先行登记保存证据审批编辑' || g_params.row.activityName == '行政强制措施及相关事项内部审批编辑' || 
 				g_params.row.activityName == '行政处罚决定法制审核编辑' || g_params.row.activityName == '听证审批表编辑' || g_params.row.activityName == '行政处罚没收财物处理审批编辑' || 
 				g_params.row.activityName == '行政处罚延期（分期）缴纳罚款审批编辑' || g_params.row.activityName == '行政强制执行及相关事项内部审批编辑' ||
-					g_params.row.activityName == '销案审批编辑'){
+					g_params.row.activityName == '销案审批编辑' || g_params.row.activityName == '审批编辑' ){
 			$('#btnAudit').text("重新提交");
 			$('#flowProgressNotice').text("待编辑，请重新编辑后提交审批！");
 			g_btnType = 4;
@@ -288,6 +290,8 @@ function jumpToAuditPage(){
 			url = "/rales/ael/case/audit/audit-20.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
 		}else if(g_params.row.subFlowProgress == '21'){
 			url = "/rales/ael/case/audit/audit-21.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
+		}else if(g_params.row.subFlowProgress == '22'){
+			url = "/rales/ael/case/audit/audit-22.html?_pid=" + pid + "&backUrl=/rales/ael/case/case-detail.html";
 		}
 	}
 	window.location.href = encodeURI(url);

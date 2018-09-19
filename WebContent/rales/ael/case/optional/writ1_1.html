@@ -148,7 +148,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	检查内容<span class="input-request">＊</span>
+							   	检查内容
 							</td>
 							<td class="reference-td" colspan="7" id="tdCheckContent">
 								<textarea id="checkContent" name="checkContent" class="form-control" style="height:120px"></textarea>
@@ -181,6 +181,21 @@
 							</td>
 							<td class="reference-td" colspan="7" id="tdCheckUserAdvice">
 								<div id="divCheckUserAdvice" style="float:left;"></div>
+							</td>
+						</tr>
+						<tr id="trHistoryAuditList" style="display: none">
+							<td class="reference-td">历史审批意见</td>
+							<td class="reference-td" colspan="7">
+								<table style="width: 100%;">
+									<tbody>
+										<tr>
+											<td class="reference-td1" style="width:100px;">审批人</td>
+											<td class="reference-td1">审批意见</td>
+											<td class="reference-td1" style="width:170px;">审批时间</td>
+										</tr>
+									</tbody>
+									<tbody id="resultList"></tbody>
+								</table>
 							</td>
 						</tr>
 					</tbody>

@@ -117,17 +117,75 @@ function getResultList(){
 		    	recommendNumber: g_params.row.recommendNumber,
 		    },success: function(data){
 			    	if(top.app.message.code.success == data.RetCode){
-			    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
+			    		if(data.RetData.type == 1){
+			    			//基本分析
 			    			$('#resultList').empty();
-			    			for(var i = 0; i < data.rows.length; i++){
-			    				var html = '<tr>' + 
-		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].frequency) + '</td>' + 
-		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].occupy) + '</td>' + 
-		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].demageLevel) + '</td>' + 
-		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].quality) + '</td>' + 
-		    								'</tr>';
-			    				$('#resultList').append(html);
+			    			if(data.RetData.singleFrequency == '1'){
+			    				$('#resultList').append('<tr>' +
+			    											'<td class="reference-td" style="width:50%">' +
+			    											   	'频率编号' +
+			    											'</td>' +
+			    											'<td class="reference-td" style="width:50%">' +
+			    											   	'中心频率' +
+			    											'</td>' +
+			    										'</tr>'); 
+			    			}else{
+			    				$('#resultList').append('<tr>' +
+			    						'<td class="reference-td" style="width:33%">' +
+			    						   	'频率编号' +
+			    						'</td>' +
+			    						'<td class="reference-td" style="width:33%">' +
+			    						   	'移动台发射频率' +
+			    						'</td>' +
+			    						'<td class="reference-td" style="width:33%">' +
+			    						   	'基地台发射频率' +
+			    						'</td>' +
+			    					'</tr>'); 
 			    			}
+			    			var html = "", length = parseInt(g_params.row.recommendNumber);
+			    			if(length > data.RetData.unAssignList.length) length = data.RetData.unAssignList.length;
+			    			for(var i = 0; i < length; i++ ){
+			    				if(data.RetData.singleFrequency == '1'){
+			    					html += '<tr>' +
+			    								'<td class="reference-td">' + data.RetData.unAssignList[i].frequencyCode + '</td>' +
+			    								'<td class="reference-td">' + data.RetData.unAssignList[i].centerFrequency + 'Mhz</td>' +
+			    							'</tr>';
+			    				}else{
+			    					html += '<tr>' +
+			    								'<td class="reference-td">' + data.RetData.unAssignList[i].frequencyCode + '</td>' +
+			    								'<td class="reference-td">' + data.RetData.unAssignList[i].mobileStation + 'Mhz</td>' +
+			    								'<td class="reference-td">' + data.RetData.unAssignList[i].baseStation + 'Mhz</td>' +
+			    							'</tr>';
+			    				}
+			    			}
+			    			$('#resultList').append(html); 
+			    		}else{
+			    			$('#resultList').empty();
+			    			$('#resultList').append('<tr>' + 
+														'<td class="reference-td" style="width:25%">' + 
+														   	'频率（MHz）' + 
+														'</td>' + 
+														'<td class="reference-td" style="width:25%">' + 
+														   	'占用度（%）' + 
+														'</td>' + 
+														'<td class="reference-td" style="width:25%">' + 
+														   	'最大电平（dBμV）' + 
+														'</td>' + 
+														'<td class="reference-td" style="width:25%">' + 
+														   	'信道质量' + 
+														'</td>' + 
+													'</tr>');
+				    		if(!$.utils.isNull(data.RetData.dataList) && data.RetData.dataList.length > 0){
+				    			for(var i = 0; i < data.RetData.dataList.length; i++){
+				    				var html = '<tr>' + 
+			    									'<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].frequency) + '</td>' + 
+			    									'<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].occupy) + '</td>' + 
+			    									'<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].demageLevel) + '</td>' + 
+			    									'<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].quality) + '</td>' + 
+			    								'</tr>';
+				    				$('#resultList').append(html);
+				    			}
+				    		}
 			    		}
 			    	    parent.document.getElementById('case-iframe').style.height = '0px';
 			    		//重新计算当前页面的高度，用于iframe

@@ -19,138 +19,113 @@
     <div class="wrapper wrapper-content animated fadeIn">
 		<div id="content-left" class="ibox-content" style="border-width: 5px 0px;width: 74%;float:left;clear: none;margin-bottom: 20px;">
 			<div class="box-title">
-				<span class="table-title">行政处罚案件立案审批表</span>
-				<span class="table-title-mark" id="tableTitleMark">粤经信无01立案审〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+				<span class="table-title">立案审批表</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01案〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
 			</div>
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
 				<table class="reference1">
 					<tbody>
 						<tr>
-							<td class="reference-td" colspan="1" rowspan="4" style="width:120px;">
-							   	当事人基本情况
+							<td class="reference-td" colspan="1" rowspan="4" style="width:120px;text-align: center;">
+							   	当事人
 							</td>
-							<td class="reference-td" colspan="1" rowspan="2" style="width:150px;">
-								<div class="checkbox">
-								    <input type="checkbox" id="personType1">
-								    <label for="personType1">
-								        公民
-								    </label>
-								</div>
+							<td class="reference-td" style="width:100px;">
+							   	姓名或名称
 							</td>
-							<td class="reference-td" style="width:60px;">
-							   	姓名
-							</td>
-							<td class="reference-td" id="tdPartiesName" style="width: 20%">
+							<td class="reference-td" id="tdPartiesName" colspan="5">
 							   	<input type="text" id="partiesName" name="partiesName" class="form-control">
 							</td>
-							<td class="reference-td" style="width:60px;">
-							   	性别
-							</td>
-							<td class="reference-td" id="tdPartiesSex" style="width: 20%">
-							   	<select class="selectpicker" id="partiesSex"></select>
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	年龄
-							</td>
-							<td class="reference-td" id="tdPartiesAge">
-							   	<input type="text" id="partiesAge" name="partiesAge" class="form-control">
-							</td>
 						</tr>
 						<tr>
-							<td class="reference-td" style="width:60px;">
-							   	住址
-							</td>
-							<td class="reference-td" id="tdPartiesAddr">
-							   	<input type="text" id="partiesAddr" name="partiesAddr" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	身份证号
-							</td>
-							<td class="reference-td" id="tdPartiesCertificateNo">
-							   	<input type="text" id="partiesCertificateNo" name="partiesCertificateNo" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	联系电话
-							</td>
-							<td class="reference-td" id="tdPartiesPhone">
-							   	<input type="text" id="partiesPhone" name="partiesPhone" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" colspan="1" rowspan="2" style="width:150px;">
-								<div class="checkbox">
-								    <input type="checkbox" id="personType2">
-								    <label for="personType2">
-								        法人或<br/>其他组织
-								    </label>
-								</div>
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	名称
-							</td>
-							<td class="reference-td" id="tdCompanyName" colspan="3">
-							   	<input type="text" id="companyName" name="companyName" class="form-control">
-							</td>
 							<td class="reference-td" style="width:60px;">
 							   	法定代表人
 							</td>
 							<td class="reference-td" id="tdLegalRepresentative">
 							   	<input type="text" id="legalRepresentative" name="legalRepresentative" class="form-control">
 							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" style="width:60px;">
-							   	地址
+							<td class="reference-td" style="width:60px;" colspan="3">
+							   	当事人身份证件号
 							</td>
-							<td class="reference-td" id="tdCompanyAddr" colspan="3">
-							   	<input type="text" id="companyAddr" name="companyAddr" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	联系电话
-							</td>
-							<td class="reference-td" id="tdCompanyPhone">
-							   	<input type="text" id="companyPhone" name="companyPhone" class="form-control">
+							<td class="reference-td" id="tdPartiesCertificateNo">
+							   	<input type="text" id="partiesCertificateNo" name="partiesCertificateNo" class="form-control">
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td" style="width:60px;">
-							   	案由
+							   	联系人
 							</td>
-							<td class="reference-td" id="tdIllegalContent" colspan="3">
-							   	<input type="text" id="illegalContent" name="illegalContent" class="form-control">
+							<td class="reference-td" id="tdPartiesContact">
+							   	<input type="text" id="partiesContact" name="partiesContact" class="form-control">
 							</td>
-							<td class="reference-td" >
-							   	案件来源
+							<td class="reference-td" style="width:60px;">
+							   	性别
 							</td>
-							<td class="reference-td" colspan="3" >
-							   	<div id="divCaseSource" style="float:left;"></div>
+							<td class="reference-td" id="tdPartiesSex">
+							   	<select class="selectpicker" id="partiesSex"></select>
+							</td>
+							<td class="reference-td" style="width:60px;">
+							   	电话
+							</td>
+							<td class="reference-td" id="tdPartiesPhone">
+							   	<input type="text" id="partiesPhone" name="partiesPhone" class="form-control">
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td" style="width:60px;">
-							   	案件简要情况
+							   	住址
 							</td>
-							<td class="reference-td" id="tdCaseDesc" colspan="7">
-								<textarea id="caseDesc" name="caseDesc" class="form-control" style="height:120px"></textarea>
+							<td class="reference-td" id="tdPartiesAddr" colspan="3">
+							   	<input type="text" id="partiesAddr" name="partiesAddr" class="form-control">
+							</td>
+							<td class="reference-td" style="width:60px;">
+							   	邮政编码
+							</td>
+							<td class="reference-td" id="tdPartiesZip">
+							   	<input type="text" id="partiesZip" name="partiesZip" class="form-control">
 							</td>
 						</tr>
 						<tr>
-							<td class="reference-td">
-							   	承办人意见
+							<td class="reference-td" style="width:60px;text-align: center;">
+							   	案发地
 							</td>
-							<td class="reference-td" id="tdAdvice"  colspan="7">
+							<td class="reference-td" id="tdCaseAddr" colspan="6">
+							   	<input type="text" id="caseAddr" name="caseAddr" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="width:60px;text-align: center;">
+							   案件来源
+							</td>
+							<td class="reference-td" id="tdCaseSource" colspan="6">
+							   	<input type="text" id="caseSource" name="caseSource" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="text-align: center;">
+							   	案情及立案理由
+							</td>
+							<td class="reference-td" colspan="6" id="tdBase">
+								<textarea id="base" name="base" class="form-control" style="height:120px"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="text-align: center;">
+							   	经办人员意见
+							</td>
+							<td class="reference-td" colspan="6" id="tdAdvice">
 								<textarea id="advice" name="advice" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 						<tr>
-							<td class="reference-td">历史审批意见</td>
+							<td class="reference-td">历史处理意见</td>
 							<td class="reference-td" colspan="7">
 								<table style="width: 100%;">
 									<tbody>
 										<tr>
-											<td class="reference-td1" style="width:100px;">审批人</td>
-											<td class="reference-td1">审批意见</td>
-											<td class="reference-td1" style="width:170px;">审批时间</td>
+											<td class="reference-td1">业务流程</td>
+											<td class="reference-td1" style="width:100px;">处理人</td>
+											<td class="reference-td1">处理意见</td>
+											<td class="reference-td1" style="width:170px;">处理时间</td>
 										</tr>
 									</tbody>
 									<tbody id="resultList"></tbody>
@@ -165,7 +140,15 @@
 								<select class="form-control selectpicker" id="auditStatus"></select>
 							</td>
 						</tr>
-						<tr id="trNeedLawOfficeAudit" style="display: none">
+						<tr>
+							<td class="reference-td" style="width:60px;">
+							   	流程办理人
+							</td>
+							<td class="reference-td" id="tdJumpStatus" colspan="7">
+							   	<select class="selectpicker" id="jumpStatus"></select>
+							</td>
+						</tr>
+						<!-- <tr id="trNeedLawOfficeAudit" style="display: none">
 							<td class="reference-td" >法规处领导审批</td>
 							<td class="reference-td" colspan="7">
 								<div id="divNeedLawOfficeAudit">
@@ -179,7 +162,7 @@
 									</div>
 							    </div>  
 							</td>
-						</tr>
+						</tr> -->
 						<tr id="trAssignHandleUser" style="display: none">
 							<td class="reference-td">
 							   	指派处理
@@ -190,7 +173,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td" id="tdTextResult">
-							   	审批意见
+							   	处理意见
 							</td>
 							<td class="reference-td" colspan="7">
 								<textarea id="result" name="result" class="form-control" style="height:120px"></textarea>

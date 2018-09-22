@@ -3,7 +3,7 @@ var g_inquiryReportProcedure = "";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
-	//获取历史审批意见
+	//获取历史处理意见
 	getResultList();
 	initView();
 	initData();
@@ -15,7 +15,7 @@ function initView(){
 	//提交
 	$("#btnOK").click(function () {
 		if($('#result').val() == ''){
-   			top.app.message.notice("请填写审批意见！");
+   			top.app.message.notice("请填写处理意见！");
 			return;
 		}
 		var submitData = {};
@@ -26,7 +26,10 @@ function initView(){
 		submitData["counterpartType"] = g_counterpartType;
 		submitData["result"] = $('#result').val();
 		
-		if(g_params.row.activityName == '部门领导审批'){
+		submitData["jumpStatus"] = $("#jumpStatus").val();
+		if(g_params.row.activityName == '法制审核员审批'){
+			submitData["auditStatus"] = $("#auditStatus").val();
+		}else if(g_params.row.activityName == '部门领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
 		}else if(g_params.row.activityName == '单位领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
@@ -95,17 +98,43 @@ function initData(){
 	$('#tableTitleMark').text(dataInfo.code);
 	
 	if(!$.utils.isNull(dataInfo.content)){
+		var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 		//转换json
 		if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
 
+		if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
+		else $("#personType2").attr("checked",true);
+
 		$('#tdIllegalAction').text($.utils.getNotNullVal(dataInfo.content.illegalAction));
+		
 		$('#tdPartiesName').text($.utils.getNotNullVal(dataInfo.content.partiesName));
-		$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
-		$('#tdPartiesUnit').text($.utils.getNotNullVal(dataInfo.content.partiesUnit));
-		$('#tdLegalRepresentative').text($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
+		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
+		$('#tdPartiesAge').text($.utils.getNotNullVal(dataInfo.content.partiesAge));
 		$('#tdPartiesAddr').text($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+		$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
+		$('#tdPartiesPhone').text($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+		$('#tdPartiesNation').text($.utils.getNotNullVal(dataInfo.content.partiesNation));
+		$('#tdPartiesEdu').text($.utils.getNotNullVal(dataInfo.content.partiesEdu));
+		$('#tdCompanyName').text($.utils.getNotNullVal(dataInfo.content.companyName));
+		$('#tdLegalRepresentative').text($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
+		$('#tdCompanyAddr').text($.utils.getNotNullVal(dataInfo.content.companyAddr));
+		$('#tdCompanyPhone').text($.utils.getNotNullVal(dataInfo.content.companyPhone));
+		$('#tdLicCode').text($.utils.getNotNullVal(dataInfo.content.licCode));
+		$('#tdCompanyContactName').text($.utils.getNotNullVal(dataInfo.content.companyContactName));
+		
 		$('#tdInquiryDesc').text($.utils.getNotNullVal(dataInfo.content.inquiryDesc));
-		$('#tdMemo').text($.utils.getNotNullVal(dataInfo.content.memo));
+		$('#tdInquiryResult').text($.utils.getNotNullVal(dataInfo.content.inquiryResult));
+		$('#tdHandleResult1').text($.utils.getNotNullVal(dataInfo.content.handleResult1));
+		$('#tdHandleResult2').text($.utils.getNotNullVal(dataInfo.content.handleResult2));
+		$('#tdEvidence1').text($.utils.getNotNullVal(dataInfo.content.evidence1));
+		$('#tdEvidence2').text($.utils.getNotNullVal(dataInfo.content.evidence2));
+		$('#tdEvidence3').text($.utils.getNotNullVal(dataInfo.content.evidence3));
+		$('#tdEvidence4').text($.utils.getNotNullVal(dataInfo.content.evidence4));
+		$('#tdEvidence10').text($.utils.getNotNullVal(dataInfo.content.evidence10));
+		$('#tdEvidence11').text($.utils.getNotNullVal(dataInfo.content.evidence11));
+		$('#tdEvidence12').text($.utils.getNotNullVal(dataInfo.content.evidence12));
+		$('#tdLawUser1').text($.utils.getNotNullVal(dataInfo.content.lawUser1));
+		$('#tdLawUser2').text($.utils.getNotNullVal(dataInfo.content.lawUser1));
 
 		//转换json
 		if(!$.utils.isEmpty(dataInfo.content .list)){

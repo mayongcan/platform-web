@@ -4,7 +4,7 @@ var g_auditStatusDict1 = [], g_auditStatusDict2 = [], g_auditStatusDict3 = [], g
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
-	//获取历史审批意见
+	//获取历史处理意见
 	getResultList();
 	initView();
 	initData();
@@ -16,7 +16,7 @@ function initView(){
 	//提交
 	$("#btnOK").click(function () {
 		if($('#result').val() == ''){
-   			top.app.message.notice("请填写审批意见！");
+   			top.app.message.notice("请填写处理意见！");
 			return;
 		}
 		var submitData = {};
@@ -27,7 +27,10 @@ function initView(){
 		submitData["counterpartType"] = g_counterpartType;
 		submitData["result"] = $('#result').val();
 		
-		if(g_params.row.activityName == '部门领导审批'){
+		submitData["jumpStatus"] = $("#jumpStatus").val();
+		if(g_params.row.activityName == '法制审核员审批'){
+			submitData["auditStatus"] = $("#auditStatus").val();
+		}else if(g_params.row.activityName == '部门领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
 		}else if(g_params.row.activityName == '单位领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
@@ -94,43 +97,24 @@ function initData(){
 		var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 		//转换json
 		if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
-		if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
-		else $("#personType2").attr("checked",true);
-
-		$('#tdPartiesName').text($.utils.getNotNullVal(dataInfo.content.partiesName));
-		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
-		$('#tdPartiesAge').text($.utils.getNotNullVal(dataInfo.content.partiesAge));
-		$('#tdPartiesAddr').text($.utils.getNotNullVal(dataInfo.content.partiesAddr));
-		$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
-		$('#tdPartiesPhone').text($.utils.getNotNullVal(dataInfo.content.partiesPhone));
-		$('#tdCompanyName').text($.utils.getNotNullVal(dataInfo.content.companyName));
-		$('#tdLegalRepresentative').text($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
-		$('#tdCompanyAddr').text($.utils.getNotNullVal(dataInfo.content.companyAddr));
-		$('#tdCompanyPhone').text($.utils.getNotNullVal(dataInfo.content.companyPhone));
 		
-		$('#tdIllegalContent').text($.utils.getNotNullVal(dataInfo.content.illegalContent));
+		$('#tdCaseName').text($.utils.getNotNullVal(dataInfo.content.caseName));
+		$('#tdCaseNo').text($.utils.getNotNullVal(dataInfo.content.caseNo));
 		$('#tdCaseBeginDate').text($.utils.getNotNullVal(dataInfo.content.caseBeginDate));
-		$('#tdPunishWritCode').text($.utils.getNotNullVal(dataInfo.content.punishWritCode));
-		$('#tdPunishDate').text($.utils.getNotNullVal(dataInfo.content.punishDate));
-		$('#tdCaseDesc').text($.utils.getNotNullVal(dataInfo.content.caseDesc));
-		$('#tdPunishContent').text($.utils.getNotNullVal(dataInfo.content.punishContent));
-		if(dataInfo.content.punishDetailCheck1 == '1') $("#punishDetailCheck1").attr("checked",true);
-		$('#tdPunishDetailContent1').text($.utils.getNotNullVal(dataInfo.content.punishDetailContent1));
-		if(dataInfo.content.punishDetailCheck2 == '1') $("#punishDetailCheck2").attr("checked",true);
-		$('#tdPunishDetailContent2').text($.utils.getNotNullVal(dataInfo.content.punishDetailContent2));
-		if(dataInfo.content.punishDetailCheck3 == '1') $("#punishDetailCheck3").attr("checked",true);
-		$('#tdPunishDetailContent3').text($.utils.getNotNullVal(dataInfo.content.punishDetailContent3));
-		if(dataInfo.content.punishDetailCheck4 == '1') $("#punishDetailCheck4").attr("checked",true);
-		$('#tdPunishDetailContent4').text($.utils.getNotNullVal(dataInfo.content.punishDetailContent4));
-		if(dataInfo.content.punishCodeCheck1 == '1') $("#punishCodeCheck1").attr("checked",true);
-		$('#tdPunishCodeContent1').text($.utils.getNotNullVal(dataInfo.content.punishCodeContent1));
-		if(dataInfo.content.punishCodeCheck2 == '1') $("#punishCodeCheck2").attr("checked",true);
-		$('#tdPunishCodeContent2').text($.utils.getNotNullVal(dataInfo.content.punishCodeContent2));
-		if(dataInfo.content.punishCodeCheck3 == '1') $("#punishCodeCheck3").attr("checked",true);
-		$('#tdPunishCodeContent3').text($.utils.getNotNullVal(dataInfo.content.punishCodeContent3));
-		if(dataInfo.content.punishCodeCheck4 == '1') $("#punishCodeCheck4").attr("checked",true);
-		$('#tdPunishCodeContent4').text($.utils.getNotNullVal(dataInfo.content.punishCodeContent4));
-		$('#tdReviewContent').text($.utils.getNotNullVal(dataInfo.content.reviewContent));
+		$('#tdPunish').text($.utils.getNotNullVal(dataInfo.content.punish));
+		$('#tdCasePunishDate').text($.utils.getNotNullVal(dataInfo.content.casePunishDate));
+		
+		$('#tdPartiesCompany').text($.utils.getNotNullVal(dataInfo.content.partiesCompany));
+		$('#tdDelegate').text($.utils.getNotNullVal(dataInfo.content.delegate));
+		$('#tdPartiesName').text($.utils.getNotNullVal(dataInfo.content.partiesName));
+		$('#tdBirthDate').text($.utils.getNotNullVal(dataInfo.content.birthDate));
+		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_params.sexDict)));
+		$('#tdPartiesAddr').text($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+		$('#tdPartiesPhone').text($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+		$('#tdPartiesZip').text($.utils.getNotNullVal(dataInfo.content.partiesZip));
+		
+		$('#tdResult').text($.utils.getNotNullVal(dataInfo.content.result));
+		$('#tdHandleDetail').text($.utils.getNotNullVal(dataInfo.content.handleDetail));
 	}
 
 	rales.initFilesList(dataInfo.files);

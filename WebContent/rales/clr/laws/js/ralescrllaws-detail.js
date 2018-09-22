@@ -157,7 +157,7 @@ function btnEventDel(url){
 
 function btnEventDownload(url){
 	if(!$.utils.isEmpty(url)){
-		window.open(top.app.conf.url.res.downloadFile + "?files=" + $('#selectFile').val());
+		window.open(top.app.conf.url.res.downloadFile + "?files=" + url);
 	}
 	else
 		top.app.message.notice("附件的下载地址为空！");

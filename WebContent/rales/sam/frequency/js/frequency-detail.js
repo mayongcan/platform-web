@@ -78,6 +78,11 @@ function initNavButton(){
 	$('#btnExportReport').click(function () {
 		$("#case-iframe")[0].contentWindow.exportWord();
     });
+	//返回
+	$('#btnReturn').click(function () {
+		window.location.href = g_backUrl + "?_pid=" + g_pid;
+    });
+	if(g_params.removeBackBtn) $('#btnReturn').remove();
 }
 
 var ifr = document.getElementById('case-iframe');

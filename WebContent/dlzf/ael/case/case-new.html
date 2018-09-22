@@ -21,121 +21,17 @@
 		<div class="ibox-content">
 			<div style="text-align: center;padding-top:15px;margin-bottom:20px;">
 				<!-- <span class="table-title">广州市工业和信息化委员会</span> -->
-				<span class="table-title">电力执法案件登记表</span>
-				<span class="table-title-mark" id="tableTitleMark">粤经信无01案登〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+				<span class="table-title">案件线索登记表</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01线索〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
 			</div>
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
 				<table class="reference1">
 					<tbody>
 						<tr>
-							<td class="reference-td" colspan="5" style="font-weight: bold;">调查过程中务必注意保护举报人</td>
-						</tr>
-						<tr>
+							<td class="reference-td">
+							   	反映时间
+							</td>
 							<td class="reference-td" colspan="2">
-							   	案件来源
-							</td>
-							<td class="reference-td" colspan="3" >
-							   	<div id="divCaseSource" style="float:left;"></div>
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" colspan="1" rowspan="4" style="width:120px;">
-							   	报告人
-							</td>
-							<td class="reference-td" style="width:120px;">
-							   	姓名
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="reporterName" name="reporterName" class="form-control">
-							</td>
-							<td class="reference-td" style="width:100px;">
-							   	证件号码
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="reporterCertificateNo" name="reporterCertificateNo" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	单位
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="reporterCompany" name="reporterCompany" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	联系人
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="reporterContacts" name="reporterContacts" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	联系地址
-							</td>
-							<td class="reference-td" colspan="3">
-							   	<input type="text" id="reporterAddress" name="reporterAddress" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	邮政编码
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="reporterZip" name="reporterZip" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	联系电话
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="reporterPhone" name="reporterPhone" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" colspan="1" rowspan="4">
-							   	被报告人
-							</td>
-							<td class="reference-td">
-							   	单位/姓名
-							</td>
-							<td class="reference-td" colspan="3">
-							   	<input type="text" id="defendantName" name="defendantName" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	案发市辖区
-							</td>
-							<td class="reference-td" colspan="3">
-							   	<select class="selectpicker" id="areaProvince"></select>
-				         		<select class="selectpicker" id="areaCity"></select>
-				         		<select class="selectpicker" id="areaDistrict"></select>
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	问题发生地
-							</td>
-							<td class="reference-td" colspan="3">
-							   	<input type="text" id="defendantAddress" name="defendantAddress" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	问题发生时间
-							</td>
-							<td class="reference-td">
-								<div class="input-group date edit-layer-input" id="divDefendantDate">
-				            		<input type="text" class="form-control" id="defendantDate" name="defendantDate"/>
-				            		<span class="input-group-addon">
-				                		<span class="glyphicon glyphicon-calendar"></span>
-				            		</span>
-				            	</div>
-							</td>
-							<td class="reference-td">
-							   	登记时间
-							</td>
-							<td class="reference-td">
 								<div class="input-group date edit-layer-input" id="divDefendantCheckDate">
 				            		<input type="text" class="form-control" id="defendantCheckDate" name="defendantCheckDate"/>
 				            		<span class="input-group-addon">
@@ -143,12 +39,100 @@
 				            		</span>
 				            	</div>
 							</td>
+							<td class="reference-td">
+							   	受理人
+							</td>
+							<td class="reference-td" colspan="3">
+								<input type="text" id="defendantName" name="defendantName" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	线索来源
+							</td>
+							<td class="reference-td" colspan="6" >
+							   	<div id="divCaseSource" style="float:left;"></div>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" colspan="1" rowspan="3" style="width:120px;">
+							   	反映人
+							</td>
+							<td class="reference-td" style="width:120px;">
+							   	姓名或名称
+							</td>
+							<td class="reference-td">
+							   	<input type="text" id="reporterName" name="reporterName" class="form-control">
+							</td>
+							<td class="reference-td" style="width:60px;">
+							   	性别
+							</td>
+							<td class="reference-td" id="tdReporterSex">
+							   	<select class="selectpicker" id="reporterSex"></select>
+							</td>
+							<td class="reference-td" style="width:60px;">
+							   	年龄
+							</td>
+							<td class="reference-td" id="tdReporterAge">
+							   	<input type="text" id="reporterAge" name="reporterAge" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	联系地址或工作单位
+							</td>
+							<td class="reference-td" colspan="5">
+							   	<input type="text" id="reporterCompany" name="reporterCompany" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	联系电话
+							</td>
+							<td class="reference-td" colspan="2">
+							   	<input type="text" id="reporterPhone" name="reporterPhone" class="form-control">
+							</td>
+							<td class="reference-td">
+							   	邮政编码
+							</td>
+							<td class="reference-td" colspan="2">
+							   	<input type="text" id="reporterZip" name="reporterZip" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" colspan="1" rowspan="3" style="width:120px;">
+							   	反映人
+							</td>
+							<td class="reference-td">
+							   	行为名称
+							</td>
+							<td class="reference-td" colspan="6">
+							   	<input type="text" id="illegalAction" name="illegalAction" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	地址（位置）
+							</td>
+							<td class="reference-td" colspan="6">
+							   	<input type="text" id="defendantAddress" name="defendantAddress" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	市辖区
+							</td>
+							<td class="reference-td" colspan="6">
+							   	<select class="selectpicker" id="areaProvince"></select>
+				         		<select class="selectpicker" id="areaCity"></select>
+				         		<select class="selectpicker" id="areaDistrict"></select>
+							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
 							   	案件处理程序
 							</td>
-							<td class="reference-td" colspan="4">
+							<td class="reference-td" colspan="6">
 							   	<select class="selectpicker form-control" id="caseProcedure"></select>
 							</td>
 						</tr>
@@ -156,56 +140,48 @@
 							<td class="reference-td">
 							   	不予立案原因
 							</td>
-							<td class="reference-td" colspan="4">
+							<td class="reference-td" colspan="6">
 							   	<input type="text" id="notPutOn" name="notPutOn" class="form-control">
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	案件类型
+							   	涉嫌违法行为内容简述
 							</td>
-							<td class="reference-td" colspan="4">
-							   	<select class="selectpicker form-control" id="caseType"></select>
-							</td>
-						</tr>
-						<!-- <tr>
-							<td class="reference-td">
-							   	第二承办人
-							</td>
-							<td class="reference-td" colspan="4">
-							   	<input type="text" id="undertaker" name="undertaker" class="form-control" readonly style="cursor: pointer;background: #fff;" placeholder="请选择第二承办人">
-							</td>
-						</tr> -->
-						<tr>
-							<td class="reference-td">
-							   	线索摘要
-							</td>
-							<td class="reference-td" colspan="4">
+							<td class="reference-td" colspan="6">
 								<textarea id="clueSummary" name="clueSummary" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	情况核实
+							   	电力行政执法处意见
 							</td>
-							<td class="reference-td" colspan="4">
-								<textarea id="caseVerification" name="caseVerification" class="form-control" style="height:120px"></textarea>
+							<td class="reference-td" colspan="6">
+								<textarea id="advice" name="advice" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	承办人意见
+							   	处理结果
 							</td>
-							<td class="reference-td" colspan="4">
-								<textarea id="advice" name="advice" class="form-control" style="height:120px"></textarea>
+							<td class="reference-td" colspan="6">
+								<textarea id="caseVerification" name="caseVerification" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
 							   	备注
 							</td>
-							<td class="reference-td" colspan="4">
+							<td class="reference-td" colspan="6">
 								<textarea id="memo" name="memo" class="form-control" style="height:120px"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="width:60px;">
+							   	流程办理人
+							</td>
+							<td class="reference-td" id="tdJumpStatus" colspan="6">
+							   	<select class="selectpicker" id="jumpStatus"></select>
 							</td>
 						</tr>
 					</tbody>
@@ -214,7 +190,7 @@
 					<tbody>
 						<tr>
 							<td class="reference-td" style="width:120px;">附件上传</td>
-							<td class="reference-td" colspan="4" style="line-height: normal;">
+							<td class="reference-td" colspan="6" style="line-height: normal;">
 								<div class="file-loading"> 
 									<input type="file" accept="*" id="files" name="files" multiple="multiple">
 								</div>
@@ -222,7 +198,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">文书关联</td>
-							<td class="reference-td" colspan="4">
+							<td class="reference-td" colspan="6">
 								<input type="text" id="relevanceId" name="relevanceId" class="form-control" readonly style="cursor: pointer;background: #fff;" placeholder="请选择关联文书">
 							</td>
 						</tr>

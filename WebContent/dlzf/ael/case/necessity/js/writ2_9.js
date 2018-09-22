@@ -1,7 +1,6 @@
 var g_params = {}, g_backUrl = null;
-var g_codeType = rales.writOptional11_2, g_codeCurNum = "";
+var g_codeType = rales.writNecessity2_9, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
-var g_dataListIndex = 0;
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -9,9 +8,6 @@ $(function () {
 });
 
 function initView(){
-	$('#divSendDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
-	$('#divReceiveDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
-	
 	//1新增 2编辑 3查看
 	if(g_params.type == 1){
 		//增加表单验证
@@ -30,11 +26,9 @@ function initView(){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
 
-			$('#partiesName').val(g_params.subRow.content.partiesName);
-			$('#sendDate').val(g_params.subRow.content.sendDate);
-			$('#code1').val(g_params.subRow.content.code1);
-			$('#code2').val(g_params.subRow.content.code2);
-			$('#receiveDate').val(g_params.subRow.content.receiveDate);
+			$('#caseParties').val(g_params.subRow.content.caseParties);
+			$('#illegalContent').val(g_params.subRow.content.illegalContent);
+			$('#reason').val(g_params.subRow.content.reason);
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -52,12 +46,10 @@ function initView(){
 		if(!$.utils.isNull(g_params.subRow.content)){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
-
-			$('#tdPartiesName').text($.utils.getNotNullVal(g_params.subRow.content.partiesName));
-			$('#tdSendDate').text($.utils.getNotNullVal(g_params.subRow.content.sendDate));
-			$('#tdCode1').text($.utils.getNotNullVal(g_params.subRow.content.code1));
-			$('#tdCode2').text($.utils.getNotNullVal(g_params.subRow.content.code2));
-			$('#tdReceiveDate').text($.utils.getNotNullVal(g_params.subRow.content.receiveDate));
+			
+			$('#tdCaseParties').text($.utils.getNotNullVal(g_params.subRow.content.caseParties));
+			$('#tdIllegalContent').text($.utils.getNotNullVal(g_params.subRow.content.illegalContent));
+			$('#tdReason').text($.utils.getNotNullVal(g_params.subRow.content.reason));
 		}
 
 		//设置右侧的高度和左侧一致
@@ -73,7 +65,7 @@ function initView(){
 		var params = {};
 		params.isPrint = true;
 		params.data = getTableParams();
-		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/optional/writ-pre11_2.html', params, function(){});
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre2_9.html', params, function(){});
     });
 	//提交
 	$("#btnOK").click(function () {
@@ -84,7 +76,7 @@ function initView(){
 		//设置参数
 		var params = {};
 		params.data = getTableParams();
-		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/optional/writ-pre11_2.html', params, function(){});
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre2_9.html', params, function(){});
     });
 	//返回
 	$("#btnCancel").click(function () {
@@ -101,12 +93,11 @@ function initView(){
 function getTableParams(){
 	var data = {};
 	data.tableTitleMark = $('#tableTitleMark').text();
-	if(g_params.type == 1 || g_params.type == 2){	
-		data.partiesName = $('#partiesName').val();
-		data.sendDate = $('#sendDate').val();
-		data.code1 = $('#code1').val();
-		data.code2 = $('#code2').val();
-		data.receiveDate = $('#receiveDate').val();
+	if(g_params.type == 1 || g_params.type == 2){
+		data.caseParties = $('#caseParties').val();
+		data.illegalContent = $('#illegalContent').val();
+		data.caseClauseCountry = $('#caseClauseCountry').val();
+		data.reason = $('#reason').val();
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}
@@ -119,7 +110,8 @@ function getTableParams(){
 function formValidate(){
 	$("#divEditForm").validate({
         rules: {
-//        	partiesName: {required: true},
+//        	caseParties: {required: true},
+//        	illegalContent: {required: true},
         },
         messages: {
         },

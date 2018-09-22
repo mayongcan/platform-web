@@ -10,18 +10,10 @@ $(function () {
 
 function initView(){
 	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
-	top.app.addComboBoxOption($("#partiesSex"), g_sexDict, true, ' ');;
-	//公民选择
-	$('input[type=checkbox][id=personType1]').change(function() { 
-		$("#personType1").attr("checked",true);
-		$("#personType2").attr("checked",false);
-	});
-	$('input[type=checkbox][id=personType2]').change(function() { 
-		$("#personType2").attr("checked",true);
-		$("#personType1").attr("checked",false);
-	});
-	$('#divCaseBeginDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
-	$('#divPunishDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
+	top.app.addComboBoxOption($("#partiesSex"), g_sexDict, true, ' ');
+	$('#divCaseBeginDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true,});
+	$('#divCasePunishDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, });
+	$('#divBirthDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true,});
 	
 	//1新增 2编辑 3查看
 	if(g_params.type == 1){
@@ -34,28 +26,28 @@ function initView(){
 		//关联内容
 		$('#caseDesc').val(g_params.row.clueSummary);
 
-		//关联内容-立案审批表
-		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
-		if(!$.utils.isNull(dataInfo.content)){
-			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
-			//转换json
-			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
-			if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
-			else $("#personType2").attr("checked",true);
-
-			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
-			$('#partiesSex').val($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
-			$('#partiesAge').val($.utils.getNotNullVal(dataInfo.content.partiesAge));
-			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
-			$('#partiesCertificateNo').val($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
-			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
-			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.companyName));
-			$('#legalRepresentative').val($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
-			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.companyAddr));
-			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.companyPhone));
-			
-			$('#illegalContent').val(dataInfo.content.illegalContent);
-		}
+//		//关联内容-立案审批表
+//		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
+//		if(!$.utils.isNull(dataInfo.content)){
+//			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
+//			//转换json
+//			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
+//			if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
+//			else $("#personType2").attr("checked",true);
+//
+//			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
+//			$('#partiesSex').val($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
+//			$('#partiesAge').val($.utils.getNotNullVal(dataInfo.content.partiesAge));
+//			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+//			$('#partiesCertificateNo').val($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
+//			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+//			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.companyName));
+//			$('#legalRepresentative').val($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
+//			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.companyAddr));
+//			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.companyPhone));
+//			
+//			$('#illegalContent').val(dataInfo.content.illegalContent);
+//		}
 	}else if(g_params.type == 2){
 		//增加表单验证
 		formValidate();
@@ -65,43 +57,24 @@ function initView(){
 		if(!$.utils.isNull(g_params.subRow.content)){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
-			if(g_params.subRow.content.personType == '1') $("#personType1").attr("checked",true);
-			else $("#personType2").attr("checked",true);
 			
-			$('#partiesName').val(g_params.subRow.content.partiesName);
-			$('#partiesSex').val(g_params.subRow.content.partiesSex);
-			$('#partiesAge').val(g_params.subRow.content.partiesAge);
-			$('#partiesAddr').val(g_params.subRow.content.partiesAddr);
-			$('#partiesCertificateNo').val(g_params.subRow.content.partiesCertificateNo);
-			$('#partiesPhone').val(g_params.subRow.content.partiesPhone);
-			$('#companyName').val(g_params.subRow.content.companyName);
-			$('#legalRepresentative').val(g_params.subRow.content.legalRepresentative);
-			$('#companyAddr').val(g_params.subRow.content.companyAddr);
-			$('#companyPhone').val(g_params.subRow.content.companyPhone);
-			
-			$('#illegalContent').val(g_params.subRow.content.illegalContent);
+			$('#caseName').val(g_params.subRow.content.caseName);
+			$('#caseNo').val(g_params.subRow.content.caseNo);
 			$('#caseBeginDate').val(g_params.subRow.content.caseBeginDate);
-			$('#punishWritCode').val(g_params.subRow.content.punishWritCode);
-			$('#punishDate').val(g_params.subRow.content.punishDate);
-			$('#caseDesc').val(g_params.subRow.content.caseDesc);
-			$('#punishContent').val(g_params.subRow.content.punishContent);
-			if(g_params.subRow.content.punishDetailCheck1 == '1') $("#punishDetailCheck1").attr("checked",true);
-			$('#punishDetailContent1').val(g_params.subRow.content.punishDetailContent1);
-			if(g_params.subRow.content.punishDetailCheck2 == '1') $("#punishDetailCheck2").attr("checked",true);
-			$('#punishDetailContent2').val(g_params.subRow.content.punishDetailContent2);
-			if(g_params.subRow.content.punishDetailCheck3 == '1') $("#punishDetailCheck3").attr("checked",true);
-			$('#punishDetailContent3').val(g_params.subRow.content.punishDetailContent3);
-			if(g_params.subRow.content.punishDetailCheck4 == '1') $("#punishDetailCheck4").attr("checked",true);
-			$('#punishDetailContent4').val(g_params.subRow.content.punishDetailContent4);
-			if(g_params.subRow.content.punishCodeCheck1 == '1') $("#punishCodeCheck1").attr("checked",true);
-			$('#punishCodeContent1').val(g_params.subRow.content.punishCodeContent1);
-			if(g_params.subRow.content.punishCodeCheck2 == '1') $("#punishCodeCheck2").attr("checked",true);
-			$('#punishCodeContent2').val(g_params.subRow.content.punishCodeContent2);
-			if(g_params.subRow.content.punishCodeCheck3 == '1') $("#punishCodeCheck3").attr("checked",true);
-			$('#punishCodeContent3').val(g_params.subRow.content.punishCodeContent3);
-			if(g_params.subRow.content.punishCodeCheck4 == '1') $("#punishCodeCheck4").attr("checked",true);
-			$('#punishCodeContent4').val(g_params.subRow.content.punishCodeContent4);
-			$('#reviewContent').val(g_params.subRow.content.reviewContent);
+			$('#punish').val(g_params.subRow.content.punish);
+			$('#casePunishDate').val(g_params.subRow.content.casePunishDate);
+
+			$('#partiesCompany').val(g_params.subRow.content.partiesCompany);
+			$('#delegate').val(g_params.subRow.content.delegate);
+			$('#partiesName').val(g_params.subRow.content.partiesName);
+			$('#birthDate').val(g_params.subRow.content.birthDate);
+			$('#partiesSex').val(g_params.subRow.content.partiesSex);
+			$('#partiesAddr').val(g_params.subRow.content.partiesAddr);
+			$('#partiesPhone').val(g_params.subRow.content.partiesPhone);
+			$('#partiesZip').val(g_params.subRow.content.partiesZip);
+			
+			$('#result').val(g_params.subRow.content.result);
+			$('#handleDetail').val(g_params.subRow.content.handleDetail);
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -119,43 +92,24 @@ function initView(){
 		if(!$.utils.isNull(g_params.subRow.content)){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
-			if(g_params.subRow.content.personType == '1') $("#personType1").attr("checked",true);
-			else $("#personType2").attr("checked",true);
 
-			$('#tdPartiesName').text($.utils.getNotNullVal(g_params.subRow.content.partiesName));
-			$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.subRow.content.partiesSex, g_sexDict)));
-			$('#tdPartiesAge').text($.utils.getNotNullVal(g_params.subRow.content.partiesAge));
-			$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.subRow.content.partiesAddr));
-			$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.subRow.content.partiesCertificateNo));
-			$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.subRow.content.partiesPhone));
-			$('#tdCompanyName').text($.utils.getNotNullVal(g_params.subRow.content.companyName));
-			$('#tdLegalRepresentative').text($.utils.getNotNullVal(g_params.subRow.content.legalRepresentative));
-			$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.subRow.content.companyAddr));
-			$('#tdCompanyPhone').text($.utils.getNotNullVal(g_params.subRow.content.companyPhone));
-			
-			$('#tdIllegalContent').text($.utils.getNotNullVal(g_params.subRow.content.illegalContent));
+			$('#tdCaseName').text($.utils.getNotNullVal(g_params.subRow.content.caseName));
+			$('#tdCaseNo').text($.utils.getNotNullVal(g_params.subRow.content.caseNo));
 			$('#tdCaseBeginDate').text($.utils.getNotNullVal(g_params.subRow.content.caseBeginDate));
-			$('#tdPunishWritCode').text($.utils.getNotNullVal(g_params.subRow.content.punishWritCode));
-			$('#tdPunishDate').text($.utils.getNotNullVal(g_params.subRow.content.punishDate));
-			$('#tdCaseDesc').text($.utils.getNotNullVal(g_params.subRow.content.caseDesc));
-			$('#tdPunishContent').text($.utils.getNotNullVal(g_params.subRow.content.punishContent));
-			if(g_params.subRow.content.punishDetailCheck1 == '1') $("#punishDetailCheck1").attr("checked",true);
-			$('#tdPunishDetailContent1').text($.utils.getNotNullVal(g_params.subRow.content.punishDetailContent1));
-			if(g_params.subRow.content.punishDetailCheck2 == '1') $("#punishDetailCheck2").attr("checked",true);
-			$('#tdPunishDetailContent2').text($.utils.getNotNullVal(g_params.subRow.content.punishDetailContent2));
-			if(g_params.subRow.content.punishDetailCheck3 == '1') $("#punishDetailCheck3").attr("checked",true);
-			$('#tdPunishDetailContent3').text($.utils.getNotNullVal(g_params.subRow.content.punishDetailContent3));
-			if(g_params.subRow.content.punishDetailCheck4 == '1') $("#punishDetailCheck4").attr("checked",true);
-			$('#tdPunishDetailContent4').text($.utils.getNotNullVal(g_params.subRow.content.punishDetailContent4));
-			if(g_params.subRow.content.punishCodeCheck1 == '1') $("#punishCodeCheck1").attr("checked",true);
-			$('#tdPunishCodeContent1').text($.utils.getNotNullVal(g_params.subRow.content.punishCodeContent1));
-			if(g_params.subRow.content.punishCodeCheck2 == '1') $("#punishCodeCheck2").attr("checked",true);
-			$('#tdPunishCodeContent2').text($.utils.getNotNullVal(g_params.subRow.content.punishCodeContent2));
-			if(g_params.subRow.content.punishCodeCheck3 == '1') $("#punishCodeCheck3").attr("checked",true);
-			$('#tdPunishCodeContent3').text($.utils.getNotNullVal(g_params.subRow.content.punishCodeContent3));
-			if(g_params.subRow.content.punishCodeCheck4 == '1') $("#punishCodeCheck4").attr("checked",true);
-			$('#tdPunishCodeContent4').text($.utils.getNotNullVal(g_params.subRow.content.punishCodeContent4));
-			$('#tdReviewContent').text($.utils.getNotNullVal(g_params.subRow.content.reviewContent));
+			$('#tdPunish').text($.utils.getNotNullVal(g_params.subRow.content.punish));
+			$('#tdCasePunishDate').text($.utils.getNotNullVal(g_params.subRow.content.casePunishDate));
+			
+			$('#tdPartiesCompany').text($.utils.getNotNullVal(g_params.subRow.content.partiesCompany));
+			$('#tdDelegate').text($.utils.getNotNullVal(g_params.subRow.content.delegate));
+			$('#tdPartiesName').text($.utils.getNotNullVal(g_params.subRow.content.partiesName));
+			$('#tdBirthDate').text($.utils.getNotNullVal(g_params.subRow.content.birthDate));
+			$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.subRow.content.partiesSex, g_sexDict)));
+			$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.subRow.content.partiesAddr));
+			$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.subRow.content.partiesPhone));
+			$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.subRow.content.partiesZip));
+			
+			$('#tdResult').text($.utils.getNotNullVal(g_params.subRow.content.result));
+			$('#tdHandleDetail').text($.utils.getNotNullVal(g_params.subRow.content.handleDetail));
 		}
 		
 		//设置右侧的高度和左侧一致
@@ -165,7 +119,7 @@ function initView(){
 		rales.initFilesList(g_params.subRow.files);
 		rales.initCodeRelevance(g_params.subRow.relevanceId);
 		
-		//显示历史审批意见
+		//显示历史处理意见
 		$('#trHistoryAuditList').css('display', '');
 		getHistoryAuditList(g_params.row.id, "5");
 	}
@@ -228,51 +182,23 @@ function getTableParams(){
 	if($('#personType2').prop('checked')) personType = '2';
 	data.personType = personType;
 	if(g_params.type == 1 || g_params.type == 2){
-		data.partiesName = $('#partiesName').val();
-		data.partiesSex = $('#partiesSex').val();
-		data.partiesAge = $('#partiesAge').val();
-		data.partiesAddr = $('#partiesAddr').val();
-		data.partiesCertificateNo = $('#partiesCertificateNo').val();
-		data.partiesPhone = $('#partiesPhone').val();
-		data.companyName = $('#companyName').val();
-		data.legalRepresentative = $('#legalRepresentative').val();
-		data.companyAddr = $('#companyAddr').val();
-		data.companyPhone = $('#companyPhone').val();
-		
-		data.illegalContent = $('#illegalContent').val();
+		data.caseName = $('#caseName').val();
+		data.caseNo = $('#caseNo').val();
 		data.caseBeginDate = $('#caseBeginDate').val();
-		data.punishWritCode = $('#punishWritCode').val();
-		data.punishDate = $('#punishDate').val();
-		data.caseDesc = $('#caseDesc').val();
-		data.punishContent = $('#punishContent').val();
+		data.punish = $('#punish').val();
+		data.casePunishDate = $('#casePunishDate').val();
 		
-		if($('#punishDetailCheck1').prop('checked'))  data.punishDetailCheck1 = "1";
-		else data.punishDetailCheck1 = "0";
-		if($('#punishDetailCheck2').prop('checked'))  data.punishDetailCheck2 = "1";
-		else data.punishDetailCheck2 = "0";
-		if($('#punishDetailCheck3').prop('checked'))  data.punishDetailCheck3 = "1";
-		else data.punishDetailCheck3 = "0";
-		if($('#punishDetailCheck14').prop('checked'))  data.punishDetailCheck4 = "1";
-		else data.punishDetailCheck4 = "0";
-		data.punishDetailContent1 = $('#punishDetailContent1').val();
-		data.punishDetailContent2 = $('#punishDetailContent2').val();
-		data.punishDetailContent3 = $('#punishDetailContent3').val();
-		data.punishDetailContent4 = $('#punishDetailContent4').val();
-
-		if($('#punishCodeCheck1').prop('checked'))  data.punishCodeCheck1 = "1";
-		else data.punishCodeCheck1 = "0";
-		if($('#punishCodeCheck2').prop('checked'))  data.punishCodeCheck2 = "1";
-		else data.punishCodeCheck2 = "0";
-		if($('#punishCodeCheck3').prop('checked'))  data.punishCodeCheck3 = "1";
-		else data.punishCodeCheck3 = "0";
-		if($('#punishCodeCheck14').prop('checked'))  data.punishCodeCheck4 = "1";
-		else data.punishCodeCheck4 = "0";
-		data.punishCodeContent1 = $('#punishCodeContent1').val();
-		data.punishCodeContent2 = $('#punishCodeContent2').val();
-		data.punishCodeContent3 = $('#punishCodeContent3').val();
-		data.punishCodeContent4 = $('#punishCodeContent4').val();
+		data.partiesCompany = $('#partiesCompany').val();
+		data.delegate = $('#delegate').val();
+		data.partiesName = $('#partiesName').val();
+		data.birthDate = $('#birthDate').val();
+		data.partiesSex = $('#partiesSex').val();
+		data.partiesAddr = $('#partiesAddr').val();
+		data.partiesPhone = $('#partiesPhone').val();
+		data.partiesZip = $('#partiesZip').val();
 		
-		data.reviewContent = $('#reviewContent').val();
+		data.result = $('#result').val();
+		data.handleDetail = $('#handleDetail').val();
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}
@@ -310,22 +236,6 @@ function formValidate(){
  * @returns
  */
 function submitAction(){
-	var personType = '0'
-	if($('#personType1').prop('checked')) personType = '1';
-	if($('#personType2').prop('checked')) personType = '2';
-	if(personType == '0'){
-		top.app.message.notice("请选择公民或法人、其他组织！");
-		return;
-	}
-	if(personType == '1' && $('#partiesName').val() == ''){
-		top.app.message.notice("请输入公民姓名！");
-		return;
-	}
-	if(personType == '2' && $('#companyName').val() == ''){
-		top.app.message.notice("请输入组织名称！");
-		return;
-	}
-	
 	//定义提交数据
 	var submitData = {};
 	var url = "";

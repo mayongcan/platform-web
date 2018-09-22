@@ -119,7 +119,7 @@ function initView(){
 		rales.initFilesList(g_params.subRow.files);
 		rales.initCodeRelevance(g_params.subRow.relevanceId);
 
-		//显示历史审批意见
+		//显示历史处理意见
 		$('#trHistoryAuditList').css('display', '');
 		getHistoryAuditList(g_params.row.id, "4");
 	}

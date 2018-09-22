@@ -462,6 +462,7 @@ rales.getWritPreviewUrl = function(writType){
 	else if(writType == rales.writOptional10_4){return '/rales/ael/case/optional/writ-pre10_4.html';}
 	else if(writType == rales.writOptional11_1){return '/rales/ael/case/optional/writ-pre11_1.html';}
 	else if(writType == rales.writOptional11_2){return '/rales/ael/case/optional/writ-pre11_2.html';}
+	else if(writType == rales.writOptional12_1){return '/rales/ael/case/optional/writ-pre12_1.html';}
 }
 
 //获取历史审批意见列表

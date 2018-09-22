@@ -72,7 +72,7 @@ LoadingOverlay - A flexible loading overlay jQuery plugin
         direction               : "column",
         fade                    : true,
         resizeInterval          : 35,
-        zIndex                  : 2147483647
+        zIndex                  : 2147483647000
     };
     
     // Required CSS

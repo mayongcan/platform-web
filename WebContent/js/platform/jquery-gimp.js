@@ -600,7 +600,8 @@ jQuery.support.cors = true;
     	opt.xhrFields = { withCredentials: true };
 		opt.crossDomain = true;
 		opt.dataType = 'json';
-		opt.timeout = 120000;		//设置超时时间120秒
+		//opt.timeout = 120000;		//设置超时时间120秒
+		opt.timeout = 0;			//设置为永不超时
         var fn = {  
             error:function(XMLHttpRequest, textStatus, errorThrown){},  
             success:function(data, textStatus){}  

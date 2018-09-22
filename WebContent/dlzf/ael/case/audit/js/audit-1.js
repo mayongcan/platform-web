@@ -3,7 +3,7 @@ var g_params = {}, g_backUrl = null, g_counterpartType = "1";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
-	//获取历史审批意见
+	//获取历史处理意见
 	getResultList();
 	initView();
 	initData();
@@ -15,7 +15,7 @@ function initView(){
 	//提交
 	$("#btnOK").click(function () {
 		if($('#result').val() == ''){
-   			top.app.message.notice("请填写审批意见！");
+   			top.app.message.notice("请填写处理意见！");
 			return;
 		}
 		var submitData = {};
@@ -27,7 +27,10 @@ function initView(){
 		submitData["activityName"] = g_params.row.activityName;
 		submitData["result"] = $('#result').val();
 		
-		if(g_params.row.activityName == '部门领导审批'){
+		submitData["jumpStatus"] = $("#jumpStatus").val();
+		if(g_params.row.activityName == '法制审核员审批'){
+			submitData["auditStatus"] = $("#auditStatus").val();
+		}else if(g_params.row.activityName == '部门领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
 		}else if(g_params.row.activityName == '单位领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
@@ -38,6 +41,8 @@ function initView(){
 				//如果案件处理程序caseProcedure!=1 则进入结案报告
 				if(g_params.row.caseProcedure == '1')
 					submitData["flowProgress"] = '2';
+				else if(g_params.row.caseProcedure == '3')		//如果是不予立案，则跳转到归档
+					submitData["flowProgress"] = '6';
 				else
 					submitData["flowProgress"] = '5';
 			}
@@ -49,6 +54,8 @@ function initView(){
 				//如果案件处理程序caseProcedure!=1 则进入结案报告
 				if(g_params.row.caseProcedure == '1')
 					submitData["flowProgress"] = '2';
+				else if(g_params.row.caseProcedure == '3')		//如果是不予立案，则跳转到归档
+					submitData["flowProgress"] = '6';
 				else
 					submitData["flowProgress"] = '5';
 			}
@@ -98,26 +105,32 @@ function initView(){
 }
 
 function initData(){
-	if($.utils.isNull(g_params.caseSourceDict)) g_params.caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	if($.utils.isNull(g_params.caseSourceDict)) g_params.caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CLUE');
 	if($.utils.isNull(g_params.caseTypeDict)) g_params.caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
+	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 	
-	$('#tableTitleMark').text(g_params.row.code);
-	$('#tdCaseSource').text(top.app.getDictName(g_params.row.sourceCase, g_params.caseSourceDict));
-	$('#tdReporterName').text(g_params.row.reporterName);
-	$('#tdReporterCertificateNo').text(g_params.row.reporterCertificateNo);
-	$('#tdReporterCompany').text(g_params.row.reporterCompany);
-	$('#tdReportContacts').text(g_params.row.reporterContacts);
-	$('#tdReporterAddress').text(g_params.row.reporterAddress);
-	$('#tdReporterZip').text(g_params.row.reporterZip);
-	$('#tdReporterPhone').text(g_params.row.reporterPhone);
-	$('#tdDefendantName').text(g_params.row.defendantName);
-	$('#tdDefendantAreaName').text(g_params.row.areaName);
-	$('#tdDefendantAddress').text(g_params.row.address);
-	$('#tdDefendantDate').text($.date.dateFormat(g_params.row.occurrenceDate, "yyyy-MM-dd"));
-	$('#tdDefendantCheckDate').text($.date.dateFormat(g_params.row.checkDate, "yyyy-MM-dd"));
-	$('#tdClueSummary').text(g_params.row.clueSummary);
-	$('#tdCaseVerification').text(g_params.row.caseVerification);
+	$('#tableTitleMark').text($.utils.getNotNullVal(g_params.row.code));
+	$('#tdCaseSource').text($.utils.getNotNullVal(top.app.getDictName(g_params.row.sourceCase, g_params.caseSourceDict)));
+	$('#tdReporterName').text($.utils.getNotNullVal(g_params.row.reporterName));
+	$('#tdReporterCertificateNo').text($.utils.getNotNullVal(g_params.row.reporterCertificateNo));
+	$('#tdReporterCompany').text($.utils.getNotNullVal(g_params.row.reporterCompany));
+	$('#tdReportContacts').text($.utils.getNotNullVal(g_params.row.reporterContacts));
+	$('#tdReporterAddress').text($.utils.getNotNullVal(g_params.row.reporterAddress));
+	$('#tdReporterZip').text($.utils.getNotNullVal(g_params.row.reporterZip));
+	$('#tdReporterSex').text($.utils.getNotNullVal($.utils.getNotNullVal(top.app.getDictName(g_params.row.reporterSex, g_params.sexDict))));
+	$('#tdReporterAge').text($.utils.getNotNullVal(g_params.row.reporterAge));
+	$('#tdReporterPhone').text($.utils.getNotNullVal(g_params.row.reporterPhone));
+	$('#tdDefendantName').text($.utils.getNotNullVal(g_params.row.defendantName));
+	$('#tdDefendantAreaName').text($.utils.getNotNullVal(g_params.row.areaName));
+	$('#tdDefendantAddress').text($.utils.getNotNullVal(g_params.row.address));
+	$('#tdDefendantDate').text($.utils.getNotNullVal($.date.dateFormat(g_params.row.occurrenceDate, "yyyy-MM-dd")));
+	$('#tdDefendantCheckDate').text($.utils.getNotNullVal($.date.dateFormat(g_params.row.checkDate, "yyyy-MM-dd")));
+	$('#tdClueSummary').text($.utils.getNotNullVal(g_params.row.clueSummary));
+	$('#tdCaseVerification').text($.utils.getNotNullVal(g_params.row.caseVerification));
 	$('#tdCaseType').text($.utils.getNotNullVal(top.app.getDictName(g_params.row.caseType, g_params.caseTypeDict)));
+	$('#tdIllegalAction').text($.utils.getNotNullVal(g_params.row.illegalAction));
+	$('#tdMemo').text($.utils.getNotNullVal(g_params.row.memo));
+	$('#tdAdvice').text($.utils.getNotNullVal(g_params.row.advice));
 	
 	rales.initFilesList(g_params.row.files);
 	rales.initCodeRelevance(g_params.row.relevanceId);

@@ -3,7 +3,7 @@ var g_flowProgressDict = [], g_caseSourceDict = [], g_caseTypeDict = [], g_typeD
 
 $(function () {
 	g_flowProgressDict = top.app.getDictDataByDictTypeValue('AEL_CASE_FLOW_PROCEDURE');
-	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CLUE');
 	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
 	g_typeDict = top.app.getDictDataByDictTypeValue('RALES_CRL_TYPE');
 	g_sourceDict = top.app.getDictDataByDictTypeValue('RALES_CRL_SOURCE');

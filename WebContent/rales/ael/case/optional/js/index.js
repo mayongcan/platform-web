@@ -89,7 +89,7 @@ function setTabStatus(index){
 		//显示内容
 		$("#optionalContent" + index).addClass('activity');
 		var nIndex = parseInt(index);
-		for(var i = 1; i <= 10; i++){
+		for(var i = 1; i <= 20; i++){
 			if(i == nIndex) continue;
 			var tmpVal = i + "";
 			if(g_optionalFlowIndex == tmpVal){

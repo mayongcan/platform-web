@@ -10,6 +10,7 @@ rales.writNecessity2_5 = "6";
 rales.writNecessity2_6 = "7";
 rales.writNecessity2_7 = "8";
 rales.writNecessity2_8 = "9";
+rales.writNecessity2_9 = "30";
 rales.writNecessity3_1 = "10";
 rales.writNecessity3_2 = "11";
 rales.writNecessity3_3 = "12";
@@ -46,6 +47,7 @@ rales.writOptional1_15 = "115";
 rales.writOptional1_16 = "116";
 rales.writOptional1_17 = "117";
 rales.writOptional1_18 = "118";
+rales.writOptional1_19 = "119";
 rales.writOptional2_1 = "201";
 rales.writOptional2_2 = "202";
 rales.writOptional2_3 = "203";
@@ -74,12 +76,14 @@ rales.writOptional8_1 = "801";
 rales.writOptional9_1 = "901";
 rales.writOptional9_2 = "902";
 rales.writOptional9_3 = "903";
+rales.writOptional9_4 = "904";
 rales.writOptional10_1 = "1001";
 rales.writOptional10_2 = "1002";
 rales.writOptional10_3 = "1003";
 rales.writOptional10_4 = "1004";
 rales.writOptional11_1 = "1101";
 rales.writOptional11_2 = "1102";
+rales.writOptional11_3 = "1103";
 rales.writOptional12_1 = "1201";
 
 rales.getDictByCode = function(dictTypeValue){
@@ -390,6 +394,7 @@ rales.getWritPreviewUrl = function(writType){
 	if(writType == rales.writNecessity1_1){return '/rales/ael/case/necessity/writ-pre1_1.html';}
 	else if(writType == rales.writNecessity2_1){return '/rales/ael/case/necessity/writ-pre2_1.html';}
 	else if(writType == rales.writNecessity2_2){return '/rales/ael/case/necessity/writ-pre2_2.html';}
+	else if(writType == rales.writNecessity2_9){return '/rales/ael/case/necessity/writ-pre2_9.html';}
 	else if(writType == rales.writNecessity2_3){return '/rales/ael/case/necessity/writ-pre2_3.html';}
 	else if(writType == rales.writNecessity2_4){return '/rales/ael/case/necessity/writ-pre2_4.html';}
 	else if(writType == rales.writNecessity2_5){return '/rales/ael/case/necessity/writ-pre2_5.html';}
@@ -428,6 +433,7 @@ rales.getWritPreviewUrl = function(writType){
 	else if(writType == rales.writOptional1_14){return '/rales/ael/case/optional/writ-pre1_14.html';}
 	else if(writType == rales.writOptional1_15){return '/rales/ael/case/optional/writ-pre1_15.html';}
 	else if(writType == rales.writOptional1_16){return '/rales/ael/case/optional/writ-pre1_16.html';}
+	else if(writType == rales.writOptional1_19){return '/rales/ael/case/optional/writ-pre1_19.html';}
 	else if(writType == rales.writOptional2_1){return '/rales/ael/case/optional/writ-pre2_1.html';}
 	else if(writType == rales.writOptional2_2){return '/rales/ael/case/optional/writ-pre2_2.html';}
 	else if(writType == rales.writOptional2_3){return '/rales/ael/case/optional/writ-pre2_3.html';}
@@ -456,12 +462,15 @@ rales.getWritPreviewUrl = function(writType){
 	else if(writType == rales.writOptional9_1){return '/rales/ael/case/optional/writ-pre9_1.html';}
 	else if(writType == rales.writOptional9_2){return '/rales/ael/case/optional/writ-pre9_2.html';}
 	else if(writType == rales.writOptional9_3){return '/rales/ael/case/optional/writ-pre9_3.html';}
+	else if(writType == rales.writOptional9_4){return '/rales/ael/case/optional/writ-pre9_4.html';}
 	else if(writType == rales.writOptional10_1){return '/rales/ael/case/optional/writ-pre10_1.html';}
 	else if(writType == rales.writOptional10_2){return '/rales/ael/case/optional/writ-pre10_2.html';}
 	else if(writType == rales.writOptional10_3){return '/rales/ael/case/optional/writ-pre10_3.html';}
 	else if(writType == rales.writOptional10_4){return '/rales/ael/case/optional/writ-pre10_4.html';}
 	else if(writType == rales.writOptional11_1){return '/rales/ael/case/optional/writ-pre11_1.html';}
 	else if(writType == rales.writOptional11_2){return '/rales/ael/case/optional/writ-pre11_2.html';}
+	else if(writType == rales.writOptional11_3){return '/rales/ael/case/optional/writ-pre11_3.html';}
+	else if(writType == rales.writOptional12_1){return '/rales/ael/case/optional/writ-pre12_1.html';}
 }
 
 //获取历史审批意见列表
@@ -481,7 +490,8 @@ function getHistoryAuditList(id, counterpartType){
 		    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
 		    			$('#resultList').empty();
 		    			for(var i = 0; i < data.rows.length; i++){
-		    				var html = '<tr>' + 
+		    				var html = '<tr>' +
+		    								'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].userRoleMemo) + '意见</td>' +
 	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createUserName) + '</td>' + 
 	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].result) + '</td>' + 
 	    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createDate) + '</td>' + 

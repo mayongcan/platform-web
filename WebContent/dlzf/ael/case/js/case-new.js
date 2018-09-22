@@ -1,10 +1,11 @@
 var g_params = null, g_backUrl = "", g_oldRegisterId = "", g_registerType = "";
 var g_filePath = null, g_fileSize = 0;
 var g_relevanceIdList = "", g_relevanceCodeList = "";
-var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "";
+var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "", g_sexDict = "";
 var g_userIdList = "", g_userCodeList = "", g_userNameList = "";
 var g_codeType = "1", g_codeCurNum = "";
 var g_saveType = 1;		//1草稿 2提交
+var g_jumpStatusDict = [{'ID': '1', 'NAME': '法制审核员'}, {'ID': '2', 'NAME': '副处长'}, {'ID': '3', 'NAME': '处长'}];
 
 $(function () {
 	//用于案件登记
@@ -27,9 +28,10 @@ $(function () {
  * @returns
  */
 function initDict(){
-	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CLUE');
 	g_caseProcedureDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_PROCEDURE');
 	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
+	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 }
 
 /**
@@ -60,6 +62,8 @@ function initView(){
 	//top.app.addCheckBoxButton($("#divCaseSource"), g_caseSourceDict, 'checkboxCaseSource');
 	top.app.addComboBoxOption($("#caseProcedure"), g_caseProcedureDict);
 	top.app.addComboBoxOption($("#caseType"), g_caseTypeDict);
+	top.app.addComboBoxOption($("#reporterSex"), g_sexDict);
+	top.app.addComboBoxOption($("#jumpStatus"), g_jumpStatusDict);
 	
 	//初始化文件选择器
 	fileupload.initFileNewSelector('files');
@@ -244,6 +248,8 @@ function submitAction(){
 	submitData["reporterCompany"] = $("#reporterCompany").val();
 	submitData["reporterContacts"] = $("#reporterContacts").val();
 	submitData["reporterZip"] = $("#reporterZip").val();
+	submitData["reporterSex"] = $("#reporterSex").val();
+	submitData["reporterAge"] = $("#reporterAge").val();
 	submitData["reporterPhone"] = $("#reporterPhone").val();
 	submitData["reporterAddress"] = $("#reporterAddress").val();
 	submitData["defendantName"] = $("#defendantName").val();
@@ -260,6 +266,8 @@ function submitAction(){
 	submitData["associateExecutor"] = g_userIdList;
 	submitData["relevanceId"] = g_relevanceIdList;
 	submitData["relevanceName"] = g_relevanceCodeList;
+	submitData["illegalAction"] = $("#illegalAction").val();
+	submitData["jumpStatus"] = $("#jumpStatus").val();
 	//已上传的附件路径
 	submitData["files"] = fileupload.getUploadFilePath();
 	

@@ -66,6 +66,8 @@ function formValidate(){
  * 提交数据
  */
 function submitAction(){
+	//启动加载层
+	top.app.message.loading(0);
 	//定义提交数据
 	var submitData = {};
 	if(g_params.type == "edit")
@@ -105,8 +107,6 @@ function ajaxUploadFile(){
 	if($("#filesPath")[0].files[0] == null || $("#filesPath")[0].files[0] == undefined){
 		//如果是编辑内容，可以不修改,直接进入提交数据
 		if(g_params.type == "edit"){
-			//启动加载层
-			top.app.message.loading();
    			submitAction();
 			return;
 		}else{

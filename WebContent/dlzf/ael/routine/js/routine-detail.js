@@ -121,6 +121,7 @@ function initData(){
 	addList('tableList1-14', 'tableCnt1-14', '/api/rales/ael/writ/getWritList', 1, 14, rales.writOptional1_14, '', true);
 	addList('tableList1-15', 'tableCnt1-15', '/api/rales/ael/writ/getWritList', 1, 15, rales.writOptional1_15, '', true);
 	addList('tableList1-16', 'tableCnt1-16', '/api/rales/ael/writ/getWritList', 1, 16, rales.writOptional1_16, '', true);
+	addList('tableList1-19', 'tableCnt1-19', '/api/rales/ael/writ/getWritList', 1, 19, rales.writOptional1_19, '', true);
 	addList('tableList1-17', 'tableCnt1-17', '/api/rales/ael/writ/getWritList', 1, 17, rales.writOptional1_17, '', true, "行政检查案卷封面");
 	addList('tableList1-18', 'tableCnt1-18', '/api/rales/ael/writ/getWritList', 1, 18, rales.writOptional1_18, '', true, "行政检查案卷目录");
 }
@@ -149,12 +150,23 @@ function addList(tableListId, tableCntId, url, index, subIndex, writType, subTyp
 						if(g_params.removeAuditEdit && index == 1 && subIndex == 1){
 							//移除审批表的编辑
 						}else{
-							editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
-											'编 辑' + 
-										 '</button>' + 
-										 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
-											'删 除' + 
-										 '</button>'; 
+							if(index == 1 && subIndex == 1){
+								if(g_params.row.createBy == top.app.info.userInfo.userId)
+									editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+														'编 辑' + 
+													 '</button>' + 
+													 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+														'删 除' + 
+													 '</button>'; 
+							}else{
+								editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+												'编 辑' + 
+											 '</button>' + 
+											 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+												'删 除' + 
+											 '</button>'; 
+							}
+								
 						}
 					}
 					//办结案件，可以编辑封面和目录

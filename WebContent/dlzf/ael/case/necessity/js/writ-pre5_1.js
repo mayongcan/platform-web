@@ -17,18 +17,10 @@ function initView(){
 	//移除文书编号
 	$('#tableTitleMark').remove();
 	
-	//公民选择
-	$('input[type=checkbox][id=personType1]').change(function() { 
-		$("#personType1").attr("checked",true);
-		$("#personType2").attr("checked",false);
-	});
-	$('input[type=checkbox][id=personType2]').change(function() { 
-		$("#personType2").attr("checked",true);
-		$("#personType1").attr("checked",false);
-	});
-	
 	setData();
-	var height = ($('#tdSuggestContent').height() < 80) ? 130 : ($('#tdSuggestContent').height() + 70);
+	var height = ($('#tdResultContent').height() < 80) ? 130 : ($('#tdResultContent').height() + 70);
+	$('#tdResult').height(height);
+	height = ($('#tdSuggestContent').height() < 80) ? 130 : ($('#tdSuggestContent').height() + 70);
 	$('#tdSuggest').height(height);
 	height = ($('#tdDeptSuggestContent').height() < 80) ? 130 : ($('#tdDeptSuggestContent').height() + 70);
 	$('#tdDeptSuggest').height(height);
@@ -48,54 +40,22 @@ function setData(){
 	
 	//获取字典
 	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
-
-	if(g_params.data.personType == '1') {
-		$("#personType1").attr("checked",true);
-		$('#trPersonType2_1').css('display', 'none');
-		$('#trPersonType2_2').css('display', 'none');
-	}
-	else if(g_params.data.personType == '2') {
-		$("#personType2").attr("checked",true);
-		$('#trPersonType1_1').css('display', 'none');
-		$('#trPersonType1_2').css('display', 'none');
-	}
-
-	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
-	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));
-	$('#tdPartiesAge').text($.utils.getNotNullVal(g_params.data.partiesAge));
-	$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
-	$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.data.partiesCertificateNo));
-	$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.data.partiesPhone));
-	$('#tdCompanyName').text($.utils.getNotNullVal(g_params.data.companyName));
-	$('#tdLegalRepresentative').text($.utils.getNotNullVal(g_params.data.legalRepresentative));
-	$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.data.companyAddr));
-	$('#tdCompanyPhone').text($.utils.getNotNullVal(g_params.data.companyPhone));
-	$('#tdBaseInfo').text($.utils.getNotNullVal(g_params.data.baseInfo));
-	$('#tdHearingInfo').text($.utils.getNotNullVal(g_params.data.hearingInfo));
-	$('#tdSuggestContent').text($.utils.getNotNullVal(g_params.data.advice));
-
 	
-	$('#tdIllegalContent').text($.utils.getNotNullVal(g_params.data.illegalContent));
-	$('#tdCaseBeginDate').text($.utils.getNotNullVal($.date.dateFormat(g_params.data.caseBeginDate, "yyyy年MM月dd日")));
-	$('#tdPunishWritCode').text($.utils.getNotNullVal(g_params.data.punishWritCode));
-	$('#tdPunishDate').text($.utils.getNotNullVal($.date.dateFormat(g_params.data.punishDate, "yyyy年MM月dd日")));
-	$('#tdCaseDesc').text($.utils.getNotNullVal(g_params.data.caseDesc));
-	$('#tdPunishContent').text($.utils.getNotNullVal(g_params.data.punishContent));
-	if(g_params.data.punishDetailCheck1 == '1') {$("#punishDetailCheck1").attr("checked",true); $("#divPunishDetailCheck1").css('display', '');}
-	$('#tdPunishDetailContent1').text($.utils.getNotNullVal(g_params.data.punishDetailContent1));
-	if(g_params.data.punishDetailCheck2 == '1') {$("#punishDetailCheck2").attr("checked",true); $("#divPunishDetailCheck2").css('display', '');}
-	$('#tdPunishDetailContent2').text($.utils.getNotNullVal(g_params.data.punishDetailContent2));
-	if(g_params.data.punishDetailCheck3 == '1') {$("#punishDetailCheck3").attr("checked",true); $("#divPunishDetailCheck3").css('display', '');}
-	$('#tdPunishDetailContent3').text($.utils.getNotNullVal(g_params.data.punishDetailContent3));
-	if(g_params.data.punishDetailCheck4 == '1') {$("#punishDetailCheck4").attr("checked",true); $("#divPunishDetailCheck4").css('display', '');}
-	$('#tdPunishDetailContent4').text($.utils.getNotNullVal(g_params.data.punishDetailContent4));
-	if(g_params.data.punishCodeCheck1 == '1') {$("#punishCodeCheck1").attr("checked",true); $("#divPunishCodeCheck1").css('display', '');}
-	$('#tdPunishCodeContent1').text($.utils.getNotNullVal(g_params.data.punishCodeContent1));
-	if(g_params.data.punishCodeCheck2 == '1') {$("#punishCodeCheck2").attr("checked",true); $("#divPunishCodeCheck2").css('display', '');}
-	$('#tdPunishCodeContent2').text($.utils.getNotNullVal(g_params.data.punishCodeContent2));
-	if(g_params.data.punishCodeCheck3 == '1') {$("#punishCodeCheck3").attr("checked",true); $("#divPunishCodeCheck3").css('display', '');}
-	$('#tdPunishCodeContent3').text($.utils.getNotNullVal(g_params.data.punishCodeContent3));
-	if(g_params.data.punishCodeCheck4 == '1') {$("#punishCodeCheck4").attr("checked",true); $("#divPunishCodeCheck4").css('display', '');}
-	$('#tdPunishCodeContent4').text($.utils.getNotNullVal(g_params.data.punishCodeContent4));
-	$('#tdReviewContent').text($.utils.getNotNullVal(g_params.data.reviewContent));
+	$('#tdCaseName').text($.utils.getNotNullVal(g_params.data.caseName));
+	$('#tdCaseNo').text($.utils.getNotNullVal(g_params.data.caseNo));
+	$('#tdCaseBeginDate').text($.utils.getNotNullVal(g_params.data.caseBeginDate));
+	$('#tdPunish').text($.utils.getNotNullVal(g_params.data.punish));
+	$('#tdCasePunishDate').text($.utils.getNotNullVal(g_params.data.casePunishDate));
+	
+	$('#tdPartiesCompany').text($.utils.getNotNullVal(g_params.data.partiesCompany));
+	$('#tdDelegate').text($.utils.getNotNullVal(g_params.data.delegate));
+	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
+	$('#tdBirthDate').text($.utils.getNotNullVal(g_params.data.birthDate));
+	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));
+	$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
+	$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.data.partiesPhone));
+	$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.data.partiesZip));
+	
+	$('#tdResultContent').text($.utils.getNotNullVal(g_params.data.result));
+	$('#tdSuggestContent').text($.utils.getNotNullVal(g_params.data.handleDetail));
 }

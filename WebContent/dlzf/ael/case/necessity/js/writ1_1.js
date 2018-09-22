@@ -1,5 +1,5 @@
 var g_params = {}, g_backUrl = null;
-var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "";
+var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "", g_sexDict = "";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -28,9 +28,10 @@ function initDistrict(){
 
 function initView(){
 	$('#tableTitleMark').text(g_params.row.code);
-	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CLUE');
 	g_caseProcedureDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_PROCEDURE');
 	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
+	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 	if(g_params.type == 2){
 		initDistrict();
 		$('#divDefendantDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
@@ -38,6 +39,7 @@ function initView(){
 		top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource', g_params.row.sourceCase);
 		top.app.addComboBoxOption($("#caseProcedure"), g_caseProcedureDict);
 		top.app.addComboBoxOption($("#caseType"), g_caseTypeDict);
+		top.app.addComboBoxOption($("#reporterSex"), g_sexDict);
 		
 		$('#divAcceptanceDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
 		$('#divFormDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date(),});
@@ -61,7 +63,9 @@ function initView(){
 		$("#reporterContacts").val(g_params.row.reporterContacts);
 		$("#reporterZip").val(g_params.row.reporterZip);
 		$("#reporterPhone").val(g_params.row.reporterPhone);
-		$("#reporterAddress").val(g_params.row.reporterAddress);
+		$("#reporterSex").val(g_params.row.defendantName);
+		$("#reporterAge").val(g_params.row.reporterSex);
+		$("#reporterAddress").val(g_params.row.reporterAge);
 		$("#defendantName").val(g_params.row.defendantName);
 		$("#defendantAddress").val(g_params.row.address);
 		$("#defendantDate").val($.date.dateFormat(g_params.row.occurrenceDate, "yyyy-MM-dd"));
@@ -74,6 +78,7 @@ function initView(){
 		$("#notPutOn").val(g_params.row.notPutOn);
 		$('#tdUndertaker').text($.utils.getNotNullVal(g_params.row.associateUserName));
 		$("#caseType").val(g_params.row.caseType);
+		$("#illegalAction").val(g_params.row.illegalAction);
 	}else{
 		$("#btnOK").remove();
 		$("#btnCancel").text('返 回');
@@ -84,6 +89,8 @@ function initView(){
 		$('#tdReporterContacts').text($.utils.getNotNullVal(g_params.row.reporterContacts));
 		$('#tdReporterAddress').text($.utils.getNotNullVal(g_params.row.reporterAddress));
 		$('#tdReporterZip').text($.utils.getNotNullVal(g_params.row.reporterZip));
+		$('#tdReporterSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.row.reporterSex, g_sexDict)));
+		$('#tdReporterAge').text($.utils.getNotNullVal(g_params.row.reporterAge));
 		$('#tdReporterPhone').text($.utils.getNotNullVal(g_params.row.reporterPhone));
 		$('#tdDefendantName').text($.utils.getNotNullVal(g_params.row.defendantName));
 		$('#tdAreaName').text($.utils.getNotNullVal(g_params.row.areaName));
@@ -98,10 +105,13 @@ function initView(){
 		$('#tdAdvice').text($.utils.getNotNullVal(g_params.row.advice));
 		$('#tdMemo').text($.utils.getNotNullVal(g_params.row.memo));
 		$('#tdCaseType').text($.utils.getNotNullVal(top.app.getDictName(g_params.row.caseType, g_caseTypeDict)));
+		$("#tdIllegalAction").text($.utils.getNotNullVal(g_params.row.illegalAction));
+		$('#tdMemo').text($.utils.getNotNullVal(g_params.row.memo));
+		$('#tdAdvice').text($.utils.getNotNullVal(g_params.row.advice));
 		
 		if($('#caseProcedure').val() == '3') $('#trNotPutOn').remove();
 		
-		//显示历史审批意见
+		//显示历史处理意见
 		$('#trHistoryAuditList').css('display', '');
 		getHistoryAuditList(g_params.row.id, "1");
 	}
@@ -185,6 +195,8 @@ function submitAction(){
 	submitData["reporterContacts"] = $("#reporterContacts").val();
 	submitData["reporterZip"] = $("#reporterZip").val();
 	submitData["reporterPhone"] = $("#reporterPhone").val();
+	submitData["reporterSex"] = $("#reporterSex").val();
+	submitData["reporterAge"] = $("#reporterAge").val();
 	submitData["reporterAddress"] = $("#reporterAddress").val();
 	submitData["defendantName"] = $("#defendantName").val();
 	submitData["address"] = $("#defendantAddress").val();
@@ -196,6 +208,7 @@ function submitAction(){
 	submitData["memo"] = $("#memo").val();
 	submitData["caseProcedure"] = $("#caseProcedure").val();
 	submitData["notPutOn"] = $("#notPutOn").val();
+	submitData["illegalAction"] = $("#illegalAction").val();
 	
 	//设置区域内容
 	if($("#areaDistrict").val() != null && $("#areaDistrict").val() != undefined && $("#areaDistrict").val() != '')

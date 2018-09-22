@@ -66,10 +66,10 @@ function initFuncBtnEvent(){
 	$("#optionalFlow12").click(function () {
 		setTabStatus('12');
     });
-	//电力执法系统才有销案模块
-	if(top.app.info.tenantsInfo.tenantsName != '电力执法系统'){
-		$("#optionalFlow11").remove();
-	}
+//	//电力执法系统才有销案模块
+//	if(top.app.info.tenantsInfo.tenantsName != '电力执法系统'){
+//		$("#optionalFlow11").remove();
+//	}
 }
 
 /**
@@ -89,7 +89,7 @@ function setTabStatus(index){
 		//显示内容
 		$("#optionalContent" + index).addClass('activity');
 		var nIndex = parseInt(index);
-		for(var i = 1; i <= 10; i++){
+		for(var i = 1; i <= 20; i++){
 			if(i == nIndex) continue;
 			var tmpVal = i + "";
 			if(g_optionalFlowIndex == tmpVal){
@@ -197,6 +197,7 @@ function initData(){
 		addFlowList('tableList9-1', 'tableCnt9-1', '/api/rales/ael/writ/getWritList', 9, 1, rales.writOptional9_1, '', true);
 		addFlowList('tableList9-2', 'tableCnt9-2', '/api/rales/ael/writ/getWritList', 9, 2, rales.writOptional9_2, '', true);
 		addList('tableList9-3', 'tableCnt9-3', '/api/rales/ael/writ/getWritList', 9, 3, rales.writOptional9_3, '', true);
+		addList('tableList9-4', 'tableCnt9-4', '/api/rales/ael/writ/getWritList', 9, 4, rales.writOptional9_4, '', true);
 	}else if(g_optionalFlowIndex == '10'){
 		addFlowList('tableList10-1', 'tableCnt10-1', '/api/rales/ael/writ/getWritList', 10, 1, rales.writOptional10_1, '', true);
 		addList('tableList10-2', 'tableCnt10-2', '/api/rales/ael/writ/getWritList', 10, 2, rales.writOptional10_2, '', true);
@@ -204,7 +205,7 @@ function initData(){
 		addList('tableList10-4', 'tableCnt10-4', '/api/rales/ael/writ/getWritList', 10, 4, rales.writOptional10_4, '', true);
 	}else if(g_optionalFlowIndex == '11'){
 		addFlowList('tableList11-1', 'tableCnt11-1', '/api/rales/ael/writ/getWritList', 11, 1, rales.writOptional11_1, '', true);
-		addList('tableList11-2', 'tableCnt11-2', '/api/rales/ael/writ/getWritList', 11, 2, rales.writOptional11_2, '', true);
+		addList('tableList11-3', 'tableCnt11-3', '/api/rales/ael/writ/getWritList', 11, 3, rales.writOptional11_3, '', true);
 	}else if(g_optionalFlowIndex == '12'){
 		addFlowList('tableList12-1', 'tableCnt12-1', '/api/rales/ael/writ/getWritList', 12, 1, rales.writOptional12_1, '', true);
 	}
@@ -309,7 +310,8 @@ function addFlowList(tableListId, tableCntId, url, index, subIndex, writType, su
 					if(parent.g_params.row.activityName == '销案审批编辑' && index == 11 && subIndex == 1)  addEditBtn = true;
 					if(parent.g_params.row.activityName == '审批编辑' && index == 12 && subIndex == 1)  addEditBtn = true;
 					var editButton = "";
-					if(addEditBtn && !parent.g_params.isFinish){
+					//审批文书只有承办人能编辑
+					if(addEditBtn && !parent.g_params.isFinish && parent.g_params.row.createBy == top.app.info.userInfo.userId){
 						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
 										'编 辑' + 
 									 '</button>'; 

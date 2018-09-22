@@ -3,7 +3,7 @@ var g_params = {}, g_backUrl = null, g_counterpartType = "16";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
-	//获取历史审批意见
+	//获取历史处理意见
 	getResultList();
 	initView();
 	initData();
@@ -14,7 +14,7 @@ function initView(){
 	//提交
 	$("#btnOK").click(function () {
 		if($('#result').val() == ''){
-   			top.app.message.notice("请填写审批意见！");
+   			top.app.message.notice("请填写处理意见！");
 			return;
 		}
 		var submitData = {};
@@ -25,7 +25,10 @@ function initView(){
 		submitData["counterpartType"] = g_counterpartType;
 		submitData["result"] = $('#result').val();
 		
-		if(g_params.row.activityName == '部门领导审批'){
+		submitData["jumpStatus"] = $("#jumpStatus").val();
+		if(g_params.row.activityName == '法制审核员审批'){
+			submitData["auditStatus"] = $("#auditStatus").val();
+		}else if(g_params.row.activityName == '部门领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();
 		}else if(g_params.row.activityName == '单位领导审批'){
 			submitData["auditStatus"] = $("#auditStatus").val();

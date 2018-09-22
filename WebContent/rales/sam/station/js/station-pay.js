@@ -62,7 +62,7 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/sam/station/getStationPayList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/sam/station/getStationDistinctPayList",   		//请求后台的URL（*）
         queryParams: searchParams,											//传递参数（*）
         uniqueId: 'id',
         onClickRow: function(row, $el){

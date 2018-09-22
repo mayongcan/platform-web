@@ -115,6 +115,7 @@ function initData(){
 	}else if(g_wizardIndex == 1){
 		addList('tableList2-1', 'tableCnt2-1', '/api/rales/ael/writ/getWritList', 2, 1, rales.writNecessity2_1, '', true);
 		addList('tableList2-2', 'tableCnt2-2', '/api/rales/ael/writ/getWritList', 2, 2, rales.writNecessity2_2, '', true);
+		addList('tableList2-9', 'tableCnt2-9', '/api/rales/ael/writ/getWritList', 2, 9, rales.writNecessity2_9, '', true);
 		addFlowList('tableList2-3', 'tableCnt2-3', '/api/rales/ael/writ/getWritList', 2, 3, rales.writNecessity2_3, '', true);
 		addList('tableList2-4', 'tableCnt2-4', '/api/rales/ael/writ/getWritList', 2, 4, rales.writNecessity2_4, '', true);
 		addList('tableList2-5', 'tableCnt2-5', '/api/rales/ael/writ/getWritList', 2, 5, rales.writNecessity2_5, '', true);
@@ -241,7 +242,8 @@ function addFlowList(tableListId, tableCntId, url, index, subIndex, writType, su
 					if(parent.g_params.row.activityName == '案件移送(调查报告)编辑' && index == 3 && subIndex == 4)  addEditBtn = true;
 					if(parent.g_params.row.activityName == '不予行政处罚决定审批编辑' && index == 4 && subIndex == 3)  addEditBtn = true;
 					var editButton = "";
-					if(addEditBtn && !parent.g_params.isFinish){
+					//审批文书只有承办人能编辑
+					if(addEditBtn && !parent.g_params.isFinish && parent.g_params.row.createBy == top.app.info.userInfo.userId){
 						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
 										'编 辑' + 
 									 '</button>'; 

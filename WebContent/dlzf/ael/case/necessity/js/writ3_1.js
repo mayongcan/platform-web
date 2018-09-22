@@ -2,6 +2,8 @@ var g_params = {}, g_backUrl = null;
 var g_codeType = rales.writNecessity3_1, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
 var g_dataList = [];
+var g_sexDict = null;
+
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -9,6 +11,18 @@ $(function () {
 });
 
 function initView(){
+	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
+	top.app.addComboBoxOption($("#partiesSex"), g_sexDict, true, ' ');;
+	//公民选择
+	$('input[type=checkbox][id=personType1]').change(function() { 
+		$("#personType1").attr("checked",true);
+		$("#personType2").attr("checked",false);
+	});
+	$('input[type=checkbox][id=personType2]').change(function() { 
+		$("#personType2").attr("checked",true);
+		$("#personType1").attr("checked",false);
+	});
+	
 	//1新增 2编辑 3查看
 	if(g_params.type == 1){
 		//增加表单验证
@@ -18,28 +32,28 @@ function initView(){
 		$('#content-right').remove();
 		fileupload.initFileNewSelector('files');
 		
-		//关联内容-立案审批表
-		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
-		if(!$.utils.isNull(dataInfo.content)){
-			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
-			//转换json
-			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
-			if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
-			else $("#personType2").attr("checked",true);
-
-			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
-			$('#partiesSex').val($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
-			$('#partiesAge').val($.utils.getNotNullVal(dataInfo.content.partiesAge));
-			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
-			$('#partiesCertificateNo').val($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
-			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
-			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.companyName));
-			$('#legalRepresentative').val($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
-			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.companyAddr));
-			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.companyPhone));
-			
-			$('#illegalAction').val(dataInfo.content.illegalContent);
-		}
+//		//关联内容-立案审批表
+//		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
+//		if(!$.utils.isNull(dataInfo.content)){
+//			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
+//			//转换json
+//			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
+//			if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
+//			else $("#personType2").attr("checked",true);
+//
+//			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
+//			$('#partiesSex').val($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
+//			$('#partiesAge').val($.utils.getNotNullVal(dataInfo.content.partiesAge));
+//			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+//			$('#partiesCertificateNo').val($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
+//			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+//			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.companyName));
+//			$('#legalRepresentative').val($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
+//			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.companyAddr));
+//			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.companyPhone));
+//			
+//			$('#illegalAction').val(dataInfo.content.illegalContent);
+//		}
 	}else if(g_params.type == 2){
 		//增加表单验证
 		formValidate();
@@ -50,14 +64,40 @@ function initView(){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
 			
+			if(g_params.subRow.content.personType == '1') $("#personType1").attr("checked",true);
+			else $("#personType2").attr("checked",true);
+
 			$('#illegalAction').val(g_params.subRow.content.illegalAction);
+			
 			$('#partiesName').val(g_params.subRow.content.partiesName);
-			$('#partiesCertificateNo').val(g_params.subRow.content.partiesCertificateNo);
-			$('#partiesUnit').val(g_params.subRow.content.partiesUnit);
-			$('#legalRepresentative').val(g_params.subRow.content.legalRepresentative);
+			$('#partiesSex').val(g_params.subRow.content.partiesSex);
+			$('#partiesAge').val(g_params.subRow.content.partiesAge);
 			$('#partiesAddr').val(g_params.subRow.content.partiesAddr);
+			$('#partiesCertificateNo').val(g_params.subRow.content.partiesCertificateNo);
+			$('#partiesPhone').val(g_params.subRow.content.partiesPhone);
+			$('#partiesNation').val(g_params.subRow.content.partiesNation);
+			$('#partiesEdu').val(g_params.subRow.content.partiesEdu);
+			$('#companyName').val(g_params.subRow.content.companyName);
+			$('#legalRepresentative').val(g_params.subRow.content.legalRepresentative);
+			$('#companyAddr').val(g_params.subRow.content.companyAddr);
+			$('#companyPhone').val(g_params.subRow.content.companyPhone);
+			$('#licCode').val(g_params.subRow.content.licCode);
+			$('#companyContactName').val(g_params.subRow.content.companyContactName);
+			
 			$('#inquiryDesc').val(g_params.subRow.content.inquiryDesc);
-			$('#memo').val(g_params.subRow.content.memo);
+			$('#inquiryResult').val(g_params.subRow.content.inquiryResult);
+			$('#handleResult1').val(g_params.subRow.content.handleResult1);
+			$('#handleResult2').val(g_params.subRow.content.handleResult2);
+			$('#evidence1').val(g_params.subRow.content.evidence1);
+			$('#evidence2').val(g_params.subRow.content.evidence2);
+			$('#evidence3').val(g_params.subRow.content.evidence3);
+			$('#evidence4').val(g_params.subRow.content.evidence4);
+			$('#evidence10').val(g_params.subRow.content.evidence10);
+			$('#evidence11').val(g_params.subRow.content.evidence11);
+			$('#evidence12').val(g_params.subRow.content.evidence12);
+			
+			$('#lawUser1').val(g_params.subRow.content.lawUser1);
+			$('#lawUser2').val(g_params.subRow.content.lawUser2);
 
 			//转换json
 			if(!$.utils.isEmpty(g_params.subRow.content.list)){
@@ -86,15 +126,40 @@ function initView(){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
 			
-			$('#tdIllegalAction').text($.utils.getNotNullVal(g_params.subRow.content.illegalAction));
-			$('#tdPartiesName').text($.utils.getNotNullVal(g_params.subRow.content.partiesName));
-			$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.subRow.content.partiesCertificateNo));
-			$('#tdPartiesUnit').text($.utils.getNotNullVal(g_params.subRow.content.partiesUnit));
-			$('#tdLegalRepresentative').text($.utils.getNotNullVal(g_params.subRow.content.legalRepresentative));
-			$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.subRow.content.partiesAddr));
-			$('#tdInquiryDesc').text($.utils.getNotNullVal(g_params.subRow.content.inquiryDesc));
-			$('#tdMemo').text($.utils.getNotNullVal(g_params.subRow.content.memo));
+			if(g_params.subRow.content.personType == '1') $("#personType1").attr("checked",true);
+			else $("#personType2").attr("checked",true);
 
+			$('#tdIllegalAction').text($.utils.getNotNullVal(g_params.subRow.content.illegalAction));
+			
+			$('#tdPartiesName').text($.utils.getNotNullVal(g_params.subRow.content.partiesName));
+			$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.subRow.content.partiesSex, g_sexDict)));
+			$('#tdPartiesAge').text($.utils.getNotNullVal(g_params.subRow.content.partiesAge));
+			$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.subRow.content.partiesAddr));
+			$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.subRow.content.partiesCertificateNo));
+			$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.subRow.content.partiesPhone));
+			$('#tdPartiesNation').text($.utils.getNotNullVal(g_params.subRow.content.partiesNation));
+			$('#tdPartiesEdu').text($.utils.getNotNullVal(g_params.subRow.content.partiesEdu));
+			$('#tdCompanyName').text($.utils.getNotNullVal(g_params.subRow.content.companyName));
+			$('#tdLegalRepresentative').text($.utils.getNotNullVal(g_params.subRow.content.legalRepresentative));
+			$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.subRow.content.companyAddr));
+			$('#tdCompanyPhone').text($.utils.getNotNullVal(g_params.subRow.content.companyPhone));
+			$('#tdLicCode').text($.utils.getNotNullVal(g_params.subRow.content.licCode));
+			$('#tdCompanyContactName').text($.utils.getNotNullVal(g_params.subRow.content.companyContactName));
+			
+			$('#tdInquiryDesc').text($.utils.getNotNullVal(g_params.subRow.content.inquiryDesc));
+			$('#tdInquiryResult').text($.utils.getNotNullVal(g_params.subRow.content.inquiryResult));
+			$('#tdHandleResult1').text($.utils.getNotNullVal(g_params.subRow.content.handleResult1));
+			$('#tdHandleResult2').text($.utils.getNotNullVal(g_params.subRow.content.handleResult2));
+			$('#tdEvidence1').text($.utils.getNotNullVal(g_params.subRow.content.evidence1));
+			$('#tdEvidence2').text($.utils.getNotNullVal(g_params.subRow.content.evidence2));
+			$('#tdEvidence3').text($.utils.getNotNullVal(g_params.subRow.content.evidence3));
+			$('#tdEvidence4').text($.utils.getNotNullVal(g_params.subRow.content.evidence4));
+			$('#tdEvidence10').text($.utils.getNotNullVal(g_params.subRow.content.evidence10));
+			$('#tdEvidence11').text($.utils.getNotNullVal(g_params.subRow.content.evidence11));
+			$('#tdEvidence12').text($.utils.getNotNullVal(g_params.subRow.content.evidence12));
+			$('#tdLawUser1').text($.utils.getNotNullVal(g_params.subRow.content.lawUser1));
+			$('#tdLawUser2').text($.utils.getNotNullVal(g_params.subRow.content.lawUser1));
+			
 			//转换json
 			if(!$.utils.isEmpty(g_params.subRow.content.list)){
 //				g_dataList = eval("(" + g_params.subRow.content.list + ")");
@@ -111,7 +176,7 @@ function initView(){
 		rales.initFilesList(g_params.subRow.files);
 		rales.initCodeRelevance(g_params.subRow.relevanceId);
 		
-		//显示历史审批意见
+		//显示历史处理意见
 		$('#trHistoryAuditList').css('display', '');
 		getHistoryAuditList(g_params.row.id, "3");
 	}
@@ -119,6 +184,7 @@ function initView(){
 	//打印
 	$("#btnPrint").click(function () {
 		var params = {};
+		params.sexDict = g_sexDict;
 		params.isPrint = true;
 		params.data = getTableParams();
 		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre3_1.html', params, function(){});
@@ -127,6 +193,7 @@ function initView(){
 	$("#btnPreview").click(function () {
 		//设置参数
 		var params = {};
+		params.sexDict = g_sexDict;
 		params.data = getTableParams();
 		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre3_1.html', params, function(){});
     });
@@ -233,15 +300,42 @@ function getTableParams(){
 	var data = {};
 	data.tableTitleMark = $('#tableTitleMark').text();
 	data.list = g_dataList;
+	var personType = '0'
+	if($('#personType1').prop('checked')) personType = '1';
+	if($('#personType2').prop('checked')) personType = '2';
+	data.personType = personType;
 	if(g_params.type == 1 || g_params.type == 2){
 		data.illegalAction = $('#illegalAction').val();
+		
 		data.partiesName = $('#partiesName').val();
-		data.partiesCertificateNo = $('#partiesCertificateNo').val();
-		data.partiesUnit = $('#partiesUnit').val();
-		data.legalRepresentative = $('#legalRepresentative').val();
+		data.partiesSex = $('#partiesSex').val();
+		data.partiesAge = $('#partiesAge').val();
 		data.partiesAddr = $('#partiesAddr').val();
+		data.partiesCertificateNo = $('#partiesCertificateNo').val();
+		data.partiesPhone = $('#partiesPhone').val();
+		data.partiesNation = $('#partiesNation').val();
+		data.partiesEdu = $('#partiesEdu').val();
+		data.companyName = $('#companyName').val();
+		data.legalRepresentative = $('#legalRepresentative').val();
+		data.companyAddr = $('#companyAddr').val();
+		data.companyPhone = $('#companyPhone').val();
+		data.licCode = $('#licCode').val();
+		data.companyContactName = $('#companyContactName').val();
+		
 		data.inquiryDesc = $('#inquiryDesc').val();
-		data.memo = $('#memo').val();
+		data.inquiryResult = $('#inquiryResult').val();
+		data.handleResult1 = $('#handleResult1').val();
+		data.handleResult2 = $('#handleResult2').val();
+		data.evidence1 = $('#evidence1').val();
+		data.evidence2 = $('#evidence2').val();
+		data.evidence3 = $('#evidence3').val();
+		data.evidence4 = $('#evidence4').val();
+		data.evidence10 = $('#evidence10').val();
+		data.evidence11 = $('#evidence11').val();
+		data.evidence12 = $('#evidence12').val();
+		data.lawUser1 = $('#lawUser1').val();
+		data.lawUser2 = $('#lawUser2').val();
+		
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}
@@ -280,6 +374,13 @@ function formValidate(){
  * @returns
  */
 function submitAction(){
+	var personType = '0'
+		if($('#personType1').prop('checked')) personType = '1';
+		if($('#personType2').prop('checked')) personType = '2';
+		if(personType == '0'){
+			top.app.message.notice("请选择个人或单位！");
+			return;
+		}
 	//定义提交数据
 	var submitData = {};
 	var url = "";

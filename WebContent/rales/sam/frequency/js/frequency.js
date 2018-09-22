@@ -1,5 +1,5 @@
 var g_map = null, g_rows = null, g_statTypeDict = [], g_areaTypeDict = [], g_networkDict = [];
-var g_searchVal = "", g_isMapClick = false, g_mapGeoc;
+var g_searchVal = "", g_isMapClick = false, g_mapGeoc = null;
 var g_filePath = null, g_fileSize = 0;
 $(function () {
 	top.app.message.loading();
@@ -237,7 +237,7 @@ function formValidate(){
         	baseStation1: {required: true},
         	baseStation2: {required: true},
         	address: {required: true},
-        	serviceRadius: {required: true, digits: true},
+        	serviceRadius: {required: true, number: true},
         	recommendNumber: {required: true, digits: true},
 //        	monitoringStation: {required: true},
 //        	beginDate: {required: true},
@@ -322,7 +322,7 @@ function submitAction(){
 		success: function(data){
 			top.app.message.loadingClose();
 			if(top.app.message.code.success == data.RetCode){
-//	   			top.app.message.notice("操作成功！");
+        		top.app.message.notice("分析完成！");
 //	   			//页面跳转
 //	   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
 //	   			window.location.href = "frequency.html?_pid=" + pid;
@@ -382,7 +382,7 @@ function uploadFile(){
 		return;
 	}
 	if(parseInt($('#serviceRadius').val()) < 1){
-		top.app.message.notice("覆盖半径必须不小于1km！");
+		top.app.message.notice("覆盖半径要大于等于1km！");
 		return;
 	}
 	if($('#recommendNumber').val() == '' || !$.validate.isPositiveInt($('#recommendNumber').val())){
@@ -408,7 +408,6 @@ function uploadFile(){
         contentType : false,
         success : function(data) { 
         	if(top.app.message.code.success == data.RetCode){
-        		top.app.message.notice("分析完成！");
         		g_filePath = data.RetData;
         		submitAction();
 	   		}else{
@@ -451,7 +450,7 @@ function loadResult(data){
 				'</td>' +
 			'</tr>'); 
 	}
-	var html = "", length = 3;
+	var html = "", length = parseInt($("#recommendNumber").val());
 	if(length > data.unAssignList.length) length = data.unAssignList.length;
 	for(var i = 0; i < length; i++ ){
 		if(data.singleFrequency == '1'){
@@ -474,11 +473,13 @@ function loadResult(data){
 		//设置传送对象
 		top.app.info.iframe.params = {};
 		top.app.info.iframe.params.row = data.row;
+		top.app.info.iframe.params.removeBackBtn = true;
 		top.app.info.iframe.params.typeDict = g_statTypeDict;
 		top.app.info.iframe.params.coverageAreaDict = g_areaTypeDict;
 		top.app.info.iframe.params.networkDict = g_networkDict;
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		var url = "/rales/sam/frequency/frequency-detail.html?_pid=" + pid + "&backUrl=/rales/sam/frequency/frequency.html";
-		window.location.href = encodeURI(url);
+//		window.location.href = encodeURI(url);
+		top.app.openTab(url, $.date.dateFormat(new Date(), 'yyyyMMddhhmmss'), '分析报告详情');
     });
 }

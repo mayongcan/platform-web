@@ -180,14 +180,15 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="reference-td">历史审批意见</td>
+							<td class="reference-td">历史处理意见</td>
 							<td class="reference-td" colspan="7">
 								<table style="width: 100%;">
 									<tbody>
 										<tr>
-											<td class="reference-td1" style="width:100px;">审批人</td>
-											<td class="reference-td1">审批意见</td>
-											<td class="reference-td1" style="width:170px;">审批时间</td>
+											<td class="reference-td1">业务流程</td>
+											<td class="reference-td1" style="width:100px;">处理人</td>
+											<td class="reference-td1">处理意见</td>
+											<td class="reference-td1" style="width:170px;">处理时间</td>
 										</tr>
 									</tbody>
 									<tbody id="resultList"></tbody>
@@ -202,7 +203,15 @@
 								<select class="form-control selectpicker" id="auditStatus"></select>
 							</td>
 						</tr>
-						<tr id="trNeedLawOfficeAudit" style="display: none">
+						<tr id="trJumpStatus" style="display: none">
+							<td class="reference-td" style="width:60px;">
+							   	流程办理人
+							</td>
+							<td class="reference-td" id="tdJumpStatus" colspan="7">
+							   	<select class="selectpicker" id="jumpStatus"></select>
+							</td>
+						</tr>
+						<!-- <tr id="trNeedLawOfficeAudit" style="display: none">
 							<td class="reference-td" >法规处领导审批</td>
 							<td class="reference-td" colspan="7">
 								<div id="divNeedLawOfficeAudit">
@@ -216,7 +225,7 @@
 									</div>
 							    </div>  
 							</td>
-						</tr>
+						</tr> -->
 						<tr id="trAssignHandleUser" style="display: none">
 							<td class="reference-td">
 							   	指派处理
@@ -227,7 +236,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td" id="tdTextResult">
-							   	审批意见
+							   	处理意见
 							</td>
 							<td class="reference-td" colspan="7">
 								<textarea id="result" name="result" class="form-control" style="height:120px"></textarea>

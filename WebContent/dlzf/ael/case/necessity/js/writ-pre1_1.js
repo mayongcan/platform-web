@@ -1,8 +1,9 @@
 var g_params = {}, g_iframeIndex = null;
-var g_caseSourceDict = "";
+var g_caseSourceDict = "", g_sexDict = "";
 $(function () {
 	g_iframeIndex = parent.layer.getFrameIndex(window.name);
-	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CLUE');
+	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 });
 
 /**
@@ -36,13 +37,15 @@ function initView(){
 //写入数据内容
 function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
-	$('#tdCaseSource').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.caseSource, g_params.caseSourceDict)));
+	$('#tdCaseSource').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.caseSource, g_caseSourceDict)));
+	$('#tdReporterSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.reporterSex, g_sexDict)));
 
 	$('#tdReporterName').text($.utils.getNotNullVal(g_params.data.reporterName));
 	$('#tdReporterCertificateNo').text($.utils.getNotNullVal(g_params.data.reporterCertificateNo));
 	$('#tdReporterCompany').text($.utils.getNotNullVal(g_params.data.reporterCompany));
 	$('#tdReporterContacts').text($.utils.getNotNullVal(g_params.data.reporterContacts));
 	$('#tdReporterAddress').text($.utils.getNotNullVal(g_params.data.reporterAddress));
+	$('#tdReporterAge').text($.utils.getNotNullVal(g_params.data.reporterAge));
 	$('#tdReporterZip').text($.utils.getNotNullVal(g_params.data.reporterZip));
 	$('#tdReporterPhone').text($.utils.getNotNullVal(g_params.data.reporterPhone));
 	$('#tdDefendantName').text($.utils.getNotNullVal(g_params.data.defendantName));
@@ -54,6 +57,8 @@ function setData(){
 	$('#tdCaseVerificationContent').text($.utils.getNotNullVal(g_params.data.caseVerification));
 	$('#tdSuggestContent').text($.utils.getNotNullVal(g_params.data.advice));
 	$('#tdMemo').text($.utils.getNotNullVal(g_params.data.memo));
+	$("#tdIllegalAction").val($.utils.getNotNullVal(g_params.data.illegalAction));
+	$('#tdAdvice').text($.utils.getNotNullVal(g_params.data.advice));
 
 	//承办人意见，显示历史处理意见
 	getHistoryAuditListPreview(g_params.data.registerId, "1", $('#tdSuggestContent'), $('#tdSuggest'));

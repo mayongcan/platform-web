@@ -1,7 +1,7 @@
 var g_params = {}, g_backUrl = null;
 var g_codeType = rales.writNecessity3_4, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
-var g_caseSourceDict = "", g_sexDict = "";
+var g_sexDict = "";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -10,19 +10,7 @@ $(function () {
 
 function initView(){
 	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
-	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
 	top.app.addComboBoxOption($("#partiesSex"), g_sexDict, true, ' ');;
-	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource', g_params.row.sourceCase);
-	//公民选择
-	$('input[type=checkbox][id=personType1]').change(function() { 
-		$("#personType1").attr("checked",true);
-		$("#personType2").attr("checked",false);
-	});
-	$('input[type=checkbox][id=personType2]').change(function() { 
-		$("#personType2").attr("checked",true);
-		$("#personType1").attr("checked",false);
-	});
-	$('#divCheckDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
 	
 	//1新增 2编辑 3查看
 	if(g_params.type == 1){
@@ -37,31 +25,24 @@ function initView(){
 		formValidate();
 		$('#tableTitleMark').text(g_params.subRow.code);
 		$('#content-right').remove();
-		
+
 		if(!$.utils.isNull(g_params.subRow.content)){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
-			if(g_params.subRow.content.personType == '1') $("#personType1").attr("checked",true);
-			else $("#personType2").attr("checked",true);
-			
-			top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource', g_params.subRow.content.caseSource);
-			$("input[type='radio'][name=illegalContent][value=" + g_params.subRow.content.illegalContent + "]").attr("checked",true);
 			
 			$('#partiesName').val(g_params.subRow.content.partiesName);
-			$('#partiesSex').val(g_params.subRow.content.partiesSex);
-			$('#partiesAge').val(g_params.subRow.content.partiesAge);
-			$('#partiesAddr').val(g_params.subRow.content.partiesAddr);
-			$('#partiesCertificateNo').val(g_params.subRow.content.partiesCertificateNo);
-			$('#partiesPhone').val(g_params.subRow.content.partiesPhone);
-			$('#companyName').val(g_params.subRow.content.companyName);
 			$('#legalRepresentative').val(g_params.subRow.content.legalRepresentative);
-			$('#companyAddr').val(g_params.subRow.content.companyAddr);
-			$('#companyPhone').val(g_params.subRow.content.companyPhone);
-			$('#tranOrg').val(g_params.subRow.content.tranOrg);
-			$('#handleInfo').val(g_params.subRow.content.handleInfo);
-			$('#tranReason').val(g_params.subRow.content.tranReason);
+			$('#partiesCertificateNo').val(g_params.subRow.content.partiesCertificateNo);
+			$('#partiesContact').val(g_params.subRow.content.partiesContact);
+			$('#partiesSex').val(g_params.subRow.content.partiesSex);
+			$('#partiesPhone').val(g_params.subRow.content.partiesPhone);
+			$('#partiesAddr').val(g_params.subRow.content.partiesAddr);
+			$('#partiesZip').val(g_params.subRow.content.partiesZip);
+			
+			$('#caseAddr').val(g_params.subRow.content.caseAddr);
+			$('#caseSource').val(g_params.subRow.content.caseSource);
+			$('#base').val(g_params.subRow.content.base);
 			$('#advice').val(g_params.subRow.content.advice);
-			$('#memo').val(g_params.subRow.content.memo);
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -79,27 +60,20 @@ function initView(){
 		if(!$.utils.isNull(g_params.subRow.content)){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
-			if(g_params.subRow.content.personType == '1') $("#personType1").attr("checked",true);
-			else $("#personType2").attr("checked",true);
-
-			top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource', g_params.subRow.content.caseSource);
-			$("input[type='radio'][name=illegalContent][value=" + g_params.subRow.content.illegalContent + "]").attr("checked",true);
 
 			$('#tdPartiesName').text($.utils.getNotNullVal(g_params.subRow.content.partiesName));
-			$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.subRow.content.partiesSex, g_sexDict)));
-			$('#tdPartiesAge').text($.utils.getNotNullVal(g_params.subRow.content.partiesAge));
-			$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.subRow.content.partiesAddr));
-			$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.subRow.content.partiesCertificateNo));
-			$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.subRow.content.partiesPhone));
-			$('#tdCompanyName').text($.utils.getNotNullVal(g_params.subRow.content.companyName));
 			$('#tdLegalRepresentative').text($.utils.getNotNullVal(g_params.subRow.content.legalRepresentative));
-			$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.subRow.content.companyAddr));
-			$('#tdCompanyPhone').text($.utils.getNotNullVal(g_params.subRow.content.companyPhone));
-			$('#tdTranOrg').text($.utils.getNotNullVal(g_params.subRow.content.tranOrg));
-			$('#tdHandleInfo').text($.utils.getNotNullVal(g_params.subRow.content.handleInfo));
-			$('#tdTranReason').text($.utils.getNotNullVal(g_params.subRow.content.tranReason));
+			$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.subRow.content.partiesCertificateNo));
+			$('#tdPartiesContact').text($.utils.getNotNullVal(g_params.subRow.content.partiesContact));
+			$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.subRow.content.partiesSex, g_sexDict)));
+			$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.subRow.content.partiesPhone));
+			$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.subRow.content.partiesAddr));
+			$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.subRow.content.partiesZip));
+			
+			$('#tdCaseAddr').text($.utils.getNotNullVal(g_params.subRow.content.caseAddr));
+			$('#tdCaseSource').text($.utils.getNotNullVal(g_params.subRow.content.caseSource));
+			$('#tdBase').text($.utils.getNotNullVal(g_params.subRow.content.base));
 			$('#tdAdvice').text($.utils.getNotNullVal(g_params.subRow.content.advice));
-			$('#tdMemo').text($.utils.getNotNullVal(g_params.subRow.content.memo));
 		}
 		
 		//设置右侧的高度和左侧一致
@@ -115,7 +89,6 @@ function initView(){
 		var params = {};
 		params.isPrint = true;
 		params.sexDict = g_sexDict;
-		params.caseSourceDict = g_caseSourceDict;
 		params.data = getTableParams();
 		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre3_4.html', params, function(){});
     });
@@ -124,7 +97,6 @@ function initView(){
 		//设置参数
 		var params = {};
 		params.sexDict = g_sexDict;
-		params.caseSourceDict = g_caseSourceDict;
 		params.data = getTableParams();
 		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre3_4.html', params, function(){});
     });
@@ -165,28 +137,19 @@ function initView(){
 function getTableParams(){
 	var data = {};
 	data.tableTitleMark = $('#tableTitleMark').text();
-	var personType = '0'
-	if($('#personType1').prop('checked')) personType = '1';
-	if($('#personType2').prop('checked')) personType = '2';
-	data.personType = personType;
-	data.caseSource = $('#divCaseSource input:radio:checked').val();
 	if(g_params.type == 1 || g_params.type == 2){
-		data.illegalContent = $('#tdIllegalContent input:radio:checked').val();
 		data.partiesName = $('#partiesName').val();
-		data.partiesSex = $('#partiesSex').val();
-		data.partiesAge = $('#partiesAge').val();
-		data.partiesAddr = $('#partiesAddr').val();
-		data.partiesCertificateNo = $('#partiesCertificateNo').val();
-		data.partiesPhone = $('#partiesPhone').val();
-		data.companyName = $('#companyName').val();
 		data.legalRepresentative = $('#legalRepresentative').val();
-		data.companyAddr = $('#companyAddr').val();
-		data.companyPhone = $('#companyPhone').val();
-		data.tranOrg = $('#tranOrg').val();
-		data.handleInfo = $('#handleInfo').val();
-		data.tranReason = $('#tranReason').val();
+		data.partiesCertificateNo = $('#partiesCertificateNo').val();
+		data.partiesContact = $('#partiesContact').val();
+		data.partiesSex = $('#partiesSex').val();
+		data.partiesPhone = $('#partiesPhone').val();
+		data.partiesAddr = $('#partiesAddr').val();
+		data.partiesZip = $('#partiesZip').val();
+		data.caseAddr = $('#caseAddr').val();
+		data.caseSource = $('#caseSource').val();
+		data.base = $('#base').val();
 		data.advice = $('#advice').val();
-		data.memo = $('#memo').val();
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}
@@ -225,22 +188,6 @@ function formValidate(){
  * @returns
  */
 function submitAction(){
-	var personType = '0'
-	if($('#personType1').prop('checked')) personType = '1';
-	if($('#personType2').prop('checked')) personType = '2';
-	if(personType == '0'){
-		top.app.message.notice("请选择公民或法人、其他组织！");
-		return;
-	}
-	if(personType == '1' && $('#partiesName').val() == ''){
-		top.app.message.notice("请输入公民姓名！");
-		return;
-	}
-	if(personType == '2' && $('#companyName').val() == ''){
-		top.app.message.notice("请输入组织名称！");
-		return;
-	}
-	
 	//定义提交数据
 	var submitData = {};
 	var url = "";

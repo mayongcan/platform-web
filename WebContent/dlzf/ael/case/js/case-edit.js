@@ -1,17 +1,19 @@
 var g_params = null, g_backUrl = "";
 var g_filePath = null, g_fileSize = 0;
 var g_relevanceIdList = "", g_relevanceCodeList = "";
-var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "";
+var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "", g_sexDict = "";
 var g_userIdList = "", g_userCodeList = "", g_userNameList = "";
 var g_saveType = 1;		//1草稿 2提交
+var g_jumpStatusDict = [{'ID': '1', 'NAME': '法制审核员'}, {'ID': '2', 'NAME': '副处长'}, {'ID': '3', 'NAME': '处长'}];
 
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search, "backUrl");
 	g_params = top.app.info.iframe.params;
 	top.app.message.loading();
-	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CLUE');
 	g_caseProcedureDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_PROCEDURE');
 	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
+	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 	initDistrict();
 	initView();
 	initData();
@@ -43,6 +45,8 @@ function initView(){
 	top.app.addRadioButton($("#divCaseSource"), g_caseSourceDict, 'radioCaseSource');
 	top.app.addComboBoxOption($("#caseProcedure"), g_caseProcedureDict);
 	top.app.addComboBoxOption($("#caseType"), g_caseTypeDict);
+	top.app.addComboBoxOption($("#reporterSex"), g_sexDict);
+	top.app.addComboBoxOption($("#jumpStatus"), g_jumpStatusDict);
 
 	// 不予立案
 	$('#caseProcedure').on('changed.bs.select',
@@ -145,6 +149,8 @@ function initData(){
 	$("#reporterZip").val(g_params.row.reporterZip);
 	$("#reporterPhone").val(g_params.row.reporterPhone);
 	$("#reporterAddress").val(g_params.row.reporterAddress);
+	$("#reporterSex").val(g_params.row.reporterSex);
+	$("#reporterAge").val(g_params.row.reporterAge);
 	$("#defendantName").val(g_params.row.defendantName);
 	$("#defendantAddress").val(g_params.row.address);
 	$("#defendantDate").val($.date.dateFormat(g_params.row.occurrenceDate, "yyyy-MM-dd"));
@@ -156,6 +162,8 @@ function initData(){
 	$("#caseProcedure").val(g_params.row.caseProcedure);
 	$("#notPutOn").val(g_params.row.notPutOn);
 	$("#caseType").val(g_params.row.caseType);
+	$("#illegalAction").val(g_params.row.illegalAction);
+	$("#jumpStatus").val(g_params.row.jumpStatus);
 
 	g_userIdList = g_params.row.associateExecutor;
 	g_userNameList = g_params.row.associateUserName;
@@ -240,6 +248,8 @@ function submitAction(){
 	submitData["reporterAddress"] = $("#reporterAddress").val();
 	submitData["defendantName"] = $("#defendantName").val();
 	submitData["address"] = $("#defendantAddress").val();
+	submitData["reporterSex"] = $("#reporterSex").val();
+	submitData["reporterAge"] = $("#reporterAge").val();
 	submitData["occurrenceDate"] = $("#defendantDate").val();
 	submitData["checkDate"] = $("#defendantCheckDate").val();
 	submitData["clueSummary"] = $("#clueSummary").val();
@@ -252,12 +262,14 @@ function submitAction(){
 	submitData["associateExecutor"] = g_userIdList;
 	submitData["relevanceId"] = g_relevanceIdList;
 	submitData["relevanceName"] = g_relevanceCodeList;
+	submitData["illegalAction"] = $("#illegalAction").val();
 	//已上传的附件路径
 	submitData["files"] = fileupload.getUploadFilePath();
 	
 	//如果保存为草稿，流程进度为0（编辑）
 	if(g_saveType == 1)submitData["flowProgress"] = "0";
 	else submitData["flowProgress"] = "1";
+	submitData["jumpStatus"] = $("#jumpStatus").val();
 	
 	//设置区域内容
 	if($("#areaDistrict").val() != null && $("#areaDistrict").val() != undefined && $("#areaDistrict").val() != '')
@@ -301,6 +313,7 @@ function submitAudit(){
 	submitData["processInstanceId"] = g_params.row.processInstanceId;
 	submitData["processDefinitionId"] = g_params.row.processDefinitionId;
 	submitData["registerId"] = g_params.row.id;
+	submitData["jumpStatus"] = $("#jumpStatus").val();
 	//提交审批
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/rales/ael/case/caseFlowNext?access_token=" + top.app.cookies.getCookiesToken(),

@@ -215,6 +215,10 @@ function initView(){
 		}
 	}
 	
+	loadView();
+}
+
+function loadView(){
 	//打印
 	$("#btnPrint").click(function () {
 		var params = {};
@@ -232,6 +236,30 @@ function initView(){
 		var params = {};
 		params.data = getTableParams();
 		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre6_2.html', params, function(){});
+    });
+	//下载Word
+	$("#btnDownWord").click(function () {
+		var html = $("#content-left").html();
+		$(".opearBtn").each(function(){
+			$(this).remove();
+		});
+		$('#btnPrint').remove();
+		$('#btnAdd').remove();
+		$('#btnOK').remove();
+		$('#btnPreview').remove();
+		$('#btnDownWord').remove();
+		$('#btnCancel').remove();
+		
+		var rules = "", ss = document.styleSheets;
+		for (var i = 0; i < ss.length; ++i) {
+		    for (var x = 0; x < ss[i].cssRules.length; ++x) {
+		        rules += ss[i].cssRules[x].cssText;
+		    }
+		}
+		$("#content-left").wordExport("案卷目录", rules);
+		
+		$("#content-left").html(html);
+		loadView();
     });
 	//返回
 	$("#btnCancel").click(function () {
@@ -260,7 +288,7 @@ function refreshView(){
 	for(var i = 0; i < g_dataList.length; i++){
 		var operate = "";
 		if(g_params.type != 3){
-			operate = '<td class="reference-td">' + 
+			operate = '<td class="reference-td opearBtn">' + 
 						'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + i + ')" style="margin-right:10px;">' + 
 							'编辑' + 
 						'</button>' +
@@ -279,7 +307,7 @@ function refreshView(){
 										'<td class="reference-td">' + 
 										g_dataList[i].pageNo + 
 										'</td>' + 
-										'<td class="reference-td">' + 
+										'<td class="reference-td ">' + 
 										g_dataList[i].memo + 
 										'</td>' + 
 										operate + 

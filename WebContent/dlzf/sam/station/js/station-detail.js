@@ -47,7 +47,7 @@ function initTable(){
 		    access_token: top.app.cookies.getCookiesToken(),
             size: params.limit,   						// 页面大小
             page: params.offset / params.limit,  		// 当前页
-            orgCode: g_params.data.orgCode
+            orgNameEqu: g_params.data.orgName
         };
         return param;
     };
@@ -74,6 +74,7 @@ function initFuncBtnEvent(){
 	$("#toolbarNew").click(function () {
 		var params = {};
 		params.data = g_params.data;
+		params.addAll = true;
 		top.app.layer.editLayer('年审/缴费', ['710px', '420px'], '/rales/sam/station/station-pay-edit.html', params, function(){
 		});
     });

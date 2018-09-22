@@ -14,6 +14,8 @@ function initView(){
 	g_statTypeDict = rales.getDictByCode("00052006");
 	top.app.addComboBoxOption($("#searchStatType"), g_statTypeDict, false);
 	
+	$("#searchStatAreaCode").val('440100');
+	
 	//搜索点击事件
 	$("#btnSearch").click(function () {
 		if($.utils.isEmpty($.trim($("#searchStatAreaCode").val()))){

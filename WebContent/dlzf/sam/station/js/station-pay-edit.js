@@ -75,6 +75,7 @@ function formValidate(){
  * 提交数据
  */
 function submitAction(){
+	top.app.message.loading(0);
 	//定义提交数据
 	var submitData = {};
 	submitData["unitId"] = g_params.data.orgGuid;
@@ -86,6 +87,11 @@ function submitAction(){
 	submitData["memo"] = $("#memo").val();
 	submitData["isExempted"] = $('#divRadioIsExempted input:radio:checked').val();
 	submitData["isPay"] = $('#divRadioIsPay input:radio:checked').val();
+	//设台单位下的所有都年审
+	if(g_params.addAll){
+		submitData["addAll"] = "1";
+	}
+		
 	//异步处理
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/rales/sam/station/addStationPay?access_token=" + top.app.cookies.getCookiesToken(),

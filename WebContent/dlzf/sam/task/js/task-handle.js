@@ -98,7 +98,8 @@ function initView(){
 		}
 		$('#selectFile').append(html);
 
-		fileupload.initFileEditSelector('auditFiles', g_params.row.files);
+		//fileupload.initFileEditSelector('auditFiles', g_params.row.files);
+		fileupload.initFileNewSelector('auditFiles');
 	}else{
 		fileupload.initFileNewSelector('auditFiles');
 	}
@@ -123,6 +124,16 @@ function initView(){
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		window.location.href = g_backUrl + "?_pid=" + pid;
     });
+	
+	$('#isAssign').on('changed.bs.select',
+		function(e) {
+			if ($('#isAssign').val() == '1') {
+				$('#trAssignHandleUser').css('display', '');
+			} else {
+				$('#trAssignHandleUser').css('display', 'none');
+			} 
+		}
+	);
 
 	//判断当前任务节点名称
 	if(g_params.row.activityId == 'handleTask'){
@@ -148,6 +159,12 @@ function initView(){
 		$('#trIsAssign').css('display', 'none');
 		$('#trAssignHandleUser').css('display', 'none');
 		$('#trAuditStatus').css('display', '');
+	}else if(g_params.row.activityId == 'sendUserHandle'){
+		$('#trIsHandle').css('display', '');
+		$('#trIsAssign').css('display', 'none');
+		$('#trAssignHandleUser').css('display', 'none');
+		$('#trAuditStatus').css('display', 'none');
+		$('#btnHandle').text('结束任务');
 	}
 	$('.selectpicker').selectpicker('refresh');
 

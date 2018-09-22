@@ -4,7 +4,7 @@ $(function () {
 	//实现日期联动
 	$.date.initSearchDate('divHandleBegin', 'divHandleEnd');
 	g_flowProgressDict = top.app.getDictDataByDictTypeValue('AEL_CASE_FLOW_PROCEDURE');
-	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
+	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CLUE');
 	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
 	top.app.addComboBoxOption($("#searchFlowProgress"), g_flowProgressDict, true);
 	//获取权限菜单

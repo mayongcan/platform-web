@@ -707,6 +707,22 @@ var app = app || {};
 	        else return false;
 	    }
 	};
+	
+	//+---------------------------------------------------   
+	//| 是否存在该角色
+	//+--------------------------------------------------- 
+	app.hasRoleName = function(userRole, roleName){
+	    if(userRole == null || userRole == undefined || userRole == '') return false;
+	    if(Array.isArray(userRole)){
+	        for(var i = 0; i < userRole.length; i++){
+	            if(userRole[i] === roleName) return true;
+	        }
+	        return false;
+	    }else{
+	        if(userRole === roleName) return true;
+	        else return false;
+	    }
+	};
 
 	//+---------------------------------------------------   
 	//| 设置租户列表下拉框

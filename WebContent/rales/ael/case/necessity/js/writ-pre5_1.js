@@ -98,4 +98,7 @@ function setData(){
 	if(g_params.data.punishCodeCheck4 == '1') {$("#punishCodeCheck4").attr("checked",true); $("#divPunishCodeCheck4").css('display', '');}
 	$('#tdPunishCodeContent4').text($.utils.getNotNullVal(g_params.data.punishCodeContent4));
 	$('#tdReviewContent').text($.utils.getNotNullVal(g_params.data.reviewContent));
+	
+	//承办人意见，显示历史处理意见
+	getHistoryAuditListPreview(g_params.data.registerId, "5");
 }

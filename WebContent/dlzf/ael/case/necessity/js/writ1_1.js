@@ -1,4 +1,5 @@
 var g_params = {}, g_backUrl = null;
+var g_codeType = rales.writNecessity1_1, g_codeCurNum = "";
 var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "", g_sexDict = "";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
@@ -82,6 +83,8 @@ function initView(){
 	}else{
 		$("#btnOK").remove();
 		$("#btnCancel").text('返 回');
+		$('#content-top-print').css('right', '26%');
+		
 		$('#tdCaseSource').text(top.app.getDictName(g_params.row.sourceCase, g_caseSourceDict));
 		$('#tdReporterName').text($.utils.getNotNullVal(g_params.row.reporterName));
 		$('#tdReporterCertificateNo').text($.utils.getNotNullVal(g_params.row.reporterCertificateNo));
@@ -126,6 +129,33 @@ function initView(){
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		window.location.href = g_backUrl + "?_pid=" + pid + "&navIndex=" + g_params.navIndex;
     });
+
+	//打印
+	$("#btnPrint").click(function () {
+		var params = {};
+		params.isPrint = true;
+		params.data = getTableParams();
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre1_1.html', params, function(){});
+    });
+	//预览
+	$("#btnPreview").click(function () {
+		//设置参数
+		var params = {};
+		params.data = getTableParams();
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre1_1.html', params, function(){});
+    });
+}
+
+/**
+ * 获取页面表格参数值
+ * @returns
+ */
+function getTableParams(){
+	var data = {};
+	data = g_params.row
+	data.registerId = g_params.row.id;
+	data.tableTitleMark = $('#tableTitleMark').text();
+	return data;
 }
 
 /**

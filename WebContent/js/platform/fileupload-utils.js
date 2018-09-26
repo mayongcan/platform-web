@@ -47,7 +47,12 @@ var fileupload = fileupload || {};
 	            other: {width: "153px", height: "100px"}
 	        }
 	    });
-
+		
+		//删除单个文件事件
+		$('#'+ inputFileId).on('fileremoved', function(event, key, index) {
+			var i = parseInt(index);
+			if(fileupload.fileToUploadList.length > i) fileupload.fileToUploadList.splice(i, 1);
+		});
 		//删除单个文件事件
 		$('#'+ inputFileId).on('filedeleted', function(event, key, jqXHR, data) {
 		    

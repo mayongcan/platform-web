@@ -25,10 +25,14 @@ function initView(){
 	});
 	
 	setData();
-	var height = ($('#divCheckUserAdvice').height() < 80) ? 130 : ($('#divCheckUserAdvice').height() + 20);
+	var height = ($('#tdSuggestContent').height() < 80) ? 130 : ($('#tdSuggestContent').height() + 70);
 	$('#tdSuggest').height(height);
 	height = ($('#tdDeptSuggestContent').height() < 80) ? 130 : ($('#tdDeptSuggestContent').height() + 70);
 	$('#tdDeptSuggest').height(height);
+	height = ($('#tdLawSuggestContent').height() < 80) ? 130 : ($('#tdLawSuggestContent').height() + 70);
+	$('#tdLawSuggest').height(height);
+	height = ($('#tdUnitSuggestContent').height() < 80) ? 130 : ($('#tdUnitSuggestContent').height() + 70);
+	$('#tdUnitSuggest').height(height);
 	//是否触发打印
 	if(g_params.isPrint){
 		rales.printOfficeFile($("#printBody"), g_iframeIndex);
@@ -79,5 +83,5 @@ function setData(){
 
 //	$('#divCheckUserAdvice').text(top.app.getCheckBoxButtonVal(g_params.data.checkUserAdvice, g_params.checkRegisterAdviceDict));
 	//承办人意见，显示历史处理意见
-	getHistoryAuditListPreview(g_params.data.registerId, "11", $('#divCheckUserAdvice'), $('#tdSuggest'));
+	getHistoryAuditListPreview(g_params.data.registerId, "11");
 }

@@ -129,6 +129,7 @@ function initView(){
  */
 function getTableParams(){
 	var data = {};
+	data.registerId = g_params.row.id;
 	data.tableTitleMark = $('#tableTitleMark').text();
 	if(g_params.type == 1 || g_params.type == 2){	
 		data.partiesName = $('#partiesName').val();

@@ -75,4 +75,7 @@ function setData(){
 	$('#tdBaseInfo').text($.utils.getNotNullVal(g_params.data.baseInfo));
 	$('#tdHearingInfo').text($.utils.getNotNullVal(g_params.data.hearingInfo));
 	$('#tdSuggestContent').text($.utils.getNotNullVal(g_params.data.advice));
+	
+	//承办人意见，显示历史处理意见
+	getHistoryAuditListPreview(g_params.data.registerId, "8");
 }

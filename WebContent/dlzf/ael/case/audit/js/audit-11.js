@@ -8,6 +8,10 @@ $(function () {
 	initView();
 	initData();
 	initOtherInfo();
+	//特殊选项
+	if(g_params.row.activityName == '单位领导审批'){
+		$('#trJumpStatus').css('display', 'none');
+	}
 });
 
 function initView(){

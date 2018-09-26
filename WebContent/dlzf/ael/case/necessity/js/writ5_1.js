@@ -26,28 +26,17 @@ function initView(){
 		//关联内容
 		$('#caseDesc').val(g_params.row.clueSummary);
 
-//		//关联内容-立案审批表
-//		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
-//		if(!$.utils.isNull(dataInfo.content)){
-//			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
-//			//转换json
-//			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
-//			if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
-//			else $("#personType2").attr("checked",true);
-//
-//			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
-//			$('#partiesSex').val($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
-//			$('#partiesAge').val($.utils.getNotNullVal(dataInfo.content.partiesAge));
-//			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
-//			$('#partiesCertificateNo').val($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
-//			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
-//			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.companyName));
-//			$('#legalRepresentative').val($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
-//			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.companyAddr));
-//			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.companyPhone));
-//			
-//			$('#illegalContent').val(dataInfo.content.illegalContent);
-//		}
+		//关联内容-立案审批表
+		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
+		if(!$.utils.isNull(dataInfo.content)){
+			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
+			//转换json
+			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
+
+			$('#partiesZip').val($.utils.getNotNullVal(dataInfo.content.partiesZip));
+			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+		}
 	}else if(g_params.type == 2){
 		//增加表单验证
 		formValidate();
@@ -176,6 +165,7 @@ function initView(){
  */
 function getTableParams(){
 	var data = {};
+	data.registerId = g_params.row.id;
 	data.tableTitleMark = $('#tableTitleMark').text();
 	var personType = '0'
 	if($('#personType1').prop('checked')) personType = '1';

@@ -18,6 +18,9 @@
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeIn">
 		<div id="content-left" class="ibox-content" style="border-width: 5px 0px;width: 74%;float:left;clear: none;margin-bottom: 20px;">
+			<div id="content-top-print" style="position: absolute;right: 20px;margin-top: 20px;">
+		        <button type="button" class="btn btn-primary no-print" id="btnPrint" style="margin-right:30px;width: 100px;">打 印</button>
+	        </div>
 			<div style="text-align: center;padding-top:15px;margin-bottom:20px;">
 				<!-- <span class="table-title">广州市工业和信息化委员会</span> -->
 				<span class="table-title">案件线索登记表</span>
@@ -100,7 +103,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td" colspan="1" rowspan="2" style="width:120px;">
-							   	反映人
+							   涉嫌违法行为
 							</td>
 							<td class="reference-td">
 							   	行为名称
@@ -195,6 +198,7 @@
 				</table>
 	            <div style="text-align: center;margin-top:30px">
 			        <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">保 存</button>
+			        <button type="button" class="btn btn-primary no-print" id="btnPreview" style="margin-right:30px;width: 100px;">预 览</button>
 			        <button type="button" class="btn btn-white" id="btnCancel" style="width: 100px;">取 消</button>
 		        </div>
 			</form>

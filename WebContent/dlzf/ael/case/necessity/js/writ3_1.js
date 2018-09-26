@@ -32,28 +32,20 @@ function initView(){
 		$('#content-right').remove();
 		fileupload.initFileNewSelector('files');
 		
-//		//关联内容-立案审批表
-//		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
-//		if(!$.utils.isNull(dataInfo.content)){
-//			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
-//			//转换json
-//			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
-//			if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
-//			else $("#personType2").attr("checked",true);
-//
-//			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
-//			$('#partiesSex').val($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
-//			$('#partiesAge').val($.utils.getNotNullVal(dataInfo.content.partiesAge));
-//			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
-//			$('#partiesCertificateNo').val($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
-//			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
-//			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.companyName));
-//			$('#legalRepresentative').val($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
-//			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.companyAddr));
-//			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.companyPhone));
-//			
-//			$('#illegalAction').val(dataInfo.content.illegalContent);
-//		}
+		//关联内容-立案审批表
+		var dataInfo = rales.getWritContent(g_params.row.id, rales.writNecessity2_1, "");
+		if(!$.utils.isNull(dataInfo.content)){
+			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
+			//转换json
+			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
+
+			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
+			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
+			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+		}
 	}else if(g_params.type == 2){
 		//增加表单验证
 		formValidate();
@@ -298,6 +290,7 @@ function btnEventDel(index){
  */
 function getTableParams(){
 	var data = {};
+	data.registerId = g_params.row.id;
 	data.tableTitleMark = $('#tableTitleMark').text();
 	data.list = g_dataList;
 	var personType = '0'

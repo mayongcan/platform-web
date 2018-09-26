@@ -157,6 +157,8 @@ rales.removeDictByName = function(dict, name){
  * 打印官方文书
  */
 rales.printOfficeFile = function(printObj, closeIndex){
+	//控制红头文件
+	$('#printBody').css('margin-top', '140px');
 	printObj.print({
 		noPrintSelector: ".no-print",
 		title: "　",
@@ -364,27 +366,52 @@ rales.previewCodeRelevance = function(registerId, code, tableName, tableId, tabl
 	var params = {};
 	params.data = {};
 	params.data.tableTitleMark = code;
-	$.ajax({
-		url: top.app.conf.url.apigateway + "/api/rales/ael/writ/getWritList",
-	    method: 'GET',
-	   	data:{
-	   		access_token: top.app.cookies.getCookiesToken(),
-	   		id: tableIdVal
-	   	},
-	   	success: function(data){
-	   		if(top.app.message.code.success == data.RetCode){
-	   			if(!$.utils.isNull(data.rows) && data.rows.length > 0){
-		   			params.registerRow = g_params.row;
-//		   			params.data.tableTitleMark = code;
-		   			params.data = eval("(" + data.rows[0].content + ")");
-		   			params.data.registerId = g_params.row.id;
-//		   			params.loadData = "1";
-		   			//打开预览页面
-		   			top.app.layer.editLayer('预览', ['725px', '600px'], rales.getWritPreviewUrl(data.rows[0].writType), params, function(){});
-	   			}
-	   		}
-	   	}
-	});
+	if(tableName == 'rales_ael_register'){
+		$.ajax({
+			url: top.app.conf.url.apigateway + "/api/rales/ael/case/getCaseAllList",
+		    method: 'GET',
+		   	data:{
+		   		access_token: top.app.cookies.getCookiesToken(),
+		   		registerId: tableIdVal
+		   	},
+		   	success: function(data){
+		   		if(top.app.message.code.success == data.RetCode){
+		   			if(!$.utils.isNull(data.rows) && data.rows.length > 0){
+			   			params.registerRow = g_params.row;
+//			   			params.data.tableTitleMark = code;
+			   			params.data = data.rows[0];
+			   			params.data.tableTitleMark = code;
+			   			params.data.registerId = g_params.row.id;
+//			   			params.loadData = "1";
+			   			//打开预览页面
+			   			top.app.layer.editLayer('预览', ['725px', '600px'], rales.getWritPreviewUrl(data.rows[0].writType), params, function(){});
+		   			}
+		   		}
+		   	}
+		});
+	}else{
+		$.ajax({
+			url: top.app.conf.url.apigateway + "/api/rales/ael/writ/getWritList",
+		    method: 'GET',
+		   	data:{
+		   		access_token: top.app.cookies.getCookiesToken(),
+		   		id: tableIdVal
+		   	},
+		   	success: function(data){
+		   		if(top.app.message.code.success == data.RetCode){
+		   			if(!$.utils.isNull(data.rows) && data.rows.length > 0){
+			   			params.registerRow = g_params.row;
+//			   			params.data.tableTitleMark = code;
+			   			params.data = eval("(" + data.rows[0].content + ")");
+			   			params.data.registerId = g_params.row.id;
+//			   			params.loadData = "1";
+			   			//打开预览页面
+			   			top.app.layer.editLayer('预览', ['725px', '600px'], rales.getWritPreviewUrl(data.rows[0].writType), params, function(){});
+		   			}
+		   		}
+		   	}
+		});
+	}
 }
 
 /**
@@ -522,16 +549,43 @@ function getHistoryAuditListPreview(id, counterpartType, divObj, divContain){
 		    },success: function(data){
 		    	if(top.app.message.code.success == data.RetCode){
 		    		if(!$.utils.isNull(data.rows) && data.rows.length > 0){
-		    			divObj.empty();
+		    			$('#tdSuggestContent').empty();
+		    			$('#tdDeptSuggestContent').empty();
+		    			$('#tdLawSuggestContent').empty();
+		    			$('#tdUnitSuggestContent').empty();
 		    			var html = "";
 		    			for(var i = 0; i < data.rows.length; i++){
-		    				html += $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
-		    						"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
+		    				if(top.app.hasRoleName(data.rows[i].userRoleName, "行政执法人员")){
+			    				html = $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
+	    								"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
+			    				$('#tdSuggestContent').append(html);
+		    				}
+		    				else if(top.app.hasRoleName(data.rows[i].userRoleName, "部门领导") || top.app.hasRoleName(data.rows[i].userRoleName, "单位领导")){
+			    				html = $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
+	    								"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
+			    				$('#tdDeptSuggestContent').append(html);
+		    				}else if(top.app.hasRoleName(data.rows[i].userRoleName, "法规处领导")){
+		    					html = $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
+												"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
+					    				$('#tdLawSuggestContent').append(html);
+		    				}else if(top.app.hasRoleName(data.rows[i].userRoleName, "委领导")){
+			    				html = $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
+	    								"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
+			    				$('#tdUnitSuggestContent').append(html);
+		    				}
 		    			}
-	    				divObj.html(html);
 	    				//重置高度
-	    				var height = (divObj.height() < 80) ? 130 : (divObj.height() + 70);
-	    				divContain.height(height);
+	    				var height = ($('#tdSuggest').height() < 80) ? 130 : ($('#tdSuggest').height() + 70);
+	    				$('#tdSuggest').height(height);
+
+	    				height = ($('#tdDeptSuggest').height() < 80) ? 130 : ($('#tdDeptSuggest').height() + 70);
+	    				$('#tdDeptSuggest').height(height);
+
+	    				height = ($('#tdLawSuggest').height() < 80) ? 130 : ($('#tdLawSuggest').height() + 70);
+	    				$('#tdLawSuggest').height(height);
+
+	    				height = ($('#tdUnitSuggest').height() < 80) ? 130 : ($('#tdUnitSuggest').height() + 70);
+	    				$('#tdUnitSuggest').height(height);
 		    		}
 		   		}
 			}

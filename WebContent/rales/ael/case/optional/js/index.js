@@ -309,7 +309,7 @@ function addFlowList(tableListId, tableCntId, url, index, subIndex, writType, su
 					if(parent.g_params.row.activityName == '销案审批编辑' && index == 11 && subIndex == 1)  addEditBtn = true;
 					if(parent.g_params.row.activityName == '审批编辑' && index == 12 && subIndex == 1)  addEditBtn = true;
 					var editButton = "";
-					if(addEditBtn && !parent.g_params.isFinish){
+					if(addEditBtn && !parent.g_params.isFinish ){
 						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
 										'编 辑' + 
 									 '</button>'; 

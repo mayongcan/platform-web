@@ -17,10 +17,12 @@ function initView(){
 	setData();
 	var height = ($('#tdInquiryDescContent').height() < 80) ? 130 : ($('#tdInquiryDescContent').height() + 70);
 	$('#tdInquiryDesc').height(height);
-	height = ($('#tdUserSuggestContent').height() < 80) ? 130 : ($('#tdUserSuggestContent').height() + 70);
-	$('#tdUserSuggest').height(height);
+	height = ($('#tdSuggestContent').height() < 80) ? 130 : ($('#tdSuggestContent').height() + 70);
+	$('#tdSuggest').height(height);
 	height = ($('#tdDeptSuggestContent').height() < 80) ? 130 : ($('#tdDeptSuggestContent').height() + 70);
 	$('#tdDeptSuggest').height(height);
+	height = ($('#tdLawSuggestContent').height() < 80) ? 130 : ($('#tdLawSuggestContent').height() + 70);
+	$('#tdLawSuggest').height(height);
 	height = ($('#tdUnitSuggestContent').height() < 80) ? 130 : ($('#tdUnitSuggestContent').height() + 70);
 	$('#tdUnitSuggest').height(height);
 	//是否触发打印
@@ -57,4 +59,7 @@ function setData(){
 										'</td>' + 
 									'</tr>')
 	}
+	
+	//承办人意见，显示历史处理意见
+	getHistoryAuditListPreview(g_params.data.registerId, "3");
 }

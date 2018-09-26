@@ -21,8 +21,11 @@ function initView(){
 		g_codeCurNum = rales.showCodeCurNum(g_codeType);
 		$('#content-right').remove();
 		fileupload.initFileNewSelector('files');
-//		//关联内容
-//		$('#caseDesc').val(g_params.row.clueSummary);
+		
+		var caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CLUE');
+		//关联内容
+		$('#caseSource').val(top.app.getDictName(g_params.row.sourceCase, caseSourceDict));
+		$('#caseAddr').val(g_params.row.defendantAddress);
 	}else if(g_params.type == 2){
 		//增加表单验证
 		formValidate();

@@ -56,5 +56,5 @@ function setData(){
 	$('#tdMemo').text($.utils.getNotNullVal(g_params.data.memo));
 
 	//承办人意见，显示历史处理意见
-	getHistoryAuditListPreview(g_params.data.registerId, "1", $('#tdSuggestContent'), $('#tdSuggest'));
+	getHistoryAuditListPreview(g_params.data.registerId, "1");
 }

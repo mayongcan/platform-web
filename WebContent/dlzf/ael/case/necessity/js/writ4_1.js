@@ -36,21 +36,21 @@ function initView(){
 			var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 			//转换json
 			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
-			if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
-			else $("#personType2").attr("checked",true);
 
 			$('#partiesName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
-			$('#partiesSex').val($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
-			$('#partiesAge').val($.utils.getNotNullVal(dataInfo.content.partiesAge));
-			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
-			$('#partiesCertificateNo').val($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
+			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.partiesName));
 			$('#partiesPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
-			$('#companyName').val($.utils.getNotNullVal(dataInfo.content.companyName));
-			$('#legalRepresentative').val($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
-			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.companyAddr));
-			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.companyPhone));
-			
-			$('#illegalContent').val(dataInfo.content.illegalContent);
+			$('#companyPhone').val($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+			$('#partiesAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+			$('#companyAddr').val($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+		}
+
+		var dataInfo3 = rales.getWritContent(g_params.row.id, rales.writNecessity3_1, "");
+		if(!$.utils.isNull(dataInfo3.content)){
+			//转换json
+			if(typeof dataInfo3.content !== 'object') dataInfo3.content = eval("(" + dataInfo3.content + ")");
+
+			$('#partiesAge').val($.utils.getNotNullVal(dataInfo3.content.partiesAge));
 		}
 	}else if(g_params.type == 2){
 		//增加表单验证
@@ -176,6 +176,7 @@ function initView(){
  */
 function getTableParams(){
 	var data = {};
+	data.registerId = g_params.row.id;
 	data.tableTitleMark = $('#tableTitleMark').text();
 	var personType = '0'
 	if($('#personType1').prop('checked')) personType = '1';

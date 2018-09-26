@@ -70,11 +70,15 @@ function submitAction(){
 	//如果变更了clientId，则需要传送到后端
 	if(g_params.type == "edit")
 		submitData["id"] = g_params.rows.id;
-		
+
 	submitData["name"] = $("#name").val();
 	if(g_filePath != null && g_filePath != undefined){
 		submitData["files"] = g_filePath;
-		submitData["num"] = g_params.rows.num + g_fileNum;
+		if(g_params.type == "edit")
+			submitData["num"] = g_params.rows.num + g_fileNum;
+		else 
+			submitData["num"] = g_fileNum;
+		
 		submitData["size"] = g_fileSize;
 	}
 	//异步处理

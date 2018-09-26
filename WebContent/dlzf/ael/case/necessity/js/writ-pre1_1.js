@@ -53,11 +53,11 @@ function setData(){
 	$('#tdDefendantAddress').text($.utils.getNotNullVal(g_params.data.address));
 	$('#tdDefendantDate').text($.date.dateFormat(g_params.data.occurrenceDate, "yyyy-MM-dd"));
 	$('#tdDefendantCheckDate').text($.date.dateFormat(g_params.data.checkDate, "yyyy-MM-dd"));
-	$('#tdClueSummaryContent').text($.utils.getNotNullVal(g_params.data.clueSummary));
-	$('#tdCaseVerificationContent').text($.utils.getNotNullVal(g_params.data.caseVerification));
+	$('#tdClueSummary').text($.utils.getNotNullVal(g_params.data.clueSummary));
+	$('#tdCaseVerification').text($.utils.getNotNullVal(g_params.data.caseVerification));
 	$('#tdSuggestContent').text($.utils.getNotNullVal(g_params.data.advice));
 	$('#tdMemo').text($.utils.getNotNullVal(g_params.data.memo));
-	$("#tdIllegalAction").val($.utils.getNotNullVal(g_params.data.illegalAction));
+	$("#tdIllegalAction").text($.utils.getNotNullVal(g_params.data.illegalAction));
 	$('#tdAdvice').text($.utils.getNotNullVal(g_params.data.advice));
 
 	//承办人意见，显示历史处理意见

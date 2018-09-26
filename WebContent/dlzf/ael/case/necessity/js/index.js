@@ -93,7 +93,7 @@ function initData(){
 	if(g_wizardIndex == 0){
 		$('#tableList1-1').empty();
 		var editButton = "";
-		if(!isBackWizard && parent.g_isEdit == 1 && !parent.g_params.isFinish){
+		if(!isBackWizard && parent.g_isEdit == 1 && !parent.g_params.isFinish && parent.g_params.row.createBy == top.app.info.userInfo.userId){
 			editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(1, 1, ' + parent.g_params.row.id + ')" style="padding: 4px 15px;">' +  
 							'编 辑' + 
 						 '</button>'; 
@@ -167,12 +167,23 @@ function addList(tableListId, tableCntId, url, index, subIndex, writType, subTyp
 				for(var i = 0; i < length; i++){
 					var editButton = "";
 					if(!isBackWizard && addEditBtn && parent.g_isEdit == 1 && !parent.g_params.isFinish){
-						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
-										'编 辑' + 
-									 '</button>' + 
-									 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
-										'删 除' + 
-									 '</button>'; 
+						if(subIndex == 1){
+							if(parent.g_params.row.createBy == top.app.info.userInfo.userId){
+								editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+												'编 辑' + 
+											 '</button>' + 
+											 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+												'删 除' + 
+											 '</button>'; 
+							}
+						}else{
+							editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+											'编 辑' + 
+										 '</button>' + 
+										 '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+											'删 除' + 
+										 '</button>'; 
+						}
 					}
 					html += '<tr>' + 
 								'<td class="reference-td" style="border-left-width: 0px;">' + (i+1) + '</td>' + 

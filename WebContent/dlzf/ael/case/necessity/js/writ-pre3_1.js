@@ -86,4 +86,7 @@ function setData(){
 										'</td>' + 
 									'</tr>')
 	}
+
+	//承办人意见，显示历史处理意见
+	getHistoryAuditListPreview(g_params.data.registerId, "3");
 }

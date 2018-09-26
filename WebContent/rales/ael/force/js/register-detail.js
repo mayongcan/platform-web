@@ -17,7 +17,7 @@ function initView(){
 	//设置顶部显示
 	$('#caseRegisterCode').text(g_params.row.otherFlowParams.code);
 	$('#flowProgressName').text("先行登记保存流程");
-	if(g_params.row.activityName == '先行登记保存草稿' || g_params.row.activityName == '重新编辑'){
+	if(g_params.row.activityName == '先行登记保存草稿' || g_params.row.activityName == '重新编辑' || g_params.row.activityName == '重新编辑1'){
 		$('#btnAudit').text("提交");
 		$('#flowProgressNotice').text("待编辑，请编辑后提交审批！");
 		g_btnType = 4;

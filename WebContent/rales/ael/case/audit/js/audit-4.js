@@ -1,5 +1,5 @@
 var g_params = {}, g_backUrl = null, g_counterpartType = "4";
-var g_auditStatusDict1 = [], g_auditStatusDict2 = [], g_auditStatusDict3 = [], g_auditStatusDict4 = [];
+//var g_auditStatusDict1 = [], g_auditStatusDict2 = [], g_auditStatusDict3 = [], g_auditStatusDict4 = [];
 
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");

@@ -407,11 +407,11 @@ function uploadFile(){
         // 告诉jQuery不要去设置Content-Type请求头
         contentType : false,
         success : function(data) { 
+   			top.app.message.loadingClose();
         	if(top.app.message.code.success == data.RetCode){
         		g_filePath = data.RetData;
         		submitAction();
 	   		}else{
-	   			top.app.message.loadingClose();
 	   			top.app.message.error(data.RetMsg);
 	   		}
         },  

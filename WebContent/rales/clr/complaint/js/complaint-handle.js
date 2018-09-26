@@ -209,10 +209,10 @@ function submitAction(){
 //		}
 		submitData["draftOpinion"] = $("#draftOpinion").val();
 	}else if(g_params.row.activityId == 'finalOpinionTask'){
-		if($('#finalOpinion').val() == ''){
-   			top.app.message.notice("请填写登记答复内容！");
-			return;
-		}
+//		if($('#finalOpinion').val() == ''){
+//   			top.app.message.notice("请填写登记答复内容！");
+//			return;
+//		}
 		submitData["finalOpinion"] = $("#finalOpinion").val();
 	}
 	//已上传的附件路径

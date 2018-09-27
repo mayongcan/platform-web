@@ -28,7 +28,9 @@ function initView(){
 	});
 	
 	setData();
-	var height = ($('#tdSuggestContent').height() < 80) ? 130 : ($('#tdSuggestContent').height() + 70);
+	var height = ($('#tdAdviceContent').height() < 80) ? 130 : ($('#tdAdviceContent').height() + 70);
+	$('#tdAdvice').height(height);
+	height = ($('#tdSuggestContent').height() < 80) ? 130 : ($('#tdSuggestContent').height() + 70);
 	$('#tdSuggest').height(height);
 	height = ($('#tdDeptSuggestContent').height() < 80) ? 130 : ($('#tdDeptSuggestContent').height() + 70);
 	$('#tdDeptSuggest').height(height);
@@ -74,7 +76,7 @@ function setData(){
 	$('#tdCompanyPhone').text($.utils.getNotNullVal(g_params.data.companyPhone));
 	$('#tdBaseInfo').text($.utils.getNotNullVal(g_params.data.baseInfo));
 	$('#tdHearingInfo').text($.utils.getNotNullVal(g_params.data.hearingInfo));
-	$('#tdSuggestContent').text($.utils.getNotNullVal(g_params.data.advice));
+	$('#tdAdviceContent').text($.utils.getNotNullVal(g_params.data.advice));
 	
 	//承办人意见，显示历史处理意见
 	getHistoryAuditListPreview(g_params.data.registerId, "4");

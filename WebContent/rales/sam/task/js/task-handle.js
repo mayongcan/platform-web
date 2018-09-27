@@ -59,6 +59,7 @@ function getResultList(){
 	    								'</tr>';
 		    				$('#resultList').append(html);
 		    			}
+		    			$('.selectpicker').selectpicker('refresh');
 		    		}
 		   		}
 			}

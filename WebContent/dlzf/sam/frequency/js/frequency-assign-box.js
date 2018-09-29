@@ -3,6 +3,21 @@ var g_params = {}, g_iframeIndex = null;
 $(function () {
 	g_iframeIndex = parent.layer.getFrameIndex(window.name);
 	top.app.message.loading();
+	$("#btnPoint").click(function () {
+		if($('#freqPoint').val() == ''){
+			top.app.message.notice("请输入需要指配的频率！");
+			return;
+		}
+		var rowObj = [];
+		rowObj.freqPoint = $('#freqPoint').val();
+		parent.app.layer.retParams = [];
+		parent.app.layer.retParams.push(rowObj);
+		
+
+		//关闭页面前设置结果
+		parent.app.layer.editLayerRet = true;
+		parent.layer.close(g_iframeIndex);
+    });
 });
 
 /**
@@ -29,7 +44,7 @@ function loadResultData(data){
 	    method: 'GET',
 	    data: {
     		access_token: top.app.cookies.getCookiesToken(),
-    		simulateId: data.id,
+    		simulateId: g_params.id,
 			page: 0,
 			size:50
 	    },success: function(data){

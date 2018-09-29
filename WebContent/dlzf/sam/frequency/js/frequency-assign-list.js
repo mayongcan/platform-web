@@ -90,18 +90,27 @@ function initFuncBtnEvent(){
 }
 
 function formatOperate(value, row, index){
-	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck(' + row.id + ')">' + 
-				'查询' + 
-		   '</button>';
+	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck1(' + row.id + ')">' + 
+				'频率指配报告' + 
+		   '</button>' + 
+		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck2(' + row.id + ')">' + 
+				'覆盖分析报告' + 
+		   '</button>' + 
+		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck3(' + row.id + ')">' + 
+				'干扰分析报告' + 
+		  '</button>';
 }
 
-function operateButtonCheck(id, url){
+function operateButtonCheck1(id, url){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	//设置传送对象
-	top.app.info.iframe.params = {};
-	top.app.info.iframe.params.row = row;
-	var pid = $.utils.getUrlParam(window.location.search,"_pid");
-	var url = "/rales/sam/frequency/frequency-assign-detail.html?_pid=" + pid + "&backUrl=/rales/sam/frequency/frequency-assign-list.html";
-	window.location.href = encodeURI(url);
+	window.open(top.app.conf.url.res.url + row.pdfPath1);
+}
+function operateButtonCheck2(id, url){
+	var row = $table.bootstrapTable("getRowByUniqueId", id);
+	window.open(top.app.conf.url.res.url + row.pdfPath2);
+}
+function operateButtonCheck3(id, url){
+	var row = $table.bootstrapTable("getRowByUniqueId", id);
+	window.open(top.app.conf.url.res.url + row.pdfPath3);
 }
 

@@ -1,16 +1,74 @@
 var g_nextStatus = 0;
 var g_modeDict = [];
-var g_dataObj = null;
-var g_map = null, g_searchVal = "", g_isMapClick = false, g_mapGeoc = null;;
+var g_dataObj = {};
+var g_map = null, g_searchVal = "", g_isMapClick = false, g_mapGeoc = null;
+var g_netSvnDict = [], g_netStDict = [];
+var g_freqPoint = "";
 
 $(function () {
-	top.app.message.loading(); 
+	top.app.message.loading();
+	initDict();
 	initView();
 	g_map = rales.createMap("map-container");//创建地图 
 	g_mapGeoc = new BMap.Geocoder();  
 	addMapSearch();
 	top.app.message.loadingClose();
 });
+
+function initDict(){
+	$.ajax({
+		url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getNetStDict",
+	    method: 'GET',
+	    async: false,
+	   	timeout:5000,
+	   	data:{
+	   		access_token: top.app.cookies.getCookiesToken(),
+	   	},
+		success: function(data){
+			if(top.app.message.code.success == data.RetCode){
+				g_netStDict = data.RetData;
+//				top.app.addComboBoxOption($("#telMode"), g_netStDict, false);
+//				$('.selectpicker').selectpicker('refresh');
+	   		}
+		}
+	});
+	$.ajax({
+		url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getNetSvnDict",
+	    method: 'GET',
+	    async: false,
+	   	timeout:5000,
+	   	data:{
+	   		access_token: top.app.cookies.getCookiesToken(),
+	   	},
+		success: function(data){
+			if(top.app.message.code.success == data.RetCode){
+				g_netSvnDict = data.RetData;
+				top.app.addComboBoxOption($("#sysType"), g_netSvnDict, false);
+				$('.selectpicker').selectpicker('refresh');
+				var tmpList = [];
+				for(var i = 0; i < g_netStDict.length; i++){
+					if(g_netStDict[i].ID.indexOf($("#sysType").val()) != -1){
+						tmpList.push(g_netStDict[i]);
+					}
+				}
+				top.app.addComboBoxOption($("#telMode"), tmpList, false);
+				$('.selectpicker').selectpicker('refresh');
+	   		}
+		}
+	});
+	$('#sysType').on('changed.bs.select',
+		function(e) {
+			var tmpList = [];
+			for(var i = 0; i < g_netStDict.length; i++){
+				if(g_netStDict[i].ID.indexOf($("#sysType").val()) != -1){
+					tmpList.push(g_netStDict[i]);
+				}
+			}
+			top.app.addComboBoxOption($("#telMode"), tmpList, false);
+			$('.selectpicker').selectpicker('refresh');
+		}
+	);
+}
 
 function loadView(){
 	$('#boxTitle1').removeClass('activiteBox');
@@ -23,6 +81,7 @@ function loadView(){
 		$('#boxContent2').css('display', 'none');
 		$('#boxContent3').css('display', 'none');
 		$('#boxContent4').css('display', 'none');
+		$('#divButton').css('display', '');
 	}else if(g_nextStatus == 1){
 		$("#freqBegin1").val($("#freqBegin").val());
 		$("#freqEnd1").val($("#freqEnd").val());
@@ -32,12 +91,14 @@ function loadView(){
 		$('#boxContent2').css('display', '');
 		$('#boxContent3').css('display', 'none');
 		$('#boxContent4').css('display', 'none');
+		$('#divButton').css('display', '');
 	}else if(g_nextStatus == 2){
 		$('#boxTitle3').addClass('activiteBox');
 		$('#boxContent1').css('display', 'none');
 		$('#boxContent2').css('display', 'none');
 		$('#boxContent3').css('display', '');
 		$('#boxContent4').css('display', 'none');
+		$('#divButton').css('display', '');
 	}else if(g_nextStatus == 3){
 		$("#receivingThreshold1").val($("#receivingThreshold").val());
 		$("#recHeight1").val($("#recHeight").val());
@@ -47,6 +108,17 @@ function loadView(){
 		$('#boxContent2').css('display', 'none');
 		$('#boxContent3').css('display', 'none');
 		$('#boxContent4').css('display', '');
+	}else if(g_nextStatus == 4){
+		$("#receivingThreshold1").val($("#receivingThreshold").val());
+		$("#recHeight1").val($("#recHeight").val());
+		
+		$('#boxTitle4').addClass('activiteBox');
+		$('#boxContent1').css('display', 'none');
+		$('#boxContent2').css('display', 'none');
+		$('#boxContent3').css('display', 'none');
+		$('#boxContent4').css('display', '');
+		$('#divButton').css('display', 'none');
+		$('#divButtonPdf').css('display', '');
 	}
 }
 
@@ -61,7 +133,18 @@ function initView(){
 			submitAction1();
 		}
 		else if(g_nextStatus == 1) {
-			submitAction2();
+//			submitAction2();
+			//弹出窗口 设置参数
+			var params = {};
+			params.id = g_dataObj.id;
+			top.app.layer.editLayer('频率指配', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-box.html', params, function(retParams){
+				if(retParams == null || retParams == undefined && retParams.length > 0) {
+					top.app.message.alert("获取返回内容失败！");
+					return;
+				}
+				g_freqPoint = retParams[0].freqPoint;
+				submitAction2();
+			});
 		}
 		else if(g_nextStatus == 2) {
 			submitAction3();
@@ -69,6 +152,15 @@ function initView(){
 		else if(g_nextStatus == 3) {
 			submitAction4();
 		}
+    });
+	$("#btnPdf1").click(function () {
+		window.open(top.app.conf.url.res.url + g_dataObj.pdfPath1);
+    });
+	$("#btnPdf2").click(function () {
+		window.open(top.app.conf.url.res.url + g_dataObj.pdfPath2);
+    });
+	$("#btnPdf3").click(function () {
+		window.open(top.app.conf.url.res.url + g_dataObj.pdfPath3);
     });
 }
 
@@ -101,6 +193,7 @@ function submitAction1(){
 	submitData["antennaAngle"] = $("#antennaAngle").val();
 	submitData["diAngle"] = $("#diAngle").val();
 	submitData["memo"] = $("#memo").val();
+	submitData["antGain"] = $("#antGain").val();
 	submitData["nextStatus"] = g_nextStatus;
 	//异步处理
 	$.ajax({
@@ -115,6 +208,17 @@ function submitAction1(){
 				g_dataObj = data.RetData
 	   			//重新加载数据
 	   			loadView();
+				//弹出窗口 设置参数
+				var params = {};
+				params.id = g_dataObj.id;
+				top.app.layer.editLayer('频率指配', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-box.html', params, function(retParams){
+					if(retParams == null || retParams == undefined && retParams.length > 0) {
+						top.app.message.alert("获取返回内容失败！");
+						return;
+					}
+					g_freqPoint = retParams[0].freqPoint;
+					submitAction2();
+				});
 	   		}else{
 	   			top.app.message.error(data.RetMsg);
 	   		}
@@ -139,6 +243,7 @@ function submitAction2(){
 	submitData["senderHeight"] = $("#senderHeight").val();
 	submitData["recStspreadModeatus"] = $("#spreadMode").val();
 	submitData["nextStatus"] = g_nextStatus;
+	submitData["freqPoint"] = g_freqPoint;
 	//异步处理
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/nextSimulate?access_token=" + top.app.cookies.getCookiesToken(),
@@ -148,6 +253,7 @@ function submitAction2(){
 		success: function(data){
 			top.app.message.loadingClose();
 			if(top.app.message.code.success == data.RetCode){
+				g_dataObj = data.RetData
 				g_nextStatus = 2;
 	   			//重新加载数据
 	   			loadView();
@@ -179,6 +285,7 @@ function submitAction3(){
 		success: function(data){
 			top.app.message.loadingClose();
 			if(top.app.message.code.success == data.RetCode){
+				g_dataObj = data.RetData
 				g_nextStatus = 3;
 	   			//重新加载数据
 	   			loadView();
@@ -211,7 +318,10 @@ function submitAction4(){
 		success: function(data){
 			top.app.message.loadingClose();
 			if(top.app.message.code.success == data.RetCode){
-				
+				g_dataObj = data.RetData
+				g_nextStatus = 4;
+	   			//重新加载数据
+	   			loadView();
 	   		}else{
 	   			top.app.message.error(data.RetMsg);
 	   		}

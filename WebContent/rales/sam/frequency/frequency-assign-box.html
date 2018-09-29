@@ -14,7 +14,8 @@
     <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
     <link href="../../../css/plugins/animate/animate.min.css" rel="stylesheet">
     <link href="../../../css/platform.css" rel="stylesheet">
-<body class="gray-bg">
+    <link href="../../../rales/ael/case/css/case.css" rel="stylesheet">
+<body>
     <div class="wrapper wrapper-content animated fadeIn">
     	<form id="divEditForm" role="form" onsubmit="return false;" autocomplete=off>
             <table class="reference1" id="tableResult1">
@@ -44,7 +45,7 @@
 				</tbody>
 				<tbody id="resultList1"></tbody>
 			</table>
-			<table class="reference1" id="tableResult2">
+			<table class="reference1" id="tableResult2" style="margin-top:20px;">
 				<tbody>
 					<tr>
 						<td class="reference-td" colspan="3" style="background: #d4d4d4;font-size: 16px;font-weight: bold;text-align: center;">
@@ -60,6 +61,23 @@
 						</td>
 						<td class="reference-td" style="text-align: center;">
 						   	是否可用
+						</td>
+					</tr>
+				</tbody>
+				<tbody id="resultList2"></tbody>
+			</table>
+			
+			<table class="reference1" id="tableResult3" style="margin-top:20px;">
+				<tbody>
+					<tr>
+						<td class="reference-td" style="width:150px;">
+						   	指配频率（MHz）
+						</td>
+						<td class="reference-td">
+						   	<input type="text" id="freqPoint" name="freqPoint" class="form-control">
+						</td>
+						<td class="reference-td" style="width:100px;">
+						   	<button type="button" class="btn btn-primary" id="btnPoint" style="margin-right:30px;width: 100px;">指配</button>
 						</td>
 					</tr>
 				</tbody>

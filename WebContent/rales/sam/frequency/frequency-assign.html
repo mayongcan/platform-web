@@ -74,13 +74,13 @@
 							   	通讯业务/系统类型
 							</td>
 							<td class="reference-td">
-							   	<input type="text" id="sysType" name="sysType" class="form-control">
+								<select class="form-control selectpicker" id="sysType"></select>
 							</td>
 							<td class="reference-td">
 							   	技术体制
 							</td>
 							<td class="reference-td">
-							   	<input type="text" id="telMode" name="telMode" class="form-control">
+								<select class="form-control selectpicker" id="telMode"></select>
 							</td>
 						</tr>
 						<tr>
@@ -172,6 +172,14 @@
 							</td>
 							<td class="reference-td">
 							   	<input type="text" id="diAngle" name="diAngle" class="form-control"> 
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	天线发射增益（dbi）
+							</td>
+							<td class="reference-td" colspan="3" >
+							   	<input type="text" id="antGain" name="antGain" class="form-control">
 							</td>
 						</tr>
 						<tr>
@@ -282,8 +290,14 @@
 					</tbody>
 				</table>
 				
-	            <div style="text-align: center;margin-top:30px">
+	            <div style="text-align: center;margin-top:30px" id="divButton">
 			        <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">下一步</button>
+		        </div>
+		        
+	            <div style="text-align: center;margin-top:30px;display: none" id="divButtonPdf">
+			        <button type="button" class="btn btn-primary" id="btnPdf1" style="margin-right:30px;width: 150px;">频率指配报告</button>
+			        <button type="button" class="btn btn-primary" id="btnPdf2" style="margin-right:30px;width: 150px;">覆盖分析报告</button>
+			        <button type="button" class="btn btn-primary" id="btnPdf3" style="margin-right:30px;width: 150px;">干扰分析报告</button>
 		        </div>
 			</form>
         </div>

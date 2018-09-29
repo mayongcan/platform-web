@@ -90,6 +90,7 @@ function initFuncBtnEvent(){
 }
 
 function formatOperate(value, row, index){
+	var html = "";
 	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck1(' + row.id + ')">' + 
 				'频率指配报告' + 
 		   '</button>' + 
@@ -103,14 +104,23 @@ function formatOperate(value, row, index){
 
 function operateButtonCheck1(id, url){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	window.open(top.app.conf.url.res.url + row.pdfPath1);
+	if($.utils.isEmpty(row.pdfPath1)){
+		top.app.message.notice("没有生成报告文件！");
+	}else
+		window.open(top.app.conf.url.res.url + row.pdfPath1);
 }
 function operateButtonCheck2(id, url){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
+	if($.utils.isEmpty(row.pdfPath2)){
+		top.app.message.notice("没有生成报告文件！");
+	}else
 	window.open(top.app.conf.url.res.url + row.pdfPath2);
 }
 function operateButtonCheck3(id, url){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	window.open(top.app.conf.url.res.url + row.pdfPath3);
+	if($.utils.isEmpty(row.pdfPath3)){
+		top.app.message.notice("没有生成报告文件！");
+	}else
+		window.open(top.app.conf.url.res.url + row.pdfPath3);
 }
 

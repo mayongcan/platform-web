@@ -4,6 +4,7 @@ var g_dataObj = {};
 var g_map = null, g_searchVal = "", g_isMapClick = false, g_mapGeoc = null;
 var g_netSvnDict = [], g_netStDict = [];
 var g_freqPoint = "";
+var g_isLoadFreq = false;
 
 $(function () {
 	top.app.message.loading();
@@ -126,6 +127,7 @@ function loadView(){
 function initView(){
 	g_modeDict = top.app.getDictDataByDictTypeValue('RALES_SAM_SPREAD_MODE');
 	top.app.addComboBoxOption($("#spreadMode"), g_modeDict);
+	$('.selectpicker').selectpicker('refresh');
 	//提交
 	$("#btnOK").click(function () {
 		//切换状态
@@ -133,18 +135,25 @@ function initView(){
 			submitAction1();
 		}
 		else if(g_nextStatus == 1) {
-//			submitAction2();
-			//弹出窗口 设置参数
-			var params = {};
-			params.id = g_dataObj.id;
-			top.app.layer.editLayer('频率指配', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-box.html', params, function(retParams){
-				if(retParams == null || retParams == undefined && retParams.length > 0) {
-					top.app.message.alert("获取返回内容失败！");
-					return;
-				}
-				g_freqPoint = retParams[0].freqPoint;
+			if(!g_isLoadFreq){
+				g_isLoadFreq = true;
 				submitAction2();
-			});
+			}
+			else{
+				//弹出窗口 设置参数
+				var params = {};
+				params.id = g_dataObj.id;
+				top.app.layer.editLayer('频率指配', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-box.html', params, function(retParams){
+					if(retParams == null || retParams == undefined && retParams.length > 0) {
+						top.app.message.alert("获取返回内容失败！");
+						return;
+					}
+					g_freqPoint = retParams[0].freqPoint;
+					g_nextStatus = 2;
+		   			//重新加载数据
+		   			loadView();
+				});
+			}
 		}
 		else if(g_nextStatus == 2) {
 			submitAction3();
@@ -173,7 +182,7 @@ function submitAction1(){
 		top.app.message.notice("请输入台站名称！");
 		return;
 	}
-	top.app.message.loading();
+	top.app.message.loading(0);
 	//定义提交数据
 	var submitData = {};
 	submitData["statName"] = $("#statName").val();
@@ -208,17 +217,6 @@ function submitAction1(){
 				g_dataObj = data.RetData
 	   			//重新加载数据
 	   			loadView();
-				//弹出窗口 设置参数
-				var params = {};
-				params.id = g_dataObj.id;
-				top.app.layer.editLayer('频率指配', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-box.html', params, function(retParams){
-					if(retParams == null || retParams == undefined && retParams.length > 0) {
-						top.app.message.alert("获取返回内容失败！");
-						return;
-					}
-					g_freqPoint = retParams[0].freqPoint;
-					submitAction2();
-				});
 	   		}else{
 	   			top.app.message.error(data.RetMsg);
 	   		}
@@ -231,7 +229,7 @@ function submitAction1(){
  * @returns
  */
 function submitAction2(){
-	top.app.message.loading();
+	top.app.message.loading(0);
 	//定义提交数据
 	var submitData = {};
 	submitData["id"] = g_dataObj.id;
@@ -254,9 +252,20 @@ function submitAction2(){
 			top.app.message.loadingClose();
 			if(top.app.message.code.success == data.RetCode){
 				g_dataObj = data.RetData
-				g_nextStatus = 2;
-	   			//重新加载数据
-	   			loadView();
+				//弹出窗口 设置参数
+				var params = {};
+				params.id = g_dataObj.id;
+				top.app.layer.editLayer('频率指配', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-box.html', params, function(retParams){
+					if(retParams == null || retParams == undefined && retParams.length > 0) {
+						top.app.message.notice("获取返回内容失败！");
+						return;
+					}
+					g_freqPoint = retParams[0].freqPoint;
+					g_nextStatus = 2;
+		   			//重新加载数据
+		   			loadView();
+				});
+				
 	   		}else{
 	   			top.app.message.error(data.RetMsg);
 	   		}
@@ -269,13 +278,14 @@ function submitAction2(){
  * @returns
  */
 function submitAction3(){
-	top.app.message.loading();
+	top.app.message.loading(0);
 	//定义提交数据
 	var submitData = {};
 	submitData["id"] = g_dataObj.id;
 	submitData["recHeight"] = $("#recHeight").val();
 	submitData["cpmRadius"] = $("#cpmRadius").val();
 	submitData["nextStatus"] = g_nextStatus;
+	submitData["freqPoint"] = g_freqPoint;
 	//异步处理
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/nextSimulate?access_token=" + top.app.cookies.getCookiesToken(),
@@ -302,13 +312,14 @@ function submitAction3(){
  * @returns
  */
 function submitAction4(){
-	top.app.message.loading();
+	top.app.message.loading(0);
 	//定义提交数据
 	var submitData = {};
 	submitData["id"] = g_dataObj.id;
 	submitData["receivingThreshold"] = $("#receivingThreshold1").val();
 	submitData["recHeight"] = $("#recHeight1").val();
 	submitData["nextStatus"] = g_nextStatus;
+	submitData["freqPoint"] = g_freqPoint;
 	//异步处理
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/nextSimulate?access_token=" + top.app.cookies.getCookiesToken(),

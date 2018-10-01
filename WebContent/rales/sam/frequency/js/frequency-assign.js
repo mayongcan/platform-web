@@ -330,9 +330,14 @@ function submitAction4(){
 			top.app.message.loadingClose();
 			if(top.app.message.code.success == data.RetCode){
 				g_dataObj = data.RetData
-				g_nextStatus = 4;
-	   			//重新加载数据
-	   			loadView();
+				//判断分析是否成功
+				if($.utils.isEmpty(g_dataObj.errorInfo)){
+					g_nextStatus = 4;
+		   			//重新加载数据
+		   			loadView();
+				}else{
+					top.app.message.alert("分析失败：" + g_dataObj.errorInfo);
+				}
 	   		}else{
 	   			top.app.message.error(data.RetMsg);
 	   		}

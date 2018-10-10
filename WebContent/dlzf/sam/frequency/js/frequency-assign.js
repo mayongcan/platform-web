@@ -239,7 +239,7 @@ function submitAction2(){
 	submitData["freqEnd"] = $("#freqEnd1").val();
 	submitData["freqStep"] = $("#freqStep").val();
 	submitData["senderHeight"] = $("#senderHeight").val();
-	submitData["recStspreadModeatus"] = $("#spreadMode").val();
+	submitData["spreadMode"] = $("#spreadMode").val();
 	submitData["nextStatus"] = g_nextStatus;
 	submitData["freqPoint"] = g_freqPoint;
 	//异步处理

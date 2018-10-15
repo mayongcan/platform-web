@@ -98,7 +98,10 @@ function formatOperate(value, row, index){
 				'覆盖分析报告' + 
 		   '</button>' + 
 		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck3(' + row.id + ')">' + 
-				'干扰分析报告' + 
+				'干扰分析报告1' + 
+		  '</button>' + 
+		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck4(' + row.id + ')">' + 
+				'干扰分析报告2' + 
 		  '</button>';
 }
 
@@ -120,7 +123,24 @@ function operateButtonCheck3(id, url){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
 	if($.utils.isEmpty(row.pdfPath3)){
 		top.app.message.notice("没有生成报告文件！");
-	}else
-		window.open(top.app.conf.url.res.url + row.pdfPath3);
+	}else{
+		var array = row.pdfPath3.split(',');
+		if($.utils.isEmpty(array[0])){
+			top.app.message.notice("没有生成报告文件！");
+		}else
+			window.open(top.app.conf.url.res.url + array[0]);
+	}
+}
+function operateButtonCheck4(id, url){
+	var row = $table.bootstrapTable("getRowByUniqueId", id);
+	if($.utils.isEmpty(row.pdfPath3)){
+		top.app.message.notice("没有生成报告文件！");
+	}else{
+		var array = row.pdfPath3.split(',');
+		if($.utils.isEmpty(array[1])){
+			top.app.message.notice("没有生成报告文件！");
+		}else
+			window.open(top.app.conf.url.res.url + array[1]);
+	}
 }
 

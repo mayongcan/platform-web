@@ -217,9 +217,25 @@ function setPlace() {
 			var pp = local.getResults().getPoi(0).point; // 获取第一个智能搜索的结果
 			g_map.centerAndZoom(pp, 18);
 			g_map.addOverlay(new BMap.Marker(pp)); // 添加标注
-			//将坐标写入经纬度
-			$('#longitude').val(pp.lng);
-			$('#latitude').val(pp.lat);
+			//动态转换GPS坐标
+			$.ajax({
+				url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getTranGps",
+			    method: 'GET',
+			    async: false,
+			   	timeout:5000,
+			   	data:{
+			    	access_token: top.app.cookies.getCookiesToken(),
+			    	lat: pp.lat,
+			    	lng: pp.lng,
+			   	},
+			   	success: function(data){
+			   		if(top.app.message.code.success == data.RetCode){
+						//将坐标写入经纬度
+						$('#longitude').val(data.RetData.lng);
+						$('#latitude').val(data.RetData.lat);
+			   		}
+			   	}
+			});	
 		}
 	});
 	local.search(g_searchVal);

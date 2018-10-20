@@ -3,7 +3,7 @@ var g_modeDict = [];
 var g_dataObj = {};
 var g_map = null, g_searchVal = "", g_isMapClick = false, g_mapGeoc = null;
 var g_netSvnDict = [], g_netStDict = [];
-var g_freqPoint = "";
+var g_freqPoint = "", g_channelWidth = "";
 var g_isLoadFreq = false;
 
 $(function () {
@@ -149,6 +149,7 @@ function initView(){
 						return;
 					}
 					g_freqPoint = retParams[0].freqPoint;
+					g_channelWidth = retParams[0].channelWidth;
 					g_nextStatus = 2;
 		   			//重新加载数据
 		   			loadView();
@@ -249,6 +250,7 @@ function submitAction2(){
 	submitData["spreadMode"] = $("#spreadMode").val();
 	submitData["nextStatus"] = g_nextStatus;
 	submitData["freqPoint"] = g_freqPoint;
+	submitData["channelWidth"] = g_channelWidth;
 	//异步处理
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/nextSimulate?access_token=" + top.app.cookies.getCookiesToken(),
@@ -268,6 +270,7 @@ function submitAction2(){
 						return;
 					}
 					g_freqPoint = retParams[0].freqPoint;
+					g_channelWidth = retParams[0].channelWidth;
 					g_nextStatus = 2;
 		   			//重新加载数据
 		   			loadView();
@@ -293,6 +296,7 @@ function submitAction3(){
 	submitData["cpmRadius"] = $("#cpmRadius").val();
 	submitData["nextStatus"] = g_nextStatus;
 	submitData["freqPoint"] = g_freqPoint;
+	submitData["channelWidth"] = g_channelWidth;
 	//异步处理
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/nextSimulate?access_token=" + top.app.cookies.getCookiesToken(),
@@ -327,6 +331,7 @@ function submitAction4(){
 	submitData["recHeight"] = $("#recHeight1").val();
 	submitData["nextStatus"] = g_nextStatus;
 	submitData["freqPoint"] = g_freqPoint;
+	submitData["channelWidth"] = g_channelWidth;
 	//异步处理
 	$.ajax({
 		url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/nextSimulate?access_token=" + top.app.cookies.getCookiesToken(),

@@ -99,8 +99,10 @@ function getInfo(index){
 	$('#statName').text($.utils.getNotNullVal(g_rows[index].statName));
 	$('#licenseCode').text($.utils.getNotNullVal(g_rows[index].licenseCode));
 	$('#statWork').text(top.app.getDictName(g_rows[index].statType, parent.g_statWorkDict));
-	$('#statLg').text($.utils.getNotNullVal(g_rows[index].statLg));
-	$('#statLa').text($.utils.getNotNullVal(g_rows[index].statLa));
+//	$('#statLg').text($.utils.getNotNullVal(g_rows[index].statLg));
+//	$('#statLa').text($.utils.getNotNullVal(g_rows[index].statLa));
+	$('#statLg').text($.utils.getNotNullVal(g_rows[index].gpsLg));
+	$('#statLa').text($.utils.getNotNullVal(g_rows[index].gpsLa));
 	$('#radius').text($.utils.getNotNullVal(g_rows[index].stServR));
 	$('#sysType').text($.utils.getNotNullVal(g_rows[index].netSvn));
 	$('#technology').text(top.app.getDictName(g_rows[index].netTs, parent.g_netTsDict));

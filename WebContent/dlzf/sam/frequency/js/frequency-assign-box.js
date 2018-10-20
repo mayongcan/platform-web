@@ -8,8 +8,13 @@ $(function () {
 			top.app.message.notice("请输入需要指配的频率！");
 			return;
 		}
+		if($('#channelWidth').val() == ''){
+			top.app.message.notice("请输入信道带宽！");
+			return;
+		}
 		var rowObj = [];
 		rowObj.freqPoint = $('#freqPoint').val();
+		rowObj.channelWidth = $('#channelWidth').val();
 		parent.app.layer.retParams = [];
 		parent.app.layer.retParams.push(rowObj);
 		

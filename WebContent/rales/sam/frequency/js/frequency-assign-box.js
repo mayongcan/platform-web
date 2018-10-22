@@ -39,6 +39,7 @@ function loadResultData(data){
 	$('#tableResult1').css('display', '');
 	$('#tableResult2').css('display', '');
 	$('#btnDetail').css('display', '');
+	$('#tdHasSolution').text(g_params.hasSolution == '1' ? '是' : '否');
 
 	$("#btnDetail").click(function () {
 		window.open(top.app.conf.url.res.url + "2_" + data.id + "_" + data.freqBegin + "-" + data.freqEnd + ".pdf");

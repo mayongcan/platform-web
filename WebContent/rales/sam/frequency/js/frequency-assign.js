@@ -264,6 +264,7 @@ function submitAction2(){
 				//弹出窗口 设置参数
 				var params = {};
 				params.id = g_dataObj.id;
+				params.hasSolution = g_dataObj.hasSolution;
 				top.app.layer.editLayer('频率指配', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-box.html', params, function(retParams){
 					if(retParams == null || retParams == undefined && retParams.length > 0) {
 						top.app.message.notice("获取返回内容失败！");

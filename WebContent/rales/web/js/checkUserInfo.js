@@ -25,7 +25,7 @@ function getUserInfo() {
                         //打开app
                         openApp();
                     } else {
-                        $(".logindiv1").hidden();
+                        $(".logindiv1").hide();
                         $(".logindiv").show();
                     }
                 }

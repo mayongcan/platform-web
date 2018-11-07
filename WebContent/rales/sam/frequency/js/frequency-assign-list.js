@@ -98,10 +98,10 @@ function formatOperate(value, row, index){
 				'覆盖分析报告' + 
 		   '</button>' + 
 		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck3(' + row.id + ')">' + 
-				'干扰分析报告1' + 
+				'台站被动干扰图' +
 		  '</button>' + 
 		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck4(' + row.id + ')">' + 
-				'干扰分析报告2' + 
+				'台站主动干扰' +
 		  '</button>';
 }
 

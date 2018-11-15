@@ -92,25 +92,33 @@ function initFuncBtnEvent(){
 function formatOperate(value, row, index){
 	var html = "";
 	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck1(' + row.id + ')">' + 
-				'频率指配报告' + 
-		   '</button>' + 
-		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck2(' + row.id + ')">' + 
-				'覆盖分析报告' + 
-		   '</button>' + 
-		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck3(' + row.id + ')">' + 
-				'台站被动干扰图' +
-		  '</button>' + 
-		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck4(' + row.id + ')">' + 
-				'台站主动干扰' +
-		  '</button>';
+	'报告结果' + 
+	   '</button>'
+//	return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck1(' + row.id + ')">' + 
+//				'频率指配报告' + 
+//		   '</button>' + 
+//		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck2(' + row.id + ')">' + 
+//				'覆盖分析报告' + 
+//		   '</button>' + 
+//		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck3(' + row.id + ')">' + 
+//				'台站被动干扰图' +
+//		  '</button>' + 
+//		   '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="operateButtonCheck4(' + row.id + ')">' + 
+//				'台站主动干扰' +
+//		  '</button>';
 }
 
 function operateButtonCheck1(id, url){
+	
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	if($.utils.isEmpty(row.pdfPath1)){
-		top.app.message.notice("没有生成报告文件！");
-	}else
-		window.open(top.app.conf.url.res.url + row.pdfPath1);
+	console.log(row);
+	 top.app.layer.editLayer('报告结果', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-result.html', row, function (retParams) {
+         
+     });
+//	if($.utils.isEmpty(row.pdfPath1)){
+//		top.app.message.notice("没有生成报告文件！");
+//	}else
+//		window.open(top.app.conf.url.res.url + row.pdfPath1);
 }
 function operateButtonCheck2(id, url){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);

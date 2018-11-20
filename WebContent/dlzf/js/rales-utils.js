@@ -404,6 +404,7 @@ rales.previewCodeRelevance = function(registerId, code, tableName, tableId, tabl
 //			   			params.data.tableTitleMark = code;
 			   			params.data = eval("(" + data.rows[0].content + ")");
 			   			params.data.registerId = g_params.row.id;
+			   			params.data.isNormalCase = g_params.row.isNormalCase;
 //			   			params.loadData = "1";
 			   			//打开预览页面
 			   			top.app.layer.editLayer('预览', ['725px', '600px'], rales.getWritPreviewUrl(data.rows[0].writType), params, function(){});

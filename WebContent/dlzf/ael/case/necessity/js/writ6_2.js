@@ -27,6 +27,13 @@ function initView(){
 		   	success: function(data){
 		   		if(top.app.message.code.success == data.RetCode){
 		   			g_dataList = [];
+		   			//案件登记
+		   			var obj = {};
+	   				obj.name = g_params.row.code;
+	   				obj.pageNo = "";
+	   				obj.memo = "";
+	   				obj.order = 0;
+		   			g_dataList.push(obj);
 		   			//一般程序
 		   			if(g_params.row.caseProcedure == '1'){
 		   				for(var i = 0; i < data.rows.length; i++){
@@ -92,6 +99,9 @@ function initView(){
 			   					obj.order = 19;
 			   					g_dataList.push(obj);
 			   				}else if(data.rows[i].writType == rales.writOptional1_10){
+			   					obj.order = 20;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity3_1){
 			   					obj.order = 20;
 			   					g_dataList.push(obj);
 			   				}else if(data.rows[i].writType == rales.writNecessity3_2){

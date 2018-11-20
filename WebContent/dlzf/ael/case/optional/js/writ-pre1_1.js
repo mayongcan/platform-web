@@ -83,5 +83,8 @@ function setData(){
 
 //	$('#divCheckUserAdvice').text(top.app.getCheckBoxButtonVal(g_params.data.checkUserAdvice, g_params.checkRegisterAdviceDict));
 	//承办人意见，显示历史处理意见
-	getHistoryAuditListPreview(g_params.data.registerId, "11");
+	if(g_params.data.isNormalCase == '1')
+		getHistoryAuditListPreview(g_params.data.registerId, "10");
+	else 
+		getHistoryAuditListPreview(g_params.data.registerId, "11");
 }

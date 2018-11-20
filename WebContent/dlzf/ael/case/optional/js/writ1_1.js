@@ -180,6 +180,7 @@ function initView(){
 function getTableParams(){
 	var data = {};
 	data.registerId = g_params.row.id;
+	data.isNormalCase = g_params.row.isNormalCase;
 	data.tableTitleMark = $('#tableTitleMark').text();
 	var personType = '0'
 	if($('#personType1').prop('checked')) personType = '1';

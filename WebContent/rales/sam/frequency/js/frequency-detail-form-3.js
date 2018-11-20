@@ -60,33 +60,70 @@ function getResultList(){
 			}
 		});
 	}
-	//搜索参数
-	var searchParams = function (params) {
-        var param = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-		    access_token: top.app.cookies.getCookiesToken(),
-            size: params.limit,   						//页面大小
-            page: params.offset / params.limit,  		//当前页
+    $.ajax({
+        url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getSumList",   		//请求后台的URL（*）
+        method: 'GET',
+        data: {
+            access_token: top.app.cookies.getCookiesToken(),
+            type:g_params.row.type,
             spectralanalysisId: g_params.row.id,
-        };
-        return param;
-    };
-    //初始化列表
-	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getMonitoringdetailList",   		//请求后台的URL（*）
-        queryParams: searchParams,											//传递参数（*）
-        uniqueId: 'id',
-        height:400,
-        onClickRow: function(row, $el){
-        	appTable.setRowClickStatus($table, row, $el);
+            analysisType: g_params.row.analysisType,
+            network: g_params.row.network,
+            coverageArea: g_params.row.coverageArea,
+            centerFrequency: g_params.row.centerFrequency,
+            mobileStation: g_params.row.mobileStation,
+            baseStation: g_params.row.baseStation,
+            statLg: g_params.row.longitude,
+            statLa: g_params.row.latitude,
+            serviceRadius: g_params.row.serviceRadius,
+        },success: function(data){
+            for(var i = 0; i < data.RetData.dataList.length; i++){
+                var html = '<tr>' +
+                    '<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].frequency) + '</td>' +
+                    '<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].occupy) + '</td>' +
+                    '<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].demageLevel) + '</td>' +
+                    '<td class="reference-td"><img src="/rales/img/icon-yes.png" style="width:20px;height:20px;"></td>' +
+                    '</tr>';
+                $('#resultList').append(html);
+            }
         }
     });
+	// //搜索参数
+	// var searchParams = function (params) {
+    //     var param = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+    //         access_token: top.app.cookies.getCookiesToken(),
+    //         type:g_params.row.type,
+    //         spectralanalysisId: g_params.row.id,
+    //         analysisType: g_params.row.analysisType,
+    //         network: g_params.row.network,
+    //         coverageArea: g_params.row.coverageArea,
+    //         centerFrequency: g_params.row.centerFrequency,
+    //         mobileStation: g_params.row.mobileStation,
+    //         baseStation: g_params.row.baseStation,
+    //         statLg: g_params.row.longitude,
+    //         statLa: g_params.row.latitude,
+    //         serviceRadius: g_params.row.serviceRadius,
+    //     };
+    //     return param;
+    // };
+    // //初始化列表
+	// $table.bootstrapTable({
+    //     url: top.app.conf.url.apigateway + "/api/rales/sam/frequency/getSumList",   		//请求后台的URL（*）
+    //     queryParams: searchParams,											//传递参数（*）
+    //     uniqueId: 'id',
+    //     height:400,
+    //     onClickRow: function(row, $el){
+    //     	appTable.setRowClickStatus($table, row, $el);
+    //     }
+    // });
 	//初始化Table相关信息
 //	appTable.initTable($table);
 }
 
 function formatIsUse(value,row,index){
-	if(value == '1') return '<img src="/rales/img/icon-yes.png" style="width:20px;height:20px;">';
-	else return '<img src="/rales/img/icon-no.png" style="width:20px;height:20px;">';
+	// if(value == '1') return '<img src="/rales/img/icon-yes.png" style="width:20px;height:20px;">';
+	// else return '<img src="/rales/img/icon-no.png" style="width:20px;height:20px;">';
+    return '<img src="/rales/img/icon-yes.png" style="width:20px;height:20px;">';
 }
 
 

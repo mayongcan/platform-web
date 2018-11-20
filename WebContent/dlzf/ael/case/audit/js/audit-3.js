@@ -150,18 +150,16 @@ function initData(){
 }
 
 function refreshView(){
-	$('#tableContentList').empty();
+	$('#tbodyEvidenceList').empty();
+	g_evidenceListIndex = 2;
 	for(var i = 0; i < g_dataList.length; i++){
-		$('#tableContentList').append('<tr>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].name + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].grade + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].totalCnt + 
-										'</td>' + 
-									'</tr>')
+		$('#tbodyEvidenceList').append('<tr id="trEvidence' + g_evidenceListIndex +'">' + 
+				'<td class="reference-td" style="text-align: center;width:60px;">' + 
+				   '证据' + $.utils.toChineseNumeral(g_evidenceListIndex) + 
+				'<td class="reference-td" id="tdEvidence' + g_evidenceListIndex + '" colspan="7">' + 
+				   	g_dataList[i] + 
+				'</td>' +
+			'</tr>');
+		g_evidenceListIndex++;
 	}
 }

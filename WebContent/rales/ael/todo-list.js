@@ -1,6 +1,6 @@
 var $table1 = $('#tableList1'), $table2 = $('#tableList2'), $table3 = $('#tableList3'), $table4 = $('#tableList4');
 var g_flowProgressDict = [], g_caseSourceDict = [], g_caseTypeDict = [], g_typeDict = [], g_sourceDict = [], g_sexDict = [];
-
+var g_rows1 = [];
 $(function () {
 	g_flowProgressDict = top.app.getDictDataByDictTypeValue('AEL_CASE_FLOW_PROCEDURE');
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
@@ -82,19 +82,21 @@ function tableFormatHandleTime1(value, row) {
 }
 
 function formatOperate1(value, row, index){
+	g_rows1[index] = row;
 	if(row.flowProgress == '0'){
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit1(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit1(' + index + ')">' + 
 					'编辑' + 
 				'</button>';
 	}else{
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail1(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail1(' + index + ')">' + 
 					'查看' + 
 				'</button>';
 	}
 }
 
-function btnEventDetail1(id){
-	var row = $table1.bootstrapTable("getRowByUniqueId", id);
+function btnEventDetail1(index){
+//	var row = $table1.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows1[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.row = row;
@@ -106,8 +108,9 @@ function btnEventDetail1(id){
 	window.location.href = encodeURI(url);
 }
 
-function btnEventEdit1(id){
-	var row = $table1.bootstrapTable("getRowByUniqueId", id);
+function btnEventEdit1(index){
+//	var row = $table1.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows1[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.row = row;

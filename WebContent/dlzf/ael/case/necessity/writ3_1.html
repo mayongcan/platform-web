@@ -181,7 +181,13 @@
 							   	<textarea id="evidence1" name="evidence1" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
-						<tr>
+						<tbody id="tbodyEvidenceList"></tbody>
+			            <tr id="trAddEvidence">
+			            	<td class="reference-td" colspan="8">
+					        	<button type="button" class="btn btn-primary no-print" id="btnAddEvidence" style="margin-right:30px;width: 100px;">新增证据</button>
+					        </td>
+				        </tr>
+						<!-- <tr>
 							<td class="reference-td" style="text-align: center;width:60px;">
 							   证据二
 							<td class="reference-td" id="tdEvidence2" colspan="7">
@@ -201,13 +207,13 @@
 							<td class="reference-td" id="tdEvidence4" colspan="7">
 							   	<textarea id="evidence4" name="evidence4" class="form-control" style="height:120px"></textarea>
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td class="reference-td" style="text-align: center;width:60px;">
 							  	证据确认
 							</td>
 							<td class="reference-td" id="tdEvidence10" colspan="7">
-							   	<input type="text" id="evidence10" name="evidence10" class="form-control">
+							   	<input type="text" id="evidence10" name="evidence10" class="form-control" placeholder="证据xx由当事人及被询问人签名确认">
 							</td>
 						</tr>
 						<tr>
@@ -215,7 +221,7 @@
 							  	证据出具
 							</td>
 							<td class="reference-td" id="tdEvidence11" colspan="7">
-							   	<input type="text" id="evidence11" name="evidence11" class="form-control">
+							   	<input type="text" id="evidence11" name="evidence11" class="form-control" placeholder="证据xx由xx出具">
 							</td>
 						</tr>
 						<tr>
@@ -223,7 +229,7 @@
 							  	证据提供
 							</td>
 							<td class="reference-td" id="tdEvidence12" colspan="7">
-							   	<input type="text" id="evidence12" name="evidence12" class="form-control">
+							   	<input type="text" id="evidence12" name="evidence12" class="form-control" placeholder="证据xx由xx提供">
 							</td>
 						</tr>
 						<tr>

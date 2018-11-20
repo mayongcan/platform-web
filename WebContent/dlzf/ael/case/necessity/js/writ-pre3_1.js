@@ -61,9 +61,9 @@ function setData(){
 	$('#tdHandleResult1').text($.utils.getNotNullVal(g_params.data.handleResult1));
 	$('#tdHandleResult2').text($.utils.getNotNullVal(g_params.data.handleResult2));
 	$('#tdEvidence1').text($.utils.getNotNullVal(g_params.data.evidence1));
-	$('#tdEvidence2').text($.utils.getNotNullVal(g_params.data.evidence2));
-	$('#tdEvidence3').text($.utils.getNotNullVal(g_params.data.evidence3));
-	$('#tdEvidence4').text($.utils.getNotNullVal(g_params.data.evidence4));
+//	$('#tdEvidence2').text($.utils.getNotNullVal(g_params.data.evidence2));
+//	$('#tdEvidence3').text($.utils.getNotNullVal(g_params.data.evidence3));
+//	$('#tdEvidence4').text($.utils.getNotNullVal(g_params.data.evidence4));
 	$('#tdEvidence10').text($.utils.getNotNullVal(g_params.data.evidence10));
 	$('#tdEvidence11').text($.utils.getNotNullVal(g_params.data.evidence11));
 	$('#tdEvidence12').text($.utils.getNotNullVal(g_params.data.evidence12));
@@ -71,20 +71,12 @@ function setData(){
 	$('#tdLawUser2').text($.utils.getNotNullVal(g_params.data.lawUser1));
 	
 	
-	$('#tableContentList').empty();
+	$('#tdEvidence').empty();
 	if(typeof g_params.data.list !== 'object') g_params.data.list = eval("(" + g_params.data.list + ")");
 	for(var i = 0; i < g_params.data.list.length; i++){
-		$('#tableContentList').append('<tr>' + 
-										'<td class="reference-td">' + 
-										g_params.data.list[i].name + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_params.data.list[i].grade + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_params.data.list[i].totalCnt + 
-										'</td>' + 
-									'</tr>')
+		$('#tdEvidence').append('<div class="box-content">' +
+				'证据' + $.utils.toChineseNumeral(i + 2) + '：<span id="tdEvidence">' + g_params.data.list[i] + '</span>' + 
+				'</div>');
 	}
 
 	//承办人意见，显示历史处理意见

@@ -3,6 +3,7 @@ var g_codeType = rales.writNecessity3_1, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
 var g_dataList = [];
 var g_sexDict = null;
+var g_evidenceListIndex = 2;
 
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
@@ -81,9 +82,9 @@ function initView(){
 			$('#handleResult1').val(g_params.subRow.content.handleResult1);
 			$('#handleResult2').val(g_params.subRow.content.handleResult2);
 			$('#evidence1').val(g_params.subRow.content.evidence1);
-			$('#evidence2').val(g_params.subRow.content.evidence2);
-			$('#evidence3').val(g_params.subRow.content.evidence3);
-			$('#evidence4').val(g_params.subRow.content.evidence4);
+//			$('#evidence2').val(g_params.subRow.content.evidence2);
+//			$('#evidence3').val(g_params.subRow.content.evidence3);
+//			$('#evidence4').val(g_params.subRow.content.evidence4);
 			$('#evidence10').val(g_params.subRow.content.evidence10);
 			$('#evidence11').val(g_params.subRow.content.evidence11);
 			$('#evidence12').val(g_params.subRow.content.evidence12);
@@ -110,6 +111,7 @@ function initView(){
 		$('#divBtnAdd').remove();
 		$("#tdOperater").remove();
 		$("#btnOK").remove();
+		$("#trAddEvidence").remove();
 		$("#btnCancel").text('返 回');
 		$('#content-left').addClass('box-view-float-left');
 		$('#content-top-print').css('right', '26%');
@@ -143,9 +145,9 @@ function initView(){
 			$('#tdHandleResult1').text($.utils.getNotNullVal(g_params.subRow.content.handleResult1));
 			$('#tdHandleResult2').text($.utils.getNotNullVal(g_params.subRow.content.handleResult2));
 			$('#tdEvidence1').text($.utils.getNotNullVal(g_params.subRow.content.evidence1));
-			$('#tdEvidence2').text($.utils.getNotNullVal(g_params.subRow.content.evidence2));
-			$('#tdEvidence3').text($.utils.getNotNullVal(g_params.subRow.content.evidence3));
-			$('#tdEvidence4').text($.utils.getNotNullVal(g_params.subRow.content.evidence4));
+//			$('#tdEvidence2').text($.utils.getNotNullVal(g_params.subRow.content.evidence2));
+//			$('#tdEvidence3').text($.utils.getNotNullVal(g_params.subRow.content.evidence3));
+//			$('#tdEvidence4').text($.utils.getNotNullVal(g_params.subRow.content.evidence4));
 			$('#tdEvidence10').text($.utils.getNotNullVal(g_params.subRow.content.evidence10));
 			$('#tdEvidence11').text($.utils.getNotNullVal(g_params.subRow.content.evidence11));
 			$('#tdEvidence12').text($.utils.getNotNullVal(g_params.subRow.content.evidence12));
@@ -217,71 +219,69 @@ function initView(){
 			$("#relevanceId").val(retParams[0].relevanceCodeList);
 		});
     });
-
 	//新增
-	$("#btnAdd").click(function () {
-		//设置参数
-		var params = {};
-		params.type= "add";
-		top.app.layer.editLayer('新增', ['710px', '400px'], '/rales/ael/case/necessity/writ3_1-edit.html', params, function(retParams){
-			if(retParams == null || retParams == undefined && retParams.length > 0) {
-				top.app.message.alert("获取返回内容失败！");
-				return;
-			}
-			g_dataList.push(retParams[0]);
-			refreshView();
-		});
+	$("#btnAddEvidence").click(function () {
+		$('#tbodyEvidenceList').append('<tr id="trEvidence' + g_evidenceListIndex +'">' + 
+				'<td class="reference-td" style="text-align: center;width:60px;">' + 
+				   '证据' + $.utils.toChineseNumeral(g_evidenceListIndex) + 
+				'<td class="reference-td" id="tdEvidence' + g_evidenceListIndex + '" colspan="6">' + 
+				   	'<textarea id="evidence' + g_evidenceListIndex + '" name="evidence' + g_evidenceListIndex + '" class="form-control" style="height:120px"></textarea>' + 
+				'</td>' +
+            	'<td class="reference-td">' +
+		        	'<button type="button" class="btn btn-primary no-print" onclick="removeEvidence(' + g_evidenceListIndex + ')">删除证据</button>' +
+		        '</td>' +
+			'</tr>')
+		g_evidenceListIndex++;
     });
 }
 
+function removeEvidence(index){
+	$('#trEvidence' + index).remove();
+	g_dataList = [];
+	for(var i = 2; i < g_evidenceListIndex;i++){
+		if($('#evidence' + i).val() !== undefined) g_dataList.push($('#evidence' + i).val())
+	}
+	g_evidenceListIndex = 2;
+	refreshView();
+}
+
 function refreshView(){
-	$('#tableContentList').empty();
+	$('#tbodyEvidenceList').empty();
 	for(var i = 0; i < g_dataList.length; i++){
-		var operate = "";
 		if(g_params.type != 3){
-			operate = '<td class="reference-td">' + 
-						'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + i + ')" style="margin-right:10px;">' + 
-							'编辑' + 
-						'</button>' +
-						'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDel(' + i + ')">' + 
-							'删除' + 
-						'</button>' +
-					'</td>';
+			$('#tbodyEvidenceList').append('<tr id="trEvidence' + g_evidenceListIndex +'">' + 
+											'<td class="reference-td" style="text-align: center;width:60px;">' + 
+											   '证据' + $.utils.toChineseNumeral(g_evidenceListIndex) + 
+											'<td class="reference-td" id="tdEvidence' + g_evidenceListIndex + '" colspan="6">' + 
+											   	'<textarea id="evidence' + g_evidenceListIndex + '" name="evidence' + g_evidenceListIndex + '" class="form-control" style="height:120px">' + g_dataList[i] + '</textarea>' + 
+											'</td>' +
+											'<td class="reference-td">' + 
+												'<button type="button" class="btn btn-primary no-print" onclick="removeEvidence(' + g_evidenceListIndex + ')">' + 
+													'删除证据' + 
+												'</button>' +
+											'</td>' +
+										'</tr>');
+		}else{
+			$('#tbodyEvidenceList').append('<tr id="trEvidence' + g_evidenceListIndex +'">' + 
+					'<td class="reference-td" style="text-align: center;width:60px;">' + 
+					   '证据' + $.utils.toChineseNumeral(g_evidenceListIndex) + 
+					'<td class="reference-td" id="tdEvidence' + g_evidenceListIndex + '" colspan="7">' + 
+					   	g_dataList[i] + 
+					'</td>' +
+				'</tr>');
 		}
-		$('#tableContentList').append('<tr>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].name + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].grade + 
-										'</td>' + 
-										'<td class="reference-td">' + 
-										g_dataList[i].totalCnt + 
-										'</td>' + 
-										operate + 
-									'</tr>')
+		g_evidenceListIndex++;
 	}
 }
 
-function btnEventEdit(index){
-	//设置参数
-	var params = {};
-	params.type= "edit";
-	params.rows = g_dataList[index];
-	top.app.layer.editLayer('编辑', ['710px', '400px'], '/rales/ael/case/necessity/writ3_1-edit.html', params, function(retParams){
-		if(retParams == null || retParams == undefined && retParams.length > 0) {
-			top.app.message.alert("获取返回内容失败！");
-			return;
+function getEvidenceList(){
+	var askList = [];
+	for(var i = 2; i < g_evidenceListIndex;i++){
+		if(!$.utils.isEmpty($('#evidence' + i).val())){
+			askList.push($('#evidence' + i).val())
 		}
-//		g_dataList.push(retParams[0]);
-		g_dataList.splice(index, 1, retParams[0]);
-		refreshView();
-	});
-}
-
-function btnEventDel(index){
-	g_dataList.splice(index, 1);
-	refreshView();
+	}
+	return askList;
 }
 
 /**
@@ -292,7 +292,8 @@ function getTableParams(){
 	var data = {};
 	data.registerId = g_params.row.id;
 	data.tableTitleMark = $('#tableTitleMark').text();
-	data.list = g_dataList;
+	//data.list = g_dataList;
+	data.list = getEvidenceList();
 	var personType = '0'
 	if($('#personType1').prop('checked')) personType = '1';
 	if($('#personType2').prop('checked')) personType = '2';
@@ -320,9 +321,9 @@ function getTableParams(){
 		data.handleResult1 = $('#handleResult1').val();
 		data.handleResult2 = $('#handleResult2').val();
 		data.evidence1 = $('#evidence1').val();
-		data.evidence2 = $('#evidence2').val();
-		data.evidence3 = $('#evidence3').val();
-		data.evidence4 = $('#evidence4').val();
+//		data.evidence2 = $('#evidence2').val();
+//		data.evidence3 = $('#evidence3').val();
+//		data.evidence4 = $('#evidence4').val();
 		data.evidence10 = $('#evidence10').val();
 		data.evidence11 = $('#evidence11').val();
 		data.evidence12 = $('#evidence12').val();

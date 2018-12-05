@@ -246,16 +246,19 @@ body.body-small .navbar-top-links li:last-child {
 }
 
 .arrow {
-    float: right;
+    /* float: right; */
     margin-top: 2px;
+    margin-right: 10px;
 }
 
 .fa.arrow:before {
-    content: "\f104";
+    /* content: "\f104"; */
+    content: "\f196";
 }
 
 .active > a > .fa.arrow:before {
-    content: "\f107";
+    /* content: "\f107"; */
+    content: "\f147";
 }
 
 .nav-second-level li,

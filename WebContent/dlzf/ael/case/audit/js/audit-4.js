@@ -93,22 +93,36 @@ function initData(){
 		var g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 		//转换json
 		dataInfo.content  = eval("(" + dataInfo.content  + ")");
-		if(dataInfo.content .personType == '1') $("#personType1").attr("checked",true);
+		if(dataInfo.content.personType == '1') $("#personType1").attr("checked",true);
 		else $("#personType2").attr("checked",true);
 
-		$('#tdPartiesName').text($.utils.getNotNullVal(dataInfo.content .partiesName));
-		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content .partiesSex, g_sexDict)));
-		$('#tdPartiesAge').text($.utils.getNotNullVal(dataInfo.content .partiesAge));
-		$('#tdPartiesAddr').text($.utils.getNotNullVal(dataInfo.content .partiesAddr));
-		$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(dataInfo.content .partiesCertificateNo));
-		$('#tdPartiesPhone').text($.utils.getNotNullVal(dataInfo.content .partiesPhone));
-		$('#tdCompanyName').text($.utils.getNotNullVal(dataInfo.content .companyName));
-		$('#tdLegalRepresentative').text($.utils.getNotNullVal(dataInfo.content .legalRepresentative));
-		$('#tdCompanyAddr').text($.utils.getNotNullVal(dataInfo.content .companyAddr));
-		$('#tdCompanyPhone').text($.utils.getNotNullVal(dataInfo.content .companyPhone));
-		$('#tdBaseInfo').text($.utils.getNotNullVal(dataInfo.content .baseInfo));
-		$('#tdHearingInfo').text($.utils.getNotNullVal(dataInfo.content .hearingInfo));
-		$('#tdAdvice').text($.utils.getNotNullVal(dataInfo.content .advice));
+		$('#tdPartiesName').text($.utils.getNotNullVal(dataInfo.content.partiesName));
+		$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(dataInfo.content.partiesSex, g_sexDict)));
+		$('#tdPartiesAge').text($.utils.getNotNullVal(dataInfo.content.partiesAge));
+		$('#tdPartiesAddr').text($.utils.getNotNullVal(dataInfo.content.partiesAddr));
+		$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(dataInfo.content.partiesCertificateNo));
+		$('#tdPartiesPhone').text($.utils.getNotNullVal(dataInfo.content.partiesPhone));
+		$('#tdCompanyName').text($.utils.getNotNullVal(dataInfo.content.companyName));
+		$('#tdLegalRepresentative').text($.utils.getNotNullVal(dataInfo.content.legalRepresentative));
+		$('#tdCompanyAddr').text($.utils.getNotNullVal(dataInfo.content.companyAddr));
+		$('#tdCompanyPhone').text($.utils.getNotNullVal(dataInfo.content.companyPhone));
+		$('#tdBaseInfo').text($.utils.getNotNullVal(dataInfo.content.baseInfo));
+		$('#tdHearingInfo').text($.utils.getNotNullVal(dataInfo.content.hearingInfo));
+		$('#tdAdvice').text($.utils.getNotNullVal(dataInfo.content.advice));
+
+		var punishType = "";
+		if(!$.utils.isNull(dataInfo.content.punishType)){
+			if(dataInfo.content.punishType.indexOf("1") != -1){
+				punishType += '警告、';
+			}
+			if(dataInfo.content.punishType.indexOf("2") != -1){
+				punishType += '罚款、';
+			}
+			if(dataInfo.content.punishType.indexOf("3") != -1){
+				punishType += '没收违法所得';
+			}
+		}
+		$('#tdPunishType').text(punishType);
 	}
 
 	rales.initFilesList(dataInfo.files);

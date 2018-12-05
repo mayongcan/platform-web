@@ -4,14 +4,14 @@ $(function () {
 	g_iframeIndex = parent.layer.getFrameIndex(window.name);
 	top.app.message.loading();
 	$("#btnPoint").click(function () {
-		if($('#freqPoint').val() == ''){
-			top.app.message.notice("请输入需要指配的频率！");
-			return;
-		}
-		if($('#channelWidth').val() == ''){
-			top.app.message.notice("请输入信道带宽！");
-			return;
-		}
+//		if($('#freqPoint').val() == ''){
+//			top.app.message.notice("请输入需要指配的频率！");
+//			return;
+//		}
+//		if($('#channelWidth').val() == ''){
+//			top.app.message.notice("请输入信道带宽！");
+//			return;
+//		}
 		var rowObj = [];
 		rowObj.freqPoint = $('#freqPoint').val();
 		rowObj.channelWidth = $('#channelWidth').val();
@@ -39,6 +39,7 @@ function loadResultData(data){
 	$('#tableResult1').css('display', '');
 	$('#tableResult2').css('display', '');
 	$('#btnDetail').css('display', '');
+	$('#tdHasSolution').text(g_params.hasSolution == '1' ? '是' : '否');
 
 	$("#btnDetail").click(function () {
 		window.open(top.app.conf.url.res.url + "2_" + data.id + "_" + data.freqBegin + "-" + data.freqEnd + ".pdf");

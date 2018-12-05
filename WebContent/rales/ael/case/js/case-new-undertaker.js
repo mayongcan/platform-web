@@ -36,6 +36,7 @@ function initView(){
             userName: $("#searchUserName").val(),
             findChildUsers: 1,
             roleId: 101,		//过滤执法人员角色
+            notInAccount: top.app.info.userInfo.userCode,
         };
         return retParam;
     };

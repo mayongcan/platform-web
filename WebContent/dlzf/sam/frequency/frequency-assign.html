@@ -6,7 +6,7 @@
     <title>通用信息管理平台-模拟设台</title>
     <meta name="keywords" content="通用信息管理平台">
     <meta name="description" content="通用信息管理平台">
-	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="../../../fonts/font-awesome/font-awesome.min.css?v=4.7.0" rel="stylesheet">
     <link href="../../../css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="../../../css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
@@ -15,309 +15,321 @@
     <link href="../../../css/platform.css" rel="stylesheet">
     <link href="../../../rales/ael/case/css/case.css" rel="stylesheet">
     <style type="text/css">
-    .boxStyle{
-        float: left;
-	    width: 150px;
-	    height: 45px;
-	    border: 1px solid #ddd;
-	    text-align: center;
-	    font-size: 18px;
-	    line-height: 45px;
-	    margin-right:20px
-    }
-    .activiteBox{
-    	background-color: #1ab394;
-    	color: white;
-    	border-width: 0px;
-    }
+        .boxStyle {
+            float: left;
+            width: 150px;
+            height: 45px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 18px;
+            line-height: 45px;
+            margin-right: 20px
+        }
+
+        .activiteBox {
+            background-color: #1ab394;
+            color: white;
+            border-width: 0px;
+        }
     </style>
 </head>
 <body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeIn">
-    	<div id="map-container" style="display: none"></div>
-		<div class="ibox-content">
-	    	<div style="margin-top: 10px;margin-bottom:20px;">
-	    		<div id="boxTitle1" class="boxStyle activiteBox">台站信息</div>
-	    		<div id="boxTitle2" class="boxStyle">频率指配</div>
-	    		<div id="boxTitle3" class="boxStyle">覆盖分析</div>
-	    		<div id="boxTitle4" class="boxStyle">干扰分析</div>
-	    	</div>
-	    	<div style="clear:both"></div>
-			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
-				<table id="boxContent1" class="reference1">
-					<tbody>
-						<tr>
-							<td class="reference-td" width="150px">
-							   	<span class="input-request">＊</span>台站名称
-							</td>
-							<td class="reference-td" colspan="3" >
-							   	<input type="text" id="statName" name="statName" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	台站地址
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="statAddr" name="statAddr" class="form-control">
-							   	<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
-							</td>
-							<td class="reference-td" width="150px">
-							   	台站高度（m）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="statHeight" name="statHeight" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	通讯业务/系统类型
-							</td>
-							<td class="reference-td">
-								<select class="form-control selectpicker" id="sysType"></select>
-							</td>
-							<td class="reference-td">
-							   	技术体制
-							</td>
-							<td class="reference-td">
-								<select class="form-control selectpicker" id="telMode"></select>
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	经度（东经）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="longitude" name="longitude" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	纬度（北纬)
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="latitude" name="latitude" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	起始频率（MHz）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="freqBegin" name="freqBegin" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	结束频率（MHz）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="freqEnd" name="freqEnd" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	工作模式
-							</td>
-							<td class="reference-td" colspan="3">
-							   	<div id="divWorkType">
-							   		<div class="radio">
-										<input type="radio" name="radioWorkType" id="radioWorkType_id_0" value="1" checked="checked">
-										<label for="radioWorkType_id_0">发射接收</label>
-									</div>
-							   		<div class="radio">
-										<input type="radio" name="radioWorkType" id="radioWorkType_id_1" value="2">
-										<label for="radioWorkType_id_1">发射</label>
-									</div>
-							   		<div class="radio">
-										<input type="radio" name="radioWorkType" id="radioWorkType_id_2" value="3">
-										<label for="radioWorkType_id_2">接收</label>
-									</div>
-							    </div>  
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	发射功率（dBm）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="pow" name="pow" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	接收灵敏度（dBm）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="recStatus" name="recStatus" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	天线高度
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="antennaHeight" name="antennaHeight" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	天线型号
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="antennaMode" name="antennaMode" class="form-control"> 
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	天线下倾角度
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="antennaAngle" name="antennaAngle" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	方向角
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="diAngle" name="diAngle" class="form-control"> 
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	天线发射增益（dbi）
-							</td>
-							<td class="reference-td" colspan="3" >
-							   	<input type="text" id="antGain" name="antGain" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	备注
-							</td>
-							<td class="reference-td" colspan="3" >
-							   	<input type="text" id="memo" name="memo" class="form-control">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<table id="boxContent2" style="display: none" class="reference1">
-					<tbody>
-						<tr>
-							<td class="reference-td" width="150px">
-							   	接收门限（dBm）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="receivingThreshold" name="receivingThreshold" class="form-control">
-							</td>
-							<td class="reference-td" width="150px">
-							   	C/I门限（dBm)
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="ciThreshold" name="ciThreshold" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	起始频率（MHz）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="freqBegin1" name="freqBegin1" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	结束频率（MHz）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="freqEnd1" name="freqEnd1" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	步长（MHz)
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="freqStep" name="freqStep" class="form-control">
-							</td>
-							<td class="reference-td">
-							   	发射机高度（m）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="senderHeight" name="senderHeight" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	传播模型
-							</td>
-							<td class="reference-td" colspan="3">
-							   	<select class="selectpicker edit-layer-input" id="spreadMode"></select>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<table id="boxContent3" style="display: none" class="reference1">
-					<tbody>
-						<tr>
-							<td class="reference-td" width="150px">
-							   	接收高度（m）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="recHeight" name="recHeight" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	计算半径
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="cpmRadius" name="cpmRadius" class="form-control">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<table id="boxContent4" style="display: none" class="reference1">
-					<tbody>
-						<tr>
-							<td class="reference-td" width="150px">
-							   	接收门限（dBm）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="receivingThreshold1" name="receivingThreshold1" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	接收高度（m）
-							</td>
-							<td class="reference-td">
-							   	<input type="text" id="recHeight1" name="recHeight1" class="form-control">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				
-	            <div style="text-align: center;margin-top:30px" id="divButton">
-			        <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">下一步</button>
-		        </div>
-		        
-	            <div style="text-align: center;margin-top:30px;display: none" id="divButtonPdf">
-			        <button type="button" class="btn btn-primary" id="btnPdf1" style="margin-right:30px;width: 150px;">频率指配报告</button>
-			        <button type="button" class="btn btn-primary" id="btnPdf2" style="margin-right:30px;width: 150px;">覆盖分析报告</button>
-			        <button type="button" class="btn btn-primary" id="btnPdf3" style="margin-right:30px;width: 150px;">干扰分析报告1</button>
-			        <button type="button" class="btn btn-primary" id="btnPdf4" style="margin-right:30px;width: 150px;">干扰分析报告2</button>
-		        </div>
-			</form>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div id="map-container" style="display: none"></div>
+    <div class="ibox-content">
+        <div style="margin-top: 10px;margin-bottom:20px;">
+            <div id="boxTitle1" class="boxStyle activiteBox">台站信息</div>
+            <div id="boxTitle2" class="boxStyle">频率指配</div>
+            <div id="boxTitle3" class="boxStyle">覆盖分析</div>
+            <div id="boxTitle4" class="boxStyle">干扰分析</div>
         </div>
+        <div style="clear:both"></div>
+        <form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
+            <table id="boxContent1" class="reference1">
+                <tbody>
+                <tr>
+                    <td class="reference-td" width="150px">
+                        <span class="input-request">＊</span>台站名称
+                    </td>
+                    <td class="reference-td" colspan="3">
+                        <input type="text" id="statName" name="statName" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        台站地址
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="statAddr" name="statAddr" class="form-control">
+                        <div id="searchResultPanel"
+                             style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                    </td>
+                    <td class="reference-td" width="150px">
+                        台站高度（m）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="statHeight" name="statHeight" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        通讯业务/系统类型
+                    </td>
+                    <td class="reference-td">
+                        <select class="form-control selectpicker" id="sysType"></select>
+                    </td>
+                    <td class="reference-td">
+                        技术体制
+                    </td>
+                    <td class="reference-td">
+                        <select class="form-control selectpicker" id="telMode"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        经度（东经）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="longitude" name="longitude" class="form-control">
+                    </td>
+                    <td class="reference-td">
+                        纬度（北纬)
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="latitude" name="latitude" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        起始频率（MHz）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="freqBegin" name="freqBegin" class="form-control">
+                    </td>
+                    <td class="reference-td">
+                        结束频率（MHz）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="freqEnd" name="freqEnd" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        工作模式
+                    </td>
+                    <td class="reference-td" colspan="3">
+                        <div id="divWorkType">
+                            <div class="radio">
+                                <input type="radio" name="radioWorkType" id="radioWorkType_id_0" value="1"
+                                       checked="checked">
+                                <label for="radioWorkType_id_0">发射接收</label>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="radioWorkType" id="radioWorkType_id_1" value="2">
+                                <label for="radioWorkType_id_1">发射</label>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="radioWorkType" id="radioWorkType_id_2" value="3">
+                                <label for="radioWorkType_id_2">接收</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        发射功率（dBm）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="pow" name="pow" class="form-control">
+                    </td>
+                    <td class="reference-td">
+                        接收灵敏度（dBm）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="recStatus" name="recStatus" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        天线高度（m）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="antennaHeight" name="antennaHeight" class="form-control">
+                    </td>
+                    <td class="reference-td">
+                        天线型号
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="antennaMode" name="antennaMode" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        天线下倾角度
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="antennaAngle" name="antennaAngle" class="form-control">
+                    </td>
+                    <td class="reference-td">
+                        方向角
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="diAngle" name="diAngle" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        天线发射增益（dbi）
+                    </td>
+                    <td class="reference-td" colspan="3">
+                        <input type="text" id="antGain" name="antGain" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        备注
+                    </td>
+                    <td class="reference-td" colspan="3">
+                        <input type="text" id="memo" name="memo" class="form-control">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table id="boxContent2" style="display: none" class="reference1">
+                <tbody>
+                <tr>
+                    <td class="reference-td" width="150px">
+                        接收门限（dBm）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="receivingThreshold" name="receivingThreshold" class="form-control">
+                    </td>
+                    <td class="reference-td" width="150px">
+                        C/I门限（dBm)
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="ciThreshold" name="ciThreshold" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        起始频率（MHz）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="freqBegin1" name="freqBegin1" class="form-control">
+                    </td>
+                    <td class="reference-td">
+                        结束频率（MHz）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="freqEnd1" name="freqEnd1" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        步长（MHz)
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="freqStep" name="freqStep" class="form-control">
+                    </td>
+                    <td class="reference-td">
+                        接收高度（m）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="senderHeight" name="senderHeight" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        传播模型
+                    </td>
+                    <td class="reference-td" colspan="3">
+                        <select class="selectpicker edit-layer-input" id="spreadMode"></select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table id="boxContent3" style="display: none" class="reference1">
+                <tbody>
+                <tr>
+                    <td class="reference-td" width="150px">
+                        接收高度（m）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="recHeight" name="recHeight" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        计算半径
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="cpmRadius" name="cpmRadius" class="form-control">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table id="boxContent4" style="display: none" class="reference1">
+                <tbody>
+                <tr>
+                    <td class="reference-td" width="150px">
+                        接收门限（dBm）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="receivingThreshold1" name="receivingThreshold1" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="reference-td">
+                        接收高度（m）
+                    </td>
+                    <td class="reference-td">
+                        <input type="text" id="recHeight1" name="recHeight1" class="form-control">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div style="text-align: center;margin-top:30px" id="divButton">
+                <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">下一步
+                </button>
+            </div>
+
+            <div style="text-align: center;margin-top:30px;display: none" id="divButtonPdf">
+                <!--<button type="button" class="btn btn-primary" id="btnPdf1" style="margin-right:30px;width: 150px;">-->
+                    <!--频率指配报告-->
+                <!--</button>-->
+                <!--<button type="button" class="btn btn-primary" id="btnPdf2" style="margin-right:30px;width: 150px;">-->
+                    <!--覆盖分析报告-->
+                <!--</button>-->
+                <!--<button type="button" class="btn btn-primary" id="btnPdf3" style="margin-right:30px;width: 150px;">-->
+                    <!--台站被动干扰图-->
+                <!--</button>-->
+                <!--<button type="button" class="btn btn-primary" id="btnPdf4" style="margin-right:30px;width: 150px;">-->
+                    <!--台站主动干扰-->
+                <!--</button>-->
+            </div>
+        </form>
     </div>
-    
-	<script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
-    <script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
-    <script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
-    <script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
-    <script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
-    <script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
-    <script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-    <script src="../../../js/plugins/prettyfile/bootstrap-prettyfile.js" type="text/javascript"></script>
-    <script src="http://api.map.baidu.com/api?v=3.0&ak=rOh5lOLnNiiVBGdcB3QVg1YvojYavPfe" type="text/javascript" ></script>
-    <script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
-    <script src="../../../js/platform/validata.js" type="text/javascript"></script>
-    <script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
-    <script src="../../js/rales-utils.js" type="text/javascript"></script>
-    <script src="js/frequency-assign.js" type="text/javascript"></script>
+</div>
+
+<script src="../../../js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="../../../js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+<script src="../../../js/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/validate/localization/messages_zh.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/layui/layer/layer.js" type="text/javascript"></script>
+<script src="../../../js/plugins/moment/moment-with-locales.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/datapicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="../../../js/plugins/prettyfile/bootstrap-prettyfile.js" type="text/javascript"></script>
+<script src="http://api.map.baidu.com/api?v=3.0&ak=rOh5lOLnNiiVBGdcB3QVg1YvojYavPfe" type="text/javascript"></script>
+<script src="../../../js/platform/jquery-gimp.js" type="text/javascript"></script>
+<script src="../../../js/platform/validata.js" type="text/javascript"></script>
+<script src="../../../js/platform/table-utils.js" type="text/javascript"></script>
+<script src="../../js/rales-utils.js" type="text/javascript"></script>
+<script src="js/frequency-assign.js" type="text/javascript"></script>
 </body>
 </html>

@@ -177,9 +177,10 @@ function getResultList(){
 													'</tr>');
 				    		if(!$.utils.isNull(data.RetData.dataList) && data.RetData.dataList.length > 0){
 				    			for(var i = 0; i < data.RetData.dataList.length; i++){
+				    				var num = new Number($.utils.getNotNullVal(data.RetData.dataList[i].occupy)).toFixed(3);
 				    				var html = '<tr>' + 
 			    									'<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].frequency) + '</td>' + 
-			    									'<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].occupy) + '</td>' + 
+			    									'<td class="reference-td">' + num + '</td>' + 
 			    									'<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].demageLevel) + '</td>' + 
 			    									'<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].quality) + '</td>' + 
 			    								'</tr>';

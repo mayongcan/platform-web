@@ -35,7 +35,8 @@ function initView(){
             organizerId:top.app.info.rootOrganizerId,
             userName: $("#searchUserName").val(),
             findChildUsers: 1,
-            roleId: 101,		//过滤执法人员角色
+            roleId: "101,102,103,136",		//过滤执法人员角色
+            notInAccount: top.app.info.userInfo.userCode,
         };
         return retParam;
     };

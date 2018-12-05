@@ -27,21 +27,23 @@ function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
 
 	//获取字典
-	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
-
-	if(g_params.data.personType == '1') {
-		$("#divPersonType2").remove();
-	}
-	else {
-		$("#divPersonType1").remove();
-	}
+//	if($.utils.isNull(g_params.sexDict)) g_params.sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
+//	if(g_params.data.personType == '1') {
+//		$("#divPersonType2").remove();
+//	}
+//	else {
+//		$("#divPersonType1").remove();
+//	}
 
 	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
-	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));
-	$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.data.partiesCertificateNo));
-	$('#tdCompanyName').text($.utils.getNotNullVal(g_params.data.companyName));
-	$('#tdCompanyJob').text($.utils.getNotNullVal(g_params.data.companyJob));
-	$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.data.companyAddr));
+	$('#tdPartiesPrincipal').text($.utils.getNotNullVal(g_params.data.partiesPrincipal));
+	$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.data.partiesPhone));
+	$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
+//	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));
+//	$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.data.partiesCertificateNo));
+//	$('#tdCompanyName').text($.utils.getNotNullVal(g_params.data.companyName));
+//	$('#tdCompanyJob').text($.utils.getNotNullVal(g_params.data.companyJob));
+//	$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.data.companyAddr));
 	$('#tdIllegalReason').text($.utils.getNotNullVal(g_params.data.illegalReason));
 	$('#tdCompanyCode').text($.utils.getNotNullVal(g_params.data.companyCode));
 	rales.setDateInfo($('#dataYear'), $('#dataMonth'), $('#dataDay'), g_params.data.illegalDate);
@@ -94,6 +96,7 @@ function setData(){
 //	}
 	$('#punishMoneyVal').text($.utils.getNotNullVal(num));
 	$('#tdPunishMoneyAll').text($.utils.getNotNullVal(g_params.data.punishMoneyAll));
+	$('#tdPunishGetType').text($.utils.getNotNullVal(g_params.data.punishGetType));
 
 	if(g_params.data.punishMoneyType1 != '1') $("#divPunishMoneyType1").remove();
 	if(g_params.data.punishMoneyType2 != '1') $("#divPunishMoneyType2").remove();

@@ -43,9 +43,10 @@ function getResultList(){
 //			    			for(var i = 0; i < data.rows.length; i++){
 //			    				var img = '<img src="/rales/img/icon-no.png" style="width:20px;height:20px;">';
 //				    			if(data.rows[i].isUse == '1') img = '<img src="/rales/img/icon-yes.png" style="width:20px;height:20px;">';
+//			    				var num = new Number($.utils.getNotNullVal(data.rows[i].occupy)).toFixed(3);
 //			    				var html = '<tr>' + 
 //		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].frequency) + '</td>' + 
-//		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].occupy) + '</td>' + 
+//		    									'<td class="reference-td">' + num + '</td>' + 
 //		    									'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].demageLevel) + '</td>' + 
 //		    									'<td class="reference-td">' + img + '</td>' + 
 //		    								'</tr>';
@@ -78,9 +79,10 @@ function getResultList(){
             serviceRadius: g_params.row.serviceRadius,
         },success: function(data){
             for(var i = 0; i < data.RetData.dataList.length; i++){
+            	var num = new Number($.utils.getNotNullVal(data.RetData.dataList[i].occupy)).toFixed(3);
                 var html = '<tr>' +
                     '<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].frequency) + '</td>' +
-                    '<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].occupy) + '</td>' +
+                    '<td class="reference-td">' + num + '</td>' +
                     '<td class="reference-td">' + $.utils.getNotNullVal(data.RetData.dataList[i].demageLevel) + '</td>' +
                     '<td class="reference-td"><img src="/rales/img/icon-yes.png" style="width:20px;height:20px;"></td>' +
                     '</tr>';

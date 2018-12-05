@@ -150,10 +150,34 @@ function initView(){
 	
 	//填写日常巡查的快捷登记
 	if(!$.utils.isNull(g_params) && !$.utils.isNull(g_params.routineRow)){
-		$("#defendantName").val(g_params.routineRow.defendantName);
-		$("#defendantAddress").val(g_params.routineRow.address);
-		$("#defendantDate").val($.date.dateFormat(g_params.routineRow.checkDate, "yyyy-MM-dd"));
-		$("#clueSummary").val(g_params.routineRow.clueSummary);
+		var dataInfo = g_params.routineRow.otherFlowParams;
+		if(!$.utils.isNull(dataInfo.content)){
+			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
+			
+			if(!$.utils.isNull(dataInfo.content.partiesName)) $("#defendantName").val(dataInfo.content.partiesName);
+			else $("#defendantName").val(dataInfo.content.companyName);
+
+			if(!$.utils.isNull(dataInfo.content.partiesName)) $("#defendantAddress").val(dataInfo.content.partiesAddr);
+			else $("#defendantAddress").val(dataInfo.content.companyAddr);
+			
+			$("#defendantDate").val($.date.dateFormat(dataInfo.content.checkDate, "yyyy-MM-dd"));
+			
+			$("#clueSummary").val(dataInfo.content.checkContent);
+		}
+	}
+
+	//行政强制措施
+	if(!$.utils.isNull(g_params) && !$.utils.isNull(g_params.fourceRow)){
+		var dataInfo = g_params.fourceRow.otherFlowParams;
+		if(!$.utils.isNull(dataInfo.content)){
+			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
+			
+			if(!$.utils.isNull(dataInfo.content.partiesName)) $("#defendantName").val(dataInfo.content.partiesName);
+			else $("#defendantName").val(dataInfo.content.companyName);
+
+			if(!$.utils.isNull(dataInfo.content.partiesName)) $("#defendantAddress").val(dataInfo.content.partiesAddr);
+			else $("#defendantAddress").val(dataInfo.content.companyAddr);
+		}
 	}
 	
 	//填写微信案件登记的快捷登记

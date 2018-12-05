@@ -52,7 +52,7 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticCaseTypeList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticPunishList",   		//请求后台的URL（*）
         queryParams: searchParams,		
         height: 400,
         onClickRow: function(row, $el){
@@ -101,8 +101,9 @@ function initTable(){
 function initPieCharts(data){
 	var dataName = [], dataValue = [];
 	for(var i = 0; i < data.length; i++){
-		if($.utils.isNull(data[i].name)) dataName[i] = "";
-		else dataName[i] = top.app.getDictName(data[i].name, g_caseTypeDict);
+//		if($.utils.isNull(data[i].name)) dataName[i] = "";
+//		else dataName[i] = top.app.getDictName(data[i].name, g_caseTypeDict);
+		dataName[i] = data[i].name;
 		var obj = {};
 		obj.name = dataName[i];
 		obj.value = data[i].value;
@@ -111,7 +112,7 @@ function initPieCharts(data){
 	var pieCharts = echarts.init(document.getElementById('pieCharts'));
 	option = {
 	    title: {
-	        text: '案件类型',
+	        text: '处罚结果',
 	        left: 'center'
 	    },
 	    tooltip : {
@@ -125,7 +126,7 @@ function initPieCharts(data){
 	    },
 	    series : [
 	        {
-	            name:'案件类型',
+	            name:'处罚结果',
 	            type: 'pie',
 	            radius : '45%',
 	            center: ['40%', '40%'],
@@ -154,14 +155,15 @@ function initPieCharts(data){
 function initBarCharts(data){
 	var dataName = [], dataValue = [];
 	for(var i = 0; i < data.length; i++){
-		if($.utils.isNull(data[i].name)) dataName[i] = "";
-		else dataName[i] = top.app.getDictName(data[i].name, g_caseTypeDict);
+//		if($.utils.isNull(data[i].name)) dataName[i] = "";
+//		else dataName[i] = top.app.getDictName(data[i].name, g_caseTypeDict);
+		dataName[i] = data[i].name;
 		dataValue[i] = data[i].value;
 	}
 	var barCharts = echarts.init(document.getElementById('barCharts'));
 	option = {
 	    title: {
-	        text: '案件类型',
+	        text: '处罚结果',
 	        left: 'center'
 	    },
 	    color: ['#4973a7'],
@@ -176,7 +178,7 @@ function initBarCharts(data){
 	    },
 	    xAxis : [
 	        {
-	            name : '案件类型',
+	            name : '处罚结果',
 	            nameLocation: 'middle',
 	            nameTextStyle:{
 	                padding: [12, 0, 0, 0],
@@ -192,7 +194,7 @@ function initBarCharts(data){
 	    ],
 	    yAxis : [
 	        {
-	            name : '数量',
+	            name : '次数',
 	            nameLocation: 'middle',
 	            nameRotate: 360,
 	            nameTextStyle:{
@@ -205,7 +207,7 @@ function initBarCharts(data){
 	    ],
 	    series : [
 	        {
-	            name:'案件总数',
+	            name:'总次数',
 	            type:'bar',
 	            barWidth: '50%',
 	            data: dataValue
@@ -221,7 +223,8 @@ function serialNumberTable(value,row,index){
 }
 
 function tableFormatName(value,row,index){
-	return appTable.tableFormatDictValue(g_caseTypeDict, value);
+//	return appTable.tableFormatDictValue(g_caseTypeDict, value);
+	return value;
 }
 
 function tableFormatTimeScope(value, row) {

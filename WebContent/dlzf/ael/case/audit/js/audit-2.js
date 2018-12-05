@@ -111,6 +111,20 @@ function initData(){
 		$('#tdCaseSource').text($.utils.getNotNullVal(dataInfo.content.caseSource));
 		$('#tdBase').text($.utils.getNotNullVal(dataInfo.content.base));
 		$('#tdAdvice').text($.utils.getNotNullVal(dataInfo.content.advice));
+
+		var illegalType = "";
+		if(!$.utils.isNull(dataInfo.content.illegalType)){
+			if(dataInfo.content.illegalType.indexOf("1") != -1){
+				illegalType += '破坏电力设施、';
+			}
+			if(dataInfo.content.illegalType.indexOf("2") != -1){
+				illegalType += '扰乱供电秩序、';
+			}
+			if(dataInfo.content.illegalType.indexOf("3") != -1){
+				illegalType += '盗窃电';
+			}
+		}
+		$('#tdIllegalType').text(illegalType);
 	}
 
 	rales.initFilesList(dataInfo.files);

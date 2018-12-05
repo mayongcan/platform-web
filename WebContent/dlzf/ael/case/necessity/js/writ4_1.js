@@ -77,6 +77,9 @@ function initView(){
 			$('#baseInfo').val(g_params.subRow.content.baseInfo);
 			$('#hearingInfo').val(g_params.subRow.content.hearingInfo);
 			$('#advice').val(g_params.subRow.content.advice);
+			
+			if(!$.utils.isNull(g_params.subRow.content.punishType))
+				$('#punishType').selectpicker('val', g_params.subRow.content.punishType.split(','));
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -110,6 +113,20 @@ function initView(){
 			$('#tdBaseInfo').text($.utils.getNotNullVal(g_params.subRow.content.baseInfo));
 			$('#tdHearingInfo').text($.utils.getNotNullVal(g_params.subRow.content.hearingInfo));
 			$('#tdAdvice').text($.utils.getNotNullVal(g_params.subRow.content.advice));
+
+			var punishType = "";
+			if(!$.utils.isNull(g_params.subRow.content.punishType)){
+				if(g_params.subRow.content.punishType.indexOf("1") != -1){
+					punishType += '警告、';
+				}
+				if(g_params.subRow.content.punishType.indexOf("2") != -1){
+					punishType += '罚款、';
+				}
+				if(g_params.subRow.content.punishType.indexOf("3") != -1){
+					punishType += '没收违法所得';
+				}
+			}
+			$('#tdPunishType').text(punishType);
 		}
 		
 		//设置右侧的高度和左侧一致
@@ -182,6 +199,7 @@ function getTableParams(){
 	if($('#personType1').prop('checked')) personType = '1';
 	if($('#personType2').prop('checked')) personType = '2';
 	data.personType = personType;
+	data.punishType = $.trim($("#punishType").val());
 	if(g_params.type == 1 || g_params.type == 2){
 		data.partiesName = $('#partiesName').val();
 		data.partiesSex = $('#partiesSex').val();
@@ -198,6 +216,9 @@ function getTableParams(){
 		data.advice = $('#advice').val();
 	}else{
 		data = $.extend(data, g_params.subRow.content);
+	}
+	if(g_params.subRow && g_params.subRow.content && g_params.subRow.content.punishType){
+		data.punishTypeOld = g_params.subRow.content.punishType;
 	}
 	return data;
 }

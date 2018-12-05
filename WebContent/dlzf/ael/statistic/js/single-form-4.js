@@ -50,7 +50,7 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticLawResultList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticIllegalList",   		//请求后台的URL（*）
         queryParams: searchParams,		
         height: 400,
         onClickRow: function(row, $el){
@@ -108,7 +108,7 @@ function initPieCharts(data){
 	var pieCharts = echarts.init(document.getElementById('pieCharts'));
 	option = {
 	    title: {
-	        text: '执法结果',
+	        text: '违法类型',
 	        left: 'center'
 	    },
 	    tooltip : {
@@ -122,7 +122,7 @@ function initPieCharts(data){
 	    },
 	    series : [
 	        {
-	            name:'执法结果',
+	            name:'违法类型',
 	            type: 'pie',
 	            radius : '45%',
 	            center: ['40%', '40%'],
@@ -157,7 +157,7 @@ function initBarCharts(data){
 	var barCharts = echarts.init(document.getElementById('barCharts'));
 	option = {
 	    title: {
-	        text: '执法结果',
+	        text: '违法类型',
 	        left: 'center'
 	    },
 	    color: ['#4973a7'],
@@ -172,7 +172,7 @@ function initBarCharts(data){
 	    },
 	    xAxis : [
 	        {
-	            name : '执法结果',
+	            name : '违法类型',
 	            nameLocation: 'middle',
 	            nameTextStyle:{
 	                padding: [12, 0, 0, 0],
@@ -188,7 +188,7 @@ function initBarCharts(data){
 	    ],
 	    yAxis : [
 	        {
-	            name : '数量',
+	            name : '次数',
 	            nameLocation: 'middle',
 	            nameRotate: 360,
 	            nameTextStyle:{
@@ -201,7 +201,7 @@ function initBarCharts(data){
 	    ],
 	    series : [
 	        {
-	            name:'案件总数',
+	            name:'总次数',
 	            type:'bar',
 	            barWidth: '50%',
 	            data: dataValue

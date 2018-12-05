@@ -43,13 +43,16 @@ function initView(){
 			   				}else if(data.rows[i].writType == rales.writOptional1_13){
 			   					obj.order = 3;
 			   					g_dataList.push(obj);
-			   				}else if(data.rows[i].writType == rales.writOptional1_2){
+//			   				}else if(data.rows[i].writType == rales.writOptional1_2){
+			   				}else if(data.rows[i].writType == rales.writOptional1_14){
 			   					obj.order = 4;
 			   					g_dataList.push(obj);
-			   				}else if(data.rows[i].writType == rales.writOptional1_3){
+//			   				}else if(data.rows[i].writType == rales.writOptional1_3){
+			   				}else if(data.rows[i].writType == rales.writOptional1_4){
 			   					obj.order = 5;
 			   					g_dataList.push(obj);
-			   				}else if(data.rows[i].writType == rales.writOptional1_5){
+//			   				}else if(data.rows[i].writType == rales.writOptional1_5){
+			   				}else if(data.rows[i].writType == rales.writOptional1_15){
 			   					obj.order = 6;
 			   					g_dataList.push(obj);
 			   				}else if(data.rows[i].writType == rales.writOptional1_7){
@@ -285,6 +288,25 @@ function refreshView(){
 										operate + 
 									'</tr>')
 	}
+	
+	//初始化可拖拽表格
+	$("#tableFolder").tableDnD({
+		onDragClass: "myDragClass",
+        onDragStop: function (table, row) {
+            var trList = $(table).find('#tableContentList').children("tr");
+            g_dataList = [];
+            for (var i = 0; i < trList.length; i++) {
+                var tdArr = trList.eq(i).find("td");
+                var obj = {};
+   				obj.order = tdArr.eq(0).text();
+   				obj.name = tdArr.eq(1).text();
+   				obj.pageNo = tdArr.eq(2).text();
+   				obj.memo = tdArr.eq(3).text();
+   				g_dataList.push(obj);
+            }
+            refreshView();
+        }
+	});
 }
 
 function btnEventEdit(index){

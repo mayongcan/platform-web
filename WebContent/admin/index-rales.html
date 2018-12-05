@@ -49,7 +49,7 @@
 	    background: #f3f3f4;
 	}
     .nav.navbar-right > li > a {
-	    color: #1AB394;
+	    color: #eff2fc;
 	}
 	.nav-tabs > li > a {
 	    line-height: 40px;
@@ -57,7 +57,7 @@
 	    padding-left:15px;
 	    padding-right:10px;
 	    border: none;
-	    color:#555555;
+	    color:#666666;
 	}
 	.nav-tabs {
 	    border-bottom: 0px
@@ -70,7 +70,7 @@
 	.nav-tabs > li.active > a:hover,
 	.nav-tabs > li.active > a:focus {
 	    border-width: 0px;
-	    color:#4397e6;
+	    color:#fe0101;
 	}
 	.btn-primary {
 	    background-color: #62a8ea;
@@ -79,6 +79,68 @@
 	.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
 	    background-color: #62a8ea;
 	    border-color: #62a8ea;
+	}
+	.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+	    background: #00000000;
+	}
+	.dropdown > a:hover{
+		background: #00000000;
+	}
+	.sidebar-collapse > .nav > li.active {
+	    border-left: 0px solid #19aa8d;
+	    background: #ffffff;
+	}
+	.nav-second-level li:last-child {
+	    margin-bottom: 0px;
+	}
+	.nav-second-level li a,
+	.nav-second-level li a:hover,
+	.nav-second-level li a:focus {
+	    padding: 14px 20px 14px 25px;
+	    padding-left: 52px;
+	    background: #00000000;
+	    color: #525658;
+	}
+	.nav-second-level li.active,
+	.nav-second-level li.active a,
+	.nav-second-level li.active a:hover,
+	.nav-second-level li.active a:focus {
+	    background: #ffffff;
+	    color: #ff0000;
+	}
+	.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus{
+		color: inherit;
+	}
+	
+	#single-menu a,
+	#single-menu a:hover,
+	#single-menu a:focus {
+	    background: #00000000;
+	    color: #525658;
+	}
+	#single-menu.active,
+	#single-menu.active a,
+	#single-menu.active a:hover,
+	#single-menu.active a:focus {
+	    background: #ffffff;
+	    color: #ff0000;
+	}
+	.page-tabs a.active{
+		background: url(../../rales/img/index-left-bar.png) no-repeat center center;
+		background-size: cover;
+		background-color: #00000000;
+		color: #444444;
+	}
+	.page-tabs a.active:hover, .page-tabs a.active i:hover {
+		background: url(../../rales/img/index-left-bar.png) no-repeat center center;
+		background-size: cover;
+		background-color: #00000000;
+		color: #444444;
+	}
+	.content-tabs {
+	    border-bottom: solid 0px #2f4050;
+    	box-shadow: 0px 2px 5px #aaaaaa;
+    	height: 40px;
 	}
     </style>
     
@@ -95,10 +157,10 @@
             <div class="nav-close">
             	<i class="fa fa-times-circle"></i>
             </div>
-            <div class="sidebar-collapse">
+            <div class="sidebar-collapse" style="background:url(../../rales/img/index-left.png);background-size: cover;">
                 <ul class="nav">
-                	<li style='height:60px;padding-left: 25px;line-height: 60px;' >
-	                	<span id="spanNavLabel" class='nav-label' style='color: #f3f3f4;font-size:18px;'>通用信息管理平台</span>
+                	<li style='height:60px;padding-left: 25px;line-height: 60px;margin-bottom: 0;background:url(../../rales/img/index-top.png);' >
+	                	<span id="spanNavLabel" class='nav-label' style='color: #ffffff;font-size:18px;'>通用信息管理平台</span>
                      	<span class='fa'></span>
 	                </li>
                 </ul>
@@ -112,10 +174,10 @@
         <div id="page-wrapper" class="gray-bg dashbard-1">
         		<!--顶部栏开始-->
             <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;background:url(../../rales/img/index-top.png);background-position: -222px;">
                     <div class="navbar-header" style="height: 60px;width:65%">
-	                    	<a class="navbar-minimalize minimalize-btn btn btn-primary " href="#">
-	                    		<i class="fa fa-bars"></i> 
+	                    	<a class="navbar-minimalize minimalize-btn" href="#">
+	                    		<img alt="" src="../../rales/img/index-nav.png">
 	                    	</a>
 	                    <!-- <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
 	                        <div class="form-group">
@@ -129,7 +191,8 @@
                     <ul class="nav navbar-top-links navbar-right" style="height: 60px;text-align:right;">
                        <!-- <li class="dropdown" style="width:300px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> -->
                        <li id="dropdownMenu" class="dropdown">
-	                    	<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#"  style="max-width:310px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+	                    	<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="max-width:310px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;background-color:#00000000">
+	                    		<img alt="" src="../../rales/img/index-user.png" style="margin-right: 3px">
                                 <span>
                                 	<strong class="font-bold">
                                 		<span id="spanUserName">用户</span>
@@ -150,9 +213,9 @@
 	                            <i class="fa fa-bell" style="color:#EE6B6B"></i>待办 ( <span id="taskCount">0</span> ) 
 	                        </a>
 	                    </li>
-	                    <li class="dropdown hidden-xs" style="margin-right: 18px;width:75px;float: right;">
-	                        <a href="javascript:index.logout();">
-	                            <i class="fa fa fa-sign-out"></i>退出
+	                    <li class="dropdown hidden-xs" style="margin-right: 30px;width:35px;float: right;">
+	                        <a href="javascript:index.logout();" style="background-color:#00000000">
+	                            <img alt="" src="../../rales/img/index-exit.png" style="width: 20px; height: 20px">
 	                        </a>
 	                    </li>
                     </ul>

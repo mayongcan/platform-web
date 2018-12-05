@@ -12,15 +12,15 @@ function initView(){
 	$('#divIllegalDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
 	g_sexDict = top.app.getDictDataByDictTypeValue('SYS_SEX_TYPE');
 	top.app.addComboBoxOption($("#partiesSex"), g_sexDict, true, ' ');;
-	//公民选择
-	$('input[type=checkbox][id=personType1]').change(function() { 
-		$("#personType1").attr("checked",true);
-		$("#personType2").attr("checked",false);
-	});
-	$('input[type=checkbox][id=personType2]').change(function() { 
-		$("#personType2").attr("checked",true);
-		$("#personType1").attr("checked",false);
-	});
+//	//公民选择
+//	$('input[type=checkbox][id=personType1]').change(function() { 
+//		$("#personType1").attr("checked",true);
+//		$("#personType2").attr("checked",false);
+//	});
+//	$('input[type=checkbox][id=personType2]').change(function() { 
+//		$("#personType2").attr("checked",true);
+//		$("#personType1").attr("checked",false);
+//	});
 	
 	//1新增 2编辑 3查看
 	if(g_params.type == 1){
@@ -44,12 +44,15 @@ function initView(){
 			else $("#personType2").attr("checked",true);
 
 			$('#partiesName').val(g_params.subRow.content.partiesName);
-			$('#partiesSex').val(g_params.subRow.content.partiesSex);
-			$('#partiesCertificateNo').val(g_params.subRow.content.partiesCertificateNo);
-			$('#companyName').val(g_params.subRow.content.companyName);
-			$('#companyJob').val(g_params.subRow.content.companyJob);
-			$('#companyAddr').val(g_params.subRow.content.companyAddr);
-			$('#companyCode').val(g_params.subRow.content.companyCode);
+			$('#partiesPrincipal').val(g_params.subRow.content.partiesPrincipal);
+			$('#partiesPhone').val(g_params.subRow.content.partiesPhone);
+			$('#partiesAddr').val(g_params.subRow.content.partiesAddr);
+//			$('#partiesSex').val(g_params.subRow.content.partiesSex);
+//			$('#partiesCertificateNo').val(g_params.subRow.content.partiesCertificateNo);
+//			$('#companyName').val(g_params.subRow.content.companyName);
+//			$('#companyJob').val(g_params.subRow.content.companyJob);
+//			$('#companyAddr').val(g_params.subRow.content.companyAddr);
+//			$('#companyCode').val(g_params.subRow.content.companyCode);
 			$('#illegalDate').val(g_params.subRow.content.illegalDate);
 			$('#illegalAddr').val(g_params.subRow.content.illegalAddr);
 			$('#illegalReason').val(g_params.subRow.content.illegalReason);
@@ -64,6 +67,7 @@ function initView(){
 			$('#punishMoney3').val(g_params.subRow.content.punishMoney3);
 			$('#punishMoney4').val(g_params.subRow.content.punishMoney4);
 			$('#punishMoneyAll').val(g_params.subRow.content.punishMoneyAll);
+			$('#punishGetType').val(g_params.subRow.content.punishGetType);
 
 			if(g_params.subRow.content.punishMoneyType1 == '1') $("#punishMoneyType1").attr("checked",true);
 			if(g_params.subRow.content.punishMoneyType2 == '1') $("#punishMoneyType2").attr("checked",true);
@@ -91,16 +95,19 @@ function initView(){
 			//转换json
 			g_params.subRow.content = eval("(" + g_params.subRow.content + ")");
 
-			if(g_params.subRow.content.personType == '1') $("#personType1").attr("checked",true);
-			else $("#personType2").attr("checked",true);
+//			if(g_params.subRow.content.personType == '1') $("#personType1").attr("checked",true);
+//			else $("#personType2").attr("checked",true);
 
 			$('#tdPartiesName').text($.utils.getNotNullVal(g_params.subRow.content.partiesName));
-			$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.subRow.content.partiesSex, g_sexDict)));
-			$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.subRow.content.partiesCertificateNo));
-			$('#tdCompanyName').text($.utils.getNotNullVal(g_params.subRow.content.companyName));
-			$('#tdCompanyJob').text($.utils.getNotNullVal(g_params.subRow.content.companyJob));
-			$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.subRow.content.companyAddr));
-			$('#tdCompanyCode').text($.utils.getNotNullVal(g_params.subRow.content.companyCode));
+			$('#tdPartiesPrincipal').val($.utils.getNotNullVal(g_params.subRow.content.partiesPrincipal));
+			$('#tdPartiesPhone').val($.utils.getNotNullVal(g_params.subRow.content.partiesPhone));
+			$('#tdPartiesAddr').val($.utils.getNotNullVal(g_params.subRow.content.partiesAddr));
+//			$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.subRow.content.partiesSex, g_sexDict)));
+//			$('#tdPartiesCertificateNo').text($.utils.getNotNullVal(g_params.subRow.content.partiesCertificateNo));
+//			$('#tdCompanyName').text($.utils.getNotNullVal(g_params.subRow.content.companyName));
+//			$('#tdCompanyJob').text($.utils.getNotNullVal(g_params.subRow.content.companyJob));
+//			$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.subRow.content.companyAddr));
+//			$('#tdCompanyCode').text($.utils.getNotNullVal(g_params.subRow.content.companyCode));
 			$('#tdIllegalDate').text($.utils.getNotNullVal(g_params.subRow.content.illegalDate));
 			$('#tdIllegalAddr').text($.utils.getNotNullVal(g_params.subRow.content.illegalAddr));
 			$('#tdIllegalReason').text($.utils.getNotNullVal(g_params.subRow.content.illegalReason));
@@ -119,6 +126,7 @@ function initView(){
 //			$('#tdPunishMoney3').text($.utils.getNotNullVal(g_params.subRow.content.punishMoney3));
 //			$('#tdPunishMoney4').text($.utils.getNotNullVal(g_params.subRow.content.punishMoney4));
 			$('#tdPunishMoneyAll').text($.utils.getNotNullVal(g_params.subRow.content.punishMoneyAll));
+			$('#tdPunishGetType').text($.utils.getNotNullVal(g_params.subRow.content.punishGetType));
 
 			if(g_params.subRow.content.punishMoneyType1 == '1') $("#punishMoneyType1").attr("checked",true);
 			if(g_params.subRow.content.punishMoneyType2 == '1') $("#punishMoneyType2").attr("checked",true);
@@ -174,10 +182,10 @@ function getTableParams(){
 	var data = {};
 	data.tableTitleMark = $('#tableTitleMark').text();
 	
-	var personType = '0'
-	if($('#personType1').prop('checked')) personType = '1';
-	if($('#personType2').prop('checked')) personType = '2';
-	data.personType = personType;
+//	var personType = '0'
+//	if($('#personType1').prop('checked')) personType = '1';
+//	if($('#personType2').prop('checked')) personType = '2';
+//	data.personType = personType;
 	
 	data.defendType = $('#tdDefendType input:radio:checked').val();
 
@@ -194,12 +202,15 @@ function getTableParams(){
 	data.punishMoneyType2 = punishMoneyType2;
 	if(g_params.type == 1 || g_params.type == 2){	
 		data.partiesName = $('#partiesName').val();
-		data.partiesSex = $('#partiesSex').val();
-		data.partiesCertificateNo = $('#partiesCertificateNo').val();
-		data.companyName = $('#companyName').val();
-		data.companyJob = $('#companyJob').val();
-		data.companyAddr = $('#companyAddr').val();
-		data.companyCode = $('#companyCode').val();
+		data.partiesPrincipal = $('#partiesPrincipal').val();
+		data.partiesPhone = $('#partiesPhone').val();
+		data.partiesAddr = $('#partiesAddr').val();
+//		data.partiesSex = $('#partiesSex').val();
+//		data.partiesCertificateNo = $('#partiesCertificateNo').val();
+//		data.companyName = $('#companyName').val();
+//		data.companyJob = $('#companyJob').val();
+//		data.companyAddr = $('#companyAddr').val();
+//		data.companyCode = $('#companyCode').val();
 		data.ruleEvidence = $('#ruleEvidence').val();
 		data.illegalDate = $('#illegalDate').val();
 		data.illegalAddr = $('#illegalAddr').val();
@@ -211,6 +222,7 @@ function getTableParams(){
 		data.punishMoney3 = $('#punishMoney3').val();
 		data.punishMoney4 = $('#punishMoney4').val();
 		data.punishMoneyAll = $('#punishMoneyAll').val();
+		data.punishGetType = $('#punishGetType').val();
 		data.bankName = $('#bankName').val();
 		data.bankCode = $('#bankCode').val();
 		data.bankUserName = $('#bankUserName').val();
@@ -219,6 +231,10 @@ function getTableParams(){
 		data.lawsuit = $('#lawsuit').val();
 	}else{
 		data = $.extend(data, g_params.subRow.content);
+	}
+	if(g_params.subRow && g_params.subRow.content){
+		data.punishTypeOld1 = g_params.subRow.content.punishType1;
+		data.punishTypeOld2 = g_params.subRow.content.punishType2;
 	}
 	return data;
 }

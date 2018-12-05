@@ -20,7 +20,7 @@
 		<div id="content-left" class="ibox-content" style="border-width: 5px 0px;width: 74%;float:left;clear: none;margin-bottom: 20px;">
 			<div class="box-title">
 				<span class="table-title">立案审批表</span>
-				<span class="table-title-mark" id="tableTitleMark">穗工信电力01案〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+				<span class="table-title-mark" id="tableTitleMark">穗工信电力案字〔<span id="tableTitleMarkYear"></span>〕第<span id="tableTitleMarkNum"></span>号</span>
 			</div>
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
 				<table class="reference1">
@@ -106,6 +106,18 @@
 							</td>
 							<td class="reference-td" colspan="6" id="tdBase">
 								<textarea id="base" name="base" class="form-control" style="height:120px"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="text-align: center;">
+							   	违法类型
+							</td>
+							<td class="reference-td" colspan="6" id="tdIllegalType">
+								<select class="selectpicker" multiple data-selected-text-format="count > 5" id="illegalType" >
+									<option value="1">破坏电力设施</option>
+									<option value="2">扰乱供电秩序</option>
+									<option value="3">盗窃电</option>
+								</select>
 							</td>
 						</tr>
 						<tr>

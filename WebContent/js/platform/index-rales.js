@@ -958,11 +958,18 @@ var index = index || {};
 			if(idx == 0) active = "active";
 			var topMenu = "<li class='" + active + "'>" + 
 	                            "<a data-toggle='tab' id='folder_" + func.funcId + "' name='folder_" + func.funcId + "' data-id='" + func.funcId + "' data-name='" + func.funcName + "' ' data-funcflag='" + func.funcFlag + "' ' data-funclink='" + func.funcLink + "' " +
-	                            		"class='index-top-item'>" + 
-	                            	"<i class='" + icon + "'></i> " +
+	                            		"class='index-top-item' style='background: url(../../rales/img/index-top-box.png) no-repeat center;width: 145px;'>" + 
+	                            	"<i class='" + icon + "' style='margin-right: 0px;'></i> " +
 	                            	"<span>" + func.funcName + "</span>" + 
 	                            "</a>" +
 	    					"</li>";
+			var drowSubMenu = "<li class='" + active + "'>" + 
+						            "<a data-toggle='tab' id='folder_" + func.funcId + "' name='folder_" + func.funcId + "' data-id='" + func.funcId + "' data-name='" + func.funcName + "' ' data-funcflag='" + func.funcFlag + "' ' data-funclink='" + func.funcLink + "' " +
+						    		"class='index-top-item'>" + 
+								    	"<i class='" + icon + "' style='margin-right: 0px;'></i> " +
+								    	"<span>" + func.funcName + "</span>" + 
+								    "</a>" +
+								"</li>";
 			//获取已经加入topMenu的菜单宽度
 			var width = 0, isBeyondWidth = false;
 			$("#index-top-menu").children("li").each(function () {
@@ -974,7 +981,7 @@ var index = index || {};
 			width += $("#test-nav-tab-width").outerWidth(true);
 			if(width > (topMenuWidth - $('.navbar-minimalize').outerWidth(true) - 50)) isAddAll = true;
 			if(isAddAll || width > (topMenuWidth - $('.navbar-minimalize').outerWidth(true) - 50)){
-				subMenu += topMenu;
+				subMenu += drowSubMenu;
 			}else{
 				$("#index-top-menu").append(topMenu);
 			}
@@ -984,8 +991,8 @@ var index = index || {};
 		//是否加入子菜单
 		if(subMenu != ""){
 			var tmpHtml = "<li class='dropdown' id='index-top-submenu'>" + 
-								"<a class='dropdown-toggle' data-toggle='dropdown' href='#' data-animation='slide-bottom' aria-expanded='true' role='button' style='padding-left:20px;padding-right:0px;'>" + 
-									"<i class='icon wb-more-vertical'></i>" + 
+								"<a class='dropdown-toggle' data-toggle='dropdown' href='#' data-animation='slide-bottom' aria-expanded='true' role='button' style='padding-left:20px;padding-right:0px;background-color:#00000000'>" + 
+									"<i class='icon wb-more-vertical' style='color: #ffffff;'></i>" + 
 								"</a>" + 
 								"<ul class='dropdown-menu' role='menu'>";
 			tmpHtml += subMenu;
@@ -1052,10 +1059,10 @@ var index = index || {};
     			//判断是菜单还是叶子节点
     			if(funcList[i].funcType == '100200'){
     				leftMenu = "<li id='folder_" + funcList[i].funcId + "' name='folder_" + funcList[i].funcId + "'> " +
-								"<a href='#'> " +
-									"<i class='" + icon + "'></i> " +
+								"<a href='#' style='background-color: #00000000;color: #4a5458;background: url(../../rales/img/index-left-bar.png) no-repeat center center;background-size: cover; '> " +
+//									"<i class='" + icon + "'></i> " +
+									"<span class='fa arrow fa-lg'></span>" + 
 									"<span class='nav-label'>" + funcList[i].funcName + "</span>" +
-									"<span class='fa arrow'></span>" + 
 								"</a>" +
 							"</li>";
     			}else if(funcList[i].funcType == '100300'){
@@ -1065,8 +1072,8 @@ var index = index || {};
     			    }else{   
     					link = link + "?";
     			    }  
-    				leftMenu = "<li>" + 
-				                    "<a class='index-menu-item' href='" + link + "_pid=" + funcList[i].funcId + "' data-flag='" + funcList[i].funcFlag + "' data-isblank='" + funcList[i].isBlank + "' data-funcid='" + funcList[i].funcId + "'>" + funcList[i].funcName + "</a>" +		    							
+    				leftMenu = "<li id='single-menu'>" + 
+				                    "<a class='index-menu-item' style='background-color: #00000000;background: url(../../rales/img/index-left-bar.png) no-repeat center center;background-size: cover; ' href='" + link + "_pid=" + funcList[i].funcId + "' data-flag='" + funcList[i].funcFlag + "' data-isblank='" + funcList[i].isBlank + "' data-funcid='" + funcList[i].funcId + "'>" + funcList[i].funcName + "</a>" +		    							
 				               "</li>";
     			}
     			$("#side-menu").append(leftMenu);
@@ -1089,11 +1096,11 @@ var index = index || {};
 		var funcList = index.leftMenuSubList[parentId][funcId];
 		var subMenu = "";
 		if(deepIndex == 1)
-			subMenu = "<ul class='nav nav-second-level'>";
+			subMenu = "<ul class='nav nav-second-level' style='background: #f0faff;'>";
 		else if(deepIndex == 2){
-			subMenu = "<ul class='nav nav-third-level'>";
+			subMenu = "<ul class='nav nav-third-level' style='background: #f0faff;'>";
 		}else if(deepIndex == 3){
-			subMenu = "<ul class='nav nav-four-level'>";
+			subMenu = "<ul class='nav nav-four-level' style='background: #f0faff;'>";
 		}
 		for(var i = 0; i < funcList.length; i++){
 			var icon = "fa fa-columns";
@@ -1102,9 +1109,9 @@ var index = index || {};
 			if(funcList[i].funcType == '100200'){
 				subMenu += "<li id='folder_" + funcList[i].funcId + "' name='folder_" + funcList[i].funcId + "'> " +
 							"<a href='#'> " +
-								"<i class='" + icon + "'></i> " +
+//								"<i class='" + icon + "'></i> " +
+								"<span class='fa arrow fa-lg'></span>" + 
 								"<span class='nav-label'>" + funcList[i].funcName + "</span>" +
-								"<span class='fa arrow'></span>" + 
 							"</a>" +
 						"</li>";
 			}else if(funcList[i].funcType == '100300'){
@@ -1115,7 +1122,7 @@ var index = index || {};
 					link = link + "?";
 			    }  
 				subMenu += "<li>" + 
-			                    "<a class='index-menu-item' href='" + link + "_pid=" + funcList[i].funcId + "' data-flag='" + funcList[i].funcFlag + "' data-isblank='" + funcList[i].isBlank + "' data-funcid='" + funcList[i].funcId + "'>" + funcList[i].funcName + "</a>" +		    							
+			                    "<a class='index-menu-item' style='background: #00000000;' href='" + link + "_pid=" + funcList[i].funcId + "' data-flag='" + funcList[i].funcFlag + "' data-isblank='" + funcList[i].isBlank + "' data-funcid='" + funcList[i].funcId + "'>" + funcList[i].funcName + "</a>" +		    							
 			               "</li>";
 			}
 		};

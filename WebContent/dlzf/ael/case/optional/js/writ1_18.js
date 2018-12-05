@@ -162,6 +162,25 @@ function refreshView(){
 										operate + 
 									'</tr>')
 	}
+	
+	//初始化可拖拽表格
+	$("#tableFolder").tableDnD({
+		onDragClass: "myDragClass",
+        onDragStop: function (table, row) {
+            var trList = $(table).find('#tableContentList').children("tr");
+            g_dataList = [];
+            for (var i = 0; i < trList.length; i++) {
+                var tdArr = trList.eq(i).find("td");
+                var obj = {};
+   				obj.order = tdArr.eq(0).text();
+   				obj.name = tdArr.eq(1).text();
+   				obj.pageNo = tdArr.eq(2).text();
+   				obj.memo = tdArr.eq(3).text();
+   				g_dataList.push(obj);
+            }
+            refreshView();
+        }
+	});
 }
 
 function btnEventEdit(index){

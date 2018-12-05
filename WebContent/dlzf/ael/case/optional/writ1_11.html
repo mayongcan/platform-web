@@ -29,73 +29,37 @@
 	        </div>
 			<div class="box-title">
 				<span class="table-title">当场处罚决定书</span>
-				<span class="table-title-mark" id="tableTitleMark">穗工信电力01罚简〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+				<span class="table-title-mark" id="tableTitleMark">穗工信电力当罚字〔<span id="tableTitleMarkYear"></span>〕第<span id="tableTitleMarkNum"></span>号</span>
 			</div>
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
 				<table class="reference1">
 					<tbody>
 						<tr>
 							<td class="reference-td" style="width:80px;">
-								<div class="checkbox">
-								    <input type="checkbox" id="personType1">
-								    <label for="personType1">
-								        当事人
-								    </label>
-								</div>
-							</td>
-							<td class="reference-td" style="width:80px;">
-							   	姓名
+							   	当事人姓名或名称
 							</td>
 							<td class="reference-td" id="tdPartiesName">
 							   	<input type="text" id="partiesName" name="partiesName" class="form-control">
 							</td>
-							<td class="reference-td" style="width:60px;">
-							   	性别
-							</td>
-							<td class="reference-td" id="tdPartiesSex">
-							   	<select class="selectpicker" id="partiesSex"></select>
-							</td>
 							<td class="reference-td" style="width:100px;">
-							   	身份证号
+							   	法定代表人(负责人)
 							</td>
-							<td class="reference-td" id="tdPartiesCertificateNo">
-							   	<input type="text" id="partiesCertificateNo" name="partiesCertificateNo" class="form-control">
+							<td class="reference-td" id="tdPartiesPrincipal">
+							   	<input type="text" id="partiesPrincipal" name="partiesPrincipal" class="form-control">
 							</td>
-							<td class="reference-td" style="width:60px;"></td>
-							<td class="reference-td" id="tdPartiesCertificateNo"></td>
 						</tr>
 						<tr>
 							<td class="reference-td" style="width:60px;">
-								<div class="checkbox">
-								    <input type="checkbox" id="personType2">
-								    <label for="personType2">
-								        法人或其他组织
-								    </label>
-								</div>
+							   	联系电话
+							</td>
+							<td class="reference-td" id="tdPartiesPhone">
+							   	<input type="text" id="partiesPhone" name="partiesPhone" class="form-control">
 							</td>
 							<td class="reference-td" style="width:60px;">
-							   	姓名
+							   	住址（地址）
 							</td>
-							<td class="reference-td" id="tdCompanyName">
-							   	<input type="text" id="companyName" name="companyName" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	职务
-							</td>
-							<td class="reference-td" id="tdCompanyJob">
-							   	<input type="text" id="companyJob" name="companyJob" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	地址
-							</td>
-							<td class="reference-td" id="tdCompanyAddr">
-							   	<input type="text" id="companyAddr" name="companyAddr" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	统一社会信用代码
-							</td>
-							<td class="reference-td" id="tdCompanyCode">
-							   	<input type="text" id="companyCode" name="companyCode" class="form-control">
+							<td class="reference-td" id="tdPartiesAddr">
+							   	<input type="text" id="partiesAddr" name="partiesAddr" class="form-control">
 							</td>
 						</tr>
 						<tr>
@@ -127,15 +91,15 @@
 							   	<input type="text" class="form-control" id="illegalReason" name="illegalReason"/>
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td class="reference-td">
 							   	违反规定
 							</td>
 							<td class="reference-td" colspan="8" id="tdIllegalRule">
 							   	<input type="text" class="form-control" id="illegalRule" name="illegalRule"/>
 							</td>
-						</tr>
-						<tr>
+						</tr> -->
+						<!-- <tr>
 							<td class="reference-td">
 							   	申辩
 							</td>
@@ -149,7 +113,7 @@
 									<label for="defendType_id_1">对此，你（单位）未作陈述申辩</label>
 								</div>
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td class="reference-td">
 							   	依据法规
@@ -196,7 +160,7 @@
 								<input type="text" class="form-control" id="punishMoneyAll" name="punishMoneyAll"/>
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td class="reference-td" style="width:100px;">
 							   	缴纳罚款方式
 							</td>
@@ -210,8 +174,16 @@
 								    <label for="punishMoneyType2">限期缴纳</label>
 								</div>
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
+							<td class="reference-td">
+							   	缴纳方式
+							</td>
+							<td class="reference-td" id="tdPunishGetType" colspan="8" >
+								<input type="text" class="form-control" id="punishGetType" name="punishGetType"/>
+							</td>
+						</tr>
+						<!-- <tr>
 							<td class="reference-td">
 							   	缴纳银行名称
 							</td>
@@ -234,20 +206,20 @@
 							<td class="reference-td" id="tdBankUserName" colspan="8" >
 								<input type="text" class="form-control" id="bankUserName" name="bankUserName" value="×××专户"/>
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td class="reference-td">
 							   	复议申请
 							</td>
-							<td class="reference-td" colspan="3" id="tdReview1">
+							<td class="reference-td" colspan="8" id="tdReview1">
 								<input type="text" class="form-control" id="review1" name="review1" value="××人民政府"/>
 							</td>
-							<td class="reference-td">
+							<!-- <td class="reference-td">
 							   	或
 							</td>
 							<td class="reference-td" colspan="3" id="tdReview2">
 								<input type="text" class="form-control" id="review2" name="review2"/>
-							</td>
+							</td> -->
 						</tr>
 						<tr>
 							<td class="reference-td">

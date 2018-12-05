@@ -54,6 +54,9 @@ function initView(){
 			$('#caseSource').val(g_params.subRow.content.caseSource);
 			$('#base').val(g_params.subRow.content.base);
 			$('#advice').val(g_params.subRow.content.advice);
+			
+			if(!$.utils.isNull(g_params.subRow.content.illegalType))
+				$('#illegalType').selectpicker('val', g_params.subRow.content.illegalType.split(','));
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -87,6 +90,20 @@ function initView(){
 			$('#tdCaseSource').text($.utils.getNotNullVal(g_params.subRow.content.caseSource));
 			$('#tdBase').text($.utils.getNotNullVal(g_params.subRow.content.base));
 			$('#tdAdvice').text($.utils.getNotNullVal(g_params.subRow.content.advice));
+			
+			var illegalType = "";
+			if(!$.utils.isNull(g_params.subRow.content.illegalType)){
+				if(g_params.subRow.content.illegalType.indexOf("1") != -1){
+					illegalType += '破坏电力设施、';
+				}
+				if(g_params.subRow.content.illegalType.indexOf("2") != -1){
+					illegalType += '扰乱供电秩序、';
+				}
+				if(g_params.subRow.content.illegalType.indexOf("3") != -1){
+					illegalType += '盗窃电';
+				}
+			}
+			$('#tdIllegalType').text(illegalType);
 		}
 		
 		//设置右侧的高度和左侧一致
@@ -173,6 +190,7 @@ function getTableParams(){
 	var data = {};
 	data.registerId = g_params.row.id;
 	data.tableTitleMark = $('#tableTitleMark').text();
+	data.illegalType = $.trim($("#illegalType").val());
 	if(g_params.type == 1 || g_params.type == 2){
 		data.partiesName = $('#partiesName').val();
 		data.legalRepresentative = $('#legalRepresentative').val();
@@ -188,6 +206,9 @@ function getTableParams(){
 		data.advice = $('#advice').val();
 	}else{
 		data = $.extend(data, g_params.subRow.content);
+	}
+	if(g_params.subRow && g_params.subRow.content && g_params.subRow.content.illegalType){
+		data.illegalTypeOld = g_params.subRow.content.illegalType;
 	}
 	return data;
 }

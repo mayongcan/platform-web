@@ -126,6 +126,8 @@ function btnEventDetail(id){
 
 function btnEventRegister(id){
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
+	top.app.info.iframe.params = {};
+	top.app.info.iframe.params.routineRow = row;
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/case/case-new.html?_pid=" + pid + "&backUrl=/rales/ael/routine/routine-finish.html&oldRegisterId=" + row.id + "&registerType=2";
 	window.location.href = encodeURI(url);

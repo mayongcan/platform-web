@@ -24,7 +24,7 @@
 	        </div>
 			<div class="box-title">
 				<span class="table-title">行政处罚决定审批表</span>
-				<span class="table-title-mark" id="tableTitleMark">穗工信电力01处罚审〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+				<span class="table-title-mark" id="tableTitleMark">穗工信电力处罚审字〔<span id="tableTitleMarkYear"></span>〕第<span id="tableTitleMarkNum"></span>号</span>
 			</div>
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
 				<table class="reference1">
@@ -138,6 +138,18 @@
 							</td>
 							<td class="reference-td" id="tdAdvice"  colspan="7">
 								<textarea id="advice" name="advice" class="form-control" style="height:120px"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="text-align: center;">
+							   	处罚结果
+							</td>
+							<td class="reference-td" colspan="7" id="tdPunishType">
+								<select class="selectpicker" multiple data-selected-text-format="count > 5" id="punishType" >
+									<option value="1">警告</option>
+									<option value="2">罚款</option>
+									<option value="3">没收违法所得</option>
+								</select>
 							</td>
 						</tr>
 						<tr id="trHistoryAuditList" style="display: none">

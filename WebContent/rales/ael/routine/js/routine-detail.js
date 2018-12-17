@@ -15,14 +15,26 @@ $(function () {
 
 function initView(){
 	//设置顶部显示
-	$('#caseRegisterCode').text(g_params.row.otherFlowParams.code);
-	$('#flowProgressName').text("行政检查登记流程");
-	if(g_params.row.activityName == '行政检查编辑' || g_params.row.activityName == '行政检查草稿'){
-		$('#btnAudit').text("提交");
-		$('#flowProgressNotice').text("待编辑，请编辑后提交审批！");
-		g_btnType = 4;
+	if(g_params.row.subFlowProgress == '23'){
+		$('#caseRegisterCode').text(g_params.row.otherFlowParams.code);
+		$('#flowProgressName').text("日常巡查-内部呈批流程");
+		if(g_params.row.activityName == '审批编辑' ){
+			$('#btnAudit').text("重新提交");
+			$('#flowProgressNotice').text("待编辑，请重新编辑后提交审批！");
+			g_btnType = 4;
+		}else{
+			g_btnType = 1;
+		}
 	}else{
-		g_btnType = 1;
+		$('#caseRegisterCode').text(g_params.row.otherFlowParams.code);
+		$('#flowProgressName').text("行政检查登记流程");
+		if(g_params.row.activityName == '行政检查编辑' || g_params.row.activityName == '行政检查草稿'){
+			$('#btnAudit').text("提交");
+			$('#flowProgressNotice').text("待编辑，请编辑后提交审批！");
+			g_btnType = 4;
+		}else{
+			g_btnType = 1;
+		}
 	}
 
 	//初始化按钮
@@ -42,6 +54,13 @@ function initView(){
 				}
 				$("#btnNewDoc" + i + "-" + j).remove();
 			}
+
+			//初始化启动流程或者提交流程
+			$("#btnSubmitAudit" + i + "-" + j).attr("index", i);
+			$("#btnSubmitAudit" + i + "-" + j).attr("subIndex", j);
+			$("#btnSubmitAudit" + i + "-" + j).on('click', function () {
+				btnSubmitAudit($(this).attr('index'), $(this).attr('subIndex'));
+		    });
 		}
 	}
 }
@@ -64,6 +83,8 @@ function initNavButton(){
 		top.app.info.iframe.params.navIndex = 1;
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		var url = "/rales/ael/case/audit/audit-11.html?_pid=" + pid + "&backUrl=" + g_backUrl + "&cancelUrl=/rales/ael/routine/routine-detail.html";
+		if(g_params.row.subFlowProgress == '23')
+			url = "/rales/ael/case/audit/audit-23.html?_pid=" + pid + "&backUrl=" + g_backUrl + "&cancelUrl=/rales/ael/routine/routine-detail.html";
 		window.location.href = encodeURI(url);
     });
 }
@@ -123,6 +144,7 @@ function initData(){
 	addList('tableList1-16', 'tableCnt1-16', '/api/rales/ael/writ/getWritList', 1, 16, rales.writOptional1_16, '', true);
 	addList('tableList1-17', 'tableCnt1-17', '/api/rales/ael/writ/getWritList', 1, 17, rales.writOptional1_17, '', true, "行政检查案卷封面");
 	addList('tableList1-18', 'tableCnt1-18', '/api/rales/ael/writ/getWritList', 1, 18, rales.writOptional1_18, '', true, "行政检查案卷目录");
+	addFlowList('tableList1-19', 'tableCnt1-19', '/api/rales/ael/writ/getWritList', 1, 19, rales.writOptional1_19, '', true);
 }
 
 //添加列表内容
@@ -191,6 +213,70 @@ function addList(tableListId, tableCntId, url, index, subIndex, writType, subTyp
 				$('#' + tableListId).append(html);
 	   		}
         }
+	});
+} 
+
+
+//添加列表内容
+function addFlowList(tableListId, tableCntId, url, index, subIndex, writType, subType, addEditBtn, codeDefault){
+	$('#' + tableListId).empty();
+	var html = "";
+	$.ajax({
+		url: top.app.conf.url.apigateway + url,
+	    method: 'GET',
+	   	data:{
+	   		access_token: top.app.cookies.getCookiesToken(),
+	   		registerId: g_params.row.id,
+	   		writType: writType,
+	   		subType: subType,
+	   	},
+		success: function(data){
+			if(top.app.message.code.success == data.RetCode){
+				var flowProgress = "";
+				if(index == 1 && subIndex == 19) flowProgress = "内部呈批流程";
+				g_dataListArray[subIndex] = data.rows;
+				var length = data.rows.length;
+				$('#' + tableCntId).text(length);
+				var removeAuditButton = true;
+				for(var i = 0; i < length; i++){
+					//流程未启动或退回重新编辑的时候，可以显示编辑按钮
+					if($.utils.isEmpty(data.rows[i].lastHandleTime)) {
+						addEditBtn = true;
+						removeAuditButton = false;
+						flowProgress = "";
+					}
+					//判断是否启动编辑
+					if(g_params.row.activityName == '审批编辑' && index == 1 && subIndex == 19)  addEditBtn = true;
+					var editButton = "";
+					if(addEditBtn && !g_params.isFinish ){
+						editButton = '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'编 辑' + 
+									 '</button>'; 
+					}
+					html += '<tr>' + 
+								'<td class="reference-td">' + (i+1) + '</td>' + 
+								'<td class="reference-td">' + ($.utils.isEmpty(data.rows[i].code) ? codeDefault : data.rows[i].code) + '</td>' + 
+								'<td class="reference-td">' + $.utils.getNotNullVal(data.rows[i].lastHandleUserName) + '</td>' + 
+								'<td class="reference-td">' + $.date.dateFormat(data.rows[i].lastHandleTime, "yyyy-MM-dd") + '</td>' + 
+								'<td class="reference-td">' + flowProgress + '</td>' + 
+								'<td class="reference-td">' + 
+									'<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventDetail(' + index + ', ' + subIndex + ', ' + data.rows[i].id + ')" style="padding: 4px 15px;">' +  
+										'查 看' + 
+									'</button>' + 
+									editButton + 
+								'</td>' + 
+							'</tr>';
+				}
+				$('#' + tableListId).append(html);
+		        if(length == 1) {
+	        		$('#btnNewDoc' + index + '-' + subIndex).remove();
+	        		if(removeAuditButton) $('#btnSubmitAudit' + index + '-' + subIndex).remove();
+		        }
+				else {
+					$('#btnSubmitAudit' + index + '-' + subIndex).remove();
+				}
+	   		}
+    }
 	});
 } 
 
@@ -273,4 +359,46 @@ function getSubRow(subIndex, id){
 		}
 	}
 	return null;
+}
+
+//启动流程或提交审核
+function btnSubmitAudit(index, subIndex){
+	top.app.message.confirm("确定要提交审批？", function(){
+		var submitData = {}, url = "";
+		if(index == 1 && subIndex == 19) {
+			url = "/api/rales/ael/case/startRoutineInteriorAuditFlow";
+			submitData["subFlowProgress"] = "23";
+		}
+		submitData["registerId"] = g_params.row.id;
+		if(top.app.info.userInfo.userId == g_params.row.associateExecutor)
+			submitData["associateExecutor"] = g_params.row.createBy;
+		else
+			submitData["associateExecutor"] = g_params.row.associateExecutor;
+
+		//填入当前行的ID和文书
+		if(g_dataListArray[subIndex].length > 0){
+			submitData["id"] = g_dataListArray[subIndex][0].id;
+			submitData["otherFlowCode"] = g_dataListArray[subIndex][0].code;
+		}
+		
+		top.app.message.loading();
+		//异步处理
+		$.ajax({
+			url: top.app.conf.url.apigateway + url + "?access_token=" + top.app.cookies.getCookiesToken(),
+		    method: 'POST',
+			data:JSON.stringify(submitData),
+			contentType: "application/json",
+		    dataType: "json",
+			success: function(data){
+				top.app.message.loadingClose();
+				if(top.app.message.code.success == data.RetCode){
+		   			top.app.message.notice("数据提交成功！");
+		   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
+		   			location.href = "/rales/ael/routine/routine-todo.html?_pid=" + pid;
+		   		}else{
+		   			top.app.message.error(data.RetMsg);
+		   		}
+	        }
+		});
+	});
 }

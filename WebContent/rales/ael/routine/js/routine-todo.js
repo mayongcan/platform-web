@@ -1,4 +1,5 @@
 var $table = $('#tableList');
+var g_rows = [];
 
 $(function () {
 	//实现日期联动
@@ -88,25 +89,32 @@ function formatProgress(value,row,index){
 	else return value;
 }
 
+function formatFlow(value, row) {
+	if(row.subFlowProgress == '23') return "日常巡查-内部呈批流程";
+	else return "日常巡查流程";
+}
+
 function formatCaseCode(value,row,index){
 	if($.utils.isNull(row.otherFlowParams)) return ""
 	else return row.otherFlowParams.code;
 }
 
 function formatOperate(value, row, index){
+	g_rows[index] = row;
 	if(row.activityName == '行政检查草稿' || row.activityName == '行政检查编辑'){
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + index + ')">' + 
 					'编辑' + 
 				'</button>';
 	}else{
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit(' + index + ')">' + 
 					'查看' + 
 				'</button>';
 	}
 }
 
-function btnEventEdit(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
+function btnEventEdit(index){
+	//var row = $table.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.isEdit = true;
@@ -117,8 +125,9 @@ function btnEventEdit(id){
 	window.location.href = encodeURI(url);
 }
 
-function btnEventAudit(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
+function btnEventAudit(index){
+	//var row = $table.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 //	if(row.activityName == '行政检查编辑' || row.activityName == '行政检查草稿' ||  row.activityName == '第二承办人审批'){

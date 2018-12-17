@@ -358,6 +358,7 @@ function tableFormatFlowProgress1(value, row) {
 		else if(row.subFlowProgress == '20') return "行政强制执行及相关事项内部审批";		
 		else if(row.subFlowProgress == '21') return "销案审批流程";	
 		else if(row.subFlowProgress == '22') return "内部呈批流程";	
+		else if(row.subFlowProgress == '23') return "日常巡查-内部呈批";	
 	}
 }
 

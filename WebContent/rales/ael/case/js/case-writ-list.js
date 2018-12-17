@@ -110,9 +110,24 @@ function initView(){
 			}
 		}
     });
-	//刷新table后，重置选中行
-	$table.on('refresh.bs.table', function () {
+	
+	//在表格 body 渲染完成后触发。
+	$table.on('post-body.bs.table', function () {
 		g_selectRowsId = [];
+		 $("#" + $table.attr("id") + " input[type=checkbox]").each(function(i){
+	    	var $check = $(this);
+	        if ($check.attr("id") && $check.next("label")) {
+	            return;
+	        }
+	        var name = $check.attr("name");
+	        if(!name) return;
+	        var id = name + "-" + i;
+	        var $label = $('<label for="'+ id +'"></label>');
+	        if(name == 'btSelectAll')
+		        $check.attr("id", id).parent().addClass("platform-checkbox").append($label);
+	        else
+	        	$check.parent().addClass("platform-checkbox").append($label);
+	    });
     });
 }
 

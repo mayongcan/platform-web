@@ -159,13 +159,15 @@ function initView(){
 			if(typeof dataInfo.content !== 'object') dataInfo.content = eval("(" + dataInfo.content + ")");
 			
 			//受理人
-			$("#defendantName").val(dataInfo.content.createUserName + "、" + dataInfo.content.associateUserName);
+			$("#defendantName").val(g_params.routineRow.createUserName + "、" + g_params.routineRow.associateUserName);
 			
 			if(!$.utils.isNull(dataInfo.content.partiesName)) $("#reporterName").val(dataInfo.content.partiesName);
 			else $("#reporterName").val(dataInfo.content.companyName);
 
 			if(!$.utils.isNull(dataInfo.content.partiesName)) $("#reporterCompany").val(dataInfo.content.partiesAddr);
 			else $("#reporterCompany").val(dataInfo.content.companyAddr);
+			
+			$("#clueSummary").val(dataInfo.content.mainCheckDetail);
 		}
 	}
 

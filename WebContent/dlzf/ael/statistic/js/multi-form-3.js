@@ -56,7 +56,7 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticCaseTypeList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticPunishList",   		//请求后台的URL（*）
         queryParams: searchParams,										//传递参数（*）
         height: 400,
         onClickRow: function(row, $el){
@@ -100,7 +100,7 @@ function initCharts(data){
 	//获取X轴坐标数据
 	var nameData = [];
 	for(var i = 0; i < data.length; i++){
-		nameData[i] = top.app.getDictName(data[i].name, g_caseTypeDict);
+		nameData[i] = data[i].name;
 	}
 	//数组去重
 	xAxisData = Array.from(new Set(nameData));
@@ -118,7 +118,7 @@ function initCharts(data){
 				var hasValue = false;
 				for(var k = 0; k < data.length; k++){
 					if(!$.utils.isNull(data[k].name)) {
-						var tmpName = top.app.getDictName(data[k].name, g_caseTypeDict);
+						var tmpName = data[k].name;
 						var tmpMonth = data[k].checkTimeMonth + "月";
 						if(tmpName == xAxisData[j] && tmpMonth == legendArray[i]){
 							objData.push(data[k].value);
@@ -147,7 +147,7 @@ function initCharts(data){
 				var hasValue = false;
 				for(var k = 0; k < data.length; k++){
 					if(!$.utils.isNull(data[k].name)) {
-						var tmpName = top.app.getDictName(data[k].name, g_caseTypeDict);
+						var tmpName = data[k].name;
 						var tmpYear = data[k].checkTimeYear + "年";
 						if(tmpName == xAxisData[j] && tmpYear == legendArray[i]){
 							objData.push(data[k].value);
@@ -165,7 +165,7 @@ function initCharts(data){
 	}
 	option = {
 	    title: {
-	        text: '案件类型',
+	        text: '处罚结果',
 	        left: 'center'
 	    },
 	    tooltip: {
@@ -188,7 +188,7 @@ function initCharts(data){
 	    calculable: true,
 	    xAxis: [
 	        {
-	            name : '案件类型',
+	            name : '处罚结果',
 	            nameLocation: 'middle',
 	            nameTextStyle:{
 	                padding: [12, 0, 0, 0],
@@ -202,7 +202,7 @@ function initCharts(data){
 	    ],
 	    yAxis: [
 	        {
-	            name : '数量',
+	            name : '次数',
 	            nameLocation: 'middle',
 	            nameRotate: 360,
 	            nameTextStyle:{

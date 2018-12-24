@@ -54,7 +54,7 @@ function initTable(){
     };
     //初始化列表
 	$table.bootstrapTable({
-        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticLawResultList",   		//请求后台的URL（*）
+        url: top.app.conf.url.apigateway + "/api/rales/ael/statistic/getStatisticIllegalList",   		//请求后台的URL（*）
         queryParams: searchParams,										//传递参数（*）
         height: 400,
         onClickRow: function(row, $el){
@@ -163,7 +163,7 @@ function initCharts(data){
 	}
 	option = {
 	    title: {
-	        text: '执法结果',
+	        text: '违法类型',
 	        left: 'center'
 	    },
 	    tooltip: {
@@ -186,7 +186,7 @@ function initCharts(data){
 	    calculable: true,
 	    xAxis: [
 	        {
-	            name : '执法结果',
+	            name : '违法类型',
 	            nameLocation: 'middle',
 	            nameTextStyle:{
 	                padding: [12, 0, 0, 0],
@@ -200,7 +200,7 @@ function initCharts(data){
 	    ],
 	    yAxis: [
 	        {
-	            name : '数量',
+	            name : '次数',
 	            nameLocation: 'middle',
 	            nameRotate: 360,
 	            nameTextStyle:{

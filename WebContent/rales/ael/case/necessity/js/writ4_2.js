@@ -1,11 +1,28 @@
 var g_params = {}, g_backUrl = null;
 var g_codeType = rales.writNecessity4_2, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
-$(function () {
+$(function () {	
+	addBank()
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
 	initView();
+	
+	
 });
+
+//需求改动：判断是否罚款显示银行账号
+
+function addBank(){
+	$(':radio').click(function(){		 
+		   if($(this).val() == "yes"){
+			   $("#bank").css("display","block");
+		   }
+		   else{
+			   $("#bank").css("display","none");
+		   }
+		   
+		  });
+}
 
 function initView(){
 	$('#divInquiryBeginDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true, defaultDate: new Date()});
@@ -85,7 +102,7 @@ function initView(){
 			$('#tdPunish2').text($.utils.getNotNullVal(g_params.subRow.content.punish2));
 			$('#tdBankCode').text($.utils.getNotNullVal(g_params.subRow.content.bankCode));
 			$('#tdReview1').text($.utils.getNotNullVal(g_params.subRow.content.review1));
-			$('#tdReview2').text($.utils.getNotNullVal(g_params.subRow.content.review2));
+			$('#tdReview2').text($.utils.getNotNullVal(g_params.subRow.content.review2));0
 			$('#tdLawsuit').text($.utils.getNotNullVal(g_params.subRow.content.lawsuit));
 		}
 

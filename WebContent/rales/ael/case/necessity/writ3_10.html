@@ -15,8 +15,6 @@
     <link href="../../../../css/plugins/bootstrap-fileinput/fileinput.css" rel="stylesheet">
     <link href="../../../../css/platform.css" rel="stylesheet">
     <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
-    
-     
 </head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeIn" id="printBody">
@@ -25,105 +23,81 @@
 		        <button type="button" class="btn btn-primary no-print" id="btnPrint" style="margin-right:30px;width: 100px;">打 印</button>
 	        </div>
 			<div class="box-title">
-				<span class="table-title">行政处罚决定书</span>
-				<span class="table-title-mark" id="tableTitleMark">粤经信无01处罚〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+				<span class="table-title">行政处罚听证告知书</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01听告〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
 			</div>
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
 				<table class="reference1">
 					<tbody>
 						<tr>
-							<td class="reference-td" style="width: 100px;">
+							<td class="reference-td" style="width: 150px;">
 							   	当事人
 							</td>
-							<td class="reference-td" colspan="3" id="tdPartiesName">
+							<td class="reference-td" id="tdPartiesName" colspan="7">
 							   	<input type="text" class="form-control" id="partiesName" name="partiesName"/>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	（公民）姓名
+							   	日期
 							</td>
-							<td class="reference-td" id="tdName">
-							   	<input type="text" class="form-control" id="name" name="name"/>
-							</td>
-							<td class="reference-td">
-							   	身份证号码
-							</td>
-							<td class="reference-td" id="tdPartiesIdCard">
-							   	<input type="text" class="form-control" id="partiesIdCard" name="partiesIdCard"/>
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	（法人或其他组织）名称
-							</td>
-							<td class="reference-td" id="tdCompanyName">
-							   	<input type="text" class="form-control" id="companyName" name="companyName"/>
-							</td>
-							<td class="reference-td">
-							   	法定代表人
-							</td>
-							<td class="reference-td" id="tdLegalRepresentative">
-							   	<input type="text" id="legalRepresentative" name="legalRepresentative" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td">
-							   	住所（地址）
-							</td>
-							<td class="reference-td" colspan="3" id="tdAddress">
-							   	<input type="text" id="address" name="address" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" style="width: 100px;">
-							   	调查时间
-							</td>
-							<td class="reference-td" id="tdInquiryBeginDate">
-							   	<div class="input-group date edit-layer-input" id="divInquiryBeginDate">
-				            		<input type="text" class="form-control" id="inquiryBeginDate" name="inquiryBeginDate"/>
+							<td class="reference-td" id='tdStopDate'  colspan="7">
+							   	<div class="input-group date edit-layer-input" id="divStopDate">
+				            		<input type="text" class="form-control" id="stopDate" name="stopDate"/>
 				            		<span class="input-group-addon">
 				                		<span class="glyphicon glyphicon-calendar"></span>
 				            		</span>
 				            	</div>
 							</td>
-							<td class="reference-td" style="width: 100px;">
+						</tr>
+						<tr>
+							<td class="reference-td">
 							   	案由
 							</td>
-							<td class="reference-td" id="tdIllegalContent">
-							   	<input type="text" id="illegalContent" name="illegalContent" class="form-control">
+							<td class="reference-td" id="tdIllegalAction" colspan="7">
+							   	<input type="text" class="form-control" id="illegalAction" name="illegalAction"/>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
 							   	违法事实
 							</td>
-							<td class="reference-td" colspan="3" id="tdIllegalInfo">
-							   	<input type="text" id="illegalInfo" name="illegalInfo" class="form-control">
+							<td class="reference-td" id="tdLawInfo" colspan="7">
+							   	<input type="text" class="form-control" id="lawInfo" name="lawInfo"/>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
 							   	违法证据
 							</td>
-							<td class="reference-td" colspan="3" id="tdIllegalEvidence">
-							   	<input type="text" id="illegalEvidence" name="illegalEvidence" class="form-control">
+							<td class="reference-td" id="tdEvidence" colspan="7">
+							   	<input type="text" class="form-control" id="evidence" name="evidence"/>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	违反规定
+							   	法
 							</td>
-							<td class="reference-td" colspan="3" id="tdIllegalRule">
-							   	<input type="text" id="illegalRule" name="illegalRule" class="form-control">
+							<td class="reference-td" id="tdRule1">
+								<input type="text" id="rule1" name="rule1" class="form-control">
 							</td>
-						</tr>
-						<tr>
 							<td class="reference-td">
-							   	行政处罚裁量标准
+							   	条
 							</td>
-							<td class="reference-td" colspan="3" id="tdIllegalStandard">
-							   	<input type="text" id="illegalStandard" name="illegalStandard" class="form-control">
+							<td class="reference-td" id="tdRule2">
+								<input type="text" id="rule2" name="rule2" class="form-control">
+							</td>
+							<td class="reference-td">
+							   	款
+							</td>
+							<td class="reference-td" id="tdRule3">
+								<input type="text" id="rule3" name="rule3" class="form-control">
+							</td>
+							<td class="reference-td">
+							   	项
+							</td>
+							<td class="reference-td" id="tdRule4">
+								<input type="text" id="rule4" name="rule4" class="form-control">
 							</td>
 						</tr>
 						<tr>
@@ -131,7 +105,7 @@
 							   	违法性质
 							</td>
 							<td class="reference-td" id="tdLawType" colspan="7">
-								<div class="radio">
+							   	<div class="radio">
 									<input type="radio" name="lawType" id="lawType_id_0" value="1" checked="checked">
 									<label for="lawType_id_0">轻微</label>
 								</div>
@@ -151,64 +125,50 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	根据规定
+							   	依据规定
 							</td>
-							<td class="reference-td" colspan="3" id="tdBaseRule">
-							   	<input type="text" id="baseRule" name="baseRule" class="form-control">
-							</td>
-						</tr>
-						<tr id="trPunish">
-							<td class="reference-td">
-							   	行政处罚1
-							</td>
-							<td class="reference-td" colspan="1" id="tdPunish1">
-							   	<input type="text" id="punish1" name="punish1" class="form-control">
-							</td>
-							 <td class="reference-td">
-							   	<button type="button" class="btn btn-primary no-print" id="add" style="margin-right:30px;width: 100px;" onclick="addhtml()">新增</button>
-							</td>
-							<!--  <td class="reference-td" id="tdPunish2">
-							   	<input type="text" id="punish2" name="punish2" class="form-control">
-							</td> -->  
-						</tr>
-						<tr>						
-							 <td class="reference-td">
-							   	是否罚款
-							</td>
-							<td class="reference-td" colspan="3" id="tdBankCode">
-							   	<!-- <input type="text" id="bankCode" name="bankCode" class="form-control"> -->
-							 		
-									<input type="radio"  name="punish" id="punish" value="yes"  >
-									<label >是</label>
-										
-																
-									<input type="radio" name="punish" value="no" >
-									<label >否</label>
-									
-								    <div id="bank" style="display:none">银行账号：<input type="text" id="bankCode" name="bankCode"  class="form-control"></div> 
-							   	
+							<td class="reference-td" id="tdBaseRule" colspan="7">
+							   	<input type="text" class="form-control" id="baseRule" name="baseRule"/>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   受理复议部门
+							   	限期
 							</td>
-							<td class="reference-td" id="tdReview1">
-								<input type="text" class="form-control" id="review1" name="review1" value="××人民政府"/>
-							</td>
-							<td class="reference-td">
-							   	受理复议部门2
-							</td>
-							<td class="reference-td" id="tdReview2">
-								<input type="text" class="form-control" id="review2" name="review2"/>
+							<td class="reference-td" id="tdDeadline" colspan="7">
+							   	<input type="text" class="form-control" id="deadline" name="deadline"/>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	行政诉讼法院
+							   	陈述地点
 							</td>
-							<td class="reference-td" id="tdLawsuit" colspan="8" >
-								<input type="text" class="form-control" id="lawsuit" name="lawsuit"/>
+							<td class="reference-td" id="tdAddr" colspan="7">
+							   	<input type="text" class="form-control" id="addr" name="addr"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	联系人
+							</td>
+							<td class="reference-td"  id="tdContactUser" colspan="7">
+							   	<input type="text" class="form-control" id="contactUser" name="contactUser"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	联系电话
+							</td>
+							<td class="reference-td"  id="tdContactPhone" colspan="7">
+							   	<input type="text" class="form-control" id="contactPhone" name="contactPhone"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	单位地址
+							</td>
+							<td class="reference-td"  id="tdContactAddr" colspan="7">
+							   	<input type="text" class="form-control" id="contactAddr" name="contactAddr"/>
 							</td>
 						</tr>
 					</tbody>
@@ -216,8 +176,8 @@
 				<table id="tableUploadList" class="reference1" style="margin-top:20px;">
 					<tbody>
 						<tr>
-							<td class="reference-td" style="width:100px;">附件上传</td>
-							<td class="reference-td" colspan="3" style="line-height: normal;">
+							<td class="reference-td" style="width:150px;">附件上传</td>
+							<td class="reference-td"  style="line-height: normal;">
 								<div class="file-loading"> 
 									<input type="file" accept="*" id="files" name="files" multiple="multiple">
 								</div>
@@ -236,7 +196,7 @@
         <div id="content-right" class="ibox-content" style="border-width: 5px 0px;width: 25%;float:right;clear: none;">
        		<div class="files-list">
        			<div class="files-list-title">附件列表</div>
-       			<div id="files-list-content" class="files-list-content"></div>+
+       			<div id="files-list-content" class="files-list-content"></div>
        		</div>
         </div>
     </div>
@@ -260,42 +220,6 @@
     <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
     <script src="../../../../js/platform/fileupload-utils.js" type="text/javascript"></script>
     <script src="../../../js/rales-utils.js" type="text/javascript"></script>
-    <script src="js/writ4_2.js" type="text/javascript"></script>
-    <script type="text/javascript" language="javascript">
-    var i=2;
-    function addhtml(){
-    	
-    	var html="<tr >"
-    	     	+"<td class='reference-td'>"
-    			+"行政处罚"				   	
-    			+"</td>"				
-    			+"<td class='reference-td' colspan='1' >"				
-    			+"<input type='text' id='punish"+i+"'  class='form-control'>"				   
-    			+"</td>"
-    			+"<td class='reference-td'>"
-    			+"<button type='button' class='btn btn-primary no-prin del'  style='margin-right:30px;width: 100px;' >删除</button>"
-    			+"</td>" 
-    			+"</tr>"
-    	i++;		
-    	$("#trPunish").after(html);
-    	delDivFn(".del");
-    }
-    
-    function delDivFn(dom){
-    	
-    	$(dom).on("click",function(){
-    	$(this).parent().parent().remove();
-    	})
-    	
-    }
-    
-    
-   
-    </script> 
-    
-    
-    
-    
+    <script src="js/writ3_10.js" type="text/javascript"></script>
 </body>
-
 </html>

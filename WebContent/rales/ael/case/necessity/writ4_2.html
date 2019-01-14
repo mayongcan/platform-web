@@ -15,6 +15,8 @@
     <link href="../../../../css/plugins/bootstrap-fileinput/fileinput.css" rel="stylesheet">
     <link href="../../../../css/platform.css" rel="stylesheet">
     <link href="/rales/ael/case/css/flow-table.css" rel="stylesheet">
+    
+     
 </head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeIn" id="printBody">
@@ -155,37 +157,47 @@
 							   	<input type="text" id="baseRule" name="baseRule" class="form-control">
 							</td>
 						</tr>
-						<tr>
+						<tr id="trPunish">
 							<td class="reference-td">
 							   	行政处罚1
 							</td>
-							<td class="reference-td" id="tdPunish1">
+							<td class="reference-td" colspan="1" id="tdPunish1">
 							   	<input type="text" id="punish1" name="punish1" class="form-control">
 							</td>
-							<td class="reference-td">
-							   	行政处罚2
+							 <td class="reference-td">
+							   	<button type="button" class="btn btn-primary no-print" id="add" style="margin-right:30px;width: 100px;" onclick="addhtml()">新增</button>
 							</td>
-							<td class="reference-td" id="tdPunish2">
+							<!--  <td class="reference-td" id="tdPunish2">
 							   	<input type="text" id="punish2" name="punish2" class="form-control">
-							</td>
+							</td> -->  
 						</tr>
-						<tr>
-							<td class="reference-td">
-							   	银行账号
+						<tr>						
+							 <td class="reference-td">
+							   	是否罚款
 							</td>
 							<td class="reference-td" colspan="3" id="tdBankCode">
-							   	<input type="text" id="bankCode" name="bankCode" class="form-control">
+							   	<!-- <input type="text" id="bankCode" name="bankCode" class="form-control"> -->
+							 		
+									<input type="radio"  name="punish" id="punish" value="yes"  >
+									<label >是</label>
+										
+																
+									<input type="radio" name="punish" value="no" >
+									<label >否</label>
+									
+								    <div id="bank" style="display:none">银行账号：<input type="text" id="bankCode" name="bankCode"  class="form-control"></div> 
+							   	
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	复议申请
+							   受理复议部门
 							</td>
 							<td class="reference-td" id="tdReview1">
 								<input type="text" class="form-control" id="review1" name="review1" value="××人民政府"/>
 							</td>
 							<td class="reference-td">
-							   	或
+							   	受理复议部门2
 							</td>
 							<td class="reference-td" id="tdReview2">
 								<input type="text" class="form-control" id="review2" name="review2"/>
@@ -224,7 +236,7 @@
         <div id="content-right" class="ibox-content" style="border-width: 5px 0px;width: 25%;float:right;clear: none;">
        		<div class="files-list">
        			<div class="files-list-title">附件列表</div>
-       			<div id="files-list-content" class="files-list-content"></div>
+       			<div id="files-list-content" class="files-list-content"></div>+
        		</div>
         </div>
     </div>
@@ -249,5 +261,41 @@
     <script src="../../../../js/platform/fileupload-utils.js" type="text/javascript"></script>
     <script src="../../../js/rales-utils.js" type="text/javascript"></script>
     <script src="js/writ4_2.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+    var i=2;
+    function addhtml(){
+    	
+    	var html="<tr >"
+    	     	+"<td class='reference-td'>"
+    			+"行政处罚"				   	
+    			+"</td>"				
+    			+"<td class='reference-td' colspan='1' >"				
+    			+"<input type='text' id='punish"+i+"'  class='form-control'>"				   
+    			+"</td>"
+    			+"<td class='reference-td'>"
+    			+"<button type='button' class='btn btn-primary no-prin del'  style='margin-right:30px;width: 100px;' >删除</button>"
+    			+"</td>" 
+    			+"</tr>"
+    	i++;		
+    	$("#trPunish").after(html);
+    	delDivFn(".del");
+    }
+    
+    function delDivFn(dom){
+    	
+    	$(dom).on("click",function(){
+    	$(this).parent().parent().remove();
+    	})
+    	
+    }
+    
+    
+   
+    </script> 
+    
+    
+    
+    
 </body>
+
 </html>

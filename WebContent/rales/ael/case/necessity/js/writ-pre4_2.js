@@ -22,6 +22,22 @@ function initView(){
 	}
 }
 
+function setPunishData(){
+	var arr = new Array();
+	arr = g_params.data.array;
+	//alert(arr.length);
+		 
+	for(var i = 0;i<=arr.length-1;i++){
+		var j = 2;
+		var html = "<div class='box-content'>"
+			 + "<a class='content-fill-in' style='min-width:100px;' id='tdPunish"+j+"'>　</a>"
+			 + "</div>"
+		$("#pc").after(html);		
+		$('#tdPunish'+j).text(arr[i]);
+		j++;
+	}	 
+}
+
 //写入数据内容
 function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
@@ -48,10 +64,11 @@ function setData(){
 	
 	$('#tdBaseRule').text($.utils.getNotNullVal(g_params.data.baseRule));
 	$('#tdPunish1').text($.utils.getNotNullVal(g_params.data.punish1));
-	$('#tdPunish2').text($.utils.getNotNullVal(g_params.data.punish2));
+	//$('#tdPunish2').text($.utils.getNotNullVal(g_params.data.punish2));
 	$('#tdBankCode').text($.utils.getNotNullVal(g_params.data.bankCode));
 	$('#tdReview1').text($.utils.getNotNullVal(g_params.data.review1));
 	$('#tdReview2').text($.utils.getNotNullVal(g_params.data.review2));
-	$('#tdLawsuit').text($.utils.getNotNullVal(g_params.data.lawsuit));
+	$('#tdLawsuit').text($.utils.getNotNullVal(g_params.data.lawsuit));	
+	setPunishData();
 	
 }

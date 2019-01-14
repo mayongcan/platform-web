@@ -96,4 +96,13 @@ function setData(){
 										'</td>' + 
 									'</tr>')
 	}
+	
+	//1.5新加 添加审批意见
+	//显示历史审批意见
+	//承办人意见，显示历史处理意见
+	if(g_params.data.caseIsNormalCase == '1')
+		getHistoryAuditListPreview(g_params.data.rowId, "13");
+	else 
+		getHistoryAuditListPreview(g_params.data.rowId, "12");
+	
 }

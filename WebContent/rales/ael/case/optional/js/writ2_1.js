@@ -3,6 +3,8 @@ var g_codeType = rales.writOptional2_1, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
 var g_sexDict = "";
 var g_dataList = [];
+
+
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -78,6 +80,7 @@ function initView(){
 		$("#btnCancel").text('返 回');
 		$('#content-left').addClass('box-view-float-left');
 		$('#content-top-print').css('right', '26%');
+		
 
 		if(!$.utils.isNull(g_params.subRow.content)){
 			//转换json
@@ -271,6 +274,11 @@ function getTableParams(){
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}
+	
+	//1.5新加 添加预览显示审批意见
+	data.caseIsNormalCase = g_params.caseIsNormalCase;
+	data.rowId = g_params.row.id;
+	
 	return data;
 }
 

@@ -79,4 +79,12 @@ function setData(){
 	else $('#tdAuditType').text("解除行政强制措施种类");
 	$('#tdBaseContent').text($.utils.getNotNullVal(g_params.data.base));
 	
+	//1.9新加 添加审批意见
+	//显示历史审批意见
+	//承办人意见，显示历史处理意见
+	if(g_params.data.caseIsNormalCase == '1')
+		getHistoryAuditListPreview(g_params.data.rowId, "15");
+	else 
+		getHistoryAuditListPreview(g_params.data.rowId, "14");
+	
 }

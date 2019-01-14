@@ -181,6 +181,11 @@ function getTableParams(){
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}
+	
+	//1.9新加 添加预览显示审批意见
+	data.caseIsNormalCase = g_params.caseIsNormalCase;
+	data.rowId = g_params.row.id;
+	
 	return data;
 }
 

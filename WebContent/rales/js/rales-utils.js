@@ -526,6 +526,15 @@ function getHistoryAuditList(id, counterpartType){
 
 //获取历史审批意见列表
 function getHistoryAuditListPreview(id, counterpartType, divObj, divContain){
+	//1.9新加 新加法规处意见显示
+	var addhtml="";
+	addhtml='<tr>'+
+				'<td class="reference-td" style="text-align: center;">'+
+					' 	法规处<br/>意见'+
+				'</td>'+
+				'<td class="reference-td" colspan="7" id="tdDeptSuggest" style="height:150px;vertical-align: top;position: relative;">'+
+				'<div style="line-height: 20px;" id="tdLawSuggestContent">';
+	
 	if(!$.utils.isEmpty(id)){
 		$.ajax({
 	        url: top.app.conf.url.apigateway + "/api/rales/ael/case/getCaseSuggestList",   		//请求后台的URL（*）
@@ -546,6 +555,7 @@ function getHistoryAuditListPreview(id, counterpartType, divObj, divContain){
 		    			$('#tdLawSuggestContent').empty();
 		    			$('#tdUnitSuggestContent').empty();
 		    			var html = "";
+		    			var count=0;
 		    			for(var i = 0; i < data.rows.length; i++){
 		    				if(top.app.hasRoleName(data.rows[i].userRoleName, "行政执法人员")){
 			    				html = $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
@@ -556,7 +566,8 @@ function getHistoryAuditListPreview(id, counterpartType, divObj, divContain){
 			    				html = $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
 	    								"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
 			    				$('#tdDeptSuggestContent').append(html);
-		    				}else if(top.app.hasRoleName(data.rows[i].userRoleName, "法规处领导")){
+			    				//1.10 已经有法规处意见的 判断后有添加数据 没数据下面也不会再添加
+		    				}else if(top.app.hasRoleName(data.rows[i].userRoleName, "法规处领导")||top.app.hasRoleName(data.rows[i].userRoleName, "法规处执法人员")){
 		    					html = $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
 												"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
 					    				$('#tdLawSuggestContent').append(html);
@@ -564,8 +575,30 @@ function getHistoryAuditListPreview(id, counterpartType, divObj, divContain){
 			    				html = $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
 	    								"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
 			    				$('#tdUnitSuggestContent').append(html);
+			    				
+			    				
 		    				}
-		    			}
+		    				//1.9新加 新加法规处意见显示
+		    				if(data.rows[i].userRoleName.indexOf("法规处")!=-1){
+		    					addhtml += $.utils.getNotNullVal(data.rows[i].createUserName) + '意见：' + $.utils.getNotNullVal(data.rows[i].result) + 
+								"<span style='margin-left:20px;'>时间：" + $.utils.getNotNullVal(data.rows[i].createDate) + "</span><br/>";
+			    				count=1;
+    				}
+		    }
+		    			//1.9新加 新加法规处意见显示
+		    			addhtml+='</div>'+
+						'<div style="position: absolute;right: 10px;bottom: 0;">'+
+							'<span style="margin-right:100px;">负责人：</span>'+
+							'<span>年　　　月　　　日</span>'+
+						'</div>'+
+					'</td>'+
+					'</tr>';
+		    			//1.9新加 新加法规处意见显示 如果已经有法规处意见显示的则上面会加数据不再添加 没有就添加
+	    			/*if(count==1&&$(".table-title").text()=="行政检查登记表"){*/
+		    			if(count==1&&$('#tdLawSuggestContent').text()==""){
+	    				$('#tdDeptSuggestContent').parent().parent().after(addhtml);
+	    			}
+    			
 	    				//重置高度
 	    				var height = ($('#tdSuggest').height() < 80) ? 130 : ($('#tdSuggest').height() + 70);
 	    				$('#tdSuggest').height(height);

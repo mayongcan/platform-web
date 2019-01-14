@@ -63,7 +63,6 @@ var app = app || {};
 	app.conf = {};
 	app.conf.isDebug = true;
 	app.conf.url = {};
-	app.conf.url.apigateway = "http://192.168.1.108:8050";
 	app.conf.url.getTokenUrl = app.conf.url.apigateway + "/authServer/oauth/token";
 	app.conf.url.getVerifyCode = app.conf.url.apigateway + "/authServer/kaptcha/getKaptchaCode";
 	app.conf.url.checkVerifyCode = app.conf.url.apigateway + "/authServer/kaptcha/checkKaptchaCode";

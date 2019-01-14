@@ -9,6 +9,10 @@ $(function () {
 	$("#layerOk").click(function () {
 		submitAction();
     });
+	//重置按钮
+	$("#layerReset").click(function(){
+		resetAction();
+	});
 });
 
 /**
@@ -113,7 +117,10 @@ function initView(){
 	
 	//在表格 body 渲染完成后触发。
 	$table.on('post-body.bs.table', function () {
-		g_selectRowsId = [];
+		if($.utils.isNull(g_selectRowsId)) {
+			g_selectRowsId = [];
+			g_selectRowsId.push(rowData);
+		}
 		 $("#" + $table.attr("id") + " input[type=checkbox]").each(function(i){
 	    	var $check = $(this);
 	        if ($check.attr("id") && $check.next("label")) {
@@ -131,6 +138,18 @@ function initView(){
     });
 }
 
+/**
+ * 重置按钮
+ * @returns
+ */
+function resetAction(){
+	var rowObj = [];
+	parent.app.layer.retParams = [];
+	parent.app.layer.retParams.push(rowObj);
+	//关闭页面前设置结果
+	parent.app.layer.editLayerRet = true;
+	parent.layer.close(g_iframeIndex);
+}
 
 /**
  * 提交数据
@@ -148,7 +167,7 @@ function submitAction(){
 		relevanceIdList = relevanceIdList + rowData.id;
 		relevanceCodeList = relevanceCodeList + rowData.code;
 	});
-
+	
 	var rowObj = [];
 	rowObj.relevanceIdList = relevanceIdList;
 	rowObj.relevanceCodeList = relevanceCodeList;

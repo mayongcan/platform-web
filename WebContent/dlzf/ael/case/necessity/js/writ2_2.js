@@ -39,6 +39,8 @@ function initView(){
 			$("#lawOfficeAddress").val(g_params.subRow.content.lawOfficeAddress);
 			$("#contacterName").val(g_params.subRow.content.contacterName);
 			$("#contacterPhone").val(g_params.subRow.content.contacterPhone);
+			//11111111111
+			$('#caseClause').val(g_params.subRow.content.caseClause);
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -70,6 +72,8 @@ function initView(){
 			$('#tdLawOfficeAddress').text($.utils.getNotNullVal(g_params.subRow.content.lawOfficeAddress));
 			$('#tdContacterName').text($.utils.getNotNullVal(g_params.subRow.content.contacterName));
 			$('#tdContacterPhone').text($.utils.getNotNullVal(g_params.subRow.content.contacterPhone));
+			//111111
+			$('#tdCaseClause').text($.utils.getNotNullVal(g_params.subRow.content.caseClause));
 		}
 
 		//设置右侧的高度和左侧一致
@@ -136,6 +140,8 @@ function getTableParams(){
 		data.lawOfficeAddress = $('#lawOfficeAddress').val();
 		data.contacterName = $('#contacterName').val();
 		data.contacterPhone = $('#contacterPhone').val();
+		//11111111
+		data.caseClause = $('#caseClause').val();
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}

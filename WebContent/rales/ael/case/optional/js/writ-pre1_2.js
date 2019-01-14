@@ -87,8 +87,13 @@ function setData(){
 	$('#tdRule3').text($.utils.getNotNullVal(g_params.data.rule3));
 	$('#tdRule4').text($.utils.getNotNullVal(g_params.data.rule4));
 	$('#tdRuleAnswer').text($.utils.getNotNullVal(g_params.data.ruleAnswer));
+	//1111111111111111111111111111
+	$('#tdEnclosure').text($.utils.getNotNullVal(g_params.data.enclosure));
+	//1111111111111111111
+	if(g_params.data.selectEnclosure == '1') $("#selectEnclosure").css('display', '');
 	if(g_params.data.selectUser1 == '1') $("#selectUser1").css('display', '');
 	if(g_params.data.selectUser2 == '1') $("#selectUser2").css('display', '');
+	
 	
 	if($.utils.isEmpty(g_params.data.companyPrincipal)) $('#spanCompanyPrincipal').remove();
 	if($.utils.isEmpty(g_params.data.companyCurUser)) $('#spanCompanyCurUser').remove();

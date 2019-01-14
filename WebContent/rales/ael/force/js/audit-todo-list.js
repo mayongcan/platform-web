@@ -9,6 +9,15 @@ $(function () {
 	initTable();
 	//初始化权限功能按钮点击事件
 	initFuncBtnEvent();
+	//待办列表刷新
+	$("li a.index-menu-item:contains('待办')",parent.document).click(function(){
+		$('.selectpicker').selectpicker('refresh');
+		$table.bootstrapTable('refresh');
+	 });
+	$("div a.index-tab-menu-item:contains('待办')",parent.document).click(function(){
+		$('.selectpicker').selectpicker('refresh');
+		$table.bootstrapTable('refresh');
+	 });
 });
 
 /**

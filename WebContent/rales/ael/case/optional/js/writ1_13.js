@@ -7,6 +7,13 @@ $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
 	initView();
+	$("#tdRelationship input:radio").click(function(){
+		if($(this).val()==4){
+			$('#other').removeAttr("disabled");
+		}else{
+			$('#other').attr("disabled","disabled");
+		}
+	});
 });
 
 function initView(){

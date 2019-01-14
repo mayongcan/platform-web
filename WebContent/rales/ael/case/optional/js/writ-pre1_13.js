@@ -52,6 +52,13 @@ function setData(){
 	$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
 	$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.data.partiesZip));
 	$("input[type='radio'][name=relationship][value=" + g_params.data.relationship + "]").attr("checked",true);
+//	if(g_params.data.relationship == '1') $('#tdRelationship').text("☑当事人 ☐法人代表 ☐现场负责人 ☐其他");
+//	else if(g_params.data.relationship == '2') $('#tdRelationship').text("☐当事人 ☑法人代表 ☐现场负责人 ☐其他");
+//	else if(g_params.data.relationship == '3') $('#tdRelationship').text("☐当事人 ☐法人代表 ☑现场负责人 ☐其他");
+//	else if(g_params.data.relationship == '4') {
+//		$('#tdRelationship').text("☐当事人 ☐法人代表 ☐现场负责人 ☑其他：");
+//		$('#tdOther').text($.utils.getNotNullVal(g_params.data.other));
+//	}
 	if(g_params.data.relationship == '1') $('#tdRelationship').text("当事人");
 	else if(g_params.data.relationship == '2') $('#tdRelationship').text("法人代表");
 	else if(g_params.data.relationship == '3') $('#tdRelationship').text("现场负责人");

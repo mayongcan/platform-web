@@ -1,5 +1,5 @@
 var g_params = {}, g_backUrl = null;
-var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "";
+var g_caseSourceDict = "", g_caseProcedureDict = "", g_caseTypeDict = "",g_sexDict = "";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -31,6 +31,7 @@ function initView(){
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
 	g_caseProcedureDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_PROCEDURE');
 	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
+	console.log(g_params);
 	if(g_params.type == 2){
 		initDistrict();
 		$('#divDefendantDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});
@@ -105,7 +106,22 @@ function initView(){
 		$('#trHistoryAuditList').css('display', '');
 		getHistoryAuditList(g_params.row.id, "1");
 	}
-
+	//打印
+	$("#btnPrint").click(function () {
+		var params = {};
+		params.isPrint = true;
+		params.sexDict = g_sexDict;
+		params.data = getTableParams();
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre1_1.html', params, function(){});
+    });
+	//预览
+	$("#btnPreview").click(function () {
+		//设置参数
+		var params = {};
+		params.sexDict = g_sexDict;
+		params.data = getTableParams();
+		top.app.layer.editLayer('预览', ['725px', '600px'], '/rales/ael/case/necessity/writ-pre1_1.html', params, function(){});
+    });
 	//提交
 	$("#btnOK").click(function () {
 		$("form").submit();
@@ -116,6 +132,58 @@ function initView(){
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		window.location.href = g_backUrl + "?_pid=" + pid + "&navIndex=" + g_params.navIndex;
     });
+}
+
+/**
+ * 获取页面表格参数值
+ * @returns
+ */
+function getTableParams(){
+	var data = {};
+	data.registerId = g_params.row.id;
+	data.tableTitleMark = $('#tableTitleMark').text();
+//	var personType = '0'
+//	if($('#personType1').prop('checked')) personType = '1';
+//	if($('#personType2').prop('checked')) personType = '2';
+//	data.personType = personType;
+	data.caseSource = $('#divCaseSource input:radio:checked').val();
+	if(g_params.type == 1 || g_params.type == 2){
+		data.reporterName = $('#reporterName').val();
+		data.reporterCertificateNo = $('#reporterCertificateNo').val();
+		data.reporterCompany = $('#reporterCompany').val();
+		data.reporterContacts = $('#reporterContacts').val();
+		data.reporterAddress = $('#reporterAddress').val();
+		data.reporterZip = $('#reporterZip').val();
+		data.reporterPhone = $('#reporterPhone').val();
+		data.defendantName = $('#defendantName').val();
+		data.areaName = $('#areaName').val();
+		data.address = $('#address').val();
+		data.clueSummary = $('#clueSummary').val();
+		data.caseVerification = $('#caseVerification').val();
+		data.advice = $('#advice').val();
+		data.memo = $('#memo').val();
+	}else{
+		data.caseSource = $('#tdCaseSource').text();
+		data.reporterName = $('#tdReporterName').text();
+		data.reporterCertificateNo = $('#tdReporterCertificateNo').text();
+		data.reporterCompany = $('#tdReporterCompany').text();
+		data.reporterContacts = $('#tdReporterContacts').text();
+		data.reporterAddress = $('#tdReporterAddress').text();
+		data.reporterZip = $('#tdReporterZip').text();
+		data.reporterPhone = $('#tdReporterPhone').text();
+		data.defendantName = $('#tdDefendantName').text();
+		data.areaName = $('#tdAreaName').text();
+		data.address = $('#tdDefendantAddress').text();
+		data.clueSummary = $('#tdClueSummary').text();
+		data.caseVerification = $('#tdCaseVerification').text();
+		data.advice = $('#tdAdvice').text();
+		data.memo = $('#tdMemo').text();
+		data.caseSource = $('#tdCaseSource').text();
+		data.occurrenceDate = $('#tdDefendantDate').text();
+		data.checkDate = $('#tdDefendantCheckDate').text();
+		//data = $.extend(data, g_params.subRow.content);
+	}
+	return data;
 }
 
 /**

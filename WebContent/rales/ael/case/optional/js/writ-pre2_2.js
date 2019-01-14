@@ -43,4 +43,8 @@ function setData(){
 	$('#tdContactUser').text($.utils.getNotNullVal(g_params.data.contactUser));
 	$('#tdContactPhone').text($.utils.getNotNullVal(g_params.data.contactPhone));
 	$('#tdContactAddr').text($.utils.getNotNullVal(g_params.data.contactAddr));
+	//1111111111111111111111111111
+	$('#tdEnclosure').text($.utils.getNotNullVal(g_params.data.enclosure));
+	//1111111111111111111
+	if(g_params.data.selectEnclosure == '1') $("#selectEnclosure").css('display', '');
 }

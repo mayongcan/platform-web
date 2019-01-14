@@ -146,19 +146,21 @@
 							<td class="reference-td" style="width:60px;">
 							   	住址
 							</td>
-							<td class="reference-td" id="tdPartiesAddr" style="width: 20%">
+							<td class="reference-td" id="tdPartiesAddr" colspan="3">
 							   	<input type="text" id="partiesAddr" name="partiesAddr" class="form-control">
 							</td>
 							<td class="reference-td" style="width:60px;">
 							   	邮编
 							</td>
-							<td class="reference-td" id="tdPartiesZip" style="width: 20%">
+							<td class="reference-td" id="tdPartiesZip">
 							   	<input type="text" id="partiesZip" name="partiesZip" class="form-control">
-							</td>
+							</td>	
+						</tr>
+						<tr>
 							<td class="reference-td" style="width:60px;">
 								与当事人关系
 							</td>
-							<td class="reference-td" id="tdRelationship">
+							<td class="reference-td" id="tdRelationship" colspan="7">
 						   		<div class="radio">
 									<input type="radio" name="relationship" id="relationship_id_0" value="1" checked="checked">
 									<label for="relationship_id_0">当事人</label>
@@ -182,7 +184,7 @@
 							   	其他
 							</td>
 							<td class="reference-td" id="tdOther" colspan="5">
-							   	<input type="text" id="other" name="other" class="form-control">
+							   	<input type="text" id="other" name="other" class="form-control" disabled="disabled">
 							</td>
 						</tr>
 					</tbody>
@@ -239,16 +241,14 @@
 							   	是否申请回避
 							</td>
 							<td class="reference-td" id="tdNoticeAnswer" colspan="3">
-								<!-- <div class="radio">
+								<div class="radio">
 									<input type="radio" name="noticeAnswer" id="noticeAnswer_id_0" value="1" checked="checked">
 									<label for="receiveType_id_0">是</label>
 								</div>
 						   		<div class="radio">
 									<input type="radio" name="noticeAnswer" id="noticeAnswer_id_1" value="2">
 									<label for="noticeAnswer_id_1">否</label>
-								</div> -->
-								
-								<input type="text" id="noticeAnswer" name="noticeAnswer" class="form-control">
+								</div>
 							</td>
 						</tr>
 					</tbody>

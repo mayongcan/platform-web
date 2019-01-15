@@ -76,10 +76,11 @@ function setData(){
 //	$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.data.lawUserCardNo1));
 //	$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.data.lawUserCardNo2));
 	$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.data.noticeUser));
-	if(g_params.data.noticeAnswer == '1')
+	/*if(g_params.data.noticeAnswer == '1')
 		$('#tdNoticeAnswer').text($.utils.getNotNullVal("是"));
 	else
-		$('#tdNoticeAnswer').text($.utils.getNotNullVal("否"));
+		$('#tdNoticeAnswer').text($.utils.getNotNullVal("否"));*/
+	$('#tdNoticeAnswer').text($.utils.getNotNullVal(g_params.data.noticeAnswer))
 	
 	$('#tdInquiryQuestion').text($.utils.getNotNullVal(g_params.data.inquiryQuestion));
 	$('#tdInquiryAnswer').text($.utils.getNotNullVal(g_params.data.inquiryAnswer));

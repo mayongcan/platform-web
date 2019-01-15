@@ -427,7 +427,7 @@ function getTableParams(){
 		data.lawUserCardNo1 = $('#lawUserCardNo1').val();
 		data.lawUserCardNo2 = $('#lawUserCardNo2').val();
 		data.noticeUser = $('#noticeUser').val();
-		data.noticeAnswer = $('#tdNoticeAnswer input:radio:checked').val();
+		data.noticeAnswer = $('#noticeAnswer').val();
 		
 		data.inquiryQuestion = $('#inquiryQuestion').val();
 		data.inquiryAnswer = $('#inquiryAnswer').val();

@@ -131,20 +131,54 @@
 							   	<input type="text" class="form-control" id="baseRule" name="baseRule"/>
 							</td>
 						</tr>
-						<tr>
+						<!-- 
+						<tr>			
 							<td class="reference-td">
 							   	限期
 							</td>
 							<td class="reference-td" id="tdDeadline" colspan="7">
 							   	<input type="text" class="form-control" id="deadline" name="deadline"/>
-							</td>
+							</td>		
 						</tr>
+						-->
 						<tr>
+							<!-- 添加可选按钮 -->
+							<td rowspan="2" class="reference-td" colspan="1" style="width:100px;">
+								<div class="checkbox">
+								    <input type="checkbox" id="selectAddr">
+								    <label for="selectAddr">
+								      		陈述、申辩
+								    </label>
+								</div>			   
+							</td>
 							<td class="reference-td">
-							   	陈述地点
+							   	限期
+							</td>
+							<td class="reference-td" id="tdDeadline" colspan="7">
+							   	<input type="text" class="form-control" id="deadline" name="deadline"/>
+							</td>	
+						</tr>
+						<tr>	
+							<td class="reference-td">
+							   	地点
 							</td>
 							<td class="reference-td" id="tdAddr" colspan="7">
 							   	<input type="text" class="form-control" id="addr" name="addr"/>
+							</td>			
+						</tr>
+						<tr>
+							<td  class="reference-td" colspan="1" style="width:100px;">
+							<div class="checkbox">
+								    <input type="checkbox" id="selectLaw">
+								    <label for="selectLaw">
+								      		(可选)
+								    </label>
+								</div>		
+							</td>
+							<td class="reference-td" colspan="7">
+							   	依据《中华人民共和国行政处罚法》第四十二条第一款规定，你（单位）有权要求举行听证。<br>
+								如你（单位）要求听证，应当自收到本告知书之日起3日内向本单位提出申请。逾期不申请听证的，<br>
+								视为你（单位）放弃听证权利。
 							</td>
 						</tr>
 						<tr>

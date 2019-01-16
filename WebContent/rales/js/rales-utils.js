@@ -26,6 +26,7 @@ rales.writNecessity4_4 = "22";
 rales.writNecessity5_1 = "23";
 rales.writNecessity6_1 = "24";
 rales.writNecessity6_2 = "25";
+rales.writNecessity3_10 = "26";
 
 //文书对应值(非必要文书)
 rales.writOptional1_1 = "101";

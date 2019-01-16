@@ -1,5 +1,5 @@
 var g_params = {}, g_backUrl = null;
-var g_codeType = rales.writOptional7_2, g_codeCurNum = "";
+var g_codeType = rales.writNecessity3_10, g_codeCurNum = "";
 var g_relevanceIdList = "", g_relevanceCodeList = "";
 $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");

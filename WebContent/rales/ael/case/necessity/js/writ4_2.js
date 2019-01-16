@@ -176,6 +176,7 @@ function getTableParams(){
 		data.review1 = $('#review1').val();
 		data.review2 = $('#review2').val();
 		data.lawsuit = $('#lawsuit').val();
+		data.ispunish = $('#tdBankCode input:radio:checked').val();
 		
 		var array = new Array();
 		for(var i = 2;i<=5;i++){

@@ -70,5 +70,10 @@ function setData(){
 	$('#tdReview2').text($.utils.getNotNullVal(g_params.data.review2));
 	$('#tdLawsuit').text($.utils.getNotNullVal(g_params.data.lawsuit));	
 	setPunishData();
+	alert(g_params.data.ispunish);
+	if(g_params.data.ispunish == "no")
+		$("#bc").css("display","none");
+	else
+		$("#bc").css("display","block")
 	
 }

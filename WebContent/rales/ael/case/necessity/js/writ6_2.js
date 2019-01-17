@@ -29,12 +29,27 @@ function initView(){
 		   			g_dataList = [];
 		   			//一般程序
 		   			if(g_params.row.caseProcedure == '1'){
+		   				//添加案件登记流程下文书
+		   				if(g_params.code !=""){
+		   					var obj = {};
+		   					obj.name = g_params.row.code;
+			   				obj.pageNo = "";
+			   				obj.memo = g_params.row.memo;
+		   					obj.order = 100;
+		   					g_dataList.push(obj);
+		   				}
 		   				for(var i = 0; i < data.rows.length; i++){
 			   				var obj = {};
 			   				obj.name = data.rows[i].code;
 			   				obj.pageNo = "";
 			   				obj.memo = "";
-			   				if(data.rows[i].writType == rales.writNecessity2_1){
+			   				//新加 行政处罚案卷目录没有显示所有原因
+			   				if(data.rows[i].code !=""){
+			   					obj.order = i+1;
+			   					g_dataList.push(obj);
+			   				}
+			   				
+			   				/*if(data.rows[i].writType == rales.writNecessity2_1){
 			   					obj.order = 1;
 			   					g_dataList.push(obj);
 			   				}else if(data.rows[i].writType == rales.writOptional1_12){
@@ -161,6 +176,15 @@ function initView(){
 			   					obj.order = 41;
 			   					g_dataList.push(obj);
 			   				}
+			   				//新加   行政处罚案卷目录没有显示所有原因：文书不是全部在一张表里面 而点击后查询显示是查一张表里面的这个流程的文书
+			   				else if(data.rows[i].writType == rales.writNecessity3_1){
+			   					obj.order =42;
+			   					g_dataList.push(obj);
+			   				}else if(data.rows[i].writType == rales.writNecessity2_2){
+			   					obj.order =43;
+		   					g_dataList.push(obj);
+		   				}*/
+			   				
 			   			}
 		   			}
 		   			//简易程序

@@ -67,6 +67,7 @@ function initView(){
 					//关闭页面前设置结果
 					parent.app.layer.editLayerRet = true;
 		   			top.app.message.notice("数据提交成功！");
+		   			editListWrit(g_params.row.id);
 		   			var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		   			window.location.href = "/rales/ael/case/case-todo.html?_pid=" + pid;
 		   		}else{

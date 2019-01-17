@@ -178,7 +178,8 @@ function addList(tableListId, tableCntId, url, index, subIndex, writType, subTyp
 					html += '<tr>' + 
 								'<td class="reference-td" style="border-left-width: 0px;">' + (i+1) + '</td>' + 
 								'<td class="reference-td">' + ($.utils.isEmpty(data.rows[i].code) ? codeDefault : data.rows[i].code) + '</td>' + 
-								'<td class="reference-td">' + parent.g_params.row.lastHandleUserName + '</td>' + 
+//								'<td class="reference-td">' + parent.g_params.row.lastHandleUserName + '</td>' + 
+								'<td class="reference-td">' + ($.utils.isEmpty(data.rows[i].lastHandleUserName) ? parent.g_params.row.lastHandleUserName : data.rows[i].lastHandleUserName)+ '</td>' + 
 								'<td class="reference-td">' + $.date.dateFormat(parent.g_params.row.lastHandleTime, "yyyy-MM-dd") + '</td>' + 
 								'<td class="reference-td">' + top.app.getDictName(parent.g_params.row.flowProgress, parent.g_params.flowProgressDict) + '</td>' + 
 								'<td class="reference-td" style="border-right-width: 0px;">' + 

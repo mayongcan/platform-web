@@ -109,9 +109,7 @@ function formatOperate(value, row, index){
 }
 
 function operateButtonCheck1(id, url){
-	
 	var row = $table.bootstrapTable("getRowByUniqueId", id);
-	console.log(row);
 	 top.app.layer.editLayer('报告结果', ['900px', '550px'], '/rales/sam/frequency/frequency-assign-result.html', row, function (retParams) {
          
      });

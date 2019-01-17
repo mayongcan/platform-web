@@ -134,7 +134,6 @@ function initData(){
 	g_relevanceCodeList = g_params.row.relevanceName;
 	$("#relevanceId").val(g_relevanceCodeList);
 	//初始化文件选择器
-	console.log(g_params.row.files);
 	fileupload.initFileEditSelector('files', g_params.row.files);
 	
 	$('#divAcceptanceDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});

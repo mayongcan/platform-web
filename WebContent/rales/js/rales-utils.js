@@ -686,3 +686,17 @@ rales.addMapControl = function(map) {
 	});
 	map.addControl(geolocationControl);
 }
+function editListWrit(registerId){
+	var submitData = {};
+	submitData["registerId"] = registerId;
+	$.ajax({
+		url: top.app.conf.url.apigateway + "/api/rales/ael/writ/editListWrit?access_token=" + top.app.cookies.getCookiesToken(),
+	    method: 'POST',
+		data:JSON.stringify(submitData),
+		contentType: "application/json",
+	    dataType: "json",
+		success: function(data){
+			
+		}
+	});
+}

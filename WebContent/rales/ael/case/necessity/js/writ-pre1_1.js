@@ -36,11 +36,9 @@ function initView(){
 //写入数据内容
 function setData(){
 	$('#tableTitleMark').text(g_params.data.tableTitleMark);
-	console.log(g_params);
 //	$('#tdCaseSource').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.caseSource, g_params.caseSourceDict)));
 	$('#tdCaseSource').text($.utils.getNotNullVal(g_params.data.caseSource));
 	$('#tdReporterName').text($.utils.getNotNullVal(g_params.data.reporterName));
-	console.log(top.app.getDictName(g_params.data.caseSource, g_params.caseSourceDict));
 	$('#tdReporterCertificateNo').text($.utils.getNotNullVal(g_params.data.reporterCertificateNo));
 	$('#tdReporterCompany').text($.utils.getNotNullVal(g_params.data.reporterCompany));
 	$('#tdReporterContacts').text($.utils.getNotNullVal(g_params.data.reporterContacts));

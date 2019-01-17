@@ -31,7 +31,6 @@ function initView(){
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
 	g_caseProcedureDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_PROCEDURE');
 	g_caseTypeDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_CASE_TYPE');
-	console.log(g_params);
 	if(g_params.type == 2){
 		initDistrict();
 		$('#divDefendantDate').datetimepicker({locale: 'zh-CN', format: 'YYYY-MM-DD', allowInputToggle: true});

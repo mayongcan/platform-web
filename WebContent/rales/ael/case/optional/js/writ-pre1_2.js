@@ -90,7 +90,6 @@ function setData(){
 	$('#tdRule4').text($.utils.getNotNullVal(g_params.data.rule4));
 	$('#tdRuleAnswer').text($.utils.getNotNullVal(g_params.data.ruleAnswer));
 	//1111111111111111111111111111
-	console.log(g_params.data.enclosure);
 	$('#tdEnclosure').text($.utils.getNotNullVal(g_params.data.enclosure));
 	//1111111111111111111
 	if(g_params.data.selectEnclosure == '1') $("#selectEnclosure").css('display', '');

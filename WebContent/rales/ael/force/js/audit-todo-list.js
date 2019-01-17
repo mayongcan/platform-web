@@ -110,7 +110,6 @@ function formatCaseType(value,row,index){
 }
 
 function formatOperate(value, row, index){
-//	console.log(row);
 	g_rows[index] = row;
 	if(row.activityName == '先行登记保存草稿' || row.activityName == '重新编辑' || row.activityName == '重新编辑1' || row.activityName == '行政强制措施草稿'){
 		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + /*row.id*/index + ')">' + 

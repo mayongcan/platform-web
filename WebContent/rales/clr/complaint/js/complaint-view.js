@@ -115,10 +115,6 @@ function initData(){
 			arrayFileName[i] = arrayFileUrl[i].substring(arrayFileUrl[i].lastIndexOf("/") + 1);
 		}
 	}
-	for (var i = 0; i < length; i++) {
-		console.log(arrayFileUrl[i]);
-		console.log(arrayFileName[i]);
-	}
 	$('#selectFile').empty();
 	var html = "";
 	var length = arrayFileUrl.length;

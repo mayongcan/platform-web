@@ -102,6 +102,7 @@ function initView(){
 
 function initNavButton(){
 	//审批按钮点击
+	console.log(g_btnType);
 	$('#btnAudit').click(function () {
 		if(g_btnType == 1){
 			jumpToAuditPage();

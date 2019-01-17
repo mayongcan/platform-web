@@ -1,6 +1,6 @@
 var $table1 = $('#tableList1'), $table2 = $('#tableList2'), $table3 = $('#tableList3'), $table4 = $('#tableList4');
 var g_flowProgressDict = [], g_caseSourceDict = [], g_caseTypeDict = [], g_typeDict = [], g_sourceDict = [], g_sexDict = [];
-var g_rows1 = [];
+var g_rows1 = [],g_rows2 = [],g_rows3 = [],g_rows4 = [];
 $(function () {
 	g_flowProgressDict = top.app.getDictDataByDictTypeValue('AEL_CASE_FLOW_PROCEDURE');
 	g_caseSourceDict = top.app.getDictDataByDictTypeValue('AEL_REGISTER_SOURCE_CASE');
@@ -170,23 +170,26 @@ function formatCaseType2(value,row,index){
 }
 
 function formatOperate2(value, row, index){
+	g_rows2[index] = row;
 	if(row.activityName == '先行登记保存草稿' || row.activityName == '重新编辑' || row.activityName == '行政强制措施草稿'){
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit2(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit2(' + /*row.id*/index + ')">' + 
 					'编辑' + 
 				'</button>';
 	}else{
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit2(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit2(' + /*row.id*/index + ')">' + 
 					'查看' + 
 				'</button>';
 	}
 }
 
-function btnEventEdit2(id){
-	var row = $table2.bootstrapTable("getRowByUniqueId", id);
+function btnEventEdit2(/*id*/index){
+//	var row = $table2.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows2[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.isEdit = true;
-	top.app.info.iframe.params.row = row;;
+	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.index = index;
 	top.app.info.iframe.params.backUrl = "/rales/ael/todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "";
@@ -195,8 +198,9 @@ function btnEventEdit2(id){
 	window.location.href = encodeURI(url);
 }
 
-function btnEventAudit2(id){
-	var row = $table2.bootstrapTable("getRowByUniqueId", id);
+function btnEventAudit2(/*id*/index){
+//	var row = $table2.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows2[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 
@@ -206,6 +210,7 @@ function btnEventAudit2(id){
 //	}
 	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.index = index;
 	top.app.info.iframe.params.backUrl = "/rales/ael/todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "";
@@ -261,31 +266,35 @@ function formatCaseCode3(value,row,index){
 }
 
 function formatOperate3(value, row, index){
+	g_rows3[index] = row;
 	if(row.activityName == '行政检查草稿' || row.activityName == '行政检查编辑'){
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit3(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit3(' + /*row.id*/index + ')">' + 
 					'编辑' + 
 				'</button>';
 	}else{
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit3(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit3(' + /*row.id*/index + ')">' + 
 					'查看' + 
 				'</button>';
 	}
 }
 
-function btnEventEdit3(id){
-	var row = $table3.bootstrapTable("getRowByUniqueId", id);
+function btnEventEdit3(/*id*/index){
+//	var row = $table3.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows3[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.index = index;
 	top.app.info.iframe.params.backUrl = "/rales/ael/todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
 	window.location.href = encodeURI(url);
 }
 
-function btnEventAudit3(id){
-	var row = $table3.bootstrapTable("getRowByUniqueId", id);
+function btnEventAudit3(/*id*/index){
+//	var row = $table3.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows3[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 //	if(row.activityName == '行政检查编辑' || row.activityName == '行政检查草稿' ||  row.activityName == '第二承办人审批'){
@@ -293,6 +302,7 @@ function btnEventAudit3(id){
 //	}
 	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.index = index;
 	top.app.info.iframe.params.backUrl = "/rales/ael/todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;

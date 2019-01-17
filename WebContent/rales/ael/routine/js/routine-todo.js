@@ -61,7 +61,7 @@ function initTable(){
         queryParams: searchParams,										//传递参数（*）
         uniqueId: 'id',
         onClickRow: function(row, $el){
-	        	appTable.setRowClickStatus($table, row, $el);
+	        appTable.setRowClickStatus($table, row, $el);
         }
     });
 	//初始化Table相关信息
@@ -128,6 +128,7 @@ function btnEventEdit(index){
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.index = index;
 	top.app.info.iframe.params.backUrl = "/rales/ael/routine/routine-todo.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;
@@ -143,7 +144,8 @@ function btnEventAudit(index){
 //		top.app.info.iframe.params.isEdit = true;
 //	}
 	top.app.info.iframe.params.isEdit = true;
-	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.row = row;	
+	top.app.info.iframe.params.index = index;
 	top.app.info.iframe.params.backUrl = "/rales/ael/routine/routine-todo.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "/rales/ael/routine/routine-detail.html?_pid=" + pid + "&backUrl=" + top.app.info.iframe.params.backUrl;

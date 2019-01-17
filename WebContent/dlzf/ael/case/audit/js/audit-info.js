@@ -82,7 +82,7 @@ function initOtherInfo(){
 	//判断当前任务节点名称
 	if(g_params.row.activityName == '初步审批' || g_params.row.activityName == '调查报告审批' || g_params.row.activityName == '行政处罚审批' || 
 			g_params.row.activityName == '结案报告审批' || g_params.row.activityName == '案件移送(立案)审批' || g_params.row.activityName == '案件移送(调查报告)审批' ||
-			g_params.row.activityName == '不予行政处罚决定审批' || g_params.row.activityName == '行政检查审批' || g_params.row.activityName == '第二承办人审批' || 
+			g_params.row.activityName == '不予行政处罚决定审批' || g_params.row.activityName == '行政检查审批' || g_params.row.activityName == '第二承办人办理' || 
 			g_params.row.activityName == '先行登记保存证据审批' || g_params.row.activityName == '行政强制措施及相关事项内部审批' || g_params.row.activityName == '行政处罚决定法制审核'|| 
 			g_params.row.activityName == '听证审批表审批' || g_params.row.activityName == '行政处罚没收财物处理审批' || g_params.row.activityName == '行政处罚延期（分期）缴纳罚款审批' || 
 			g_params.row.activityName == '行政强制执行及相关事项内部审批' || g_params.row.activityName == '销案审批'){

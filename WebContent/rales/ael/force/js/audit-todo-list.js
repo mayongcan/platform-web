@@ -1,4 +1,5 @@
 var $table = $('#tableList');
+var g_rows = [];
 
 $(function () {
 	//实现日期联动
@@ -109,23 +110,27 @@ function formatCaseType(value,row,index){
 }
 
 function formatOperate(value, row, index){
+//	console.log(row);
+	g_rows[index] = row;
 	if(row.activityName == '先行登记保存草稿' || row.activityName == '重新编辑' || row.activityName == '重新编辑1' || row.activityName == '行政强制措施草稿'){
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventEdit(' + /*row.id*/index + ')">' + 
 					'编辑' + 
 				'</button>';
 	}else{
-		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit(' + row.id + ')">' + 
+		return '<button type="button" class="btn btn-outline btn-default btn-table-opreate" onclick="btnEventAudit(' + /*row.id*/index + ')">' + 
 					'查看' + 
 				'</button>';
 	}
 }
 
-function btnEventEdit(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
+function btnEventEdit(/*id*/index){
+//	var row = $table.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
 	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.index = index;
 	top.app.info.iframe.params.backUrl = "/rales/ael/force/audit-todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "";
@@ -134,17 +139,18 @@ function btnEventEdit(id){
 	window.location.href = encodeURI(url);
 }
 
-function btnEventAudit(id){
-	var row = $table.bootstrapTable("getRowByUniqueId", id);
+function btnEventAudit(/*id*/index){
+//	var row = $table.bootstrapTable("getRowByUniqueId", id);
+	var row = g_rows[index];
 	//设置传送对象
 	top.app.info.iframe.params = {};
-
 //	if(row.activityName == '先行登记保存草稿' || row.activityName == '行政强制措施草稿' || 
 //			row.activityName == '重新编辑' || row.activityName == '第二承办人审批'){
 //		top.app.info.iframe.params.isEdit = true;
 //	}
 	top.app.info.iframe.params.isEdit = true;
 	top.app.info.iframe.params.row = row;
+	top.app.info.iframe.params.index = index;
 	top.app.info.iframe.params.backUrl = "/rales/ael/force/audit-todo-list.html";
 	var pid = $.utils.getUrlParam(window.location.search,"_pid");
 	var url = "";

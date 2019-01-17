@@ -1,4 +1,6 @@
 var g_params = {}, g_backUrl = "", g_btnType = 1, g_dataListArray = [];
+var g_rows = [];
+var newData = {};
 $(function () {
 //	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
@@ -67,7 +69,21 @@ function initView(){
 
 function initNavButton(){
 	//审批按钮点击
+	var index = g_params.index;
 	$('#btnAudit').click(function () {
+		top.app.message.loading();
+		$.ajax({
+			url: top.app.conf.url.apigateway + "/api/rales/ael/routine/getTodoList?access_token=" + top.app.cookies.getCookiesToken(),
+		    method: 'GET',
+			data:JSON.stringify(),
+			contentType: "application/json",
+			async: false,
+		    dataType: "json",
+			success: function(data){
+				top.app.message.loadingClose();
+				newData = data.rows;
+	        }
+		});
 //		if(g_btnType == 1){
 //			//根据必要流程的状态，进入不同的审批页面
 //			top.app.info.iframe.params = g_params;
@@ -79,7 +95,9 @@ function initNavButton(){
 //			submitAudit();
 //		}
 		//根据必要流程的状态，进入不同的审批页面
-		top.app.info.iframe.params = g_params;
+//		top.app.info.iframe.params = g_params;
+		top.app.info.iframe.params.isEdit = true;
+		top.app.info.iframe.params.row = newData[index];
 		top.app.info.iframe.params.navIndex = 1;
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		var url = "/rales/ael/case/audit/audit-11.html?_pid=" + pid + "&backUrl=" + g_backUrl + "&cancelUrl=/rales/ael/routine/routine-detail.html";

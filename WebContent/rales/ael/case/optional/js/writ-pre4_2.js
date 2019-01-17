@@ -45,4 +45,6 @@ function setData(){
 	$('#tdContactUser').text($.utils.getNotNullVal(g_params.data.contactUser));
 	$('#tdContactPhone').text($.utils.getNotNullVal(g_params.data.contactPhone));
 	$('#tdContactAddr').text($.utils.getNotNullVal(g_params.data.contactAddr));
+	
+	
 }

@@ -17,12 +17,27 @@
 </head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeIn">
+    	 
 		<div id="content-left" class="ibox-content" style="border-width: 5px 0px;width: 74%;float:left;clear: none;margin-bottom: 20px;">
-			<div style="text-align: center;padding-top:15px;margin-bottom:20px;">
+			<!-- 添加打印按钮 -->
+		 	<div id="content-top-print" style="float:right;right: 20px;margin-top: 20px;">
+		        <button type="button" class="btn btn-primary no-print" id="btnPrint" style="width: 100px;">打 印</button>
+	        </div>
+			<div style="text-align: center;padding-top:15px;margin-bottom:20px;"> 
 				<!-- <span class="table-title">广州市工业和信息化委员会</span> -->
+			 		<span class="table-title">无线电管理案件登记表</span>
+				<span class="table-title-mark" id="tableTitleMark">粤经信无01案登〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+		<!-- 
+		<div id="content-left" class="ibox-content" style="border-width: 5px 0px;">
+            <div id="content-top-print" style="position: absolute;right: 20px;margin-top: 20px;">
+		        <button type="button" class="btn btn-primary no-print" id="btnPrint" style="margin-right:30px;width: 100px;">打 印</button>
+	        </div>
+			<div class="box-title">
 				<span class="table-title">无线电管理案件登记表</span>
 				<span class="table-title-mark" id="tableTitleMark">粤经信无01案登〔<span id="tableTitleMarkYear"></span>〕<span id="tableTitleMarkNum"></span>号</span>
 			</div>
+		 -->
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
 				<table class="reference1">
 					<tbody>
@@ -226,6 +241,8 @@
 				</table>
 	            <div style="text-align: center;margin-top:30px">
 			        <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">保 存</button>
+			        <!-- 添加预览 -->
+			        <button type="button" class="btn btn-primary no-print" id="btnPreview" style="margin-right:30px;width: 100px;">预 览</button>
 			        <button type="button" class="btn btn-white" id="btnCancel" style="width: 100px;">取 消</button>
 		        </div>
 			</form>

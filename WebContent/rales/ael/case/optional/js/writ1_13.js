@@ -7,6 +7,13 @@ $(function () {
 	g_backUrl = $.utils.getUrlParam(window.location.search,"backUrl");
 	g_params = top.app.info.iframe.params;
 	initView();
+	$("#tdRelationship input:radio").click(function(){
+		if($(this).val()==4){
+			$('#other').removeAttr("disabled");
+		}else{
+			$('#other').attr("disabled","disabled");
+		}
+	});
 });
 
 function initView(){
@@ -420,7 +427,7 @@ function getTableParams(){
 		data.lawUserCardNo1 = $('#lawUserCardNo1').val();
 		data.lawUserCardNo2 = $('#lawUserCardNo2').val();
 		data.noticeUser = $('#noticeUser').val();
-		data.noticeAnswer = $('#tdNoticeAnswer input:radio:checked').val();
+		data.noticeAnswer = $('#noticeAnswer').val();
 		
 		data.inquiryQuestion = $('#inquiryQuestion').val();
 		data.inquiryAnswer = $('#inquiryAnswer').val();

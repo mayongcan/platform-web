@@ -46,4 +46,8 @@ function setData(){
 	$('#tdContactUser').text($.utils.getNotNullVal(g_params.data.contactUser));
 	$('#tdContactPhone').text($.utils.getNotNullVal(g_params.data.contactPhone));
 	$('#tdContactAddr').text($.utils.getNotNullVal(g_params.data.contactAddr));
+	//1111111111111111111
+	if(g_params.data.selectAddr == '1') $("#selectAddr").css('display', '');
+	//1111111111111111111
+	if(g_params.data.selectLaw == '1') $("#selectLaw").css('display', '');
 }

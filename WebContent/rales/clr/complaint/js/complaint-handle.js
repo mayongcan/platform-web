@@ -56,6 +56,8 @@ function getResultList(){
 			    							'</td>' + 
 	    								'</tr>';
 		    				$('#resultList').append(html);
+		    				$('#selectFile'+i+'').selectpicker('refresh');
+		    				$('#selectFile'+i+'').selectpicker('render');
 		    			}
 		    		}
 		    		//设置右侧的高度和左侧一致

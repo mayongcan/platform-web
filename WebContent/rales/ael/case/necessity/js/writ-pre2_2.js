@@ -42,8 +42,11 @@ function setData(){
 	$('#lawExecutorIdCard1').text($.utils.getNotNullVal(g_params.data.lawExecutorIdCard1));
 	$('#lawExecutor2').text($.utils.getNotNullVal(g_params.data.lawExecutor2));
 	$('#lawExecutorIdCard2').text($.utils.getNotNullVal(g_params.data.lawExecutorIdCard2));
-	$('#applyAddress').text($.utils.getNotNullVal(g_params.data.applyAddress));
+	//执法机关单位和申请地址
+	$('#applyAddress').text($.utils.getNotNullVal(g_params.data.lawOfficeAddress));
 	$('#lawOfficeAddress').text($.utils.getNotNullVal(g_params.data.lawOfficeAddress));
 	$('#contacterName').text($.utils.getNotNullVal(g_params.data.contacterName));
 	$('#contacterPhone').text($.utils.getNotNullVal(g_params.data.contacterPhone));	
+	//1111111111111111111
+	$('#caseClause').text($.utils.getNotNullVal(g_params.data.caseClause));
 }

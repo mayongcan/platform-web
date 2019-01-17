@@ -85,9 +85,13 @@ function initView(){
 			$('#rule3').val(g_params.subRow.content.rule3);
 			$('#rule4').val(g_params.subRow.content.rule4);
 			$('#ruleAnswer').val(g_params.subRow.content.ruleAnswer);
+			//1111111111111111111111111
+			$('#enclosure').val(g_params.subRow.content.enclosure);
+			//11111111111111111111111111111111
+			if(g_params.subRow.content.selectEnclosure == '1') $("#selectEnclosure").attr("checked",true);
 			if(g_params.subRow.content.selectUser1 == '1') $("#selectUser1").attr("checked",true);
 			if(g_params.subRow.content.selectUser2 == '1') $("#selectUser2").attr("checked",true);
-
+			
 			$('.selectpicker').selectpicker('refresh');
 			
 			if(!$.utils.isEmpty(g_params.subRow.content.askList)){
@@ -174,8 +178,13 @@ function initView(){
 			$('#tdRule3').text($.utils.getNotNullVal(g_params.subRow.content.rule3));
 			$('#tdRule4').text($.utils.getNotNullVal(g_params.subRow.content.rule4));
 			$('#tdRuleAnswer').text($.utils.getNotNullVal(g_params.subRow.content.ruleAnswer));
+			//1111111111111111111
+			$('#tdEnclosure').text($.utils.getNotNullVal(g_params.subRow.content.enclosure));
+			//111111111111111
+			if(g_params.subRow.content.selectEnclosure == '1') $("#selectEnclosure").attr("checked",true);
 			if(g_params.subRow.content.selectUser1 == '1') $("#selectUser1").attr("checked",true);
 			if(g_params.subRow.content.selectUser2 == '1') $("#selectUser2").attr("checked",true);
+			
 			
 			if(!$.utils.isEmpty(g_params.subRow.content.askList)){
 				var askList = eval("(" + g_params.subRow.content.askList + ")");
@@ -328,7 +337,7 @@ function getTableParams(){
 		data.lawUserCardNo1 = $('#lawUserCardNo1').val();
 		data.lawUserCardNo2 = $('#lawUserCardNo2').val();
 		data.noticeUser = $('#noticeUser').val();
-		data.noticeAnswer = $('#tdNoticeAnswer input:radio:checked').val();
+		data.noticeAnswer = $('#noticeAnswer').val();
 		data.checkDetail = $('#checkDetail').val();
 		data.inquiryQuestion = $('#inquiryQuestion').val();
 		data.inquiryAnswer = $('#inquiryAnswer').val();
@@ -337,10 +346,15 @@ function getTableParams(){
 		data.rule3 = $('#rule3').val();
 		data.rule4 = $('#rule4').val();
 		data.ruleAnswer = $('#ruleAnswer').val();
+		//1111111111111111111
+		data.enclosure = $('#enclosure').val();
 		if($('#selectUser1').prop('checked')) data.selectUser1 = '1';
 		else data.selectUser1 = '0';
 		if($('#selectUser2').prop('checked')) data.selectUser2 = '1';
 		else data.selectUser2 = '0';
+		//1111111111111111111111
+		if($('#selectEnclosure').prop('checked')) data.selectEnclosure = '1';
+		else data.selectEnclosure = '0';
 		
 		var askList = [];
 		for(var i = 1; i < g_askListIndex;i++){

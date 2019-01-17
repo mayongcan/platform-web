@@ -271,7 +271,7 @@
 									<input type="radio" name="noticeAnswer" id="noticeAnswer_id_1" value="2">
 									<label for="noticeAnswer_id_1">否</label>
 								</div> -->
-									<input type="text" id="noticeAnswer" name="noticeAnswer" class="form-control">
+								<input type="text" id="noticeAnswer" name="noticeAnswer" class="form-control">
 							</td>
 						</tr>
 					</tbody>
@@ -390,10 +390,26 @@
 								</div>
 							</td>
 						</tr>
+						<!-- 
 						<tr>
 							<td class="reference-td">文书关联</td>
 							<td class="reference-td" colspan="3">
 								<input type="text" id="relevanceId" name="relevanceId" class="form-control" readonly style="cursor: pointer;background: #fff;" placeholder="请选择关联文书">
+							</td>
+						</tr>
+						 -->
+						<tr>
+						 	<td class="reference-td" colspan="1" rowspan="3" style="width:100px;">
+								<div class="checkbox">
+								    <input type="checkbox" id="selectEnclosure">
+								    <label for="selectEnclosure">
+								      	附件(可选)
+								    </label>
+								</div>
+							</td>
+							<!-- <td class="reference-td" style="width:100px;">附件(可选)</td> -->
+							<td class="reference-td" colspan="3" style="line-height: normal;">
+								<textarea id="enclosure" name="enclosure" class="form-control"></textarea>
 							</td>
 						</tr>
 					</tbody>

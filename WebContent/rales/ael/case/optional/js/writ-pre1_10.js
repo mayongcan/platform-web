@@ -60,4 +60,6 @@ function setData(){
 	$('#tdContactUser').text($.utils.getNotNullVal(g_params.data.contactUser));
 	$('#tdContactPhone').text($.utils.getNotNullVal(g_params.data.contactPhone));
 	$('#tdContactAddr').text($.utils.getNotNullVal(g_params.data.contactAddr));
+	//1111111111111111111
+	if(g_params.data.selectOrderContent == '1') $("#selectOrderContent").css('display', '');
 }

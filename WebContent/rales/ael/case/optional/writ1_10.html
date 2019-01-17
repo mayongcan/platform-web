@@ -38,8 +38,9 @@
 							</td>
 						</tr>
 						<tr>
+							<!-- 单位 改成  违法行为-->
 							<td class="reference-td">
-							   	单位
+							   	违法行为
 							</td>
 							<td class="reference-td" colspan="7" id="tdCompanyName">
 							   	<input type="text" class="form-control" id="companyName" name="companyName"/>
@@ -106,24 +107,40 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="reference-td" colspan="8" style="text-align: center;">
+							<td class="reference-td" colspan="8">
 								<div class="checkbox">
 								    <input type="checkbox" id="stopAction1">
 								    <label for="stopAction1">立即停止违法行为</label>
 								</div>
-								<div class="checkbox">
+								<!-- <div class="checkbox">
+								    <input type="checkbox" id="stopAction2">
+								    <label for="stopAction2">立即改正违法行为</label>
+								</div> -->
+								<!-- <div class="checkbox">
+								    <input type="checkbox" id="stopAction3">
+								    <label for="stopAction3">限期改正违法行为</label>
+								</div> -->
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" colspan="8">
+							 	<div class="checkbox">
 								    <input type="checkbox" id="stopAction2">
 								    <label for="stopAction2">立即改正违法行为</label>
 								</div>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="3" class="reference-td" style="width:100px;">
 								<div class="checkbox">
-								    <input type="checkbox" id="stopAction3">
-								    <label for="stopAction3">限期改正违法行为</label>
+									    <input type="checkbox" id="stopAction3">
+									    <label for="stopAction3">限期改正</label>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	改正限期
+							   	限期改正时间
 							</td>
 							<td class="reference-td" id='tdStopDate' colspan="7" >
 							   	<div class="input-group date edit-layer-input" id="divStopDate">
@@ -136,12 +153,13 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	改正内容
+							   	限期改正内容
 							</td>
 							<td class="reference-td" colspan="7"  id="tdContent">
 							   	<input type="text" class="form-control" id="content" name="content"/>
 							</td>
 						</tr>
+						<!-- 处理日期 改成 接受处理时间
 						<tr>
 							<td class="reference-td">
 							   	处理日期
@@ -155,14 +173,56 @@
 				            	</div>
 							</td>
 						</tr>
+						 -->
+						<tr>
+							<!--承办机构 改成  责令内容 -->
+							<td rowspan="3" class="reference-td" colspan="1" style="width:100px;">
+								<div class="checkbox">
+								    <input type="checkbox" id="selectOrderContent">
+								    <label for="selectOrderContent">
+								      		责令内容
+								    </label>
+								</div>			   
+							</td>
+							<td class="reference-td">
+								接受处理时间
+							</td>
+							<td class="reference-td" id='tdHandleDate' colspan="7" >
+							   	<div class="input-group date edit-layer-input" id="divHandleDate">
+				            		<input type="text" class="form-control" id="handleDate" name="handleDate"/>
+				            		<span class="input-group-addon">
+				                		<span class="glyphicon glyphicon-calendar"></span>
+				            		</span>
+				            	</div>
+							</td>
+							<!-- 
+							<td class="reference-td" colspan="7"  id="tdOrg">
+							   	<input type="text" class="form-control" id="org" name="org"/>
+							</td>
+							 -->
+						</tr>
 						<tr>
 							<td class="reference-td">
-							   	承办机构
+								承办单位
 							</td>
 							<td class="reference-td" colspan="7"  id="tdOrg">
 							   	<input type="text" class="form-control" id="org" name="org"/>
 							</td>
 						</tr>
+						<tr>
+							<td class="reference-td">
+								报告上交期限
+							</td>
+							<td class="reference-td" colspan="7"  id="tdOrg">
+							   	<div class="input-group date edit-layer-input" id="divChangeDate">
+				            		<input type="text" class="form-control" id="changeDate" name="changeDate"/>
+				            		<span class="input-group-addon">
+				                		<span class="glyphicon glyphicon-calendar"></span>
+				            		</span>
+				            	</div>
+							</td>
+						</tr>
+						<!--  把整改日期 改成 报告上交期限
 						<tr>
 							<td class="reference-td">
 							   	整改日期
@@ -176,6 +236,7 @@
 				            	</div>
 							</td>
 						</tr>
+						 -->
 						<tr>
 							<td class="reference-td">
 							   	联系人

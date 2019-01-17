@@ -42,6 +42,10 @@ function initView(){
 			$('#contactUser').val(g_params.subRow.content.contactUser);
 			$('#contactPhone').val(g_params.subRow.content.contactPhone);
 			$('#contactAddr').val(g_params.subRow.content.contactAddr);
+			//1111111111111111111111111
+			$('#enclosure').val(g_params.subRow.content.enclosure);
+			//11111111111111111111111111111111
+			if(g_params.subRow.content.selectEnclosure == '1') $("#selectEnclosure").attr("checked",true);
 		}
 		//显示文书列表
 		g_relevanceIdList = g_params.subRow.relevanceId;
@@ -74,6 +78,10 @@ function initView(){
 			$('#tdContactUser').text($.utils.getNotNullVal(g_params.subRow.content.contactUser));
 			$('#tdContactPhone').text($.utils.getNotNullVal(g_params.subRow.content.contactPhone));
 			$('#tdContactAddr').text($.utils.getNotNullVal(g_params.subRow.content.contactAddr));
+			//1111111111111111111
+			$('#tdEnclosure').text($.utils.getNotNullVal(g_params.subRow.content.enclosure));
+			//111111111111111
+			if(g_params.subRow.content.selectEnclosure == '1') $("#selectEnclosure").attr("checked",true);
 		}
 
 		//设置右侧的高度和左侧一致
@@ -132,6 +140,11 @@ function getTableParams(){
 		data.contactUser = $('#contactUser').val();
 		data.contactPhone = $('#contactPhone').val();
 		data.contactAddr = $('#contactAddr').val();
+		//1111111111111111111
+		data.enclosure = $('#enclosure').val();
+		//1111111111111111111111
+		if($('#selectEnclosure').prop('checked')) data.selectEnclosure = '1';
+		else data.selectEnclosure = '0';
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}

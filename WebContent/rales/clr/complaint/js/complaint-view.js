@@ -34,7 +34,7 @@ function getResultList(){
 														'<select class="selectpicker" id="selectFile' + i + '">';
 		    					var arrayFileUrl = [], arrayFileName = [];
 		    					arrayFileUrl = data.rows[i].files.split(',');
-		    					for(var index = 0; index < arrayFileUrl.length; index++){
+		    					for(var index = 0; index < arrayFileUrl.length; index++){				
 		    						arrayFileName[index] = arrayFileUrl[index].substring(arrayFileUrl[index].lastIndexOf("/") + 1);
 		    						fileList += "<option value='" + arrayFileUrl[index] + "'>" + arrayFileName[index] + "</option>";
 		    					}
@@ -56,6 +56,8 @@ function getResultList(){
 			    							'</td>' + 
 	    								'</tr>';
 		    				$('#resultList').append(html);
+		    				$('#selectFile'+i+'').selectpicker('refresh');
+		    				$('#selectFile'+i+'').selectpicker('render');
 		    			}
 		    		}
 		    		//设置右侧的高度和左侧一致
@@ -112,6 +114,10 @@ function initData(){
 		for(var i = 0; i < arrayFileUrl.length; i++){
 			arrayFileName[i] = arrayFileUrl[i].substring(arrayFileUrl[i].lastIndexOf("/") + 1);
 		}
+	}
+	for (var i = 0; i < length; i++) {
+		console.log(arrayFileUrl[i]);
+		console.log(arrayFileName[i]);
 	}
 	$('#selectFile').empty();
 	var html = "";

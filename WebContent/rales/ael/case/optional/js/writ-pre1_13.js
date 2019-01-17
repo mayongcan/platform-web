@@ -52,6 +52,13 @@ function setData(){
 	$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
 	$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.data.partiesZip));
 	$("input[type='radio'][name=relationship][value=" + g_params.data.relationship + "]").attr("checked",true);
+//	if(g_params.data.relationship == '1') $('#tdRelationship').text("☑当事人 ☐法人代表 ☐现场负责人 ☐其他");
+//	else if(g_params.data.relationship == '2') $('#tdRelationship').text("☐当事人 ☑法人代表 ☐现场负责人 ☐其他");
+//	else if(g_params.data.relationship == '3') $('#tdRelationship').text("☐当事人 ☐法人代表 ☑现场负责人 ☐其他");
+//	else if(g_params.data.relationship == '4') {
+//		$('#tdRelationship').text("☐当事人 ☐法人代表 ☐现场负责人 ☑其他：");
+//		$('#tdOther').text($.utils.getNotNullVal(g_params.data.other));
+//	}
 	if(g_params.data.relationship == '1') $('#tdRelationship').text("当事人");
 	else if(g_params.data.relationship == '2') $('#tdRelationship').text("法人代表");
 	else if(g_params.data.relationship == '3') $('#tdRelationship').text("现场负责人");
@@ -69,10 +76,11 @@ function setData(){
 //	$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.data.lawUserCardNo1));
 //	$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.data.lawUserCardNo2));
 	$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.data.noticeUser));
-	if(g_params.data.noticeAnswer == '1')
+	/*if(g_params.data.noticeAnswer == '1')
 		$('#tdNoticeAnswer').text($.utils.getNotNullVal("是"));
 	else
-		$('#tdNoticeAnswer').text($.utils.getNotNullVal("否"));
+		$('#tdNoticeAnswer').text($.utils.getNotNullVal("否"));*/
+	$('#tdNoticeAnswer').text($.utils.getNotNullVal(g_params.data.noticeAnswer))
 	
 	$('#tdInquiryQuestion').text($.utils.getNotNullVal(g_params.data.inquiryQuestion));
 	$('#tdInquiryAnswer').text($.utils.getNotNullVal(g_params.data.inquiryAnswer));

@@ -1,6 +1,6 @@
 var g_auditStatusDict1 = [], g_auditStatusDict2 = [], g_auditStatusDict3 = [], g_auditStatusDict4 = [];
 var g_userIdList = "", g_userCodeList = "", g_userNameList = "";
-
+var userRoleName = [];
 /**
  * 获取审批意见列表
  * @returns
@@ -10,6 +10,7 @@ function getResultList(){
 		$.ajax({
 	        url: top.app.conf.url.apigateway + "/api/rales/ael/case/getCaseSuggestList",   		//请求后台的URL（*）
 		    method: 'GET',
+			async:false,
 		    data: {
 	    		access_token: top.app.cookies.getCookiesToken(),
 	    		registerId: g_params.row.id,
@@ -26,8 +27,14 @@ function getResultList(){
 		    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createUserName) + '</td>' + 
 		    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].result) + '</td>' + 
 		    									'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].createDate) + '</td>' + 
+		    									/*'<td class="reference-td1">' + $.utils.getNotNullVal(data.rows[i].userRoleName) + '</td>' +*/
 		    								'</tr>';
 			    				$('#resultList').append(html);
+			    				userRoleName.push(data.rows[i].userRoleName);
+			    				//alert(userRoleName);
+			    				
+			    				
+			    				
 			    			}
 			    		}
 			    		//设置右侧的高度和左侧一致
@@ -84,6 +91,14 @@ function initOtherInfo(){
 	}else if(g_params.row.activityName == '委领导审批'){
 		g_auditStatusDict4 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_4');
 		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict4);
+		
+		for(var i = 0; i<userRoleName.length; i++){
+			if(!(userRoleName[i] == "法规处领导")){
+				//alert($("#trAuditStatus li:eq(5)").text());
+				$("select option:eq(5)").empty();
+			}
+		}
+		
 	}else if(g_params.row.activityName == '法规处指派'){
 		g_auditStatusDict3 = top.app.getDictDataByDictTypeValue('AEL_CASE_AUDIT_STATUS_3');
 		top.app.addComboBoxOption($("#auditStatus"), g_auditStatusDict3);

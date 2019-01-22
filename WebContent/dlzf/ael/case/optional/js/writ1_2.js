@@ -74,6 +74,8 @@ function initView(){
 			$('#lawUserCardNo1').val(g_params.subRow.content.lawUserCardNo1);
 			$('#lawUserCardNo2').val(g_params.subRow.content.lawUserCardNo2);
 			$('#noticeUser').val(g_params.subRow.content.noticeUser);
+			//新加联系人 修改 按照给的文书显示1.15
+			$('#linkman').val($.utils.getNotNullVal(g_params.subRow.content.linkman));
 			
 			if(!$.utils.isEmpty(g_params.subRow.content.noticeAnswer))
 				$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
@@ -163,6 +165,8 @@ function initView(){
 			$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo1));
 			$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.subRow.content.lawUserCardNo2));
 			$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.subRow.content.noticeUser));
+			//新加联系人 修改 按照给的文书显示1.15
+			$('#tdlinkman').text($.utils.getNotNullVal(g_params.subRow.content.linkman));
 			
 			if(!$.utils.isEmpty(g_params.subRow.content.noticeAnswer))
 				$("input[type='radio'][name=noticeAnswer][value=" + g_params.subRow.content.noticeAnswer + "]").attr("checked",true);
@@ -337,6 +341,10 @@ function getTableParams(){
 		data.rule3 = $('#rule3').val();
 		data.rule4 = $('#rule4').val();
 		data.ruleAnswer = $('#ruleAnswer').val();
+		//新加联系人 修改 按照给的文书显示1.15
+		data.linkman = $('#linkman').val();
+		
+		
 		if($('#selectUser1').prop('checked')) data.selectUser1 = '1';
 		else data.selectUser1 = '0';
 		if($('#selectUser2').prop('checked')) data.selectUser2 = '1';

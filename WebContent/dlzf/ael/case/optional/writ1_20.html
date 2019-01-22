@@ -23,15 +23,23 @@
 		        <button type="button" class="btn btn-primary no-print" id="btnPrint" style="margin-right:30px;width: 100px;">打 印</button>
 	        </div>
 			<div class="box-title">
-				<span class="table-title">现场检查笔录</span>
-				<span class="table-title-mark" id="tableTitleMark">穗工信电力现检录字〔<span id="tableTitleMarkYear"></span>〕第<span id="tableTitleMarkNum"></span>号</span>
+				<span class="table-title">询问笔录</span>
+				<span class="table-title-mark" id="tableTitleMark">穗工信电力问录字〔<span id="tableTitleMarkYear"></span>〕第<span id="tableTitleMarkNum"></span>号</span>
 			</div>
 			<form id="divEditForm" class="m-t" role="form" onsubmit="return false;" autocomplete=off>
 				<table class="reference1">
 					<tbody>
 						<tr>
 							<td class="reference-td">
-							   	检查时间
+							   	案由
+							</td>
+							<td class="reference-td" colspan="6" id="tdCaseReason">
+							   	<input type="text" class="form-control" id="CaseReason" name="CaseReason"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	询问时间
 							</td>
 							<td class="reference-td" id='tdCheckDateBegin' colspan="2">
 							   	<div class="input-group date edit-layer-input" id="divCheckDateBegin">
@@ -44,7 +52,7 @@
 							<td class="reference-td">
 							   	至
 							</td>
-							<td class="reference-td" id='tdCheckDateEnd' colspan="3">
+							<td class="reference-td" id='tdCheckDateEnd' colspan="2">
 							   	<div class="input-group date edit-layer-input" id="divCheckDateEnd">
 				            		<input type="text" class="form-control" id="checkDateEnd" name="checkDateEnd"/>
 				            		<span class="input-group-addon">
@@ -55,7 +63,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	检查地点
+							   	询问地点
 							</td>
 							<td class="reference-td" colspan="6" id="tdCheckAddr">
 							   	<input type="text" class="form-control" id="checkAddr" name="checkAddr"/>
@@ -63,94 +71,67 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	检查内容
+							   	询问人1
 							</td>
-							<td class="reference-td" colspan="6" id="tdCheckContent">
-							   	<textarea id="checkContent" name="checkContent" class="form-control" style="height:120px"></textarea>
+							<td class="reference-td" id="tdAskUser1" colspan="2">
+							   	<input type="text" id="askUser1" name="askUser1" class="form-control">
+							</td>
+							<td class="reference-td">
+							   	询问人2
+							</td>
+							<td class="reference-td" id="tdAskUser2" colspan="2">
+							   	<input type="text" id="askUser2" name="askUser2" class="form-control">
 							</td>
 						</tr>
+						<tr>
+							<td class="reference-td">
+							   	执法证号1
+							</td>
+							<td class="reference-td" id="tdAskUserCardNo1" colspan="2">
+							   	<input type="text" id="askUserCardNo1" name="askUserCardNo1" class="form-control">
+							</td>
+							<td class="reference-td">
+							   	执法证号2
+							</td>
+							<td class="reference-td" id="tdAskUserCardNo2" colspan="2">
+							   	<input type="text" id="askUserCardNo2" name="askUserCardNo2" class="form-control">
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	记录人
+							</td>
+							<td class="reference-td" colspan="6" id="tdRecordUser">
+							   	<input type="text" class="form-control" id="recordUser" name="recordUser"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="width:60px;">
+								在场人
+							</td>
+							<td class="reference-td" id="tdOtherName" style="width: 20%">
+								<input type="text" id="OtherName" name="OtherName" class="form-control">
+							</td>
+							<td class="reference-td" style="width:60px;">
+								单位
+							</td>
+							<td class="reference-td" id=tdOtherUnit style="width: 20%">
+								<input type="text" id="OtherUnit" name="OtherUnit" class="form-control">
+							</td>
+							<td class="reference-td" style="width:60px;">
+								职务
+							</td>
+							<td class="reference-td" id=tdOtherJob style="width: 20%">
+								<input type="text" id="OtherJob" name="OtherJob" class="form-control">
+							</td>						
+						</tr>
+						
 					</tbody>
 				</table>
-				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">一、检查对象基本情况：</div>
+				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">一、被询问人基本情况：</div>
 				<table class="reference1">
 					<tbody>
 						<tr>
-							<td class="reference-td" colspan="1" rowspan="3" style="width:60px;">
-								<div class="checkbox">
-								    <input type="checkbox" id="personType2">
-								    <label for="personType2">
-								      	单位
-								    </label>
-								</div>
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	名称
-							</td>
-							<td class="reference-td" id="tdCompanyName">
-							   	<input type="text" id="companyName" name="companyName" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	法定代表人
-							</td>
-							<td class="reference-td" id="tdLegalRepresentative">
-							   	<input type="text" id="legalRepresentative" name="legalRepresentative" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	住所
-							</td>
-							<td class="reference-td" id="tdCompanyAddr">
-							   	<input type="text" id="companyAddr" name="companyAddr" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" style="width:60px;">
-							   	身份证号
-							</td>
-							<td class="reference-td" id="tdCompanyCreditCode">
-							   	<input type="text" id="companyCreditCode" name="companyCreditCode" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	联系电话
-							</td>
-							<td class="reference-td" id="tdCompanyPhone">
-							   	<input type="text" id="companyPhone" name="companyPhone" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	现场负责人
-							</td>
-							<td class="reference-td" id="tdCompanyPrincipal">
-							   	<input type="text" id="companyPrincipal" name="companyPrincipal" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" style="width:60px;">
-							   	在场人
-							</td>
-							<td class="reference-td" id="tdCompanyCurUser">
-							   	<input type="text" id="companyCurUser" name="companyCurUser" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	电话
-							</td>
-							<td class="reference-td" id="tdCompanyIdCard">
-							   	<input type="text" id="companyIdCard" name="companyIdCard" class="form-control">
-							</td>
-							<td class="reference-td" style="width:60px;">
-							   	工作岗位
-							</td>
-							<td class="reference-td" id="tdCompanyPost">
-							   	<input type="text" id="companyPost" name="companyPost" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" colspan="1" rowspan="3" style="width:60px;">
-								<div class="checkbox">
-								    <input type="checkbox" id="personType1">
-								    <label for="personType1">
-								        个人
-								    </label>
-								</div>
-							</td>
 							<td class="reference-td" style="width:60px;">
 							   	姓名
 							</td>
@@ -164,24 +145,24 @@
 							   	<select class="selectpicker" id="partiesSex"></select>
 							</td>
 							<td class="reference-td" style="width:60px;">
-							   	职业
-							</td>
-							<td class="reference-td" id="tdPartiesJob">
-							   	<input type="text" id="partiesJob" name="partiesJob" class="form-control">
-							</td>
-						</tr>
-						<tr>
-							<td class="reference-td" style="width:60px;">
 							   	身份证号码
 							</td>
 							<td class="reference-td" id="tdPartiesIdCard" style="width: 20%">
 							   	<input type="text" id="partiesIdCard" name="partiesIdCard" class="form-control">
 							</td>
+						</tr>
+						<tr>
 							<td class="reference-td" style="width:60px;">
 							   	工作单位
 							</td>
 							<td class="reference-td" id="tdPartiesUnit" style="width: 20%">
 								<input type="text" id="partiesUnit" name="partiesUnit" class="form-control">
+							</td>
+							<td class="reference-td" style="width:60px;">
+							   	职业
+							</td>
+							<td class="reference-td" id="tdPartiesJob">
+							   	<input type="text" id="partiesJob" name="partiesJob" class="form-control">
 							</td>
 							<td class="reference-td" style="width:60px;">
 							   	联系电话
@@ -204,15 +185,38 @@
 							   	<input type="text" id="partiesZip" name="partiesZip" class="form-control">
 							</td>
 							<td class="reference-td" style="width:60px;">
-							联系人
+								与当事人关系
 							</td>
-							<td class="reference-td" id="tdlinkman" style="width: 20%">
-								<input type="text" id="linkman" name="linkman" class="form-control" style="">
+							<td class="reference-td" id="tdRelationship">
+						   		<div class="radio">
+									<input type="radio" name="relationship" id="relationship_id_0" value="1" checked="checked">
+									<label for="relationship_id_0">当事人</label>
+								</div>
+						   		<div class="radio">
+									<input type="radio" name="relationship" id="relationship_id_1" value="2">
+									<label for="relationship_id_1">法人代表</label>
+								</div>
+						   		<div class="radio">
+									<input type="radio" name="relationship" id="relationship_id_2" value="3">
+									<label for="relationship_id_2">现场负责人</label>
+								</div>
+						   		<div class="radio">
+									<input type="radio" name="relationship" id="relationship_id_3" value="4">
+									<label for="relationship_id_3">其他</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td" style="width:60px;">
+							   	其他
+							</td>
+							<td class="reference-td" id="tdOther" colspan="5">
+							   	<input type="text" id="other" name="other" class="form-control">
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">二、告知事项：</div>
+<!-- 				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">二、告知事项：</div>
 				<table class="reference1">
 					<tbody>
 						<tr>
@@ -228,15 +232,13 @@
 							   	执法人员1
 							</td>
 							<td class="reference-td" id="tdLawUser1">
-								<select class="selectpicker" id="lawUser1"></select>
-							   	<!-- <input type="text" id="lawUser1" name="lawUser1" class="form-control"> -->
+							   	<input type="text" id="lawUser1" name="lawUser1" class="form-control">
 							</td>
 							<td class="reference-td">
 							   	执法人员2
 							</td>
 							<td class="reference-td" id="tdLawUser2">
-								<select class="selectpicker" id="lawUser2"></select>
-							   	<!-- <input type="text" id="lawUser2" name="lawUser2" class="form-control"> -->
+							   	<input type="text" id="lawUser2" name="lawUser2" class="form-control">
 							</td>
 						</tr>
 						<tr>
@@ -255,7 +257,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	告知内容
+							   	被告知人
 							</td>
 							<td class="reference-td" id="tdNoticeUser" colspan="3">
 							   	<input type="text" id="noticeUser" name="noticeUser" class="form-control">
@@ -277,21 +279,8 @@
 							</td>
 						</tr>
 					</tbody>
-				</table>
-				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">三、相关检查情况：</div>
-				<table class="reference1">
-					<tbody>
-						<tr>
-							<td class="reference-td" style="width:100px;">
-							   	检查情况
-							</td>
-							<td class="reference-td" id="tdCheckDetail" colspan="3">
-								<textarea id="checkDetail" name="checkDetail" class="form-control" style="height:120px"></textarea>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">四、询问内容：</div>
+				</table> -->
+				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">三、询问内容：</div>
 				<table class="reference1">
 					<tbody>
 						<tr>
@@ -311,51 +300,61 @@
 							</td>
 						</tr>
 					</tbody>
-					<tbody id="tbodyAskList"></tbody>
+					<tbody id="tbodyAskList1"></tbody>
 				</table>
 	            <div style="margin-top:10px">
-			        <button type="button" class="btn btn-primary no-print" id="btnAddAsk" style="margin-right:30px;width: 100px;">新 增</button>
+			        <button type="button" class="btn btn-primary no-print" id="btnAddAsk1" style="margin-right:30px;width: 100px;">新 增</button>
 		        </div>
-		        
-				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">五、告知权利：</div>
+<!-- 				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">四、陈述（申辩）情况：</div>
 				<table class="reference1">
 					<tbody>
 						<tr>
 							<td class="reference-td" style="width:100px;">
-							   	法
+							   	问
 							</td>
-							<td class="reference-td" id="tdRule1">
-								<input type="text" id="rule1" name="rule1" class="form-control">
-							</td>
-							<td class="reference-td" style="width:100px;">
-							   	条
-							</td>
-							<td class="reference-td" id="tdRule2">
-								<input type="text" id="rule2" name="rule2" class="form-control">
-							</td>
-							<td class="reference-td" style="width:100px;">
-							   	款
-							</td>
-							<td class="reference-td" id="tdRule3">
-								<input type="text" id="rule3" name="rule3" class="form-control">
-							</td>
-							<td class="reference-td" style="width:100px;">
-							   	项
-							</td>
-							<td class="reference-td" id="tdRule4">
-								<input type="text" id="rule4" name="rule4" class="form-control">
+							<td class="reference-td" id="tdDefendQuestion" colspan="4">
+								<textarea id="defendQuestion" name="defendQuestion" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td class="reference-td">
 							   	答
 							</td>
-							<td class="reference-td" id="tdRuleAnswer" colspan="7">
-								<textarea id="ruleAnswer" name="ruleAnswer" class="form-control" style="height:120px"></textarea>
+							<td class="reference-td" id="tdDefendAnswer" colspan="4">
+								<textarea id="defendAnswer" name="defendAnswer" class="form-control" style="height:120px"></textarea>
 							</td>
 						</tr>
 					</tbody>
+					<tbody id="tbodyAskList2"></tbody>
 				</table>
+	            <div style="margin-top:10px">
+			        <button type="button" class="btn btn-primary no-print" id="btnAddAsk2" style="margin-right:30px;width: 100px;">新 增</button>
+		        </div> 
+				<div style="margin-top: 20px;font-size: 18px;font-weight: bold;">五、送达地址确认：</div>
+				<table class="reference">
+					<tbody>
+						<tr>
+							<td class="reference-td" style="width:100px;">
+							   	问
+							</td>
+							<td class="reference-td" id="tdAddrQuestion" colspan="4">
+								<textarea id="addrQuestion" name="addrQuestion" class="form-control" style="height:120px"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="reference-td">
+							   	答
+							</td>
+							<td class="reference-td" id="tdAddrAnswer" colspan="4">
+								<textarea id="addrAnswer" name="addrAnswer" class="form-control" style="height:120px"></textarea>
+							</td>
+						</tr>
+					</tbody>
+					<tbody id="tbodyAskList3"></tbody>
+				</table>
+	            <div style="margin-top:10px">
+			        <button type="button" class="btn btn-primary no-print" id="btnAddAsk3" style="margin-right:30px;width: 100px;">新 增</button>
+		        </div>
 				
 				<table id="tableUploadList" class="reference1" style="margin-top:20px;">
 					<tbody>
@@ -367,14 +366,8 @@
 								</div>
 							</td>
 						</tr>
-						<tr>
-							<td class="reference-td">文书关联</td>
-							<td class="reference-td" colspan="3">
-								<input type="text" id="relevanceId" name="relevanceId" class="form-control" readonly style="cursor: pointer;background: #fff;" placeholder="请选择关联文书">
-							</td>
-						</tr>
 					</tbody>
-				</table>
+				</table>-->
 	            <div style="text-align: center;margin-top:30px">
 			        <button type="button" class="btn btn-primary no-print" id="btnOK" style="margin-right:30px;width: 100px;">保 存</button>
 			        <button type="button" class="btn btn-primary no-print" id="btnPreview" style="margin-right:30px;width: 100px;">预 览</button>
@@ -410,6 +403,6 @@
     <script src="../../../../js/platform/table-utils.js" type="text/javascript"></script>
     <script src="../../../../js/platform/fileupload-utils.js" type="text/javascript"></script>
     <script src="../../../js/rales-utils.js" type="text/javascript"></script>
-    <script src="js/writ1_2.js" type="text/javascript"></script>
+    <script src="js/writ1_20.js" type="text/javascript"></script>
 </body>
 </html>

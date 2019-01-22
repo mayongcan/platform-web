@@ -22,13 +22,92 @@
     <div class="animated fadeIn" id="printBody">
 		<div class="ibox-content box-info">
 			<div class="box-title">
+				<h5 class="table-title">广州市工业和信息化部门电力行政执法</h5>
 				<span class="table-title">现场检查笔录</span>
 				<span class="table-title-mark" id="tableTitleMark">穗工信电力现检录字〔<span id="tableTitleMarkYear"></span>〕第<span id="tableTitleMarkNum"></span>号</span>
+			</div>
+			<div class="box-content-noindent">
+				检查事项名称：<a class="content-fill-in" id="tdCheckContent" style="min-width: 220px; display: inline-block; height: 22px;">　</a>
+				检查地点：<a class="content-fill-in" id="tdCheckAddr" style="min-width: 220px; display: inline-block; height: 22px;">　</a>
+				<br>
+				被检查单位（人）：<a class="content-fill-in"   id="tdPartiesName" style="min-width: 168px; display: inline-block; height: 22px;">　</a>
+				&nbsp;&nbsp;&nbsp;
+				身份证号码：<a class="content-fill-in" style="min-width:220px;" id="tdPartiesIdCard">　</a>
+				<br>
+				法定代表人：<a class="content-fill-in" style="min-width:220px;" id="tdLegalRepresentative">　</a>         　
+				地址：<a class="content-fill-in" style="min-width:245px;" id="partiesAddr">　</a>
+				<br>
+				联系人：<a class="content-fill-in" style="min-width:220px;" id="linkman">　</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				联系电话：<a class="content-fill-in" style="min-width:220px;" id="tdPartiesPhone">　</a>
+				<br>
+				见证人：<a class="content-fill-in" style="min-width:100px;" id="tdCompanyCurUser">　</a>
+				电话：<a class="content-fill-in" style="min-width:100px;" id="companyIdC">　</a>
+				单位或住所：<a class="content-fill-in" style="min-width:222px;" id="partiesUnit">　</a>
+				<br>
+				检查人：<a class="content-fill-in" style="min-width:80px;" id= "lawUser1">　</a>
+				证件号：<a class="content-fill-in" style="min-width:110px;" id= "lawUser2">　</a>
+				检查人：<a class="content-fill-in" style="min-width:80px;" id="lawUserCardNo1">　</a>
+				证件号：<a class="content-fill-in" style="min-width:110px;" id="lawUserCardNo2">　</a>
+				<br>
 			</div>
 			<div class="box-content-noindent">
 				检查时间：<a class="content-fill-in" id="dataYear">　</a>
 					年
 					<a class="content-fill-in" id="dataMonth">　</a>
+					月
+					<a class="content-fill-in" id="dataDay">　</a>
+					日
+					<a class="content-fill-in" id="dataHour">　</a>
+					时
+					<a class="content-fill-in" id="dataMinute">　</a>
+					分至
+					<a class="content-fill-in" id="dataDay1">　</a>
+					日
+					<a class="content-fill-in" id="dataHour1">　</a>
+					时
+					<a class="content-fill-in" id="dataMinute1">　</a>
+					分
+				</div>
+				<div class="box-content-noindent">
+					检查过程描述：<a class="content-fill-in" id="tdCheckDetail" >　</a>
+										<!--<a class="content-fill-in" id="tdCheckDetail" style="min-width:600px;">　</a>
+										 <a class="content-fill-in" style="min-width:600px;">　</a>
+										<a class="content-fill-in" style="min-width:600px;">　</a>
+										<a class="content-fill-in" style="min-width:600px;">　</a>
+										<a class="content-fill-in" style="min-width:600px;">　</a>
+										<a class="content-fill-in" style="min-width:600px;">　</a> -->
+				</div>
+				<div class="box-content-noindent">
+				<div class="box-content-noindent">
+						<label  class="" style="">
+						被检查单位（人）意见：
+						</label>
+						<label  class="" style="margin-left: 160px;">
+						签名：   
+						</label>
+				</div>
+				<div class="box-content-noindent">
+						<label  class="" style="">
+						见证人意见：
+						</label>
+						<label  class="" style="margin-left: 225px;">
+						签名：   
+						</label>
+				</div>
+				<div class="box-content-noindent">
+						<label  class="" style="">
+						执法人员：
+						</label>
+						<label  class="" style="margin-left: 225px;">
+						记录人：   
+						</label>
+				</div>
+				</div>
+			<!-- <div class="box-content-noindent">
+				检查时间：<a class="content-fill-in" id="dataYear">　</a>
+					年
+					<a class="contenght-fill-in" id="dataMonth">　</a>
 					月
 					<a class="content-fill-in" id="dataDay">　</a>
 					日
@@ -153,13 +232,13 @@
 			<div class="box-content-noindent">
 				记录人：<a class="content-fill-in" style="min-width:200px;">　</a>
 			</div>
-			<!-- <div class="box-content" style="float: right;">
+			<div class="box-content" style="float: right;">
 				第<span>　　</span>页（共<span>　　</span>页）
-			</div> -->
+			</div>
 			
 			<div style="clear:both;"></div>
 			<div id="fileCode" style="margin-top:20px;"></div>
-			<!-- <div class="box-content-noindent">
+			<div class="box-content-noindent">
 				附件(可选)：1.涉案物品清单
 			</div>
 			<div class="box-content-noindent" style="padding-left: 72px">

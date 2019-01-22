@@ -43,35 +43,59 @@ function setData(){
 	rales.setDatetimeInfo($('#dataYear'), $('#dataMonth'), $('#dataDay'), $('#dataHour'), $('#dataMinute'), g_params.data.checkDateBegin);
 	rales.setDatetimeInfo($('#dataYear1'), $('#dataMonth1'), $('#dataDay1'), $('#dataHour1'), $('#dataMinute1'), g_params.data.checkDateEnd);
 	
-//	$('#tdCheckDateBegin').text($.utils.getNotNullVal(g_params.data.checkDateBegin));
-//	$('#tdCheckDateEnd').text($.utils.getNotNullVal(g_params.data.checkDateEnd));
 	$('#tdCheckAddr').text($.utils.getNotNullVal(g_params.data.checkAddr));
 	$('#tdCheckContent').text($.utils.getNotNullVal(g_params.data.checkContent));
-	$('#tdCompanyName').text($.utils.getNotNullVal(g_params.data.companyName));
 	$('#tdLegalRepresentative').text($.utils.getNotNullVal(g_params.data.legalRepresentative));
-	$('#tdCompanyAddr').text($.utils.getNotNullVal(g_params.data.companyAddr));
-	$('#tdCompanyCreditCode').text($.utils.getNotNullVal(g_params.data.companyCreditCode));
-	$('#tdCompanyPhone').text($.utils.getNotNullVal(g_params.data.companyPhone));
 	$('#tdCompanyPrincipal').text($.utils.getNotNullVal(g_params.data.companyPrincipal));
 	$('#tdCompanyCurUser').text($.utils.getNotNullVal(g_params.data.companyCurUser));
-	$('#tdCompanyIdCard').text($.utils.getNotNullVal(g_params.data.companyIdCard));
-	$('#tdCompanyPost').text($.utils.getNotNullVal(g_params.data.companyPost));
-	$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
 	$('#tdPartiesSex').text($.utils.getNotNullVal(top.app.getDictName(g_params.data.partiesSex, g_params.sexDict)));
 	$('#tdPartiesJob').text($.utils.getNotNullVal(g_params.data.partiesJob));
-	$('#tdPartiesIdCard').text($.utils.getNotNullVal(g_params.data.partiesIdCard));
-	$('#tdPartiesUnit').text($.utils.getNotNullVal(g_params.data.partiesUnit));
-	$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.data.partiesPhone));
-	$('#tdPartiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
 	$('#tdPartiesZip').text($.utils.getNotNullVal(g_params.data.partiesZip));
-	$('#tdLawOffice').text($.utils.getNotNullVal(g_params.data.lawOffice));
-	$('#tdLawUser').text($.utils.getNotNullVal(g_params.data.lawUser1) + "、" + $.utils.getNotNullVal(g_params.data.lawUser2));
-	$('#tdLawUserCardNo').text($.utils.getNotNullVal(g_params.data.lawUserCardNo1) + "、" + $.utils.getNotNullVal(g_params.data.lawUserCardNo2));
-//	$('#tdLawUser1').text($.utils.getNotNullVal(g_params.data.lawUser1));
-//	$('#tdLawUser2').text($.utils.getNotNullVal(g_params.data.lawUser2));
-//	$('#tdLawUserCardNo1').text($.utils.getNotNullVal(g_params.data.lawUserCardNo1));
-//	$('#tdLawUserCardNo2').text($.utils.getNotNullVal(g_params.data.lawUserCardNo2));
 	
+	//新加联系人字段 修改 按照给的文书显示1.15
+	$('#companyIdC').text($.utils.getNotNullVal(g_params.data.companyIdCard));
+	if($.utils.getNotNullVal(g_params.data.companyPrincipal)==""){
+		$('#linkman').text($.utils.getNotNullVal(g_params.data.linkman));
+	}else{
+		$('#linkman').text($.utils.getNotNullVal(g_params.data.companyPrincipal));
+	}
+	if($.utils.getNotNullVal(g_params.data.companyCreditCode)==""){
+		$('#tdPartiesIdCard').text($.utils.getNotNullVal(g_params.data.partiesIdCard));
+	}else{
+		$('#tdPartiesIdCard').text($.utils.getNotNullVal(g_params.data.companyCreditCode));
+	}
+	if($.utils.getNotNullVal(g_params.data.companyPhone)==""){
+		$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.data.partiesPhone));
+	}else{
+		$('#tdPartiesPhone').text($.utils.getNotNullVal(g_params.data.companyPhone));
+	}
+	
+	if($.utils.getNotNullVal(g_params.data.partiesUnit)==""){
+		$('#partiesUnit').text($.utils.getNotNullVal(g_params.data.companyPost));
+	}else{
+		$('#partiesUnit').text($.utils.getNotNullVal(g_params.data.partiesUnit));
+	}
+	
+	if($.utils.getNotNullVal(g_params.data.partiesAddr)==""){
+		$('#partiesAddr').text($.utils.getNotNullVal(g_params.data.companyAddr));
+	}else{
+		$('#partiesAddr').text($.utils.getNotNullVal(g_params.data.partiesAddr));
+	}
+	
+	if($.utils.getNotNullVal(g_params.data.companyName)==""){
+		$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.partiesName));
+	}else{
+		$('#tdPartiesName').text($.utils.getNotNullVal(g_params.data.companyName));
+	}
+	$('#lawUser1').text($.utils.getNotNullVal(g_params.data.lawUser1) );
+	$('#lawUserCardNo1').text($.utils.getNotNullVal(g_params.data.lawUser2));
+	
+	$('#lawUser2').text($.utils.getNotNullVal(g_params.data.lawUserCardNo1));
+	$('#lawUserCardNo2').text($.utils.getNotNullVal(g_params.data.lawUserCardNo2));
+
+	
+	
+	$('#tdLawOffice').text($.utils.getNotNullVal(g_params.data.lawOffice));
 	$('#tdNoticeUser').text($.utils.getNotNullVal(g_params.data.noticeUser));
 	if(g_params.data.noticeAnswer == '1')
 		$('#tdNoticeAnswer').text($.utils.getNotNullVal("是"));

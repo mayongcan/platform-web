@@ -33,6 +33,7 @@ function setData(){
 	$('#tdRule3').text($.utils.getNotNullVal(g_params.data.rule3));
 	$('#tdRule4').text($.utils.getNotNullVal(g_params.data.rule4));
 	$('#tdRuleEvidence').text($.utils.getNotNullVal(g_params.data.ruleEvidence));
+	$('#tdIllegalAct').text($.utils.getNotNullVal(g_params.data.illegalAct));
 	$('#tdRule5').text($.utils.getNotNullVal(g_params.data.rule5));
 	$('#tdRule6').text($.utils.getNotNullVal(g_params.data.rule6));
 	$('#tdRule7').text($.utils.getNotNullVal(g_params.data.rule7));

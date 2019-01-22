@@ -161,6 +161,7 @@ function initData(){
 		addList('tableList1-14', 'tableCnt1-14', '/api/rales/ael/writ/getWritList', 1, 14, rales.writOptional1_14, '', true);
 		addList('tableList1-15', 'tableCnt1-15', '/api/rales/ael/writ/getWritList', 1, 15, rales.writOptional1_15, '', true);
 		addList('tableList1-16', 'tableCnt1-16', '/api/rales/ael/writ/getWritList', 1, 16, rales.writOptional1_16, '', true);
+		addList('tableList1-20', 'tableCnt1-20', '/api/rales/ael/writ/getWritList', 1, 20, rales.writOptional1_20, '', true);
 	}else if(g_optionalFlowIndex == '2'){
 		addFlowList('tableList2-1', 'tableCnt2-1', '/api/rales/ael/writ/getWritList', 2, 1, rales.writOptional2_1, '', true);
 		addList('tableList2-2', 'tableCnt2-2', '/api/rales/ael/writ/getWritList', 2, 2, rales.writOptional2_2, '', true);

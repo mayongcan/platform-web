@@ -162,6 +162,7 @@ function getTableParams(){
 		data.contactUser = $('#contactUser').val();
 		data.contactPhone = $('#contactPhone').val();
 		data.contactAddr = $('#contactAddr').val();
+		data.illegalAct = $('#illegalAct').val();
 	}else{
 		data = $.extend(data, g_params.subRow.content);
 	}

@@ -48,6 +48,8 @@ rales.writOptional1_16 = "116";
 rales.writOptional1_17 = "117";
 rales.writOptional1_18 = "118";
 rales.writOptional1_19 = "119";
+rales.writOptional1_20 = "120";
+
 rales.writOptional2_1 = "201";
 rales.writOptional2_2 = "202";
 rales.writOptional2_3 = "203";

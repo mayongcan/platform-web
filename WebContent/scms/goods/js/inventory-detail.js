@@ -1,4 +1,5 @@
-var $table = $('#tableList'), g_selectGoodsData = null, g_params = {};
+
+var $table = $('#tableList'),g_operRights = [], g_selectGoodsData = null, g_params = {};
 var g_goodsYearDict = null;
 var g_goodsSeasonDict = null;
 var g_buyStatusDict = null;
@@ -9,11 +10,35 @@ $(function () {
 	g_params = top.app.info.iframe.params;
 	g_selectGoodsData = g_params.row
 	top.app.message.loading();
+	//初始化权限
+	initFunc();
 	initTable();
 	//初始化界面
 	initView();
 	top.app.message.loadingClose();
 });
+
+
+/**
+ * 初始化权限
+ */
+function initFunc(){
+	g_operRights = top.app.getUserRights($.utils.getUrlParam(window.location.search,"_pid"));
+	$("#tableToolbar").empty();
+	var htmlTable = "";
+	var length = g_operRights.length;
+	for (var i = 0; i < length; i++) {
+		//显示在列表上方的权限菜单
+		if(g_operRights[i].dispPosition == '1'){
+			htmlTable += "<button type='button' class='btn btn-outline btn-default' id='" + g_operRights[i].funcFlag  + "' data-action-url='" + g_operRights[i].funcLink + "'>" + 
+							"<i class=\""+ g_operRights[i].funcIcon + "\" aria-hidden=\"true\"></i> " + g_operRights[i].funcName + 
+						 "</button>";
+		}
+	}
+	//添加默认权限
+	htmlTable += appTable.addDefaultFuncButton();
+	$("#tableToolbar").append(htmlTable);
+}
 
 /**
  * 初始化列表信息
@@ -40,7 +65,7 @@ function initTable(){
         }
     });
 	//初始化Table相关信息
-//	appTable.initTable($table);
+	appTable.initTable($table);
 }
 
 /**

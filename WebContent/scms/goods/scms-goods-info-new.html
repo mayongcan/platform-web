@@ -138,7 +138,7 @@
 					        	</div>
 							</td>
 						</tr>
-						<tr>
+						<tr style="display: none">
 							<td class="reference-td">
 							   	包装数
 							</td>
@@ -162,7 +162,7 @@
 								<div id="divGoodsSeason" style="float:left;"></div>
 							</td>
 						</tr>
-						<tr>
+						<tr style="display: none">
 							<td class="reference-td">
 							   	商品材质
 							</td>
@@ -170,7 +170,7 @@
 								<select class="form-control m-b selectpicker" id="goodsTexture"></select>
 							</td>
 						</tr>
-						<tr>
+						<tr style="display: none">
 							<td class="reference-td">
 							   	商品状态
 							</td>
@@ -227,7 +227,7 @@
 						</tr>
 						<tr>
 							<td class="reference-td">
-							   	商品尺码
+							   	商品规格
 							</td>
 							<td class="reference-td" id="tdGoodsSize">
 							</td>
@@ -239,7 +239,24 @@
 						<tbody id="tbodyGenInventory"></tbody>
 					</table>
 				</div>
+				<!--  -->
+				<div style="overflow: auto; width: 100%;">
+					<table class="reference1">
+						<tbody id="tbodyGenInventory">
+							<tr>
+							<td class="reference-td" style="width:120px;">
+							   	商品IMEI
+							</td>
+							<td class="reference-td" >
+								<textarea id="goodsIMEI" name="goodsIMEI" class="form-control" style="height:120px"></textarea>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				
 	        </div>
+	        
             <div style="text-align: center;margin-top:30px">
 		        <button type="button" class="btn btn-primary" id="btnOK" style="margin-right:30px;width: 100px;">保 存</button>
 		        <button type="button" class="btn btn-white" id="btnCancel" style="width: 100px;">返 回</button>

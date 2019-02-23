@@ -35,7 +35,7 @@ function initView(){
 	});
 	g_defDiscount = new Cleave('#defDiscount', {
 	    numeral: true,
-	    numeralIntegerScale: 2,
+	    numeralIntegerScale: 4,
 	    numeralDecimalScale: 0
 	});
 	g_packingNum = new Cleave('#packingNum', {
@@ -105,6 +105,10 @@ function initView(){
 		var pid = $.utils.getUrlParam(window.location.search,"_pid");
 		window.location.href = g_backUrl + "?_pid=" + pid;
     });
+	
+	
+	
+	
 }
 
 function removeMorePrice(index){
@@ -153,6 +157,7 @@ function loadGenInventoryInfo(){
 							'<td class="reference-td" style="font-weight:bold;line-height:20px;">商品颜色</td>' + 
 							'<td class="reference-td" style="font-weight:bold;line-height:20px;">商品尺寸</td>' + 
 							'<td class="reference-td" style="font-weight:bold;line-height:20px;">商品库存</td>' + 
+							'<td class="reference-td" style="font-weight:bold;line-height:20px;">设置</td>' + 
 						'</tr>';
 	$('#tbodyGenInventory').append(tableHeader);
 	var tableContent = ""; 
@@ -185,15 +190,46 @@ function loadGenInventoryInfo(){
 							        '</div>' + 
 							        '<div class="input-group" style="min-width:120px;">' + 
 										'<span class="input-group-addon" style="font-size:12px;">条码</span>' + 
-									   	'<input id="barcode' + tmpId + '" type="text" class="form-control" style="font-size:12px;">' + 
+									   	'<input id="barcode' + tmpId + '" type="text" class="form-control" style="font-size:12px;">' + 									   	
 							        '</div>' + 
 								'</td>' + 
+								'<td class="reference-td" style="line-height:20px;">'+
+								'<button type="button" class="btn btn-primary" id="selIMEI' + tmpId + '" onclick="selIMEI(this)" style="margin-right:30px;width: 100px;">设置IMEI</button>'+
+								'</td>'+
 								'<script>new Cleave("#num' + tmpId + '", {numeral: true,numeralThousandsGroupStyle: "none",numeralIntegerScale: 5,numeralDecimalScale: 0});</script> ' +
 							'</tr>'; 
+				
+				/*$("#selIMEI"+tmpId).click(function(){
+					alert("")
+					var params = {};
+					
+					top.app.layer.editLayer('选择商品', ['900px', '550px'], '/scms/goods/select-imei.html', params, function(retParams){
+						
+					})
+				})*/
+				
 			}
 		}
 	}
+	
 	$('#tbodyGenInventory').append(tableContent);
+	
+	
+}
+
+
+function selIMEI(obj){
+	var val=[];
+	var params = {};
+	
+	val=obj.id.split("_");		
+	params.val=val;
+	params.goodsSerialNum  = $("#goodsSerialNum").val();
+	params.operUrl = top.app.conf.url.apigateway + "/api/scms/imei/add";
+	top.app.layer.editLayer('选择商品', ['900px', '550px'], '/scms/goods/select-imei.html', params, function(retParams){
+		//重新加载列表
+		//$table.bootstrapTable('refresh');
+	})
 }
 
 function getDataListId(data, index, type){
